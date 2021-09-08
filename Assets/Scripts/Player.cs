@@ -13,18 +13,32 @@ namespace Project
         [SerializeField, Min(0f)] private float timeMissileLife = 1f;
         [SerializeField, Min(0f)] private float timeBetweenShots = 1f;
 
+        [Header("Other", order = 50)]
+        [SerializeField] private Color colorShip;
+        [SerializeField] private Color colorShipTip;
+
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Rigidbody2D prefabMissile;
+        [SerializeField] private SpriteRenderer srShip;
+        [SerializeField] private SpriteRenderer srShipTip;
+        [SerializeField] private new ParticleSystem particleSystem;
 
         private bool inputAddForce = false;
         private bool inputFire = false;
         private float inputRotation = 0f;
 
+        private void OnValidate()
+        {
+            srShip.color = colorShip;
+            srShipTip.color = colorShipTip;
+        }
+
         private void Update()
         {
             UpdateForce();
             UpdateRotation();
+            particleSystem.transform.position = transform.position;
         }
 
         private void UpdateForce()
@@ -45,7 +59,6 @@ namespace Project
                 force *= multRotate * Time.deltaTime;
 
                 Vector2 position = transform.position;
-                print((Vector2)transform.up);
                 position += (Vector2)transform.up * 0.5f;
 
                 rigidbody.AddForceAtPosition(force, position);
