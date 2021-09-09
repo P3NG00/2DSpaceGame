@@ -19,7 +19,7 @@ namespace Project
 
         private void Update()
         {
-            if (scaleSize > 0f)
+            if (scaleSize >= GameInfo.MinSpaceRockScale)
             {
                 transform.localScale = Vector2.one * scaleSize;
                 rigidbody.mass = scaleSize * scaleMass;
@@ -27,6 +27,7 @@ namespace Project
             else
             {
                 Destroy(gameObject);
+                GameInfo.IncrementCredit();
             }
         }
 
@@ -35,6 +36,7 @@ namespace Project
             if (collider.gameObject.tag == "Missile")
             {
                 Scale -= 0.5f;
+                GameInfo.IncrementCredit();
                 Destroy(collider.gameObject);
             }
         }

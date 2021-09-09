@@ -6,8 +6,6 @@ namespace Project
 {
     public sealed class Player : MonoBehaviour
     {
-        // TODO implement credits or something for hitting space rocks
-
         [Header("Stats", order = 5)]
         [SerializeField, Min(0f)] private float multForce = 1f;
         [SerializeField, Min(0f)] private float multRotate = 1f;
@@ -25,6 +23,7 @@ namespace Project
         [SerializeField] private SpriteRenderer srShip;
         [SerializeField] private SpriteRenderer srShipTip;
         [SerializeField] private new ParticleSystem particleSystem;
+        [SerializeField] private Animator animator;
 
         public Rigidbody2D Rigidbody => rigidbody;
 
@@ -43,6 +42,7 @@ namespace Project
             UpdateForce();
             UpdateRotation();
             particleSystem.transform.position = transform.position;
+            animator.SetBool("moving", inputAddForce);
         }
 
         private void UpdateForce()

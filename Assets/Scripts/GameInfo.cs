@@ -1,6 +1,5 @@
-using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace Project
@@ -25,10 +24,13 @@ namespace Project
         }
         #endregion
 
-        [Header("Init", order = 0)]
+        [Header("Game", order = 0)]
+        [SerializeField] private int credits;
+
+        [Header("Init", order = 1)]
         [SerializeField] private int framerate;
 
-        [Header("Info", order = 1)]
+        [Header("Info", order = 2)]
         [SerializeField, Min(0f)] private float minVelocity;
         [SerializeField] private float maxVelocity;
         [SerializeField, Min(0f)] private float minAngularVelocity;
@@ -61,6 +63,9 @@ namespace Project
         [SerializeField] private SpaceRock[] prefabSpaceRocks;
         [SerializeField] private Player player;
         [SerializeField] private Transform parentSpaceRock;
+        [SerializeField] private TMP_Text textCredits;
+
+        public static float MinSpaceRockScale => instance.minSpaceRockScale;
 
         private static float RandomUnit => Random.Range(-1f, 1f);
         private static float RandomSpaceRockScale => Random.Range(instance.minSpaceRockScale, instance.maxSpaceRockScale);
@@ -73,6 +78,11 @@ namespace Project
             Application.targetFrameRate = framerate;
             StartCoroutine(RoutineCreateSpaceRocks());
             StartCoroutine(RoutineCleanDistantSpaceRocks());
+        }
+
+        private void Update()
+        {
+            textCredits.text = credits.ToString();
         }
 
         private IEnumerator RoutineCreateSpaceRocks()
@@ -131,5 +141,7 @@ namespace Project
             float angularVelocity = RandomUnit * Random.Range(instance.minAngularVelocity, instance.maxAngularVelocity);
             spaceRock.SetVelocities(velocity, angularVelocity);
         }
+
+        public static void IncrementCredit() => ++instance.credits;
     }
 }

@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3331545610729043388}
   - component: {fileID: 4979323623273713214}
   - component: {fileID: 6322791345613309431}
+  - component: {fileID: 3470504029433804715}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -142,6 +143,7 @@ MonoBehaviour:
   srShip: {fileID: 1846706566606818846}
   srShipTip: {fileID: 1205873065221026397}
   particleSystem: {fileID: 0}
+  animator: {fileID: 3470504029433804715}
 --- !u!114 &3331545610729043388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +288,25 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.5}
       - {x: 0, y: 0.366}
       - {x: -0.5, y: -0.5}
+--- !u!95 &3470504029433804715
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3331545610729043390}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d3ef9c7e469050c4ca167a6a20824662, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4231681900229312245
 GameObject:
   m_ObjectHideFlags: 0
