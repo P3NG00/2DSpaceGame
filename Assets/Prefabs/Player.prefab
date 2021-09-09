@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3200124118517892216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2113, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3331545610729043389}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 0.87006724, g: 0.9339623, b: 0.7004717, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,13 +130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73ecc0d41116ac4389e72ac6aa543ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multForce: 10
-  multRotate: 100
+  multForce: 50
+  multRotate: 250
   velocityMissile: 125
   timeMissileLife: 1
   timeBetweenShots: 0.09
-  colorShip: {r: 0.87006724, g: 0.9339623, b: 0.7004717, a: 1}
-  colorShipTip: {r: 0, g: 0.37927818, b: 1, a: 1}
+  colorShip: {r: 1, g: 1, b: 1, a: 1}
+  colorShipTip: {r: 1, g: 0, b: 0, a: 1}
   rigidbody: {fileID: 4979323623273713214}
   prefabMissile: {fileID: -6234159493842483732, guid: a43e52a7801009a4e95c94ebf1f9dd28, type: 3}
   srShip: {fileID: 1846706566606818846}
@@ -233,11 +233,11 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_LinearDrag: 0.5
+  m_AngularDrag: 3
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
@@ -254,7 +254,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0.2113}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -342,7 +342,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 0, g: 0.37927818, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

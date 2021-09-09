@@ -24,6 +24,8 @@ namespace Project
         [SerializeField] private SpriteRenderer srShipTip;
         [SerializeField] private new ParticleSystem particleSystem;
 
+        public Rigidbody2D Rigidbody => rigidbody;
+
         private bool inputAddForce = false;
         private bool inputFire = false;
         private float inputRotation = 0f;
