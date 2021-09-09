@@ -1,0 +1,14 @@
+TODO create shop
+on controller - use d-pad
+on keyboard - use arrow keys
+
+TODO implement audio
+firing sound
+missile hit sound
+player collision w space rock
+space rock w space rock
+
+TODO implement settings
+able to change audio
+able to change graphics
+able to change controls
