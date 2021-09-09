@@ -1,8 +1,6 @@
-using System.Text;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Project
 {
@@ -31,9 +29,6 @@ namespace Project
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
-
-        [Header("Shop", order = 2)]
-        [SerializeField] private ShopItem[] shopItems;
 
         [Header("Info", order = 3)]
         [SerializeField, Min(0f)] private float minVelocity;
@@ -77,8 +72,6 @@ namespace Project
         private static Vector2 RandomUnitVector => new Vector2(RandomUnit, RandomUnit).normalized;
         private static Vector2 PlayerPos => instance.player.transform.position;
         private static SpaceRock RandomSpaceRock => instance.prefabSpaceRocks[Random.Range(0, instance.prefabSpaceRocks.Length)];
-
-        private int indexShop = 0;
 
         private void Start()
         {
@@ -150,28 +143,5 @@ namespace Project
         }
 
         public static void IncrementCredit() => ++instance.credits;
-
-        public void ShopNavigation(InputAction.CallbackContext ctx)
-        {
-            Vector2 input = ctx.ReadValue<Vector2>();
-            // TODO shop nav
-            // x = left,right
-            // y = up,down
-        }
-
-        [System.Serializable]
-        public class ShopItem
-        {
-            [SerializeField] private string itemName;
-            [SerializeField] private string itemDescriptor;
-            [SerializeField] private int costCredits;
-
-            public override string ToString()
-            {
-                return $"{itemName}\n" +
-                    $"{itemDescriptor}\n" +
-                    $"{costCredits}";
-            }
-        }
     }
 }
