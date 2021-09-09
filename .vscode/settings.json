@@ -53,6 +53,7 @@
     "Temp/": true,
 
     // P3
+    "**/*.pfx": true,
     "Assets/Input/": true,
     "Assets/Prefabs/": true,
     "Assets/Rendering/": true,

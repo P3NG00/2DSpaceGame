@@ -95,5 +95,6 @@ namespace Project
             }
         }
         public void Rotate(InputAction.CallbackContext ctx) => inputRotation = ctx.ReadValue<float>();
+        public void Exit(InputAction.CallbackContext ctx) => Application.Quit();
     }
 }

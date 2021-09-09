@@ -28,9 +28,9 @@ namespace Project
         [SerializeField] private int framerate;
 
         [Header("Info", order = 1)]
-        [SerializeField] private float minVelocity;
+        [SerializeField, Min(0f)] private float minVelocity;
         [SerializeField] private float maxVelocity;
-        [SerializeField] private float minAngularVelocity;
+        [SerializeField, Min(0f)] private float minAngularVelocity;
         [SerializeField] private float maxAngularVelocity;
         [SerializeField] private float distanceSpaceRockSpawn;
         [SerializeField] private float maxDistanceSpaceRock;
