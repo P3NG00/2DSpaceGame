@@ -130,11 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73ecc0d41116ac4389e72ac6aa543ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multForce: 50
-  multRotate: 250
+  multForce: 40
+  multRotate: 300
   velocityMissile: 125
   timeMissileLife: 1
-  timeBetweenShots: 0.09
+  timeBetweenShots: 0.25
   colorShip: {r: 1, g: 1, b: 1, a: 1}
   colorShipTip: {r: 1, g: 0, b: 0, a: 1}
   rigidbody: {fileID: 4979323623273713214}

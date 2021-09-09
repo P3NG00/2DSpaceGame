@@ -51,13 +51,14 @@ MonoBehaviour:
   distanceSpaceRockSpawn: 40
   maxDistanceSpaceRock: 75
   timeBetweenSpaceRockCleanup: 10
-  scaleSpawnSpaceRocksWithSpeed: 0.15
+  scaleSpawnSpaceRocksWithSpeed: 0.1
   timeBetweenSpaceRockChance: 0.631035
-  chanceSpaceRockSpawn: 0.3
+  chanceSpaceRockSpawn: 0.4
   minSpaceRockScale: 1
   maxSpaceRockScale: 7.5
   prefabSpaceRocks:
-  - {fileID: 4298117860354638438, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
-  - {fileID: 5061040797798713342, guid: 54e982048e29651428566b47da96f37d, type: 3}
-  - {fileID: 1215508696780729370, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
+  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
+  - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
+  - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   player: {fileID: 0}
+  parentSpaceRock: {fileID: 0}

@@ -6,6 +6,8 @@ namespace Project
 {
     public sealed class Player : MonoBehaviour
     {
+        // TODO implement credits or something for hitting space rocks
+
         [Header("Stats", order = 5)]
         [SerializeField, Min(0f)] private float multForce = 1f;
         [SerializeField, Min(0f)] private float multRotate = 1f;

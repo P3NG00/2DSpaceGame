@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,16 +58,15 @@ namespace Project
         }
 
         [Header("References", order = 99)]
-        [SerializeField] private Rigidbody2D[] prefabSpaceRocks;
+        [SerializeField] private SpaceRock[] prefabSpaceRocks;
         [SerializeField] private Player player;
+        [SerializeField] private Transform parentSpaceRock;
 
-        private float RandomUnit => Random.Range(-1f, 1f);
-        private float RandomSpaceRockScale => Random.Range(minSpaceRockScale, maxSpaceRockScale);
-        private Vector2 RandomUnitVector => new Vector2(RandomUnit, RandomUnit).normalized;
-        private Vector2 PlayerPos => player.transform.position;
-        private Rigidbody2D RandomSpaceRock => prefabSpaceRocks[Random.Range(0, prefabSpaceRocks.Length)];
-
-        private List<Rigidbody2D> spaceRocks = new List<Rigidbody2D>();
+        private static float RandomUnit => Random.Range(-1f, 1f);
+        private static float RandomSpaceRockScale => Random.Range(instance.minSpaceRockScale, instance.maxSpaceRockScale);
+        private static Vector2 RandomUnitVector => new Vector2(RandomUnit, RandomUnit).normalized;
+        private static Vector2 PlayerPos => instance.player.transform.position;
+        private static SpaceRock RandomSpaceRock => instance.prefabSpaceRocks[Random.Range(0, instance.prefabSpaceRocks.Length)];
 
         private void Start()
         {
@@ -84,7 +84,7 @@ namespace Project
                 waitTime = timeBetweenSpaceRockChance;
                 playerMagnitude = player.Rigidbody.velocity.magnitude * scaleSpawnSpaceRocksWithSpeed;
 
-                if (playerMagnitude != 0)
+                if (playerMagnitude > 1f)
                 {
                     waitTime /= playerMagnitude;
                 }
@@ -100,50 +100,36 @@ namespace Project
 
         private IEnumerator RoutineCleanDistantSpaceRocks()
         {
-            List<Rigidbody2D> spaceRocksToRemove = new List<Rigidbody2D>();
-
             while (true)
             {
                 // Wait for cleanup...
                 yield return new WaitForSeconds(timeBetweenSpaceRockCleanup);
 
-                // Add each Space Rock too far away from the player to a removal list
-                spaceRocks.ForEach(sr =>
+                // Remove all distant Space Rocks
+                Rigidbody2D[] spaceRocks = parentSpaceRock.GetComponentsInChildren<Rigidbody2D>();
+
+                foreach (Rigidbody2D sr in spaceRocks)
                 {
                     if (Vector2.Distance(PlayerPos, sr.transform.position) > maxDistanceSpaceRock)
                     {
-                        spaceRocksToRemove.Add(sr);
+                        Destroy(sr.gameObject);
                     }
-                });
-
-                // Destroy all Space Rocks on removal list
-                spaceRocksToRemove.ForEach(sr =>
-                {
-                    spaceRocks.Remove(sr);
-                    Destroy(sr.gameObject);
-                });
-
-                // Clear removal list
-                spaceRocksToRemove.Clear();
+                }
             }
         }
 
-        private void SpawnSpaceRock()
+        public static void SpawnSpaceRock()
         {
             // Instantiate space rock
-            Vector2 spawnPos = PlayerPos + (RandomUnitVector * distanceSpaceRockSpawn);
+            Vector2 spawnPos = PlayerPos + (RandomUnitVector * instance.distanceSpaceRockSpawn);
             Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-            Rigidbody2D spaceRock = Instantiate(RandomSpaceRock, spawnPos, Quaternion.identity);
+            SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
+            spaceRock.Scale = RandomSpaceRockScale;
 
-            // Change scale
-            spaceRock.transform.localScale = Vector2.one * RandomSpaceRockScale;
-
-            // Give velocity
-            spaceRock.velocity = RandomUnitVector * Random.Range(minVelocity, maxVelocity);
-            spaceRock.angularVelocity = RandomUnit * Random.Range(minAngularVelocity, maxAngularVelocity);
-
-            // Add to list
-            spaceRocks.Add(spaceRock);
+            // Create velocities
+            Vector2 velocity = RandomUnitVector * Random.Range(instance.minVelocity, instance.maxVelocity);
+            float angularVelocity = RandomUnit * Random.Range(instance.minAngularVelocity, instance.maxAngularVelocity);
+            spaceRock.SetVelocities(velocity, angularVelocity);
         }
     }
 }

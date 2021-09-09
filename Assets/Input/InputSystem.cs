@@ -75,28 +75,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""3d97a18f-80f2-405e-a6d4-76f63669699d"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Add Force"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d02d8e5c-fc84-4bc7-9786-344cf0efc6bf"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Add Force"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Keyboard"",
                     ""id"": ""e8090e10-37fe-47a9-8474-4887e9052079"",
                     ""path"": ""1DAxis"",
@@ -143,7 +121,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""ea91107e-ff1f-418e-a8af-3911ba3c04f7"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -154,7 +132,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""510de66a-f9d3-4fa3-a8be-ca47b0e54702"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -176,22 +154,11 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4fe245ba-011b-496b-a824-ebebc3ed946f"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""28811dd3-1101-4761-87cd-1ae9563202bf"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Add Force"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },

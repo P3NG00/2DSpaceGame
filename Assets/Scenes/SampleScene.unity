@@ -390,6 +390,36 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 91a84900826bdce4a96adf242a08d5a5, type: 2}
+--- !u!1 &781711343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781711344}
+  m_Layer: 0
+  m_Name: Parent Space Rock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781711344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781711343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &1793820154 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1609611623004105348, guid: aa2084ea99ebac94caab77de28a317da, type: 3}
@@ -656,5 +686,9 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 127685313}
+    - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: parentSpaceRock
+      value: 
+      objectReference: {fileID: 781711344}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
