@@ -25,7 +25,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2634249643401036136, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
       propertyPath: m_Name
-      value: Space Rock (Circle)
+      value: Space Rock (Circle) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2634249643401036138, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
       propertyPath: m_RootOrder

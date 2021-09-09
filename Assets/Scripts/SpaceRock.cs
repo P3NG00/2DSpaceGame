@@ -7,9 +7,16 @@ namespace Project
         [Header("Info", order = 0)]
         [SerializeField, Min(0f)] private float scaleSize;
         [SerializeField, Min(0f)] private float scaleMass;
+        [SerializeField] private Color color;
 
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+
+        private void OnValidate()
+        {
+            spriteRenderer.color = color;
+        }
 
         public float Scale
         {

@@ -63,7 +63,7 @@ namespace Project
                 force *= multRotate * Time.deltaTime;
 
                 Vector2 position = transform.position;
-                position += (Vector2)transform.up * 0.5f;
+                position += (Vector2)transform.up * 0.5773f;
 
                 rigidbody.AddForceAtPosition(force, position);
             }

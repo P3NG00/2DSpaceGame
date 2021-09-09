@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4, g: 0.6666666, b: 0.8, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -118,9 +118,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1572107092036697097, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 1140679818436495679}
     - target: {fileID: 2634249643401036136, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
       propertyPath: m_Name
       value: Space Rock (Triangle) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634249643401036137, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
+      propertyPath: m_Mass
+      value: 3.897
       objectReference: {fileID: 0}
     - target: {fileID: 2634249643401036138, guid: 323dcec44f3670a4d9ede0531ff9ff71, type: 3}
       propertyPath: m_RootOrder
