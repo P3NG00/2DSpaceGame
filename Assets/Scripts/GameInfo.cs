@@ -1,4 +1,5 @@
 using System.Collections;
+using Project.Utilities;
 using TMPro;
 using UnityEngine;
 
@@ -26,38 +27,10 @@ namespace Project
 
         [Header("Game", order = 0)]
         [SerializeField] private int credits;
+        [SerializeField] private GameModeSettings gameMode;
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
-
-        [Header("Info", order = 3)]
-        [SerializeField, Min(0f)] private float minVelocity;
-        [SerializeField] private float maxVelocity;
-        [SerializeField, Min(0f)] private float minAngularVelocity;
-        [SerializeField] private float maxAngularVelocity;
-        [SerializeField] private float distanceSpaceRockSpawn;
-        [SerializeField] private float maxDistanceSpaceRock;
-        [SerializeField] private float timeBetweenSpaceRockCleanup;
-        [SerializeField] private float scaleSpawnSpaceRocksWithSpeed;
-        [SerializeField, Min(0f)] private float timeBetweenSpaceRockChance;
-        [SerializeField, Range(0f, 1f)] private float chanceSpaceRockSpawn;
-        [SerializeField, Min(0f)] private float minSpaceRockScale;
-        [SerializeField] private float maxSpaceRockScale;
-
-        private void ValidateMinMax(float min, ref float max)
-        {
-            if (min > max)
-            {
-                max = min;
-            }
-        }
-
-        private void OnValidate()
-        {
-            ValidateMinMax(minVelocity, ref maxVelocity);
-            ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
-            ValidateMinMax(minSpaceRockScale, ref maxSpaceRockScale);
-        }
 
         [Header("References", order = 99)]
         [SerializeField] private SpaceRock[] prefabSpaceRocks;
@@ -65,11 +38,9 @@ namespace Project
         [SerializeField] private Transform parentSpaceRock;
         [SerializeField] private TMP_Text textCredits;
 
-        public static float MinSpaceRockScale => instance.minSpaceRockScale;
+        public static GameModeSettings GMSettings => instance.gameMode;
 
-        private static float RandomUnit => Random.Range(-1f, 1f);
-        private static float RandomSpaceRockScale => Random.Range(instance.minSpaceRockScale, instance.maxSpaceRockScale);
-        private static Vector2 RandomUnitVector => new Vector2(RandomUnit, RandomUnit).normalized;
+        private static float RandomSpaceRockScale => Random.Range(GMSettings.MinSpaceRockScale, GMSettings.MaxSpaceRockScale);
         private static Vector2 PlayerPos => instance.player.transform.position;
         private static SpaceRock RandomSpaceRock => instance.prefabSpaceRocks[Random.Range(0, instance.prefabSpaceRocks.Length)];
 
@@ -85,14 +56,20 @@ namespace Project
             textCredits.text = credits.ToString();
         }
 
+        public static void GiveCredits(int amount, Vector2 position)
+        {
+            instance.credits += amount;
+            // TODO spawn +{amount} at position
+        }
+
         private IEnumerator RoutineCreateSpaceRocks()
         {
             float waitTime, playerMagnitude;
 
             while (true)
             {
-                waitTime = timeBetweenSpaceRockChance;
-                playerMagnitude = player.Rigidbody.velocity.magnitude * scaleSpawnSpaceRocksWithSpeed;
+                waitTime = GMSettings.TimeBetweenSpaceRockCleanup;
+                playerMagnitude = player.Rigidbody.velocity.magnitude * GMSettings.ScaleSpaceRockSpawnRate;
 
                 if (playerMagnitude > 1f)
                 {
@@ -101,7 +78,7 @@ namespace Project
 
                 yield return new WaitForSeconds(waitTime);
 
-                if (Random.value <= chanceSpaceRockSpawn)
+                if (Random.value <= GMSettings.ChanceSpaceRockSpawn)
                 {
                     SpawnSpaceRock();
                 }
@@ -113,14 +90,14 @@ namespace Project
             while (true)
             {
                 // Wait for cleanup...
-                yield return new WaitForSeconds(timeBetweenSpaceRockCleanup);
+                yield return new WaitForSeconds(GMSettings.TimeBetweenSpaceRockCleanup);
 
                 // Remove all distant Space Rocks
                 Rigidbody2D[] spaceRocks = parentSpaceRock.GetComponentsInChildren<Rigidbody2D>();
 
                 foreach (Rigidbody2D sr in spaceRocks)
                 {
-                    if (Vector2.Distance(PlayerPos, sr.transform.position) > maxDistanceSpaceRock)
+                    if (Vector2.Distance(PlayerPos, sr.transform.position) > GMSettings.DistanceSpaceRockMax)
                     {
                         Destroy(sr.gameObject);
                     }
@@ -131,17 +108,15 @@ namespace Project
         public static void SpawnSpaceRock()
         {
             // Instantiate space rock
-            Vector2 spawnPos = PlayerPos + (RandomUnitVector * instance.distanceSpaceRockSpawn);
+            Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * GMSettings.DistanceSpaceRockSpawn);
             Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
             SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
             spaceRock.Scale = RandomSpaceRockScale;
 
             // Create velocities
-            Vector2 velocity = RandomUnitVector * Random.Range(instance.minVelocity, instance.maxVelocity);
-            float angularVelocity = RandomUnit * Random.Range(instance.minAngularVelocity, instance.maxAngularVelocity);
+            Vector2 velocity = Util.RandomUnitVector * Random.Range(GMSettings.MinSpaceRockVelocity, GMSettings.MaxSpaceRockVelocity);
+            float angularVelocity = Util.RandomUnit * Random.Range(GMSettings.MinSpaceRockVelocityAngular, GMSettings.MaxSpaceRockVelocityAngular);
             spaceRock.SetVelocities(velocity, angularVelocity);
         }
-
-        public static void IncrementCredit() => ++instance.credits;
     }
 }

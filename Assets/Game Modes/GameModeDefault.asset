@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b6916d83ce60f4c97132de06d65d5f, type: 3}
+  m_Name: GameModeDefault
+  m_EditorClassIdentifier: 
+  shipPlayer:
+    colorPrimary: {r: 0, g: 0, b: 0, a: 0}
+    colorSecondary: {r: 0, g: 0, b: 0, a: 0}
+    multiplierForce: 40
+    multiplierRotate: 300
+    velocityMissile: 125
+    timeMissileLife: 1
+    timeBetweenShots: 0.25
+  shipEnemy:
+    colorPrimary: {r: 0, g: 0, b: 0, a: 0}
+    colorSecondary: {r: 0, g: 0, b: 0, a: 0}
+    multiplierForce: 0
+    multiplierRotate: 0
+    velocityMissile: 1
+    timeMissileLife: 1
+    timeBetweenShots: 1
+  minVelocity: 2
+  maxVelocity: 25
+  minAngularVelocity: 10
+  maxAngularVelocity: 90
+  minScale: 2
+  maxScale: 6.5
+  distanceSpaceRockSpawn: 60
+  distanceSpaceRockMax: 100
+  timeBetweenSpaceRockCleanup: 10
+  scaleSpaceRockSpawnRate: 3
+  timeBetweenSpaceRockChance: 0.631035
+  chanceSpaceRockSpawn: 0.4

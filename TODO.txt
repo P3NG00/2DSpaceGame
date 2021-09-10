@@ -1,3 +1,7 @@
+the whole game is played inside your ship
+
+i want to include enemy ai's for you to takeout for rewards like materials / credits
+
 TODO create shop
 on controller - use d-pad
 on keyboard - use arrow keys
@@ -12,3 +16,17 @@ TODO implement settings
 able to change audio
 able to change graphics
 able to change controls
+
+TODO implement effect when bullet hits
+particle system for 'sparks'
+
+TODO implement player method AddCredits(int amount, Vector2 pos)
+this will create a "+{amount}" popup
+rises and fades away after a second
+
+TODO implement drones with ai that fly around
+able to kill for random amount of credits
+move in small area
+
+TODO implement "bases" or "planets" or something
+i want this to be a place where ships would normally dock

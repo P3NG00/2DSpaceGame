@@ -43,24 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adb4b2c7d9ed0c41a9ec895be0b1b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: 0
+  gameMode: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
   framerate: 150
-  minVelocity: 2
-  maxVelocity: 25
-  minAngularVelocity: 10
-  maxAngularVelocity: 90
-  distanceSpaceRockSpawn: 60
-  maxDistanceSpaceRock: 100
-  timeBetweenSpaceRockCleanup: 10
-  scaleSpawnSpaceRocksWithSpeed: 0.1
-  timeBetweenSpaceRockChance: 0.631035
-  chanceSpaceRockSpawn: 0.4
-  minSpaceRockScale: 2
-  maxSpaceRockScale: 6.5
   prefabSpaceRocks:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   player: {fileID: 0}
   parentSpaceRock: {fileID: 0}
-  textCredits: {fileID: 0}

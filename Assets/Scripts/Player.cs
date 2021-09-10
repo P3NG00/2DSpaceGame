@@ -6,22 +6,11 @@ namespace Project
 {
     public sealed class Player : MonoBehaviour
     {
-        [Header("Stats", order = 5)]
-        [SerializeField, Min(0f)] private float multForce = 1f;
-        [SerializeField, Min(0f)] private float multRotate = 1f;
-        [SerializeField, Min(0f)] private float velocityMissile = 1f;
-        [SerializeField, Min(0f)] private float timeMissileLife = 1f;
-        [SerializeField, Min(0f)] private float timeBetweenShots = 1f;
-
-        [Header("Other", order = 50)]
-        [SerializeField] private Color colorShip;
-        [SerializeField] private Color colorShipTip;
-
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Rigidbody2D prefabMissile;
-        [SerializeField] private SpriteRenderer srShip;
-        [SerializeField] private SpriteRenderer srShipTip;
+        [SerializeField] private SpriteRenderer srPrimary;
+        [SerializeField] private SpriteRenderer srSecondary;
         [SerializeField] private new ParticleSystem particleSystem;
         [SerializeField] private Animator animator;
 
@@ -31,18 +20,19 @@ namespace Project
         private bool inputFire = false;
         private float inputRotation = 0f;
 
-        private void OnValidate()
-        {
-            srShip.color = colorShip;
-            srShipTip.color = colorShipTip;
-        }
+        private ShipStats stats;
 
         private void Update()
         {
             UpdateForce();
             UpdateRotation();
             particleSystem.transform.position = transform.position;
-            animator.SetBool("moving", inputAddForce);
+            animator.SetBool("Moving", inputAddForce);
+        }
+
+        private void Start()
+        {
+            stats = GameInfo.GMSettings.ShipStatsPlayer;
         }
 
         private void UpdateForce()
@@ -50,7 +40,7 @@ namespace Project
             if (inputAddForce)
             {
                 Vector2 direction = transform.up;
-                Vector2 velocity = direction * multForce;
+                Vector2 velocity = direction * stats.MultiplierForce;
                 rigidbody.AddForce(velocity);
             }
         }
@@ -60,7 +50,7 @@ namespace Project
             if (inputRotation != 0f)
             {
                 Vector2 force = transform.right * inputRotation;
-                force *= multRotate * Time.deltaTime;
+                force *= stats.MultiplierRotate * Time.deltaTime;
 
                 Vector2 position = transform.position;
                 position += (Vector2)transform.up * 0.5773f;
@@ -78,11 +68,11 @@ namespace Project
 
                 Rigidbody2D missile = Instantiate(prefabMissile, posMissile, transform.rotation);
 
-                missile.velocity = transform.up * velocityMissile;
+                missile.velocity = transform.up * stats.VelocityMissile;
 
-                Destroy(missile.gameObject, timeMissileLife);
+                Destroy(missile.gameObject, stats.TimeMissileLife);
 
-                yield return new WaitForSeconds(timeBetweenShots);
+                yield return new WaitForSeconds(stats.TimeBetweenShots);
             }
         }
 

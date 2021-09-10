@@ -54,14 +54,16 @@
 
     // P3
     "**/*.pfx": true,
+    "Assets/Animations": true,
+    "Assets/Camera": true,
+    "Assets/Fonts": true,
+    "Assets/Game Modes": true,
     "Assets/Input/": true,
     "Assets/Prefabs/": true,
     "Assets/Rendering/": true,
     "Assets/Scenes": true,
     "Assets/TextMesh Pro": true,
     "Assets/Textures": true,
-    "Assets/Camera": true,
-    "Assets/Fonts": true,
     "Logs": true,
     "Packages": true,
     "UserSettings": true,

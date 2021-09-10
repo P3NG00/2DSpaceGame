@@ -49,14 +49,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""Shop Navigation"",
-                    ""type"": ""Value"",
-                    ""id"": ""46e2c6f4-6fb7-4cf5-b651-11d6f78c38bc"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -180,72 +172,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""b7a27184-7421-4466-b04f-0aa650afa5c0"",
-                    ""path"": ""2DVector(mode=1)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""05087d17-5619-414d-a27f-87027a49f57a"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""0866dc40-8189-4a0b-b692-63a359f91587"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""1d55522b-9ffa-40c1-9c04-21bae59d737c"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""4d384a96-2e06-41d4-9401-261ca782c0e9"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""58ba8e8b-df02-4728-9ae6-23e346259ba4"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Shop Navigation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -281,7 +207,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
-        m_Input_ShopNavigation = m_Input.FindAction("Shop Navigation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -335,7 +260,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_Exit;
-    private readonly InputAction m_Input_ShopNavigation;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -344,7 +268,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @Exit => m_Wrapper.m_Input_Exit;
-        public InputAction @ShopNavigation => m_Wrapper.m_Input_ShopNavigation;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -366,9 +289,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @ShopNavigation.started -= m_Wrapper.m_InputActionsCallbackInterface.OnShopNavigation;
-                @ShopNavigation.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnShopNavigation;
-                @ShopNavigation.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnShopNavigation;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -385,9 +305,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
-                @ShopNavigation.started += instance.OnShopNavigation;
-                @ShopNavigation.performed += instance.OnShopNavigation;
-                @ShopNavigation.canceled += instance.OnShopNavigation;
             }
         }
     }
@@ -416,6 +333,5 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
-        void OnShopNavigation(InputAction.CallbackContext context);
     }
 }

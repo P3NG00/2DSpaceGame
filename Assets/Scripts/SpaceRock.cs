@@ -21,20 +21,12 @@ namespace Project
         public float Scale
         {
             get => scaleSize;
-            set => scaleSize = value;
-        }
-
-        private void Update()
-        {
-            if (scaleSize >= GameInfo.MinSpaceRockScale)
+            set
             {
+                scaleSize = value;
+
                 transform.localScale = Vector2.one * scaleSize;
                 rigidbody.mass = scaleSize * scaleMass;
-            }
-            else
-            {
-                Destroy(gameObject);
-                GameInfo.IncrementCredit();
             }
         }
 
@@ -43,8 +35,17 @@ namespace Project
             if (collider.gameObject.tag == "Missile")
             {
                 Scale -= 0.5f;
-                GameInfo.IncrementCredit();
+                int reward = 1;
                 Destroy(collider.gameObject);
+
+                if (Scale < GameInfo.GMSettings.MinSpaceRockScale)
+                {
+                    ++reward;
+                    Destroy(gameObject);
+                }
+
+                Vector2 pos = transform.position;
+                GameInfo.GiveCredits(reward, pos);
             }
         }
 
