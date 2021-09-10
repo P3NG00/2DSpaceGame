@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d015afb7982694f80d3cb2e0ad7d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSize: 0
-  scaleMass: 0
   color: {r: 0.4, g: 0.6666666, b: 0.8, a: 1}
   rigidbody: {fileID: 2634249643401036137}
   spriteRenderer: {fileID: 2634249643401036139}

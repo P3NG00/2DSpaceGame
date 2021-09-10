@@ -17,14 +17,13 @@ namespace Project
         [SerializeField] private float maxAngularVelocity;
         [SerializeField, Min(0f)] private float minScale;
         [SerializeField] private float maxScale;
-
-        [SerializeField] private float distanceSpaceRockSpawn;
-        [SerializeField] private float distanceSpaceRockMax;
-        [SerializeField] private float timeBetweenSpaceRockCleanup;
-        [SerializeField] private float scaleSpaceRockSpawnRate;
-        [SerializeField, Min(0f)] private float timeBetweenSpaceRockChance;
-        [SerializeField, Range(0f, 1f)] private float chanceSpaceRockSpawn;
-
+        [SerializeField] private float scaleSpawnRate;
+        [SerializeField] private float distanceSpawn;
+        [SerializeField] private float distanceMax;
+        [SerializeField] private float timeBetweenCleanup;
+        [SerializeField, Min(0f)] private float timeBetweenChance;
+        [SerializeField, Range(0f, 1f)] private float chanceSpawn;
+        [SerializeField, Min(0f)] private float scaleMissileImpactForce;
         private void OnValidate()
         {
             void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
@@ -42,13 +41,13 @@ namespace Project
         public float MaxSpaceRockVelocityAngular => maxAngularVelocity;
         public float MinSpaceRockScale => minScale;
         public float MaxSpaceRockScale => maxScale;
-
-        public float DistanceSpaceRockSpawn => distanceSpaceRockSpawn;
-        public float DistanceSpaceRockMax => distanceSpaceRockMax;
-        public float TimeBetweenSpaceRockCleanup => timeBetweenSpaceRockCleanup;
-        public float ScaleSpaceRockSpawnRate => scaleSpaceRockSpawnRate;
-        public float TimeBetweenSpaceRockChance => timeBetweenSpaceRockChance;
-        public float ChanceSpaceRockSpawn => chanceSpaceRockSpawn;
+        public float ScaleSpaceRockSpawnRate => scaleSpawnRate;
+        public float DistanceSpaceRockSpawn => distanceSpawn;
+        public float DistanceSpaceRockMax => distanceMax;
+        public float TimeBetweenSpaceRockCleanup => timeBetweenCleanup;
+        public float TimeBetweenSpaceRockChance => timeBetweenChance;
+        public float ChanceSpaceRockSpawn => chanceSpawn;
+        public float ScaleMissileImpactForce => scaleMissileImpactForce;
     }
 
     [System.Serializable]
@@ -62,8 +61,8 @@ namespace Project
         [SerializeField, Min(0f)] private float timeMissileLife;
         [SerializeField, Min(0f)] private float timeBetweenShots;
 
-        public Color ColorPrimary => colorPrimary;
-        public Color ColorSecondary => colorSecondary;
+        // public Color ColorPrimary => colorPrimary;
+        // public Color ColorSecondary => colorSecondary;
         public float MultiplierForce => multiplierForce;
         public float MultiplierRotate => multiplierRotate;
         public float VelocityMissile => velocityMissile;

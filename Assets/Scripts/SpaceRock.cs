@@ -5,8 +5,6 @@ namespace Project
     public sealed class SpaceRock : MonoBehaviour
     {
         [Header("Info", order = 0)]
-        [SerializeField, Min(0f)] private float scaleSize;
-        [SerializeField, Min(0f)] private float scaleMass;
         [SerializeField] private Color color;
 
         [Header("References", order = 99)]
@@ -20,28 +18,34 @@ namespace Project
 
         public float Scale
         {
-            get => scaleSize;
+            get => transform.localScale.x;
             set
             {
-                scaleSize = value;
-
-                transform.localScale = Vector2.one * scaleSize;
-                rigidbody.mass = scaleSize * scaleMass;
+                transform.localScale = Vector2.one * value;
             }
         }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.tag == "Missile")
+            GameObject otherObj = collider.gameObject;
+
+            if (otherObj.tag == "Missile")
             {
                 Scale -= 0.5f;
                 int reward = 1;
-                Destroy(collider.gameObject);
+                Destroy(otherObj);
 
                 if (Scale < GameInfo.GMSettings.MinSpaceRockScale)
                 {
                     ++reward;
                     Destroy(gameObject);
+                }
+                else
+                {
+                    Rigidbody2D otherRigidbody = otherObj.GetComponent<Rigidbody2D>();
+                    Vector2 force = otherRigidbody.velocity * GameInfo.GMSettings.ScaleMissileImpactForce;
+                    Vector2 position = otherObj.transform.position;
+                    rigidbody.AddForceAtPosition(force, position);
                 }
 
                 Vector2 pos = transform.position;

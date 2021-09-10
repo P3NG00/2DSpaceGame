@@ -68,7 +68,7 @@ namespace Project
 
             while (true)
             {
-                waitTime = GMSettings.TimeBetweenSpaceRockCleanup;
+                waitTime = GMSettings.TimeBetweenSpaceRockChance;
                 playerMagnitude = player.Rigidbody.velocity.magnitude * GMSettings.ScaleSpaceRockSpawnRate;
 
                 if (playerMagnitude > 1f)
