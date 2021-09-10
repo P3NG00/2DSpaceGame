@@ -1,4 +1,5 @@
 using System.Collections;
+using Project.Ships;
 using Project.Utilities;
 using TMPro;
 using UnityEngine;
@@ -34,9 +35,10 @@ namespace Project
 
         [Header("References", order = 99)]
         [SerializeField] private SpaceRock[] prefabSpaceRocks;
-        [SerializeField] private Player player;
+        [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceRock;
         [SerializeField] private TMP_Text textCredits;
+        [SerializeField] private TMP_Text prefabTextCreditPopup;
 
         public static GameModeSettings GMSettings => instance.gameMode;
 
@@ -59,7 +61,10 @@ namespace Project
         public static void GiveCredits(int amount, Vector2 position)
         {
             instance.credits += amount;
-            // TODO spawn +{amount} at position
+
+            TMP_Text textPopup = Instantiate(instance.prefabTextCreditPopup, position, Quaternion.identity);
+            textPopup.text = $"+{amount}";
+            Destroy(textPopup.gameObject, 0.5f);
         }
 
         private IEnumerator RoutineCreateSpaceRocks()

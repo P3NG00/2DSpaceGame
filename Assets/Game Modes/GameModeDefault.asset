@@ -40,4 +40,4 @@ MonoBehaviour:
   timeBetweenCleanup: 10
   timeBetweenChance: 0.631035
   chanceSpawn: 0.2
-  scaleMissileImpactForce: 0.2
+  scaleMissileImpactForce: 0.4
