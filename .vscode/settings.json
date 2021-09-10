@@ -59,6 +59,7 @@
     "Assets/Fonts": true,
     "Assets/Game Modes": true,
     "Assets/Input/": true,
+    "Assets/Materials": true,
     "Assets/Prefabs/": true,
     "Assets/Rendering/": true,
     "Assets/Scenes": true,
