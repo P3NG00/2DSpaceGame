@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project
+namespace SpaceGame
 {
     public sealed class SpaceRock : MonoBehaviour
     {

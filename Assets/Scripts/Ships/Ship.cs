@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Ships
+namespace SpaceGame.Ships
 {
     public abstract class Ship : MonoBehaviour
     {

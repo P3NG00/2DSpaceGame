@@ -1,10 +1,11 @@
 using System.Collections;
-using Project.Ships;
-using Project.Utilities;
+using SpaceGame.Settings;
+using SpaceGame.Ships;
+using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 
-namespace Project
+namespace SpaceGame
 {
     public sealed class GameInfo : MonoBehaviour
     {

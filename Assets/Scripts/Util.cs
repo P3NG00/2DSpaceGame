@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Utilities
+namespace SpaceGame.Utilities
 {
     public sealed class Util : MonoBehaviour
     {

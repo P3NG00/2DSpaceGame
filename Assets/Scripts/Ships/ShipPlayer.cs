@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Project.Ships
+namespace SpaceGame.Ships
 {
     public sealed class ShipPlayer : Ship
     {

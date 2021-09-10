@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project
+namespace SpaceGame
 {
     [CreateAssetMenu(menuName = "Project/Game Mode Settings", fileName = "GameMode Settings")]
     public sealed class GameModeSettings : ScriptableObject
