@@ -1,14 +1,10 @@
 using UnityEngine;
 
-namespace SpaceGame
+namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "Project/Game Mode Settings", fileName = "GameMode Settings")]
+    [CreateAssetMenu(menuName = "2D Space Game/Game Mode Settings", fileName = "GameMode Settings")]
     public sealed class GameModeSettings : ScriptableObject
     {
-        [Header("Ships", order = 30)]
-        [SerializeField] private ShipStats shipPlayer;
-        [SerializeField] private ShipStats shipEnemy;
-
         [Header("Space Rocks", order = 40)]
         [SerializeField, Min(0f)] private float minVelocity;
         [SerializeField] private float maxVelocity;
@@ -23,6 +19,7 @@ namespace SpaceGame
         [SerializeField, Min(0f)] private float timeBetweenChance;
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
+
         private void OnValidate()
         {
             void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
@@ -30,9 +27,6 @@ namespace SpaceGame
             ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
             ValidateMinMax(minScale, ref maxScale);
         }
-
-        public ShipStats ShipStatsPlayer => shipPlayer;
-        public ShipStats ShipStatsEnemy => shipEnemy;
 
         public float MinSpaceRockVelocity => minVelocity;
         public float MaxSpaceRockVelocity => maxVelocity;
@@ -47,25 +41,5 @@ namespace SpaceGame
         public float TimeBetweenSpaceRockChance => timeBetweenChance;
         public float ChanceSpaceRockSpawn => chanceSpawn;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
-    }
-
-    [System.Serializable]
-    public sealed class ShipStats
-    {
-        [SerializeField] private Color colorPrimary; // TODO implement colorPrimary?
-        [SerializeField] private Color colorSecondary; // TODO implement colorSecondary?
-        [SerializeField, Min(0f)] private float multiplierForce;
-        [SerializeField, Min(0f)] private float multiplierRotate;
-        [SerializeField, Min(0f)] private float velocityMissile;
-        [SerializeField, Min(0f)] private float timeMissileLife;
-        [SerializeField, Min(0f)] private float timeBetweenShots;
-
-        // public Color ColorPrimary => colorPrimary;
-        // public Color ColorSecondary => colorSecondary;
-        public float MultiplierForce => multiplierForce;
-        public float MultiplierRotate => multiplierRotate;
-        public float VelocityMissile => velocityMissile;
-        public float TimeMissileLife => timeMissileLife;
-        public float TimeBetweenShots => timeBetweenShots;
     }
 }

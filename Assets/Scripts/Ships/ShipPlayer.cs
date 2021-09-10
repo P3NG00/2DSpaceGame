@@ -7,7 +7,6 @@ namespace SpaceGame.Ships
     public sealed class ShipPlayer : Ship
     {
         [Header("References (as ShipPlayer)", order = 99)]
-        [SerializeField] private Transform parentParticleSystems;
         [SerializeField] private Animator animator;
 
         private bool inputAddForce = false;
@@ -18,13 +17,7 @@ namespace SpaceGame.Ships
         {
             UpdateForce();
             UpdateRotation();
-            parentParticleSystems.position = transform.position;
             animator.SetBool("Moving", inputAddForce);
-        }
-
-        private void Start()
-        {
-            stats = GameInfo.GMSettings.ShipStatsPlayer;
         }
 
         private void UpdateForce()
@@ -49,7 +42,7 @@ namespace SpaceGame.Ships
             {
                 Fire();
 
-                yield return new WaitForSeconds(stats.TimeBetweenShots);
+                yield return new WaitForSeconds(Stats.TimeBetweenShots);
             }
         }
 

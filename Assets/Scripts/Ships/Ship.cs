@@ -1,18 +1,21 @@
+using SpaceGame.Settings;
 using UnityEngine;
 
 namespace SpaceGame.Ships
 {
     public abstract class Ship : MonoBehaviour
     {
+        [Header("Info", order = 0)]
+        [SerializeField] private ShipStats stats;
+
         [Header("References (as Ship)", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
         // [SerializeField] private SpriteRenderer srPrimary;
         // [SerializeField] private SpriteRenderer srSecondary;
         [SerializeField] private Rigidbody2D prefabMissile;
 
-        protected ShipStats stats;
-
         public Rigidbody2D Rigidbody => rigidbody;
+        public ShipStats Stats => stats;
 
         protected void AddForce()
         {
