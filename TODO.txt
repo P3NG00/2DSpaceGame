@@ -1,11 +1,3 @@
-the whole game is played inside your ship
-
-i want to include enemy ai's for you to takeout for rewards like materials / credits
-
-TODO create shop
-on controller - use d-pad
-on keyboard - use arrow keys
-
 TODO implement audio
 firing sound
 missile hit sound
@@ -29,4 +21,21 @@ able to kill for random amount of credits
 move in small area
 
 TODO implement "bases" or "planets" or something
-i want this to be a place where ships would normally dock
+these can be
+    shops
+        you can fly up to vendors and see what they're offering
+        shop types
+            weapons
+            materials
+            defense
+            ship upgrades
+        use arrow keys / d-pad to navigate
+    enemy hideouts
+        meant to gain experience and credits
+    planets
+        have different climates
+        can shoot things on or around the planet for materials and credits
+
+TODO implement a "base"
+    able to travel to whenever
+    able to switch out ships
