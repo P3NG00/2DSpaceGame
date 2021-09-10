@@ -113,7 +113,7 @@ namespace Project
         public static void SpawnSpaceRock()
         {
             // Instantiate space rock
-            Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * GMSettings.DistanceSpaceRockSpawn);
+            Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * Random.Range(GMSettings.DistanceSpaceRockSpawn, GMSettings.DistanceSpaceRockMax));
             Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
             SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
             spaceRock.Scale = RandomSpaceRockScale;
