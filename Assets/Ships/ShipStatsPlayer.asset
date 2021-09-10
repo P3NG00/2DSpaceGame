@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dfbc84bb7acce4abf99f89383aa7e6, type: 3}
   m_Name: ShipStatsPlayer
   m_EditorClassIdentifier: 
-  colorPrimary: {r: 0, g: 0, b: 0, a: 0}
-  colorSecondary: {r: 0, g: 0, b: 0, a: 0}
+  colorPrimary: {r: 1, g: 1, b: 1, a: 1}
+  colorSecondary: {r: 0.2, g: 1, b: 0.8, a: 1}
   multiplierForce: 40
   multiplierRotate: 300
   velocityMissile: 125

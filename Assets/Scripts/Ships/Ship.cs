@@ -10,12 +10,18 @@ namespace SpaceGame.Ships
 
         [Header("References (as Ship)", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
-        // [SerializeField] private SpriteRenderer srPrimary;
-        // [SerializeField] private SpriteRenderer srSecondary;
+        [SerializeField] private SpriteRenderer srPrimary;
+        [SerializeField] private SpriteRenderer srSecondary;
         [SerializeField] private Rigidbody2D prefabMissile;
 
         public Rigidbody2D Rigidbody => rigidbody;
         public ShipStats Stats => stats;
+
+        private void OnValidate()
+        {
+            srPrimary.color = stats.ColorPrimary;
+            srSecondary.color = stats.ColorSecondary;
+        }
 
         protected void AddForce()
         {
