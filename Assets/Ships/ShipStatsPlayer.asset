@@ -17,5 +17,5 @@ MonoBehaviour:
   multiplierForce: 40
   multiplierRotate: 300
   velocityMissile: 125
-  timeMissileLife: 13.76
+  timeMissileLife: 1
   timeBetweenShots: 0.25
