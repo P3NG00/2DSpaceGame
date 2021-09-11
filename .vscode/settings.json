@@ -63,6 +63,7 @@
     "Assets/Prefabs/": true,
     "Assets/Rendering/": true,
     "Assets/Scenes": true,
+    "Assets/Ships": true,
     "Assets/TextMesh Pro": true,
     "Assets/Textures": true,
     "Logs": true,
