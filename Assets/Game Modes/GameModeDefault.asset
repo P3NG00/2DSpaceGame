@@ -18,12 +18,12 @@ MonoBehaviour:
   sr_maxAngularVelocity: 90
   sr_minScale: 2
   sr_maxScale: 6.5
-  sr_scaleSpawnRate: 0.25
+  sr_scaleSpawnRate: 0.3
   sr_distanceSpawn: 100
-  sr_distanceMax: 150
+  sr_distanceMax: 200
   sr_timeBetweenCleanup: 10
-  sr_timeBetweenChance: 0.631035
+  sr_timeBetweenChance: 0.55
   sr_chanceSpawn: 0.4
   sr_scaleMissileImpactForce: 1.5
-  p_distanceSpawn: 0
-  p_distanceMax: 0
+  p_distanceSpawn: 500
+  p_distanceMax: 2000
