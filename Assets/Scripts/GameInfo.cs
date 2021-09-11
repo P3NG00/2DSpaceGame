@@ -63,7 +63,6 @@ namespace SpaceGame
         public static void GiveCredits(int amount, Vector2 position)
         {
             instance.credits += amount;
-
             TMP_Text textPopup = Instantiate(instance.prefabTextCreditPopup, position, Quaternion.identity);
             textPopup.text = $"+{amount}";
             Destroy(textPopup.gameObject, 0.5f);
@@ -92,8 +91,14 @@ namespace SpaceGame
             }
         }
 
+        // private IEnumerator RoutineCleanPlanets()
+        // {
+        //     float waitTime
+        // }
+
         private IEnumerator RoutineCleanDistantSpaceRocks()
         {
+            // Function to clean bodies
             void CleanBodies(Transform parent, float max)
             {
                 foreach (Rigidbody2D rb in parent.GetComponentsInChildren<Rigidbody2D>())
