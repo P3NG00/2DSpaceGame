@@ -994,15 +994,15 @@ PrefabInstance:
       objectReference: {fileID: 2011637057}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1846706566606818846, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.b
@@ -1018,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3331545610729043388, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_DefaultActionMap
-      value: Input
+      value: 33063dee-766e-4c81-9c8f-1ed363d508f0
       objectReference: {fileID: 0}
     - target: {fileID: 3331545610729043388, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_DefaultControlScheme
