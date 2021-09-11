@@ -12,32 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b6916d83ce60f4c97132de06d65d5f, type: 3}
   m_Name: GameModeDefault
   m_EditorClassIdentifier: 
-  shipPlayer:
-    colorPrimary: {r: 0, g: 0, b: 0, a: 0}
-    colorSecondary: {r: 0, g: 0, b: 0, a: 0}
-    multiplierForce: 40
-    multiplierRotate: 300
-    velocityMissile: 125
-    timeMissileLife: 1
-    timeBetweenShots: 0.25
-  shipEnemy:
-    colorPrimary: {r: 0, g: 0, b: 0, a: 0}
-    colorSecondary: {r: 0, g: 0, b: 0, a: 0}
-    multiplierForce: 0
-    multiplierRotate: 0
-    velocityMissile: 1
-    timeMissileLife: 1
-    timeBetweenShots: 1
-  minVelocity: 2
-  maxVelocity: 25
-  minAngularVelocity: 10
-  maxAngularVelocity: 90
-  minScale: 2
-  maxScale: 6.5
-  scaleSpawnRate: 0.25
-  distanceSpawn: 100
-  distanceMax: 150
-  timeBetweenCleanup: 10
-  timeBetweenChance: 0.631035
-  chanceSpawn: 0.2
-  scaleMissileImpactForce: 0.4
+  sr_minVelocity: 2
+  sr_maxVelocity: 25
+  sr_minAngularVelocity: 10
+  sr_maxAngularVelocity: 90
+  sr_minScale: 2
+  sr_maxScale: 6.5
+  sr_scaleSpawnRate: 0.25
+  sr_distanceSpawn: 100
+  sr_distanceMax: 150
+  sr_timeBetweenCleanup: 10
+  sr_timeBetweenChance: 0.631035
+  sr_chanceSpawn: 0.4
+  sr_scaleMissileImpactForce: 1.5
+  p_distanceSpawn: 0
+  p_distanceMax: 0

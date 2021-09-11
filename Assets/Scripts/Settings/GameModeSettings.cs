@@ -21,6 +21,10 @@ namespace SpaceGame.Settings
         [SerializeField, Range(0f, 1f)] private float sr_chanceSpawn;
         [SerializeField, Min(0f)] private float sr_scaleMissileImpactForce;
 
+        [Header("Planets", order = 60)]
+        [SerializeField] private float p_distanceSpawn;
+        [SerializeField] private float p_distanceMax;
+
         private void OnValidate()
         {
             void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
@@ -42,5 +46,8 @@ namespace SpaceGame.Settings
         public float TimeBetweenSpaceRockChance => sr_timeBetweenChance;
         public float ChanceSpaceRockSpawn => sr_chanceSpawn;
         public float ScaleMissileImpactForce => sr_scaleMissileImpactForce;
+
+        public float DistancePlanetSpawn => p_distanceSpawn;
+        public float DistancePlanetMax => p_distanceMax;
     }
 }

@@ -38,6 +38,7 @@ namespace SpaceGame
         [SerializeField] private SpaceRock[] prefabSpaceRocks;
         [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceRock;
+        [SerializeField] private Transform parentPlanet;
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
 
@@ -93,21 +94,27 @@ namespace SpaceGame
 
         private IEnumerator RoutineCleanDistantSpaceRocks()
         {
+            void CleanBodies(Transform parent, float max)
+            {
+                foreach (Rigidbody2D rb in parent.GetComponentsInChildren<Rigidbody2D>())
+                {
+                    if (Vector2.Distance(PlayerPos, rb.transform.position) > max)
+                    {
+                        Destroy(rb.gameObject);
+                    }
+                }
+            }
+
             while (true)
             {
                 // Wait for cleanup...
                 yield return new WaitForSeconds(GMSettings.TimeBetweenSpaceRockCleanup);
 
                 // Remove all distant Space Rocks
-                Rigidbody2D[] spaceRocks = parentSpaceRock.GetComponentsInChildren<Rigidbody2D>();
+                CleanBodies(parentSpaceRock, GMSettings.DistanceSpaceRockMax);
 
-                foreach (Rigidbody2D sr in spaceRocks)
-                {
-                    if (Vector2.Distance(PlayerPos, sr.transform.position) > GMSettings.DistanceSpaceRockMax)
-                    {
-                        Destroy(sr.gameObject);
-                    }
-                }
+                // Remove all distance Planets
+                CleanBodies(parentPlanet, GMSettings.DistancePlanetMax);
             }
         }
 
