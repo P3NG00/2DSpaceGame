@@ -53,6 +53,18 @@ namespace SpaceGame
             }
         }
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                // TODO Space Rock / Player collision - add damage, effect, other?
+                // ideas
+                //  hurt player in relation to velocity
+                //  create collision particle system effect
+                //  audio feedback
+            }
+        }
+
         public void SetVelocities(Vector2 velocity, float angularVelocity)
         {
             rigidbody.velocity = velocity;
