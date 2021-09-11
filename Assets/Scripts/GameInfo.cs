@@ -1,6 +1,7 @@
 using System.Collections;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
+using SpaceGame.SpaceObjects;
 using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
@@ -90,11 +91,6 @@ namespace SpaceGame
                 }
             }
         }
-
-        // private IEnumerator RoutineCleanPlanets()
-        // {
-        //     float waitTime
-        // }
 
         private IEnumerator RoutineCleanDistantSpaceRocks()
         {

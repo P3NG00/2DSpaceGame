@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Game Mode Settings", fileName = "GameMode Settings")]
+    [CreateAssetMenu(menuName = "2D Space Game/Settings/Game Mode", fileName = "GameMode Settings")]
     public sealed class GameModeSettings : ScriptableObject
     {
+        // TODO REMOVE SECTION BELOW
         [Header("Space Rocks", order = 40)]
         [SerializeField, Min(0f)] private float sr_minVelocity;
         [SerializeField] private float sr_maxVelocity;
