@@ -14,13 +14,21 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srSecondary;
         [SerializeField] private Rigidbody2D prefabMissile;
 
+        [Header("DEBUG", order = 100)]
+        [SerializeField] private bool FORCE_VALIDATE;
+
         public Rigidbody2D Rigidbody => rigidbody;
         public ShipStats Stats => stats;
 
         private void OnValidate()
         {
-            srPrimary.color = stats.ColorPrimary;
-            srSecondary.color = stats.ColorSecondary;
+            if (FORCE_VALIDATE)
+            {
+                srPrimary.color = stats.ColorPrimary;
+                srSecondary.color = stats.ColorSecondary;
+
+                FORCE_VALIDATE = false;
+            }
         }
 
         protected void AddForce()
