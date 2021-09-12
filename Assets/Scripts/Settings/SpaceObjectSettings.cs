@@ -13,16 +13,16 @@ namespace SpaceGame.Settings
         [SerializeField] private float maxVelocity;
         [SerializeField, Min(0f)] private float minAngularVelocity;
         [SerializeField] private float maxAngularVelocity;
-        [SerializeField] private float scaleSpawnRate;
-        [SerializeField] private float distanceSpawn;
+        [SerializeField, Min(0f)] private float distanceSpawn;
         [SerializeField] private float distanceMax;
+        [SerializeField] private float scaleSpawnRate;
         [SerializeField] private float timeBetweenCleanup;
         [SerializeField, Min(0f)] private float timeBetweenChance;
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
 
         [Header("References", order = 99)]
-        [SerializeField] private SpaceObject prefabSpaceObject;
+        [SerializeField] private SpaceObject[] prefabSpaceObjects;
 
         private void ValidateMinMax(float min, ref float max)
         {
@@ -37,22 +37,20 @@ namespace SpaceGame.Settings
             ValidateMinMax(minScale, ref maxScale);
             ValidateMinMax(minVelocity, ref maxVelocity);
             ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
+            ValidateMinMax(distanceSpawn, ref distanceMax);
         }
 
-        public float MinVelocity => minVelocity;
-        public float MaxVelocity => maxVelocity;
-        public float MinVelocityAngular => minAngularVelocity;
-        public float MaxVelocityAngular => maxAngularVelocity;
+        public float RandomScale => Random.Range(minScale, maxScale);
+        public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
+        public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
+        public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
+
         public float MinScale => minScale;
-        public float MaxScale => maxScale;
         public float ScaleSpawnRate => scaleSpawnRate;
-        public float DistanceSpawn => distanceSpawn;
-        public float DistanceMax => distanceMax;
         public float TimeBetweenCleanup => timeBetweenCleanup;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
-
-        public SpaceObject Prefab => prefabSpaceObject;
+        public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
     }
 }

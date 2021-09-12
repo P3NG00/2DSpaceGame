@@ -45,15 +45,16 @@ namespace SpaceGame
 
         public static GameModeSettings GMSettings => instance.gameMode;
 
-        private static float RandomSpaceRockScale => Random.Range(GMSettings.MinSpaceRockScale, GMSettings.MaxSpaceRockScale);
         private static Vector2 PlayerPos => instance.player.transform.position;
-        private static SpaceRock RandomSpaceRock => instance.prefabSpaceRocks[Random.Range(0, instance.prefabSpaceRocks.Length)];
 
         private void Start()
         {
             Application.targetFrameRate = framerate;
-            StartCoroutine(RoutineCreateSpaceRocks());
-            StartCoroutine(RoutineCleanDistantSpaceRocks());
+
+            foreach (SpaceObjectSettings sos in gameMode.SpaceObjects)
+            {
+                StartCoroutine(RoutineSpawnSpaceObject(sos));
+            }
         }
 
         private void Update()
@@ -69,68 +70,94 @@ namespace SpaceGame
             Destroy(textPopup.gameObject, 0.5f);
         }
 
-        private IEnumerator RoutineCreateSpaceRocks()
+        private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSettings sos)
         {
-            float waitTime, playerMagnitude;
-
             while (true)
             {
-                waitTime = GMSettings.TimeBetweenSpaceRockChance;
-                playerMagnitude = player.Rigidbody.velocity.magnitude * GMSettings.ScaleSpaceRockSpawnRate;
+                yield return new WaitForSeconds(sos.TimeBetweenChance);
 
-                if (playerMagnitude > 1f)
+                if (Random.value <= sos.ChanceSpawn)
                 {
-                    waitTime /= playerMagnitude;
-                }
+                    // // Instantiate space rock
+                    Vector2 playerPos = player.transform.position;
+                    Vector2 spawnOffset = Util.RandomUnitVector * sos.RandomSpawnDistance;
+                    Vector2 spawnPos = playerPos + spawnOffset;
+                    Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+                    SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, spawnPos, spawnRot);
 
-                yield return new WaitForSeconds(waitTime);
-
-                if (Random.value <= GMSettings.ChanceSpaceRockSpawn)
-                {
-                    SpawnSpaceRock();
+                    // // Create velocities
+                    Vector2 velocity = Util.RandomUnitVector * sos.RandomVelocity;
+                    float angularVelocity = Util.RandomUnit * sos.RandomAngularVelocity;
+                    spaceObject.SetVelocities(velocity, angularVelocity);
                 }
             }
         }
 
-        private IEnumerator RoutineCleanDistantSpaceRocks()
-        {
-            // Function to clean bodies
-            void CleanBodies(Transform parent, float max)
-            {
-                foreach (Rigidbody2D rb in parent.GetComponentsInChildren<Rigidbody2D>())
-                {
-                    if (Vector2.Distance(PlayerPos, rb.transform.position) > max)
-                    {
-                        Destroy(rb.gameObject);
-                    }
-                }
-            }
+        // [System.Obsolete]
+        // private IEnumerator RoutineCreateSpaceRocks()
+        // {
+        //     float waitTime, playerMagnitude;
 
-            while (true)
-            {
-                // Wait for cleanup...
-                yield return new WaitForSeconds(GMSettings.TimeBetweenSpaceRockCleanup);
+        //     while (true)
+        //     {
+        //         waitTime = GMSettings.TimeBetweenSpaceRockChance;
+        //         playerMagnitude = player.Rigidbody.velocity.magnitude * GMSettings.ScaleSpaceRockSpawnRate;
 
-                // Remove all distant Space Rocks
-                CleanBodies(parentSpaceRock, GMSettings.DistanceSpaceRockMax);
+        //         TODO RE-IMPLEMENT SCALING WITH MOVEMENT
+        //         if (playerMagnitude > 1f)
+        //         {
+        //             waitTime /= playerMagnitude;
+        //         }
 
-                // Remove all distance Planets
-                CleanBodies(parentPlanet, GMSettings.DistancePlanetMax);
-            }
-        }
+        //         yield return new WaitForSeconds(waitTime);
 
-        public static void SpawnSpaceRock()
-        {
-            // Instantiate space rock
-            Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * Random.Range(GMSettings.DistanceSpaceRockSpawn, GMSettings.DistanceSpaceRockMax));
-            Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-            SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
-            spaceRock.Scale = RandomSpaceRockScale;
+        //         if (Random.value <= GMSettings.ChanceSpaceRockSpawn)
+        //         {
+        //             SpawnSpaceRock();
+        //         }
+        //     }
+        // }
 
-            // Create velocities
-            Vector2 velocity = Util.RandomUnitVector * Random.Range(GMSettings.MinSpaceRockVelocity, GMSettings.MaxSpaceRockVelocity);
-            float angularVelocity = Util.RandomUnit * Random.Range(GMSettings.MinSpaceRockVelocityAngular, GMSettings.MaxSpaceRockVelocityAngular);
-            spaceRock.SetVelocities(velocity, angularVelocity);
-        }
+        // [System.Obsolete]
+        // private IEnumerator RoutineCleanDistantSpaceRocks()
+        // {
+        //     // Function to clean bodies
+        //     void CleanBodies(Transform parent, float max)
+        //     {
+        //         foreach (Rigidbody2D rb in parent.GetComponentsInChildren<Rigidbody2D>())
+        //         {
+        //             if (Vector2.Distance(PlayerPos, rb.transform.position) > max)
+        //             {
+        //                 Destroy(rb.gameObject);
+        //             }
+        //         }
+        //     }
+
+        //     while (true)
+        //     {
+        //         // Wait for cleanup...
+        //         yield return new WaitForSeconds(GMSettings.TimeBetweenSpaceRockCleanup);
+
+        //         // Remove all distant Space Rocks
+        //         CleanBodies(parentSpaceRock, GMSettings.DistanceSpaceRockMax);
+
+        //         // Remove all distance Planets
+        //         CleanBodies(parentPlanet, GMSettings.DistancePlanetMax);
+        //     }
+        // }
+
+        // private void SpawnSpaceRock()
+        // {
+        //     // Instantiate space rock
+        //     Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * Random.Range(GMSettings.DistanceSpaceRockSpawn, GMSettings.DistanceSpaceRockMax));
+        //     Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+        //     SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
+        //     spaceRock.Scale = RandomSpaceRockScale;
+
+        //     // Create velocities
+        //     Vector2 velocity = Util.RandomUnitVector * Random.Range(GMSettings.MinSpaceRockVelocity, GMSettings.MaxSpaceRockVelocity);
+        //     float angularVelocity = Util.RandomUnit * Random.Range(GMSettings.MinSpaceRockVelocityAngular, GMSettings.MaxSpaceRockVelocityAngular);
+        //     spaceRock.SetVelocities(velocity, angularVelocity);
+        // }
     }
 }

@@ -10,7 +10,7 @@ namespace SpaceGame.SpaceObjects
             int reward = 1;
             Destroy(collider.gameObject);
 
-            if (Scale < GameInfo.GMSettings.MinSpaceRockScale)
+            if (Scale < settings.MinScale)
             {
                 ++reward;
                 Destroy(gameObject);
@@ -18,7 +18,7 @@ namespace SpaceGame.SpaceObjects
             else
             {
                 Rigidbody2D otherRigidbody = collider.gameObject.GetComponent<Rigidbody2D>();
-                Vector2 force = otherRigidbody.velocity * GameInfo.GMSettings.ScaleMissileImpactForce;
+                Vector2 force = otherRigidbody.velocity * settings.ScaleMissileImpactForce;
                 Vector2 position = collider.gameObject.transform.position;
                 rigidbody.AddForceAtPosition(force, position);
             }

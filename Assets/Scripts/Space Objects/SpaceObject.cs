@@ -6,7 +6,7 @@ namespace SpaceGame.SpaceObjects
     public abstract class SpaceObject : MonoBehaviour
     {
         [Header("Info (as SpaceObject)", order = 5)]
-        [SerializeField] private SpaceObjectSettings settings;
+        [SerializeField] protected SpaceObjectSettings settings;
 
         [Header("References (as SpaceObject)", order = 99)]
         [SerializeField] protected new Rigidbody2D rigidbody;
