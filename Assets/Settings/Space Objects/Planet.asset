@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb5c1acd019d8f47a031d192bc34b3d, type: 3}
   m_Name: Planet
   m_EditorClassIdentifier: 
-  minScale: 0
-  maxScale: 0
-  minVelocity: 0
-  maxVelocity: 0
-  minAngularVelocity: 0
-  maxAngularVelocity: 0
-  scaleSpawnRate: 0
-  distanceSpawn: 500
-  distanceMax: 2000
-  timeBetweenCleanup: 0
-  timeBetweenChance: 0
-  chanceSpawn: 0
+  tagName: Planet
+  minScale: 50
+  maxScale: 100
+  minVelocity: 0.5
+  maxVelocity: 5
+  minAngularVelocity: 5
+  maxAngularVelocity: 20
+  distanceSpawn: 100
+  distanceMax: 750
+  widthSpawn: 50
+  scaleSpawnRate: 1
+  timeBetweenChance: 30
+  chanceSpawn: 1
   scaleMissileImpactForce: 0
-  prefabSpaceObject: {fileID: 0}
+  spawnType: 2
+  prefabSpaceObjects:
+  - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}

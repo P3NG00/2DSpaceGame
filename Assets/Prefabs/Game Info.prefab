@@ -44,13 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   credits: 0
-  gameMode: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
+  settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
   framerate: 150
-  prefabSpaceRocks:
-  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
-  - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
-  - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   player: {fileID: 0}
-  parentSpaceRock: {fileID: 0}
+  parentSpaceObjects: {fileID: 0}
   textCredits: {fileID: 0}
   prefabTextCreditPopup: {fileID: 5284667503819923402, guid: 052644854a10f5b4e984287ef05b8f00, type: 3}

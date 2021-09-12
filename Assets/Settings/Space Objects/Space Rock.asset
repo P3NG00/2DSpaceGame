@@ -12,17 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb5c1acd019d8f47a031d192bc34b3d, type: 3}
   m_Name: Space Rock
   m_EditorClassIdentifier: 
+  tagName: Space Rock
   minScale: 2
   maxScale: 6.2
   minVelocity: 2
   maxVelocity: 25
   minAngularVelocity: 10
   maxAngularVelocity: 90
-  scaleSpawnRate: 0.3
-  distanceSpawn: 100
+  distanceSpawn: 75
   distanceMax: 200
-  timeBetweenCleanup: 10
+  widthSpawn: 200
+  scaleSpawnRate: 0.1
   timeBetweenChance: 0.55
   chanceSpawn: 0.4
   scaleMissileImpactForce: 1.5
-  prefabSpaceObject: {fileID: 0}
+  spawnType: 1
+  prefabSpaceObjects:
+  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
+  - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
+  - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}

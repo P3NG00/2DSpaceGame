@@ -6,10 +6,13 @@ namespace SpaceGame.SpaceObjects
     public abstract class SpaceObject : MonoBehaviour
     {
         [Header("Info (as SpaceObject)", order = 5)]
-        [SerializeField] protected SpaceObjectSettings settings;
+        [SerializeField] private SpaceObjectSettings settings;
 
         [Header("References (as SpaceObject)", order = 99)]
-        [SerializeField] protected new Rigidbody2D rigidbody;
+        [SerializeField] private new Rigidbody2D rigidbody;
+
+        public SpaceObjectSettings Settings => settings;
+        public Rigidbody2D Rigidbody => rigidbody;
 
         public float Scale
         {

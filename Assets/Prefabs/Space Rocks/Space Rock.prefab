@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2634249643401036137}
   m_Layer: 6
   m_Name: Space Rock
-  m_TagString: Untagged
+  m_TagString: Space Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,9 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 72bd3ba82047df8438fa4660e81e6d39, type: 2}
   rigidbody: {fileID: 2634249643401036137}
-  color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
-  rigidbody: {fileID: 2634249643401036137}
-  spriteRenderer: {fileID: 2634249643401036139}
 --- !u!212 &2634249643401036139
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace SpaceGame.Settings
     public sealed class SpaceObjectSettings : ScriptableObject
     {
         [Header("Info", order = 20)]
+        [SerializeField] private string tagName;
         [SerializeField, Min(0f)] private float minScale;
         [SerializeField] private float maxScale;
         [SerializeField, Min(0f)] private float minVelocity;
@@ -15,11 +16,12 @@ namespace SpaceGame.Settings
         [SerializeField] private float maxAngularVelocity;
         [SerializeField, Min(0f)] private float distanceSpawn;
         [SerializeField] private float distanceMax;
+        [SerializeField, Min(0f)] private float widthSpawn;
         [SerializeField] private float scaleSpawnRate;
-        [SerializeField] private float timeBetweenCleanup;
         [SerializeField, Min(0f)] private float timeBetweenChance;
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
+        [SerializeField] private SpaceObjectSpawnType spawnType;
 
         [Header("References", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
@@ -44,13 +46,23 @@ namespace SpaceGame.Settings
         public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
         public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
+        public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
 
+        public string Tag => tagName;
         public float MinScale => minScale;
+        public float DistanceMax => distanceMax;
+        public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
         public float ScaleSpawnRate => scaleSpawnRate;
-        public float TimeBetweenCleanup => timeBetweenCleanup;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
-        public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
+        public SpaceObjectSpawnType SpawnType => spawnType;
+    }
+
+    public enum SpaceObjectSpawnType
+    {
+        Default,
+        ScaleWithMagnitude,
+        SingleInstance,
     }
 }

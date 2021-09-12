@@ -12,18 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b6916d83ce60f4c97132de06d65d5f, type: 3}
   m_Name: GameModeDefault
   m_EditorClassIdentifier: 
-  sr_minVelocity: 2
-  sr_maxVelocity: 25
-  sr_minAngularVelocity: 10
-  sr_maxAngularVelocity: 90
-  sr_minScale: 2
-  sr_maxScale: 6.5
-  sr_scaleSpawnRate: 0.3
-  sr_distanceSpawn: 100
-  sr_distanceMax: 200
-  sr_timeBetweenCleanup: 10
-  sr_timeBetweenChance: 0.55
-  sr_chanceSpawn: 0.4
-  sr_scaleMissileImpactForce: 1.5
-  p_distanceSpawn: 500
-  p_distanceMax: 2000
+  timeBetweenCleanup: 15
+  spaceObjects:
+  - {fileID: 11400000, guid: 72bd3ba82047df8438fa4660e81e6d39, type: 2}
+  - {fileID: 11400000, guid: c48b87e8ecabddf4fa7340575ac73f4c, type: 2}

@@ -6,10 +6,10 @@ namespace SpaceGame.Settings
     public sealed class GameModeSettings : ScriptableObject
     {
         [Header("Info", order = 0)]
+        [SerializeField] private float timeBetweenCleanup;
         [SerializeField] private SpaceObjectSettings[] spaceObjects;
 
-        public SpaceObjectSettings[] SpaceObjects => spaceObjects;
-
-        // TODO start coroutines for each spaceobject spawnable
+        public float TimeBetweenCleanup => timeBetweenCleanup;
+        public SpaceObjectSettings[] SpaceObjectsToSpawn => spaceObjects;
     }
 }

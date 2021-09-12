@@ -10,7 +10,7 @@ namespace SpaceGame.SpaceObjects
             int reward = 1;
             Destroy(collider.gameObject);
 
-            if (Scale < settings.MinScale)
+            if (Scale < Settings.MinScale)
             {
                 ++reward;
                 Destroy(gameObject);
@@ -18,9 +18,9 @@ namespace SpaceGame.SpaceObjects
             else
             {
                 Rigidbody2D otherRigidbody = collider.gameObject.GetComponent<Rigidbody2D>();
-                Vector2 force = otherRigidbody.velocity * settings.ScaleMissileImpactForce;
+                Vector2 force = otherRigidbody.velocity * Settings.ScaleMissileImpactForce;
                 Vector2 position = collider.gameObject.transform.position;
-                rigidbody.AddForceAtPosition(force, position);
+                Rigidbody.AddForceAtPosition(force, position);
             }
 
             Vector2 pos = transform.position;
@@ -34,12 +34,6 @@ namespace SpaceGame.SpaceObjects
             //  hurt player in relation to velocity
             //  create collision particle system effect
             //  audio feedback
-        }
-
-        public void SetVelocities(Vector2 velocity, float angularVelocity)
-        {
-            rigidbody.velocity = velocity;
-            rigidbody.angularVelocity = angularVelocity;
         }
     }
 }

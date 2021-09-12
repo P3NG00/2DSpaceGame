@@ -227,7 +227,7 @@ RectTransform:
   m_Children:
   - {fileID: 930916114}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0.2
+  m_LookaheadTime: 0.3
   m_LookaheadSmoothing: 0.2
   m_LookaheadIgnoreY: 0
   m_XDamping: 0
@@ -380,8 +380,8 @@ MonoBehaviour:
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.9
-  m_SoftZoneHeight: 0.9
+  m_SoftZoneWidth: 1
+  m_SoftZoneHeight: 1
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2136948614}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 17.5
+    OrthographicSize: 20
     NearClipPlane: 0.3
     FarClipPlane: 100
     Dutch: 0
@@ -563,7 +563,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 17.5
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -644,36 +644,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 91a84900826bdce4a96adf242a08d5a5, type: 2}
---- !u!1 &581577743
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 581577744}
-  m_Layer: 0
-  m_Name: Parent Planet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &581577744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581577743}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &781711343
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781711344}
   m_Layer: 0
-  m_Name: Parent Space Rock
+  m_Name: Parent Space Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -965,7 +935,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2136948614}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 25
+    OrthographicSize: 40
     NearClipPlane: 0.3
     FarClipPlane: 100
     Dutch: 0
@@ -1019,9 +989,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1793820154}
     - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
+      propertyPath: debug_showFacingRay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: parentParticleSystems
       value: 
       objectReference: {fileID: 2011637057}
+    - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
+      propertyPath: debug_distanceFacingRay
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023139067621609577, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
+      propertyPath: randomSeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1163,9 +1145,13 @@ PrefabInstance:
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: parentPlanet
       value: 
-      objectReference: {fileID: 581577744}
+      objectReference: {fileID: 0}
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: parentSpaceRock
+      value: 
+      objectReference: {fileID: 781711344}
+    - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: parentSpaceObjects
       value: 
       objectReference: {fileID: 781711344}
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}

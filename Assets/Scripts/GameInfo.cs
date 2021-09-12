@@ -30,31 +30,30 @@ namespace SpaceGame
 
         [Header("Game", order = 0)]
         [SerializeField] private int credits;
-        [SerializeField] private GameModeSettings gameMode;
+        [SerializeField] private GameModeSettings settings;
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
 
         [Header("References", order = 99)]
-        [SerializeField] private SpaceRock[] prefabSpaceRocks;
         [SerializeField] private ShipPlayer player;
-        [SerializeField] private Transform parentSpaceRock;
-        [SerializeField] private Transform parentPlanet;
+        [SerializeField] private Transform parentSpaceObjects;
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
 
-        public static GameModeSettings GMSettings => instance.gameMode;
+        public static GameModeSettings GMSettings => instance.settings;
 
-        private static Vector2 PlayerPos => instance.player.transform.position;
+        private SpaceObject[] SpaceObjects => parentSpaceObjects.GetComponentsInChildren<SpaceObject>();
 
         private void Start()
         {
-            Application.targetFrameRate = framerate;
-
-            foreach (SpaceObjectSettings sos in gameMode.SpaceObjects)
+            foreach (SpaceObjectSettings sos in settings.SpaceObjectsToSpawn)
             {
                 StartCoroutine(RoutineSpawnSpaceObject(sos));
             }
+
+            StartCoroutine(RoutineCleanDistantSpaceObjects());
+            Application.targetFrameRate = framerate;
         }
 
         private void Update()
@@ -72,92 +71,80 @@ namespace SpaceGame
 
         private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSettings sos)
         {
+            float waitTime, magnitude;
+
             while (true)
             {
-                yield return new WaitForSeconds(sos.TimeBetweenChance);
+                // Default wait time
+                waitTime = sos.TimeBetweenChance;
 
+                // If scale wait time...
+                if (sos.SpawnType == SpaceObjectSpawnType.ScaleWithMagnitude)
+                {
+                    magnitude = player.Rigidbody.velocity.magnitude * sos.ScaleSpawnRate;
+
+                    if (magnitude > 1f)
+                    {
+                        waitTime /= magnitude;
+                    }
+                }
+
+                // Wait...
+                yield return new WaitForSeconds(waitTime);
+
+                // If chance passes...
                 if (Random.value <= sos.ChanceSpawn)
                 {
-                    // // Instantiate space rock
-                    Vector2 playerPos = player.transform.position;
-                    Vector2 spawnOffset = Util.RandomUnitVector * sos.RandomSpawnDistance;
-                    Vector2 spawnPos = playerPos + spawnOffset;
-                    Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                    SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, spawnPos, spawnRot);
+                    // Setup variable for checks
+                    bool pass = true;
 
-                    // // Create velocities
-                    Vector2 velocity = Util.RandomUnitVector * sos.RandomVelocity;
-                    float angularVelocity = Util.RandomUnit * sos.RandomAngularVelocity;
-                    spaceObject.SetVelocities(velocity, angularVelocity);
+                    // If single instance type spawning...
+                    if (sos.SpawnType == SpaceObjectSpawnType.SingleInstance)
+                    {
+                        // Search through all space objects and see if it's already instantiated
+                        foreach (SpaceObject so in SpaceObjects)
+                        {
+                            if (so.tag == sos.Tag)
+                            {
+                                pass = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    // If checks passed...
+                    if (pass)
+                    {
+                        // Instantiate space rock
+                        Vector2 spawnOffset = player.transform.up * sos.RandomSpawnDistance;
+                        spawnOffset += (Vector2)player.transform.right * sos.RandomSpawnWidth;
+                        Vector2 spawnPos = (Vector2)player.transform.position + spawnOffset;
+                        Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+                        SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, spawnPos, spawnRot, parentSpaceObjects);
+                        spaceObject.Scale = sos.RandomScale;
+                        Vector2 velocity = Util.RandomUnitVector * sos.RandomVelocity;
+                        float angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
+                        spaceObject.Rigidbody.velocity = velocity;
+                        spaceObject.Rigidbody.angularVelocity = angularVelocity;
+                    }
                 }
             }
         }
 
-        // [System.Obsolete]
-        // private IEnumerator RoutineCreateSpaceRocks()
-        // {
-        //     float waitTime, playerMagnitude;
+        private IEnumerator RoutineCleanDistantSpaceObjects()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(settings.TimeBetweenCleanup);
 
-        //     while (true)
-        //     {
-        //         waitTime = GMSettings.TimeBetweenSpaceRockChance;
-        //         playerMagnitude = player.Rigidbody.velocity.magnitude * GMSettings.ScaleSpaceRockSpawnRate;
-
-        //         TODO RE-IMPLEMENT SCALING WITH MOVEMENT
-        //         if (playerMagnitude > 1f)
-        //         {
-        //             waitTime /= playerMagnitude;
-        //         }
-
-        //         yield return new WaitForSeconds(waitTime);
-
-        //         if (Random.value <= GMSettings.ChanceSpaceRockSpawn)
-        //         {
-        //             SpawnSpaceRock();
-        //         }
-        //     }
-        // }
-
-        // [System.Obsolete]
-        // private IEnumerator RoutineCleanDistantSpaceRocks()
-        // {
-        //     // Function to clean bodies
-        //     void CleanBodies(Transform parent, float max)
-        //     {
-        //         foreach (Rigidbody2D rb in parent.GetComponentsInChildren<Rigidbody2D>())
-        //         {
-        //             if (Vector2.Distance(PlayerPos, rb.transform.position) > max)
-        //             {
-        //                 Destroy(rb.gameObject);
-        //             }
-        //         }
-        //     }
-
-        //     while (true)
-        //     {
-        //         // Wait for cleanup...
-        //         yield return new WaitForSeconds(GMSettings.TimeBetweenSpaceRockCleanup);
-
-        //         // Remove all distant Space Rocks
-        //         CleanBodies(parentSpaceRock, GMSettings.DistanceSpaceRockMax);
-
-        //         // Remove all distance Planets
-        //         CleanBodies(parentPlanet, GMSettings.DistancePlanetMax);
-        //     }
-        // }
-
-        // private void SpawnSpaceRock()
-        // {
-        //     // Instantiate space rock
-        //     Vector2 spawnPos = PlayerPos + (Util.RandomUnitVector * Random.Range(GMSettings.DistanceSpaceRockSpawn, GMSettings.DistanceSpaceRockMax));
-        //     Quaternion spawnRot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-        //     SpaceRock spaceRock = Instantiate(RandomSpaceRock, spawnPos, spawnRot, instance.parentSpaceRock);
-        //     spaceRock.Scale = RandomSpaceRockScale;
-
-        //     // Create velocities
-        //     Vector2 velocity = Util.RandomUnitVector * Random.Range(GMSettings.MinSpaceRockVelocity, GMSettings.MaxSpaceRockVelocity);
-        //     float angularVelocity = Util.RandomUnit * Random.Range(GMSettings.MinSpaceRockVelocityAngular, GMSettings.MaxSpaceRockVelocityAngular);
-        //     spaceRock.SetVelocities(velocity, angularVelocity);
-        // }
+                foreach (SpaceObject so in SpaceObjects)
+                {
+                    if (Vector2.Distance(player.transform.position, so.transform.position) > so.Settings.DistanceMax)
+                    {
+                        Destroy(so.gameObject);
+                    }
+                }
+            }
+        }
     }
 }

@@ -13,8 +13,9 @@ namespace SpaceGame.Ships
         private bool inputFire = false;
         private float inputRotation = 0f;
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
             UpdateForce();
             UpdateRotation();
             animator.SetBool("Moving", inputAddForce);
