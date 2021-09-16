@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Space Rock
   color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
-  minScale: 2
-  maxScale: 6.2
+  minScale: 3
+  maxScale: 7.5
   minVelocity: 2
   maxVelocity: 25
   minAngularVelocity: 10

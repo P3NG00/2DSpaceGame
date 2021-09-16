@@ -6,7 +6,6 @@ using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace SpaceGame
 {
@@ -44,10 +43,10 @@ namespace SpaceGame
         [SerializeField] private TMP_Text prefabTextCreditPopup;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Animator uiInvBar;
-        [SerializeField] private Image[] uiInvSlotSprites;
+        [SerializeField] private Sprite[] sprites;
+        [SerializeField] private UIInventorySlot[] inventory = new UIInventorySlot[5];
 
         private SpaceObject[] SpaceObjects => parentSpaceObjects.GetComponentsInChildren<SpaceObject>();
-        private Pair<ItemInfo, int>[] inventory = new Pair<ItemInfo, int>[] { new Pair<ItemInfo, int>(), new Pair<ItemInfo, int>(), new Pair<ItemInfo, int>(), new Pair<ItemInfo, int>(), new Pair<ItemInfo, int>() };
 
         private bool inputAddForce = false;
         private bool inputFire = false;
@@ -58,6 +57,7 @@ namespace SpaceGame
 
         public static GameModeSettings GMSettings => instance.settings;
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
+        public static Sprite[] Sprites => instance.sprites;
 
         public static bool InputAddForce => instance.inputAddForce;
         public static bool InputFire => instance.inputFire;
@@ -98,26 +98,27 @@ namespace SpaceGame
 
         private void UpdateTextCredits() => textCredits.text = credits.ToString();
 
+        // Iterates through inventory slots and disables them if nothing is in them
         private void UpdateInventoryUI()
         {
-            Pair<ItemInfo, int>[] inv = instance.inventory;
+            UIInventorySlot[] inv = instance.inventory;
+            UIInventorySlot slotCurrent;
             ItemInfo itemCurrent;
-            Image imageCurrent;
             int i;
 
             for (i = 0; i < inv.Length; i++)
             {
-                imageCurrent = instance.uiInvSlotSprites[i];
-                itemCurrent = inv[i].Left;
+                slotCurrent = instance.inventory[i];
+                itemCurrent = inv[i].Item;
 
                 if (itemCurrent == null)
                 {
-                    imageCurrent.enabled = false;
+                    slotCurrent.gameObject.SetActive(false);
                 }
                 else
                 {
-                    imageCurrent.enabled = true;
-                    imageCurrent.color = itemCurrent.Color;
+                    slotCurrent.gameObject.SetActive(true);
+                    slotCurrent.Color = itemCurrent.Color;
                 }
             }
         }
@@ -153,14 +154,14 @@ namespace SpaceGame
 
         public static bool GiveItem(ItemInfo item, int amount)
         {
-            Pair<ItemInfo, int>[] inv = instance.inventory;
+            UIInventorySlot[] inv = instance.inventory;
             int slotFirstEmpty = 0, slotSameItem = 0, i;
             bool foundEmptySlot = false, foundSameItem = false;
             ItemInfo itemCurrent;
 
             for (i = 0; i < inv.Length; i++)
             {
-                itemCurrent = inv[i].Left;
+                itemCurrent = inv[i].Item;
 
                 if (itemCurrent == item)
                 {
@@ -182,16 +183,22 @@ namespace SpaceGame
                 }
             }
 
+            UIInventorySlot slot;
+
             if (foundSameItem)
             {
-                inv[slotSameItem].Right += amount;
+                slot = inv[slotSameItem];
+                slot.Amount += amount;
+                slot.ChangeSprite();
                 instance.UpdateInventoryUI();
                 return true;
             }
             else if (foundEmptySlot)
             {
-                inv[slotFirstEmpty].Left = item;
-                inv[slotFirstEmpty].Right = amount;
+                slot = inv[slotFirstEmpty];
+                slot.Item = item;
+                slot.Amount = amount;
+                slot.ChangeSprite();
                 instance.UpdateInventoryUI();
                 return true;
             }

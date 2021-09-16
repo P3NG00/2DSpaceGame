@@ -52,7 +52,12 @@ MonoBehaviour:
   textCredits: {fileID: 0}
   prefabTextCreditPopup: {fileID: 5284667503819923402, guid: 052644854a10f5b4e984287ef05b8f00, type: 3}
   settingsItemObject: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
-  uiInvSlotSprites:
+  uiInvBar: {fileID: 0}
+  sprites:
+  - {fileID: 21300000, guid: 47b3ab2d12542894b8b67de6cf382703, type: 3}
+  - {fileID: 21300000, guid: 00910b9ea88bc3944a7b80544f9cc4dd, type: 3}
+  - {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
+  inventory:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

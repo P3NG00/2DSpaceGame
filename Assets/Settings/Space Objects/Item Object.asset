@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Item
   color: {r: 0, g: 0, b: 0, a: 0}
-  minScale: 1
-  maxScale: 1
+  minScale: 2
+  maxScale: 2.5
   minVelocity: 0.5
   maxVelocity: 1
   minAngularVelocity: 5
