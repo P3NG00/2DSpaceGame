@@ -23,7 +23,8 @@ namespace SpaceGame.Settings
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
         [SerializeField, Min(0f)] private float scaleMissileImpactStep;
-        [SerializeField] private SpaceObjectSpawnType spawnType;
+        [SerializeField] private SpaceObjectSpawnRateType spawnRateType;
+        [SerializeField] private SpaceObjectSpawnAreaType spawnAreaType;
 
         [Header("References", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
@@ -49,19 +50,28 @@ namespace SpaceGame.Settings
         public string Tag => tagName;
         public Color Color => color;
         public float MinScale => minScale;
+        public float DistanceSpawn => distanceSpawn;
         public float DistanceMax => distanceMax;
         public float ScaleSpawnRate => scaleSpawnRate;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
         public float ScaleMissileImpactStep => scaleMissileImpactStep;
-        public SpaceObjectSpawnType SpawnType => spawnType;
+        public SpaceObjectSpawnRateType SpawnRateType => spawnRateType;
+        public SpaceObjectSpawnAreaType SpawnAreaType => spawnAreaType;
     }
 
-    public enum SpaceObjectSpawnType
+    public enum SpaceObjectSpawnRateType
     {
         Default,
         ScaleWithMagnitude,
         SingleInstance,
+    }
+
+    public enum SpaceObjectSpawnAreaType
+    {
+        Default,
+        AroundPlayer,
+        FrontOfPlayer,
     }
 }

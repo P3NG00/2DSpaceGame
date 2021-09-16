@@ -216,7 +216,7 @@ namespace SpaceGame
             bool pass = true;
 
             // If single instance type spawning...
-            if (sos.SpawnType == SpaceObjectSpawnType.SingleInstance)
+            if (sos.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in instance.SpaceObjects)
@@ -260,7 +260,7 @@ namespace SpaceGame
                 waitTime = sos.TimeBetweenChance;
 
                 // If scale wait time...
-                if (sos.SpawnType == SpaceObjectSpawnType.ScaleWithMagnitude)
+                if (sos.SpawnRateType == SpaceObjectSpawnRateType.ScaleWithMagnitude)
                 {
                     magnitude = player.Rigidbody.velocity.magnitude * sos.ScaleSpawnRate;
 
@@ -278,9 +278,20 @@ namespace SpaceGame
                 {
                     // Spawn Space Object
                     Transform player = instance.player.transform;
-                    Vector2 spawnOffset = player.transform.up * sos.RandomSpawnDistance;
-                    spawnOffset += (Vector2)player.transform.right * sos.RandomSpawnWidth;
-                    Vector2 spawnPos = (Vector2)player.transform.position + spawnOffset;
+                    Vector2 spawnOffset, spawnPos = player.position;
+
+                    switch (sos.SpawnAreaType)
+                    {
+                        case SpaceObjectSpawnAreaType.FrontOfPlayer:
+                            spawnOffset = player.transform.up * sos.RandomSpawnDistance;
+                            spawnOffset += (Vector2)player.transform.right * sos.RandomSpawnWidth;
+                            spawnPos += spawnOffset;
+                            break;
+
+                        case SpaceObjectSpawnAreaType.AroundPlayer:
+                            spawnPos += Util.RandomUnitVector * Random.Range(sos.DistanceSpawn, sos.DistanceMax);
+                            break;
+                    }
 
                     SpawnSpaceObject(sos, spawnPos);
                 }

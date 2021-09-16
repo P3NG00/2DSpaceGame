@@ -28,7 +28,8 @@ MonoBehaviour:
   chanceSpawn: 0.4
   scaleMissileImpactForce: 1.5
   scaleMissileImpactStep: 0.5
-  spawnType: 1
+  spawnRateType: 1
+  spawnAreaType: 2
   prefabSpaceObjects:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
