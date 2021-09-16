@@ -170,6 +170,8 @@ MonoBehaviour:
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}
   prefabMissile: {fileID: -6234159493842483732, guid: a43e52a7801009a4e95c94ebf1f9dd28, type: 3}
+  debug_showFacingRay: 0
+  debug_distanceFacingRay: 0
   FORCE_VALIDATE: 0
   animator: {fileID: 3470504029433804715}
 --- !u!114 &3331545610729043388
@@ -248,8 +250,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 805840465613134679}
-        m_TargetAssemblyTypeName: Project.Ships.ShipPlayer, Assembly-CSharp
-        m_MethodName: InputExit
+        m_TargetAssemblyTypeName: SpaceGame.Ships.ShipPlayer, Assembly-CSharp
+        m_MethodName: InputInventory
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -259,8 +261,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 4084120e-b007-4e27-a547-53c97a557c90
-    m_ActionName: Input/Exit[/Keyboard/escape]
+    m_ActionId: 00c7eef2-64bf-4137-a39d-cf3fd0b40bec
+    m_ActionName: Input/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 805840465613134679}
+        m_TargetAssemblyTypeName: SpaceGame.Ships.ShipPlayer, Assembly-CSharp
+        m_MethodName: InputMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f20c52fe-a657-4c9d-9981-09a9a161724a
+    m_ActionName: Input/Menu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input
@@ -407,7 +425,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 0.2, g: 1, b: 0.8, a: 1}
+  m_Color: {r: 0, g: 0.2, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5258815394248899772}
   - component: {fileID: 5258815394248899773}
+  - component: {fileID: 3068602627571150779}
   m_Layer: 0
   m_Name: Game Info
   m_TagString: Untagged
@@ -50,3 +51,120 @@ MonoBehaviour:
   parentSpaceObjects: {fileID: 0}
   textCredits: {fileID: 0}
   prefabTextCreditPopup: {fileID: 5284667503819923402, guid: 052644854a10f5b4e984287ef05b8f00, type: 3}
+  settingsItemObject: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
+  uiInvSlotSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &3068602627571150779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258815394248899770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 8cbc213fe37032041823134d07e7d532, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputAddForce
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 164377d6-e88c-4ffc-b50c-62619ab31fca
+    m_ActionName: Input/Add Force[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 265737f6-0605-42e0-afbd-7994e55cfdab
+    m_ActionName: Input/Rotate[/Keyboard/d,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bf94d510-7c98-43c0-a0a4-21f7c345335e
+    m_ActionName: Input/Fire[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 00c7eef2-64bf-4137-a39d-cf3fd0b40bec
+    m_ActionName: Input/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f20c52fe-a657-4c9d-9981-09a9a161724a
+    m_ActionName: Input/Menu[/Keyboard/escape]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Input
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

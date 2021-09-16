@@ -12,10 +12,6 @@ able to change controls
 TODO implement effect when bullet hits
 particle system for 'sparks'
 
-TODO implement player method AddCredits(int amount, Vector2 pos)
-this will create a "+{amount}" popup
-rises and fades away after a second
-
 TODO implement drones with ai that fly around
 able to kill for random amount of credits
 move in small area
@@ -46,3 +42,13 @@ to have it there would be good for future game modes
 
 TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"
+
+TODO upon breaking space rock, replace with random item
+
+TODO implement items (space objects)
+when ran into by player, pick up into inventory
+
+
+TODO
+TODO START ADDING THE NEW ITEMS TO SPACE ROCK DROPS AND MAKE THEM DROP THEM ONCE BROKEN
+TODO

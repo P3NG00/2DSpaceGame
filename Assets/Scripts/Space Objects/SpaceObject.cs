@@ -10,8 +10,10 @@ namespace SpaceGame.SpaceObjects
 
         [Header("References (as SpaceObject)", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         public SpaceObjectSettings Settings => settings;
+        public SpriteRenderer SpriteRenderer => spriteRenderer;
         public Rigidbody2D Rigidbody => rigidbody;
 
         public float Scale
@@ -23,30 +25,25 @@ namespace SpaceGame.SpaceObjects
             }
         }
 
-        public void SetVelocities(Vector2 velocity, float angularVelocity)
+        private void Start()
         {
-            rigidbody.velocity = velocity;
-            rigidbody.angularVelocity = angularVelocity;
+            spriteRenderer.color = GetColor();
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
+        protected void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.gameObject.tag == "Missile")
-            {
-                OnMissileHit(collider);
-            }
+            OnTriggered(collider);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        protected void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                OnCollideWithPlayer(collision);
-            }
+            OnCollided(collision);
         }
 
-        protected virtual void OnMissileHit(Collider2D collider) { }
+        protected virtual Color GetColor() => settings.Color;
 
-        protected virtual void OnCollideWithPlayer(Collision2D collision) { }
+        protected virtual void OnTriggered(Collider2D collider) { }
+
+        protected virtual void OnCollided(Collision2D collision) { }
     }
 }

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: c48b87e8ecabddf4fa7340575ac73f4c, type: 2}
   rigidbody: {fileID: 2553805387490157576}
+  spriteRenderer: {fileID: 2553805387490157581}
 --- !u!212 &2553805387490157581
 SpriteRenderer:
   m_ObjectHideFlags: 0

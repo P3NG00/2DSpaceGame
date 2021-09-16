@@ -8,6 +8,7 @@ namespace SpaceGame.Settings
     {
         [Header("Info", order = 20)]
         [SerializeField] private string tagName;
+        [SerializeField] private Color color;
         [SerializeField, Min(0f)] private float minScale;
         [SerializeField] private float maxScale;
         [SerializeField, Min(0f)] private float minVelocity;
@@ -21,21 +22,16 @@ namespace SpaceGame.Settings
         [SerializeField, Min(0f)] private float timeBetweenChance;
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
+        [SerializeField, Min(0f)] private float scaleMissileImpactStep;
         [SerializeField] private SpaceObjectSpawnType spawnType;
 
         [Header("References", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
-
-        private void ValidateMinMax(float min, ref float max)
-        {
-            if (min > max)
-            {
-                max = min;
-            }
-        }
+        [SerializeField] private ItemInfo[] itemDrops;
 
         private void OnValidate()
         {
+            void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
             ValidateMinMax(minScale, ref maxScale);
             ValidateMinMax(minVelocity, ref maxVelocity);
             ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
@@ -46,16 +42,19 @@ namespace SpaceGame.Settings
         public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
         public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
+        public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
         public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
+        public ItemInfo RandomItemDrop => itemDrops[Random.Range(0, itemDrops.Length)];
 
         public string Tag => tagName;
+        public Color Color => color;
         public float MinScale => minScale;
         public float DistanceMax => distanceMax;
-        public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
         public float ScaleSpawnRate => scaleSpawnRate;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
+        public float ScaleMissileImpactStep => scaleMissileImpactStep;
         public SpaceObjectSpawnType SpawnType => spawnType;
     }
 

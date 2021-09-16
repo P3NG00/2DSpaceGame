@@ -43,9 +43,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Exit"",
+                    ""name"": ""Inventory"",
                     ""type"": ""Button"",
-                    ""id"": ""4084120e-b007-4e27-a547-53c97a557c90"",
+                    ""id"": ""00c7eef2-64bf-4137-a39d-cf3fd0b40bec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f20c52fe-a657-4c9d-9981-09a9a161724a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -164,12 +172,45 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""643c56b5-39f1-4e23-940f-d9d0e0efba6c"",
+                    ""id"": ""398dad8c-3a97-4588-af62-2df56d4bfdc8"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1a2d50b-d4e0-4099-a3d1-b827b40ea285"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3a80431-a895-4efd-8ee0-a836cbfd8b5c"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""853baf63-ca15-4b3a-98c2-9188e567a4b3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -206,7 +247,8 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_AddForce = m_Input.FindAction("Add Force", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
-        m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
+        m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
+        m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,7 +301,8 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_AddForce;
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_Fire;
-    private readonly InputAction m_Input_Exit;
+    private readonly InputAction m_Input_Inventory;
+    private readonly InputAction m_Input_Menu;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -267,7 +310,8 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @AddForce => m_Wrapper.m_Input_AddForce;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
-        public InputAction @Exit => m_Wrapper.m_Input_Exit;
+        public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
+        public InputAction @Menu => m_Wrapper.m_Input_Menu;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -286,9 +330,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
-                @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
+                @Inventory.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Menu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
+                @Menu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
+                @Menu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -302,9 +349,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Menu.started += instance.OnMenu;
+                @Menu.performed += instance.OnMenu;
+                @Menu.canceled += instance.OnMenu;
             }
         }
     }
@@ -332,6 +382,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnAddForce(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }

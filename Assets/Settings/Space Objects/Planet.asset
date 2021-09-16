@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Planet
   m_EditorClassIdentifier: 
   tagName: Planet
+  color: {r: 1, g: 1, b: 1, a: 1}
   minScale: 50
   maxScale: 100
   minVelocity: 0.5

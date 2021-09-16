@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Space Rock
   m_EditorClassIdentifier: 
   tagName: Space Rock
+  color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   minScale: 2
   maxScale: 6.2
   minVelocity: 2
@@ -26,8 +27,15 @@ MonoBehaviour:
   timeBetweenChance: 0.55
   chanceSpawn: 0.4
   scaleMissileImpactForce: 1.5
+  scaleMissileImpactStep: 0.5
   spawnType: 1
   prefabSpaceObjects:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
+  itemDrops:
+  - {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
+  - {fileID: 11400000, guid: 12d4719f9fa635c48b9c52d1bb59ff66, type: 2}
+  - {fileID: 11400000, guid: 1e47bc25f918b7c4c8ed34be3afffc94, type: 2}
+  - {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
+  - {fileID: 11400000, guid: 2cc1c85d90eed354fb2b93f0944a45e5, type: 2}

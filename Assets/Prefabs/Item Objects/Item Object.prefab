@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2634249643401036138}
-  - component: {fileID: 1572107092036697097}
+  - component: {fileID: -160183931098287300}
   - component: {fileID: 2634249643401036139}
   - component: {fileID: 2634249643401036137}
   m_Layer: 6
-  m_Name: Space Rock
-  m_TagString: Space Rock
+  m_Name: Item Object
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1572107092036697097
+--- !u!114 &-160183931098287300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2634249643401036136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d015afb7982694f80d3cb2e0ad7d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ae8187ec5851c94fbfafb48ac4efd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 72bd3ba82047df8438fa4660e81e6d39, type: 2}
+  settings: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
   rigidbody: {fileID: 2634249643401036137}
   spriteRenderer: {fileID: 2634249643401036139}
+  item: {fileID: 0}
+  amount: 0
 --- !u!212 &2634249643401036139
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -24,13 +24,10 @@ namespace SpaceGame.Ships
 
         private void OnValidate()
         {
-            if (FORCE_VALIDATE)
-            {
-                srPrimary.color = stats.ColorPrimary;
-                srSecondary.color = stats.ColorSecondary;
+            srPrimary.color = stats.ColorPrimary;
+            srSecondary.color = stats.ColorSecondary;
 
-                FORCE_VALIDATE = false;
-            }
+            FORCE_VALIDATE = false;
         }
 
         protected virtual void Update()
@@ -43,14 +40,14 @@ namespace SpaceGame.Ships
             }
         }
 
-        protected void AddForce()
+        public void AddForce()
         {
             Vector2 direction = transform.up;
             Vector2 velocity = direction * stats.MultiplierForce;
             rigidbody.AddForce(velocity);
         }
 
-        protected void Rotate(float rotation)
+        public void Rotate(float rotation)
         {
             Vector2 force = transform.right * rotation;
             force *= stats.MultiplierRotate * Time.deltaTime;
@@ -61,7 +58,7 @@ namespace SpaceGame.Ships
             rigidbody.AddForceAtPosition(force, position);
         }
 
-        protected void Fire()
+        public void Fire()
         {
             Vector3 posMissile = transform.position;
             posMissile += transform.up * 0.1f;
