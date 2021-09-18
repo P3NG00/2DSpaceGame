@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Rich Space Rock
   color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-  minScale: 3
-  maxScale: 7.5
-  minVelocity: 2
-  maxVelocity: 25
+  minScale: 5
+  maxScale: 10
+  minVelocity: 5
+  maxVelocity: 15
   minAngularVelocity: 10
   maxAngularVelocity: 90
   distanceSpawn: 75
   distanceMax: 200
+  minDropAmount: 2
+  maxDropAmount: 5
   widthSpawn: 200
   scaleSpawnRate: 0.05
-  timeBetweenChance: 0.55
-  chanceSpawn: 0.4
+  timeBetweenChance: 3
+  chanceSpawn: 0.3
   scaleMissileImpactForce: 0.75
   scaleMissileImpactStep: 0.5
   spawnRateType: 1

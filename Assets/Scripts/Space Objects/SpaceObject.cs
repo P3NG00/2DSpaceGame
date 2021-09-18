@@ -6,13 +6,12 @@ namespace SpaceGame.SpaceObjects
     public abstract class SpaceObject : MonoBehaviour
     {
         [Header("Info (as SpaceObject)", order = 5)]
-        [SerializeField] private SpaceObjectSettings settings;
+        public SpaceObjectSettings Settings;
 
         [Header("References (as SpaceObject)", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
-        public SpaceObjectSettings Settings => settings;
         public SpriteRenderer SpriteRenderer => spriteRenderer;
         public Rigidbody2D Rigidbody => rigidbody;
 
@@ -40,7 +39,7 @@ namespace SpaceGame.SpaceObjects
             OnCollided(collision);
         }
 
-        protected virtual Color GetColor() => settings.Color;
+        protected virtual Color GetColor() => Settings.Color;
 
         protected virtual void OnTriggered(Collider2D collider) { }
 

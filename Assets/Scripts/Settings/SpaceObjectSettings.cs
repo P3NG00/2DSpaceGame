@@ -17,6 +17,8 @@ namespace SpaceGame.Settings
         [SerializeField] private float maxAngularVelocity;
         [SerializeField, Min(0f)] private float distanceSpawn;
         [SerializeField] private float distanceMax;
+        [SerializeField, Min(0)] private int minDropAmount;
+        [SerializeField] private int maxDropAmount;
         [SerializeField, Min(0f)] private float widthSpawn;
         [SerializeField] private float scaleSpawnRate;
         [SerializeField, Min(0f)] private float timeBetweenChance;
@@ -44,6 +46,7 @@ namespace SpaceGame.Settings
         public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
         public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
+        public int RandomDropAmount => Random.Range(minDropAmount, maxDropAmount + 1);
         public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
         public ItemInfo RandomItemDrop => itemDrops[Random.Range(0, itemDrops.Length)];
 

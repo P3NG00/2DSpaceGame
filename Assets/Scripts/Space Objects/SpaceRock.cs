@@ -17,7 +17,7 @@ namespace SpaceGame.SpaceObjects
                     ++reward;
                     Destroy(gameObject);
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
-                    itemObject.SetInfo(Settings.RandomItemDrop, Random.Range(0, 5));
+                    itemObject.SetInfo(Settings.RandomItemDrop, Settings.RandomDropAmount);
                 }
                 else
                 {

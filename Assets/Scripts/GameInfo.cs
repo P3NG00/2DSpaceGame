@@ -1,3 +1,4 @@
+using System.Transactions;
 using System.Collections;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
@@ -135,7 +136,13 @@ namespace SpaceGame
                 instance.routineFiring = StartCoroutine(RoutineFire());
             }
         }
-        public void CallbackInputRotate(InputAction.CallbackContext ctx) => inputRotation = ctx.ReadValue<float>();
+        public void CallbackInputRotate(InputAction.CallbackContext ctx)
+        {
+            if (!pointTowardsMouse)
+            {
+                inputRotation = ctx.ReadValue<float>();
+            }
+        }
         public void CallbackInputInventory(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
@@ -148,7 +155,9 @@ namespace SpaceGame
         public static void GiveCredits(int amount, Vector2 position)
         {
             instance.credits += amount;
-            TMP_Text textPopup = Instantiate(instance.prefabTextCreditPopup, position, Quaternion.identity);
+            Vector3 pos = position;
+            pos.z = -1f;
+            TMP_Text textPopup = Instantiate(instance.prefabTextCreditPopup, pos, Quaternion.identity);
             textPopup.text = $"+{amount}";
             instance.UpdateTextCredits();
             Destroy(textPopup.gameObject, 0.5f);
@@ -161,14 +170,14 @@ namespace SpaceGame
             bool foundEmptySlot = false, foundSameItem = false;
             ItemInfo itemCurrent;
 
-            for (i = 0; i < inv.Length; i++)
+            for (i = 0; i < inv.Length & !foundSameItem; i++)
             {
                 itemCurrent = inv[i].Item;
 
                 if (itemCurrent == item)
                 {
                     foundSameItem = true;
-                    break;
+                    continue;
                 }
                 else
                 {
@@ -239,7 +248,9 @@ namespace SpaceGame
                 Transform parent = instance.parentSpaceObjects;
                 Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
                 SpaceObject spaceObject = Instantiate(newSpaceObject, pos, rot, parent);
+                spaceObject.Settings = sos;
                 spaceObject.Scale = sos.RandomScale;
+                spaceObject.SpriteRenderer.color = sos.Color;
 
                 Vector2 velocity = Util.RandomUnitVector * sos.RandomVelocity;
                 float angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
