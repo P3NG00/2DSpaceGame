@@ -15,4 +15,5 @@ MonoBehaviour:
   timeBetweenCleanup: 15
   spaceObjects:
   - {fileID: 11400000, guid: 72bd3ba82047df8438fa4660e81e6d39, type: 2}
+  - {fileID: 11400000, guid: 6cf0712ab8618364d84f8a64e781fe05, type: 2}
   - {fileID: 11400000, guid: c48b87e8ecabddf4fa7340575ac73f4c, type: 2}

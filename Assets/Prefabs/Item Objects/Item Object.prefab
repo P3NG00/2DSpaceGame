@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -160183931098287300}
   - component: {fileID: 2634249643401036139}
   - component: {fileID: 2634249643401036137}
+  - component: {fileID: 958526997770894481}
   m_Layer: 6
   m_Name: Item Object
   m_TagString: Item
@@ -122,3 +123,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &958526997770894481
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634249643401036136}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2

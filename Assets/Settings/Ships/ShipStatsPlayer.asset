@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorPrimary: {r: 1, g: 1, b: 1, a: 1}
   colorSecondary: {r: 0, g: 0.2, b: 1, a: 1}
-  multiplierForce: 40
-  multiplierRotate: 300
+  multiplierForce: 8
+  multiplierRotate: 15
   velocityMissile: 125
   timeMissileLife: 1
   timeBetweenShots: 0.25

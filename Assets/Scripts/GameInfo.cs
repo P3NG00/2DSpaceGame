@@ -32,6 +32,7 @@ namespace SpaceGame
         [Header("Game", order = 0)]
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
+        [SerializeField] private bool pointTowardsMouse; // TODO implement
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
@@ -118,7 +119,8 @@ namespace SpaceGame
                 else
                 {
                     slotCurrent.gameObject.SetActive(true);
-                    slotCurrent.Color = itemCurrent.Color;
+                    slotCurrent.Image.color = itemCurrent.Color;
+                    slotCurrent.Image.sprite = itemCurrent.Sprite;
                 }
             }
         }

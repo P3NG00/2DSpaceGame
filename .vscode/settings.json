@@ -55,6 +55,7 @@
     // P3
     "**/*.pfx": true,
     "Assets/Animations": true,
+    "Assets/Audio": true,
     "Assets/Camera": true,
     "Assets/Fonts": true,
     "Assets/Game Modes": true,

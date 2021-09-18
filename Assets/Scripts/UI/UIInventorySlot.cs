@@ -14,7 +14,7 @@ public class UIInventorySlot : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text textAmount;
 
-    public Color Color { set { image.color = value; } }
+    public Image Image => image;
 
     private int index;
 

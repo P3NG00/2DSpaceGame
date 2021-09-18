@@ -7,9 +7,11 @@ namespace SpaceGame.Settings
     {
         [Header("Info", order = 0)]
         [SerializeField] private string itemName;
+        [SerializeField] private Sprite sprite;
         [SerializeField] private Color color;
 
-        public string Name => name;
+        public Sprite Sprite => sprite;
         public Color Color => color;
+        public string Name => name;
     }
 }

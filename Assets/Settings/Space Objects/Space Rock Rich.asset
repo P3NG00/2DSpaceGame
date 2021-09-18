@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edb5c1acd019d8f47a031d192bc34b3d, type: 3}
-  m_Name: Space Rock
+  m_Name: Space Rock Rich
   m_EditorClassIdentifier: 
-  tagName: Space Rock
-  color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  tagName: Rich Space Rock
+  color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   minScale: 3
   maxScale: 7.5
   minVelocity: 2
@@ -23,10 +23,10 @@ MonoBehaviour:
   distanceSpawn: 75
   distanceMax: 200
   widthSpawn: 200
-  scaleSpawnRate: 0.1
+  scaleSpawnRate: 0.05
   timeBetweenChance: 0.55
   chanceSpawn: 0.4
-  scaleMissileImpactForce: 1
+  scaleMissileImpactForce: 0.75
   scaleMissileImpactStep: 0.5
   spawnRateType: 1
   spawnAreaType: 2
@@ -35,6 +35,6 @@ MonoBehaviour:
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
+  - {fileID: 11400000, guid: 2cc1c85d90eed354fb2b93f0944a45e5, type: 2}
+  - {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
   - {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
-  - {fileID: 11400000, guid: 12d4719f9fa635c48b9c52d1bb59ff66, type: 2}
-  - {fileID: 11400000, guid: 1e47bc25f918b7c4c8ed34be3afffc94, type: 2}
