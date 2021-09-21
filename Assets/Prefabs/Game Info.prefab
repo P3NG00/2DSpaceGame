@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   credits: 0
   settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
+  pointTowardsMouse: 0
   framerate: 150
   player: {fileID: 0}
   parentSpaceObjects: {fileID: 0}
@@ -168,6 +169,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f20c52fe-a657-4c9d-9981-09a9a161724a
     m_ActionName: Input/Menu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackMousePosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3f9f38c2-fa50-4ece-bd98-6c87238ffef6
+    m_ActionName: Input/Mouse Position[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Input

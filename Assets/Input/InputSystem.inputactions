@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Mouse Position",
+                    "type": "Value",
+                    "id": "3f9f38c2-fa50-4ece-bd98-6c87238ffef6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -53,18 +61,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Add Force",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f036932a-95d5-4c89-ab0f-9e189f802fd4",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
+                    "groups": "Keyboard + Mouse",
                     "action": "Add Force",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -86,7 +83,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard + Mouse",
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -97,40 +94,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Controller",
-                    "id": "1a26fbe1-2b00-4fa6-bd1b-33ef90eb31ff",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotate",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "ea91107e-ff1f-418e-a8af-3911ba3c04f7",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "510de66a-f9d3-4fa3-a8be-ca47b0e54702",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
+                    "groups": "Keyboard + Mouse",
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -141,18 +105,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4fe245ba-011b-496b-a824-ebebc3ed946f",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
+                    "groups": "Keyboard + Mouse",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -163,18 +116,7 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f1a2d50b-d4e0-4099-a3d1-b827b40ea285",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
+                    "groups": "Keyboard + Mouse",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -185,19 +127,19 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard + Mouse",
                     "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "853baf63-ca15-4b3a-98c2-9188e567a4b3",
-                    "path": "<Gamepad>/start",
+                    "id": "4563df86-f8d4-4bb6-999f-c98e98328fdc",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
-                    "action": "Menu",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Mouse Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -206,22 +148,16 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
+            "name": "Keyboard + Mouse",
+            "bindingGroup": "Keyboard + Mouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Controller",
-            "bindingGroup": "Controller",
-            "devices": [
+                },
                 {
-                    "devicePath": "<Gamepad>",
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }

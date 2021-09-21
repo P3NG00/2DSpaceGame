@@ -1,4 +1,3 @@
-using System.Transactions;
 using System.Collections;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
@@ -7,6 +6,7 @@ using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace SpaceGame
 {
@@ -33,7 +33,7 @@ namespace SpaceGame
         [Header("Game", order = 0)]
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
-        [SerializeField] private bool pointTowardsMouse; // TODO implement
+        [SerializeField] private bool pointTowardsMouse;
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
@@ -44,7 +44,7 @@ namespace SpaceGame
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
-        [SerializeField] private Animator uiInvBar;
+        [SerializeField] private Animator uiInvAnimator;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] inventory = new UIInventorySlot[5];
 
@@ -55,12 +55,14 @@ namespace SpaceGame
         private bool inputInventory = false;
         private bool inputMenu = false;
         private float inputRotation = 0f;
+        private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
 
         public static GameModeSettings GMSettings => instance.settings;
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
         public static Sprite[] Sprites => instance.sprites;
 
+        // Input variables
         public static bool InputAddForce => instance.inputAddForce;
         public static bool InputFire => instance.inputFire;
         public static bool InputInventory => instance.inputInventory;
@@ -89,13 +91,40 @@ namespace SpaceGame
                 player.AddForce();
             }
 
-            if (inputRotation != 0f)
+            if (pointTowardsMouse)
             {
-                player.Rotate(inputRotation);
+                Vector2 playerPosition = player.transform.position;
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(inputMousePosition);
+
+                Vector2 mouseRay = mousePosition - playerPosition;
+                Vector2 playerRay = player.transform.right;
+
+                // draw rays
+                float rayScale = mouseRay.magnitude;
+                mouseRay.Normalize();
+
+                Debug.DrawLine(playerPosition, playerPosition + (Vector2)(player.transform.up * rayScale), Color.magenta);
+                Debug.DrawLine(playerPosition, mousePosition, Color.white);
+
+                float direction = Vector2.Dot(mouseRay, playerRay);
+
+                print(direction);
+
+                player.Rotate(direction * 10f);
+
+                // TODO needs simplification
+                // TODO remove rotation keybinds, rotation will be handled with mouse now
+            }
+            else
+            {
+                if (inputRotation != 0f)
+                {
+                    player.Rotate(inputRotation);
+                }
             }
 
             player.Animator.SetBool("Moving", inputAddForce);
-            uiInvBar.SetBool("ShowInv", inputInventory);
+            uiInvAnimator.SetBool("ShowInv", inputInventory);
         }
 
         private void UpdateTextCredits() => textCredits.text = credits.ToString();
@@ -110,8 +139,8 @@ namespace SpaceGame
 
             for (i = 0; i < inv.Length; i++)
             {
-                slotCurrent = instance.inventory[i];
-                itemCurrent = inv[i].Item;
+                slotCurrent = inv[i];
+                itemCurrent = slotCurrent.Item;
 
                 if (itemCurrent == null)
                 {
@@ -136,13 +165,7 @@ namespace SpaceGame
                 instance.routineFiring = StartCoroutine(RoutineFire());
             }
         }
-        public void CallbackInputRotate(InputAction.CallbackContext ctx)
-        {
-            if (!pointTowardsMouse)
-            {
-                inputRotation = ctx.ReadValue<float>();
-            }
-        }
+        public void CallbackInputRotate(InputAction.CallbackContext ctx) => inputRotation = ctx.ReadValue<float>();
         public void CallbackInputInventory(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
@@ -151,6 +174,7 @@ namespace SpaceGame
             }
         }
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
+        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
 
         public static void GiveCredits(int amount, Vector2 position)
         {

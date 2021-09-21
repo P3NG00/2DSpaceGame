@@ -57,6 +57,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mouse Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""3f9f38c2-fa50-4ece-bd98-6c87238ffef6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -66,18 +74,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Add Force"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f036932a-95d5-4c89-ab0f-9e189f802fd4"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Add Force"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -99,7 +96,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -110,40 +107,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Controller"",
-                    ""id"": ""1a26fbe1-2b00-4fa6-bd1b-33ef90eb31ff"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""ea91107e-ff1f-418e-a8af-3911ba3c04f7"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""510de66a-f9d3-4fa3-a8be-ca47b0e54702"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -154,18 +118,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4fe245ba-011b-496b-a824-ebebc3ed946f"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -176,18 +129,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f1a2d50b-d4e0-4099-a3d1-b827b40ea285"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -198,19 +140,19 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""853baf63-ca15-4b3a-98c2-9188e567a4b3"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""id"": ""4563df86-f8d4-4bb6-999f-c98e98328fdc"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu"",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Mouse Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -219,22 +161,16 @@ public class @InputSystem : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
+            ""name"": ""Keyboard + Mouse"",
+            ""bindingGroup"": ""Keyboard + Mouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Controller"",
-            ""bindingGroup"": ""Controller"",
-            ""devices"": [
+                },
                 {
-                    ""devicePath"": ""<Gamepad>"",
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -249,6 +185,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
+        m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -303,6 +240,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_Inventory;
     private readonly InputAction m_Input_Menu;
+    private readonly InputAction m_Input_MousePosition;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -312,6 +250,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
+        public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +275,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
+                @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -355,26 +297,20 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
     public InputActions @Input => new InputActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
-        }
-    }
-    private int m_ControllerSchemeIndex = -1;
-    public InputControlScheme ControllerScheme
-    {
-        get
-        {
-            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
-            return asset.controlSchemes[m_ControllerSchemeIndex];
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
     }
     public interface IInputActions
@@ -384,5 +320,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

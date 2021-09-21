@@ -15,8 +15,6 @@ namespace SpaceGame.Ships
         [SerializeField] private Rigidbody2D prefabMissile;
 
         [Header("DEBUG", order = 100)]
-        [SerializeField] private bool debug_showFacingRay;
-        [SerializeField] private float debug_distanceFacingRay;
         [SerializeField] private bool FORCE_VALIDATE;
 
         public Rigidbody2D Rigidbody => rigidbody;
@@ -28,16 +26,6 @@ namespace SpaceGame.Ships
             srSecondary.color = stats.ColorSecondary;
 
             FORCE_VALIDATE = false;
-        }
-
-        protected virtual void Update()
-        {
-            if (debug_showFacingRay)
-            {
-                Vector2 pos = transform.position;
-                Vector2 dist = transform.up * debug_distanceFacingRay;
-                Debug.DrawLine(pos, pos + dist, Color.blue);
-            }
         }
 
         public void AddForce()
@@ -64,7 +52,6 @@ namespace SpaceGame.Ships
             posMissile += transform.up * 0.1f;
 
             Rigidbody2D missile = Instantiate(prefabMissile, posMissile, transform.rotation);
-
             missile.velocity = transform.up * stats.VelocityMissile;
 
             Destroy(missile.gameObject, stats.TimeMissileLife);
