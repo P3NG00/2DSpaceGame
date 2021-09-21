@@ -42,3 +42,7 @@ to have it there would be good for future game modes
 
 TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"
+
+TODO redo space object abstraction.
+keep info that all space objects need in one place.
+remove unused data into seperate classes?

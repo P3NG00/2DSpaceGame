@@ -103,7 +103,7 @@ namespace SpaceGame
                 Debug.DrawLine(playerPosition, mousePosition, Color.white);
 
                 float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
-                player.Rotate(direction * 10f); // TODO remove "* 10f", mess with player rotation speed
+                player.Rotate(direction);
 
                 // TODO needs simplification
                 // TODO remove rotation keybinds, rotation will be handled with mouse now
