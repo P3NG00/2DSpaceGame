@@ -99,13 +99,10 @@ namespace SpaceGame
                 Vector2 mouseOffset = mousePosition - playerPosition;
 
                 // draw rays
-                Debug.DrawLine(playerPosition, playerPosition + (Vector2)(player.transform.up * mouseOffset.magnitude), Color.magenta);
+                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), Color.magenta);
                 Debug.DrawLine(playerPosition, mousePosition, Color.white);
 
                 float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
-
-                print(direction);
-
                 player.Rotate(direction * 10f); // TODO remove "* 10f", mess with player rotation speed
 
                 // TODO needs simplification
