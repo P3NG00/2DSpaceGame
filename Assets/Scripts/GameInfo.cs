@@ -96,17 +96,16 @@ namespace SpaceGame
                 Vector2 playerPosition = player.transform.position;
                 Vector2 mousePosition = Camera.main.ScreenToWorldPoint(inputMousePosition);
 
-                Vector2 mouseRay = mousePosition - playerPosition;
-                Vector2 playerRay = player.transform.right;
+                Vector2 mouseOffset = mousePosition - playerPosition;
 
                 // draw rays
-                float rayScale = mouseRay.magnitude;
-                mouseRay.Normalize();
+                float rayLength = mouseOffset.magnitude;
+                mouseOffset.Normalize();
 
-                Debug.DrawLine(playerPosition, playerPosition + (Vector2)(player.transform.up * rayScale), Color.magenta);
+                Debug.DrawLine(playerPosition, playerPosition + (Vector2)(player.transform.up * rayLength), Color.magenta);
                 Debug.DrawLine(playerPosition, mousePosition, Color.white);
 
-                float direction = Vector2.Dot(mouseRay, playerRay);
+                float direction = Vector2.Dot(mouseOffset, player.transform.right);
 
                 print(direction);
 
