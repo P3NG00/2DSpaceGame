@@ -27,14 +27,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Rotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""265737f6-0605-42e0-afbd-7994e55cfdab"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""bf94d510-7c98-43c0-a0a4-21f7c345335e"",
@@ -78,39 +70,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Add Force"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""e8090e10-37fe-47a9-8474-4887e9052079"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""73763565-2c3c-4974-a3aa-ce5521e84c4a"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""1207add5-029f-4371-8cac-186b7af070a6"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -192,7 +151,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         // Input
         m_Input = asset.FindActionMap("Input", throwIfNotFound: true);
         m_Input_AddForce = m_Input.FindAction("Add Force", throwIfNotFound: true);
-        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
@@ -247,7 +205,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Input;
     private IInputActions m_InputActionsCallbackInterface;
     private readonly InputAction m_Input_AddForce;
-    private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_Inventory;
     private readonly InputAction m_Input_Menu;
@@ -257,7 +214,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         private @InputSystem m_Wrapper;
         public InputActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @AddForce => m_Wrapper.m_Input_AddForce;
-        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
@@ -274,9 +230,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AddForce.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
                 @AddForce.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
                 @AddForce.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
-                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @Fire.started -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
@@ -296,9 +249,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AddForce.started += instance.OnAddForce;
                 @AddForce.performed += instance.OnAddForce;
                 @AddForce.canceled += instance.OnAddForce;
-                @Rotate.started += instance.OnRotate;
-                @Rotate.performed += instance.OnRotate;
-                @Rotate.canceled += instance.OnRotate;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
@@ -327,7 +277,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
     public interface IInputActions
     {
         void OnAddForce(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);

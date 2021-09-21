@@ -33,7 +33,6 @@ namespace SpaceGame
         [Header("Game", order = 0)]
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
-        [SerializeField] private bool pointTowardsMouse;
 
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
@@ -54,7 +53,6 @@ namespace SpaceGame
         private bool inputFire = false;
         private bool inputInventory = false;
         private bool inputMenu = false;
-        private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
 
@@ -67,7 +65,6 @@ namespace SpaceGame
         public static bool InputFire => instance.inputFire;
         public static bool InputInventory => instance.inputInventory;
         public static bool InputMenu => instance.inputMenu;
-        public static float InputRotation => instance.inputRotation;
 
         // Unity Start method
         private void Start()
@@ -91,30 +88,20 @@ namespace SpaceGame
                 player.AddForce();
             }
 
-            if (pointTowardsMouse)
-            {
-                Vector2 playerPosition = player.transform.position;
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(inputMousePosition);
+            Vector2 playerPosition = player.transform.position;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(inputMousePosition);
 
-                Vector2 mouseOffset = mousePosition - playerPosition;
+            Vector2 mouseOffset = mousePosition - playerPosition;
 
-                // draw rays
-                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), Color.magenta);
-                Debug.DrawLine(playerPosition, mousePosition, Color.white);
+            // Draw rays to display in editor
+            Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), Color.magenta);
+            Debug.DrawLine(playerPosition, mousePosition, Color.white);
 
-                float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
-                player.Rotate(direction);
+            float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
+            player.Rotate(direction);
 
-                // TODO needs simplification
-                // TODO remove rotation keybinds, rotation will be handled with mouse now
-            }
-            else
-            {
-                if (inputRotation != 0f)
-                {
-                    player.Rotate(inputRotation);
-                }
-            }
+            // TODO needs simplification
+            // TODO remove rotation keybinds, rotation will be handled with mouse now
 
             player.Animator.SetBool("Moving", inputAddForce);
             uiInvAnimator.SetBool("ShowInv", inputInventory);
@@ -158,7 +145,6 @@ namespace SpaceGame
                 instance.routineFiring = StartCoroutine(RoutineFire());
             }
         }
-        public void CallbackInputRotate(InputAction.CallbackContext ctx) => inputRotation = ctx.ReadValue<float>();
         public void CallbackInputInventory(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
