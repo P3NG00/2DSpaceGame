@@ -135,7 +135,11 @@ namespace SpaceGame
             }
         }
 
+        #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => inputAddForce = ctx.performed;
+        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
+        public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
+
         public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
             inputFire = ctx.performed;
@@ -145,6 +149,7 @@ namespace SpaceGame
                 instance.routineFiring = StartCoroutine(RoutineFire());
             }
         }
+
         public void CallbackInputInventory(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
@@ -152,8 +157,7 @@ namespace SpaceGame
                 inputInventory = !inputInventory;
             }
         }
-        public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
-        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
+        #endregion
 
         public static void GiveCredits(int amount, Vector2 position)
         {
