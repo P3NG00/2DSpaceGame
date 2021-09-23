@@ -21,7 +21,7 @@ MonoBehaviour:
   minAngularVelocity: 5
   maxAngularVelocity: 20
   distanceSpawn: 0
-  distanceMax: 0
+  distanceMax: 80
   minDropAmount: 0
   maxDropAmount: 0
   widthSpawn: 0
