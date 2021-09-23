@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
-using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +30,7 @@ namespace SpaceGame
         #endregion
 
         [Header("Game", order = 0)]
+        // TODO add health
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
 
@@ -53,6 +53,7 @@ namespace SpaceGame
 
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
+        // TODO add input slow down
         private bool inputAddForce = false;
         private bool inputFire = false;
         private bool inputInventory = false;
@@ -67,11 +68,7 @@ namespace SpaceGame
         public static string TagPlayer => instance.tagPlayer;
         public static string TagMissile => instance.tagMissile;
 
-        // Input variables
-        public static bool InputAddForce => instance.inputAddForce;
-        public static bool InputFire => instance.inputFire;
-        public static bool InputInventory => instance.inputInventory;
-        public static bool InputMenu => instance.inputMenu;
+        public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
         // Unity Start method
         private void Start()
@@ -88,7 +85,7 @@ namespace SpaceGame
         }
 
         // Unity Update method
-        private void Update()
+        private void FixedUpdate()
         {
             if (inputAddForce)
             {
@@ -106,9 +103,6 @@ namespace SpaceGame
 
             float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
             player.Rotate(direction);
-
-            // TODO needs simplification
-            // TODO remove rotation keybinds, rotation will be handled with mouse now
 
             player.Animator.SetBool("Moving", inputAddForce);
             uiInvAnimator.SetBool("ShowInv", inputInventory);
@@ -276,7 +270,7 @@ namespace SpaceGame
                 spaceObject.Scale = sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
 
-                Vector2 velocity = Util.RandomUnitVector * sos.RandomVelocity;
+                Vector2 velocity = RandomUnitVector * sos.RandomVelocity;
                 float angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
                 spaceObject.Rigidbody.velocity = velocity;
                 spaceObject.Rigidbody.angularVelocity = angularVelocity;
@@ -333,7 +327,7 @@ namespace SpaceGame
                             break;
 
                         case SpaceObjectSpawnAreaType.AroundPlayer:
-                            spawnPos += Util.RandomUnitVector * Random.Range(sos.DistanceSpawn, sos.DistanceMax);
+                            spawnPos += RandomUnitVector * Random.Range(sos.DistanceSpawn, sos.DistanceMax);
                             break;
                     }
 
