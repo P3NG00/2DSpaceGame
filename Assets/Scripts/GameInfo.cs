@@ -136,30 +136,6 @@ namespace SpaceGame
             }
         }
 
-        #region Input Callbacks
-        public void CallbackInputAddForce(InputAction.CallbackContext ctx) => inputAddForce = ctx.performed;
-        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
-        public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
-
-        public void CallbackInputFire(InputAction.CallbackContext ctx)
-        {
-            inputFire = ctx.performed;
-
-            if (inputFire & instance.routineFiring == null)
-            {
-                instance.routineFiring = StartCoroutine(RoutineFire());
-            }
-        }
-
-        public void CallbackInputInventory(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed)
-            {
-                inputInventory = !inputInventory;
-            }
-        }
-        #endregion
-
         public static void GiveCredits(int amount, Vector2 position)
         {
             GameInfo gi = GameInfo.instance;
@@ -378,10 +354,28 @@ namespace SpaceGame
             routineFiring = null;
         }
 
-        public class Pair<TL, TR>
+        #region Input Callbacks
+        public void CallbackInputAddForce(InputAction.CallbackContext ctx) => inputAddForce = ctx.performed;
+        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
+        public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
+
+        public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
-            public TL Left = default(TL);
-            public TR Right = default(TR);
+            inputFire = ctx.performed;
+
+            if (inputFire & instance.routineFiring == null)
+            {
+                instance.routineFiring = StartCoroutine(RoutineFire());
+            }
         }
+
+        public void CallbackInputInventory(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed)
+            {
+                inputInventory = !inputInventory;
+            }
+        }
+        #endregion
     }
 }
