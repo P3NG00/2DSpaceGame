@@ -33,7 +33,7 @@ namespace SpaceGame.SpaceObjects
 
         protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.tag == "Missile")
+            if (collider.tag == GameInfo.TagMissile)
             {
                 Destroy(collider.gameObject);
             }

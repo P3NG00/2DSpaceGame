@@ -16,38 +16,8 @@ public class UIInventorySlot : MonoBehaviour
 
     public Image Image => image;
 
-    private int index;
-
-    private void Start()
+    public void UpdateText()
     {
-        index = Random.Range(0, GameInfo.Sprites.Length);
-    }
-
-    public void ChangeSprite()
-    {
-        Sprite[] sprites = GameInfo.Sprites;
-
-        if (Random.value < 0.5f)
-        {
-            --index;
-
-            if (index == -1)
-            {
-                index = sprites.Length - 1;
-            }
-        }
-        else
-        {
-            ++index;
-
-            if (index == sprites.Length)
-            {
-                index = 0;
-            }
-        }
-
-        image.sprite = sprites[index];
-
         textAmount.text = Amount.ToString();
     }
 }

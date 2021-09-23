@@ -9,23 +9,10 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private ItemInfo item;
         [SerializeField] private int amount;
 
+        public ItemInfo Item => item;
+        public int Amount => amount;
+
         protected override Color GetColor() => item.Color;
-
-        protected override void OnCollisionEnter2D(Collision2D collision)
-        {
-            base.OnCollisionEnter2D(collision);
-
-            // If player triggered and item declared...
-            if (collision.gameObject.tag == "Player" & item != null)
-            {
-                bool given = GameInfo.GiveItem(item, amount);
-
-                if (given)
-                {
-                    Destroy(gameObject);
-                }
-            }
-        }
 
         public void SetInfo(ItemInfo item, int amount)
         {

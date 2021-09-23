@@ -47,6 +47,8 @@ MonoBehaviour:
   credits: 0
   settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
   framerate: 150
+  tagPlayer: Player
+  tagMissile: Missile
   player: {fileID: 0}
   parentSpaceObjects: {fileID: 0}
   textCredits: {fileID: 0}

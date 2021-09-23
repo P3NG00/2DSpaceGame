@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
@@ -6,7 +7,6 @@ using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace SpaceGame
 {
@@ -37,6 +37,10 @@ namespace SpaceGame
         [Header("Init", order = 1)]
         [SerializeField] private int framerate;
 
+        [Header("Tags", order = 5)]
+        [SerializeField] private string tagPlayer;
+        [SerializeField] private string tagMissile;
+
         [Header("References", order = 99)]
         [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceObjects;
@@ -47,7 +51,7 @@ namespace SpaceGame
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] inventory = new UIInventorySlot[5];
 
-        private SpaceObject[] SpaceObjects => parentSpaceObjects.GetComponentsInChildren<SpaceObject>();
+        private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
         private bool inputAddForce = false;
         private bool inputFire = false;
@@ -59,6 +63,9 @@ namespace SpaceGame
         public static GameModeSettings GMSettings => instance.settings;
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
         public static Sprite[] Sprites => instance.sprites;
+
+        public static string TagPlayer => instance.tagPlayer;
+        public static string TagMissile => instance.tagMissile;
 
         // Input variables
         public static bool InputAddForce => instance.inputAddForce;
@@ -130,7 +137,7 @@ namespace SpaceGame
                 {
                     slotCurrent.gameObject.SetActive(true);
                     slotCurrent.Image.color = itemCurrent.Color;
-                    slotCurrent.Image.sprite = itemCurrent.Sprite; // TODO should set slot sprite? is it not? sprites show up as squares?
+                    slotCurrent.Image.sprite = itemCurrent.Sprite;
                 }
             }
         }
@@ -186,14 +193,14 @@ namespace SpaceGame
             bool foundEmptySlot = false, foundSameItem = false;
             ItemInfo itemCurrent;
 
-            for (i = 0; i < inv.Length & !foundSameItem; i++)
+            for (i = 0; i < inv.Length; i++)
             {
                 itemCurrent = inv[i].Item;
 
                 if (itemCurrent == item)
                 {
                     foundSameItem = true;
-                    continue;
+                    break;
                 }
                 else
                 {
@@ -216,7 +223,7 @@ namespace SpaceGame
             {
                 slot = inv[slotSameItem];
                 slot.Amount += amount;
-                slot.ChangeSprite();
+                slot.UpdateText();
                 instance.UpdateInventoryUI();
                 return true;
             }
@@ -225,7 +232,7 @@ namespace SpaceGame
                 slot = inv[slotFirstEmpty];
                 slot.Item = item;
                 slot.Amount = amount;
-                slot.ChangeSprite();
+                slot.UpdateText();
                 instance.UpdateInventoryUI();
                 return true;
             }
@@ -248,8 +255,9 @@ namespace SpaceGame
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in instance.SpaceObjects)
                 {
-                    if (so.tag == sos.Tag)
+                    if (so != null & so.tag == sos.Tag)
                     {
+                        // Cannot pass
                         pass = false;
                         break;
                     }
@@ -273,10 +281,17 @@ namespace SpaceGame
                 spaceObject.Rigidbody.velocity = velocity;
                 spaceObject.Rigidbody.angularVelocity = angularVelocity;
 
+                instance.SpaceObjects.Add(spaceObject);
                 r = spaceObject;
             }
 
             return r;
+        }
+
+        public static void DestroySpaceObject(SpaceObject spaceObject)
+        {
+            instance.SpaceObjects.Remove(spaceObject);
+            Destroy(spaceObject.gameObject);
         }
 
         private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSettings sos)
@@ -330,6 +345,8 @@ namespace SpaceGame
         // Routine to clean distance Space Objects
         private IEnumerator RoutineCleanDistantSpaceObjects()
         {
+            List<SpaceObject> objectsToRemove = new List<SpaceObject>();
+
             // Infinite loop...
             while (true)
             {
@@ -342,10 +359,16 @@ namespace SpaceGame
                     // If Space Object too far away...
                     if (Vector2.Distance(player.transform.position, so.transform.position) > so.Settings.DistanceMax)
                     {
-                        // Dispose of
-                        Destroy(so.gameObject);
+                        // Add to disposal list
+                        objectsToRemove.Add(so);
                     }
                 }
+
+                // Remove Space Objects
+                objectsToRemove.ForEach(so => DestroySpaceObject(so));
+
+                // Reset
+                objectsToRemove.Clear();
             }
         }
 

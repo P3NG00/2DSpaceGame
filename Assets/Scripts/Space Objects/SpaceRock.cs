@@ -8,16 +8,20 @@ namespace SpaceGame.SpaceObjects
         {
             base.OnTriggerEnter2D(collider);
 
-            if (collider.tag == "Missile")
+            if (collider.tag == GameInfo.TagMissile)
             {
-                Destroy(collider.gameObject);
                 Scale -= Settings.ScaleMissileImpactStep;
                 int reward = 1;
 
                 if (Scale < Settings.MinScale)
                 {
+                    // Give bonus credit
                     ++reward;
-                    Destroy(gameObject);
+
+                    // Destroy Space Rock
+                    GameInfo.DestroySpaceObject(this);
+
+                    // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
                     itemObject.SetInfo(Settings.RandomItemDrop, Settings.RandomDropAmount);
                 }
@@ -29,6 +33,7 @@ namespace SpaceGame.SpaceObjects
                     Rigidbody.AddForceAtPosition(force, position);
                 }
 
+                // Give player credit(s)
                 Vector2 pos = transform.position;
                 GameInfo.GiveCredits(reward, pos);
             }
