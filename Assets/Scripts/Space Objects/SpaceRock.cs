@@ -4,8 +4,10 @@ namespace SpaceGame.SpaceObjects
 {
     public sealed class SpaceRock : SpaceObject
     {
-        protected override void OnTriggered(Collider2D collider)
+        protected override void OnTriggerEnter2D(Collider2D collider)
         {
+            base.OnTriggerEnter2D(collider);
+
             if (collider.tag == "Missile")
             {
                 Destroy(collider.gameObject);
@@ -32,8 +34,10 @@ namespace SpaceGame.SpaceObjects
             }
         }
 
-        protected override void OnCollided(Collision2D collision)
+        protected override void OnCollisionEnter2D(Collision2D collision)
         {
+            base.OnCollisionEnter2D(collision);
+
             // TODO Space Rock / Player collision - add damage, effect, other?
             // ideas
             //  hurt player in relation to velocity

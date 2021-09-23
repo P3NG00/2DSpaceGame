@@ -130,7 +130,7 @@ namespace SpaceGame
                 {
                     slotCurrent.gameObject.SetActive(true);
                     slotCurrent.Image.color = itemCurrent.Color;
-                    slotCurrent.Image.sprite = itemCurrent.Sprite;
+                    slotCurrent.Image.sprite = itemCurrent.Sprite; // TODO should set slot sprite? is it not? sprites show up as squares?
                 }
             }
         }
@@ -161,13 +161,22 @@ namespace SpaceGame
 
         public static void GiveCredits(int amount, Vector2 position)
         {
-            instance.credits += amount;
+            GameInfo gi = GameInfo.instance;
+
+            // Add credits
+            gi.credits += amount;
+
+            // Position to spawn
             Vector3 pos = position;
             pos.z = -1f;
-            TMP_Text textPopup = Instantiate(instance.prefabTextCreditPopup, pos, Quaternion.identity);
+
+            // Instantiate Text Object
+            TMP_Text textPopup = Instantiate(gi.prefabTextCreditPopup, pos, Quaternion.identity);
             textPopup.text = $"+{amount}";
-            instance.UpdateTextCredits();
             Destroy(textPopup.gameObject, 0.5f);
+
+            // Update Credits Text
+            gi.UpdateTextCredits();
         }
 
         public static bool GiveItem(ItemInfo item, int amount)

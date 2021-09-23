@@ -11,8 +11,10 @@ namespace SpaceGame.SpaceObjects
 
         protected override Color GetColor() => item.Color;
 
-        protected override void OnCollided(Collision2D collision)
+        protected override void OnCollisionEnter2D(Collision2D collision)
         {
+            base.OnCollisionEnter2D(collision);
+
             // If player triggered and item declared...
             if (collision.gameObject.tag == "Player" & item != null)
             {

@@ -29,20 +29,16 @@ namespace SpaceGame.SpaceObjects
             spriteRenderer.color = GetColor();
         }
 
-        protected void OnTriggerEnter2D(Collider2D collider)
-        {
-            OnTriggered(collider);
-        }
-
-        protected void OnCollisionEnter2D(Collision2D collision)
-        {
-            OnCollided(collision);
-        }
-
         protected virtual Color GetColor() => Settings.Color;
 
-        protected virtual void OnTriggered(Collider2D collider) { }
+        protected virtual void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.tag == "Missile")
+            {
+                Destroy(collider.gameObject);
+            }
+        }
 
-        protected virtual void OnCollided(Collision2D collision) { }
+        protected virtual void OnCollisionEnter2D(Collision2D collision) { }
     }
 }
