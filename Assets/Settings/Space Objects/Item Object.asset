@@ -13,25 +13,14 @@ MonoBehaviour:
   m_Name: Item Object
   m_EditorClassIdentifier: 
   tagName: Item
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
   minScale: 2
   maxScale: 2.5
   minVelocity: 0.5
   maxVelocity: 1
   minAngularVelocity: 5
   maxAngularVelocity: 20
-  distanceSpawn: 0
   distanceMax: 80
-  minDropAmount: 0
-  maxDropAmount: 0
-  widthSpawn: 0
-  scaleSpawnRate: 0
-  timeBetweenChance: 0
-  chanceSpawn: 0
-  scaleMissileImpactForce: 0
-  scaleMissileImpactStep: 0
-  spawnRateType: 0
-  spawnAreaType: 0
   prefabSpaceObjects:
   - {fileID: 2452851676518499770, guid: 5f299ded775940d4da4ba2b2f45059ba, type: 3}
   - {fileID: 5199835733904565838, guid: 8764d807ad766f0418116535ecc57b7d, type: 3}

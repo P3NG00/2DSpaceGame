@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edb5c1acd019d8f47a031d192bc34b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: f78b1c8f7ff3728429817b0fbf586933, type: 3}
   m_Name: Planet
   m_EditorClassIdentifier: 
   tagName: Planet
@@ -20,8 +20,13 @@ MonoBehaviour:
   maxVelocity: 5
   minAngularVelocity: 5
   maxAngularVelocity: 20
-  distanceSpawn: 250
   distanceMax: 300
+  prefabSpaceObjects:
+  - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}
+  itemDrops: []
+  distanceSpawn: 250
+  minDropAmount: 0
+  maxDropAmount: 0
   widthSpawn: 50
   scaleSpawnRate: 1
   timeBetweenChance: 30
@@ -30,6 +35,3 @@ MonoBehaviour:
   scaleMissileImpactStep: 0
   spawnRateType: 2
   spawnAreaType: 1
-  prefabSpaceObjects:
-  - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}
-  itemDrops: []

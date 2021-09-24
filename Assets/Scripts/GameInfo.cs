@@ -73,7 +73,7 @@ namespace SpaceGame
         // Unity Start method
         private void Start()
         {
-            foreach (SpaceObjectSettings sos in settings.SpaceObjectsToSpawn)
+            foreach (SpaceObjectSpawnableSettings sos in settings.SpaceObjectsToSpawn)
             {
                 StartCoroutine(RoutineSpawnSpaceObject(sos));
             }
@@ -220,7 +220,7 @@ namespace SpaceGame
             bool pass = true;
 
             // If single instance type spawning...
-            if (sos.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
+            if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in instance.SpaceObjects)
@@ -264,19 +264,19 @@ namespace SpaceGame
             Destroy(spaceObject.gameObject);
         }
 
-        private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSettings sos)
+        private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSpawnableSettings soss)
         {
             float waitTime, magnitude;
 
             while (true)
             {
                 // Default wait time
-                waitTime = sos.TimeBetweenChance;
+                waitTime = soss.TimeBetweenChance;
 
                 // If scale wait time...
-                if (sos.SpawnRateType == SpaceObjectSpawnRateType.ScaleWithMagnitude)
+                if (soss.SpawnRateType == SpaceObjectSpawnRateType.ScaleWithMagnitude)
                 {
-                    magnitude = player.Rigidbody.velocity.magnitude * sos.ScaleSpawnRate;
+                    magnitude = player.Rigidbody.velocity.magnitude * soss.ScaleSpawnRate;
 
                     if (magnitude > 1f)
                     {
@@ -288,26 +288,26 @@ namespace SpaceGame
                 yield return new WaitForSeconds(waitTime);
 
                 // If chance passes...
-                if (Random.value <= sos.ChanceSpawn)
+                if (Random.value <= soss.ChanceSpawn)
                 {
                     // Spawn Space Object
                     Transform player = instance.player.transform;
                     Vector2 spawnOffset, spawnPos = player.position;
 
-                    switch (sos.SpawnAreaType)
+                    switch (soss.SpawnAreaType)
                     {
                         case SpaceObjectSpawnAreaType.FrontOfPlayer:
-                            spawnOffset = player.transform.up * sos.RandomSpawnDistance;
-                            spawnOffset += (Vector2)player.transform.right * sos.RandomSpawnWidth;
+                            spawnOffset = player.transform.up * soss.RandomSpawnDistance;
+                            spawnOffset += (Vector2)player.transform.right * soss.RandomSpawnWidth;
                             spawnPos += spawnOffset;
                             break;
 
                         case SpaceObjectSpawnAreaType.AroundPlayer:
-                            spawnPos += RandomUnitVector * Random.Range(sos.DistanceSpawn, sos.DistanceMax);
+                            spawnPos += RandomUnitVector * Random.Range(soss.DistanceSpawn, soss.DistanceMax);
                             break;
                     }
 
-                    SpawnSpaceObject(sos, spawnPos);
+                    SpawnSpaceObject(soss, spawnPos);
                 }
             }
         }

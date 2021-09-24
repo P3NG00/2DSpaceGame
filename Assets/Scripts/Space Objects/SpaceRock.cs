@@ -1,9 +1,17 @@
+using SpaceGame.Settings;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
 {
     public sealed class SpaceRock : SpaceObject
     {
+        private new SpaceObjectSpawnableSettings Settings;
+
+        private void Start()
+        {
+            this.Settings = (SpaceObjectSpawnableSettings)base.Settings;
+        }
+
         protected override void OnTriggerEnter2D(Collider2D collider)
         {
             base.OnTriggerEnter2D(collider);

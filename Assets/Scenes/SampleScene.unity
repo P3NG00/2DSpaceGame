@@ -1816,10 +1816,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4979323623273713214, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
-      propertyPath: m_AngularDrag
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6988878651088220016, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: ShapeModule.m_Scale.y
       value: 150

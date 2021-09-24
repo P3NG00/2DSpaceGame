@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b6916d83ce60f4c97132de06d65d5f, type: 3}
   m_Name: GameModeDefault
   m_EditorClassIdentifier: 
-  timeBetweenCleanup: 15
+  timeBetweenCleanup: 20
   spaceObjects:
-  - {fileID: 11400000, guid: 72bd3ba82047df8438fa4660e81e6d39, type: 2}
-  - {fileID: 11400000, guid: 6cf0712ab8618364d84f8a64e781fe05, type: 2}
-  - {fileID: 11400000, guid: c48b87e8ecabddf4fa7340575ac73f4c, type: 2}
+  - {fileID: 11400000, guid: 0cc34474b1ab9924baf41c71118aa562, type: 2}
+  - {fileID: 11400000, guid: 90c12bd977c91154fb28eeff5b5cd35c, type: 2}
+  - {fileID: 11400000, guid: 4b163d7379f6609438eb2345c9d7f64f, type: 2}
