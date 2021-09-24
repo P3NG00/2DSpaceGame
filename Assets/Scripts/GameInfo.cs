@@ -225,7 +225,7 @@ namespace SpaceGame
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in instance.SpaceObjects)
                 {
-                    if (so != null & so.tag == sos.Tag)
+                    if (so.tag == sos.Tag)
                     {
                         // Cannot pass
                         pass = false;
