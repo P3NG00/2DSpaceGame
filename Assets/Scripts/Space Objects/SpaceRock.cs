@@ -5,11 +5,11 @@ namespace SpaceGame.SpaceObjects
 {
     public sealed class SpaceRock : SpaceObject
     {
-        private new SpaceObjectSpawnableSettings Settings;
+        private SpaceObjectSpawnableSettings settings;
 
         private void Start()
         {
-            this.Settings = (SpaceObjectSpawnableSettings)base.Settings;
+            this.settings = (SpaceObjectSpawnableSettings)base.Settings;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collider)
@@ -18,10 +18,10 @@ namespace SpaceGame.SpaceObjects
 
             if (collider.tag == GameInfo.TagMissile)
             {
-                Scale -= Settings.ScaleMissileImpactStep;
+                Scale -= settings.ScaleMissileImpactStep;
                 int reward = 1;
 
-                if (Scale < Settings.MinScale)
+                if (Scale < settings.MinScale)
                 {
                     // Give bonus credit
                     ++reward;
@@ -31,12 +31,12 @@ namespace SpaceGame.SpaceObjects
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
-                    itemObject.SetInfo(Settings.RandomItemDrop, Settings.RandomDropAmount);
+                    itemObject.SetInfo(settings.RandomItemDrop, settings.RandomDropAmount);
                 }
                 else
                 {
                     Rigidbody2D otherRigidbody = collider.gameObject.GetComponent<Rigidbody2D>();
-                    Vector2 force = otherRigidbody.velocity * Settings.ScaleMissileImpactForce;
+                    Vector2 force = otherRigidbody.velocity * settings.ScaleMissileImpactForce;
                     Vector2 position = Rigidbody.position;
                     Rigidbody.AddForceAtPosition(force, position);
                 }
