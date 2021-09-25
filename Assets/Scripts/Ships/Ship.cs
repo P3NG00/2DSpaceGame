@@ -12,13 +12,12 @@ namespace SpaceGame.Ships
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer srPrimary;
         [SerializeField] private SpriteRenderer srSecondary;
-        [SerializeField] private Rigidbody2D prefabMissile;
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
-        public Rigidbody2D Rigidbody => rigidbody;
         public ShipStats Stats => stats;
+        public Rigidbody2D Rigidbody => rigidbody;
 
         private void OnValidate()
         {
@@ -30,8 +29,7 @@ namespace SpaceGame.Ships
 
         public void AddForce()
         {
-            Vector2 direction = transform.up;
-            Vector2 velocity = direction * stats.MultiplierForce;
+            Vector2 velocity = transform.up * stats.MultiplierForce;
             rigidbody.AddForce(velocity);
         }
 
@@ -41,7 +39,7 @@ namespace SpaceGame.Ships
             force *= stats.MultiplierRotate * Time.deltaTime;
 
             Vector2 position = transform.position;
-            position += (Vector2)transform.up * 0.5773f;
+            position += (Vector2)transform.up * 0.5773f; // TODO test increasing height?
 
             rigidbody.AddForceAtPosition(force, position);
         }
@@ -51,10 +49,10 @@ namespace SpaceGame.Ships
             Vector3 posMissile = transform.position;
             posMissile += transform.up * 0.1f;
 
-            Rigidbody2D missile = Instantiate(prefabMissile, posMissile, transform.rotation);
-            missile.velocity = transform.up * stats.VelocityMissile;
+            Rigidbody2D missile = Instantiate(GameInfo.PrefabMissile, posMissile, transform.rotation);
+            missile.velocity = transform.up * stats.Weapon.ProjectileSpeed;
 
-            Destroy(missile.gameObject, stats.TimeMissileLife);
+            Destroy(missile.gameObject, stats.Weapon.LifetimeMax);
         }
     }
 }

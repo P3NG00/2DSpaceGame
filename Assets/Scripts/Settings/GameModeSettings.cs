@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Settings/Game Mode", fileName = "GameMode Settings")]
+    [CreateAssetMenu(menuName = "2D Space Game/Game Mode", fileName = "GameMode Settings")]
     public sealed class GameModeSettings : ScriptableObject
     {
         [Header("Info", order = 0)]

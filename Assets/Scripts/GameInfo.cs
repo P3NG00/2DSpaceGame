@@ -1,3 +1,5 @@
+using System.Security.AccessControl;
+using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceGame.Settings;
@@ -6,7 +8,7 @@ using SpaceGame.SpaceObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace SpaceGame
 {
@@ -42,16 +44,20 @@ namespace SpaceGame
         [SerializeField] private string tagPlayer;
         [SerializeField] private string tagMissile;
 
+        [Header("Prefabs", order = 50)]
+        [SerializeField] private Rigidbody2D prefabMissile;
+        [SerializeField] private TMP_Text prefabTextCreditPopup;
+
         [Header("References", order = 99)]
         [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceObjects;
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text textInfoPanel;
-        [SerializeField] private TMP_Text prefabTextCreditPopup;
         [SerializeField] private GameObject parentInvUI;
+        [SerializeField] private Image slotHighlight;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
-        [SerializeField] private UIInventorySlot[] inventory = new UIInventorySlot[5];
+        [SerializeField] private List<UIInventorySlot> inventory;
 
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
@@ -61,6 +67,7 @@ namespace SpaceGame
         private bool inputMenu = false;
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
+        private UIInventorySlot selectedSlot;
 
         public static GameModeSettings GMSettings => instance.settings;
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
@@ -68,6 +75,8 @@ namespace SpaceGame
 
         public static string TagPlayer => instance.tagPlayer;
         public static string TagMissile => instance.tagMissile;
+
+        public static Rigidbody2D PrefabMissile => instance.prefabMissile;
 
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
@@ -82,6 +91,7 @@ namespace SpaceGame
             StartCoroutine(RoutineCleanDistantSpaceObjects());
             UpdateTextCredits();
             UpdateInventoryUI();
+            ToggleInventory();
             Application.targetFrameRate = framerate;
         }
 
@@ -107,8 +117,9 @@ namespace SpaceGame
 
             player.Animator.SetBool("Moving", inputAddForce);
 
-            textInfoPanel.text = $"position: {((Vector2)player.transform.position).ToString()}\n" +
-                $"velocity: {player.Rigidbody.velocity}, magnitude: {player.Rigidbody.velocity.magnitude}\n" +
+            textInfoPanel.text = $"x: {playerPosition.x}\n" +
+                $"y: {playerPosition.y}\n" +
+                $"magnitude: {player.Rigidbody.velocity.magnitude}\n" +
                 $"angular velocity: {player.Rigidbody.angularVelocity}";
         }
 
@@ -119,26 +130,43 @@ namespace SpaceGame
 
         private void UpdateInventoryUI()
         {
-            UIInventorySlot[] inv = instance.inventory;
+            var inv = instance.inventory;
             UIInventorySlot slotCurrent;
             ItemInfo itemCurrent;
-            int i;
 
-            for (i = 0; i < inv.Length; i++)
+            for (int i = 0; i < inv.Count; i++)
             {
                 slotCurrent = inv[i];
                 itemCurrent = slotCurrent.Item;
 
                 if (itemCurrent == null)
                 {
-                    slotCurrent.gameObject.SetActive(false);
+                    slotCurrent.SetVisible(false);
                 }
                 else
                 {
-                    slotCurrent.gameObject.SetActive(true);
                     slotCurrent.Image.color = itemCurrent.Color;
                     slotCurrent.Image.sprite = itemCurrent.Sprite;
+                    slotCurrent.SetVisible(true);
+                    slotCurrent.UpdateText();
                 }
+            }
+
+            if (selectedSlot == null)
+            {
+                slotHighlight.enabled = false;
+            }
+            else
+            {
+                // TODO move highlight slot to center of slot properly
+                slotHighlight.rectTransform.SetParent(selectedSlot.transform);
+
+                RectTransform rectH = slotHighlight.rectTransform;
+                RectTransform rectS = selectedSlot.RectTransform;
+
+                slotHighlight.transform.localPosition = new Vector3(0f, 0f, -5f);
+
+                slotHighlight.enabled = true;
             }
         }
 
@@ -164,12 +192,12 @@ namespace SpaceGame
 
         public static bool GiveItem(ItemInfo item, int amount)
         {
-            UIInventorySlot[] inv = instance.inventory;
-            int slotFirstEmpty = 0, slotSameItem = 0, i;
+            var inv = instance.inventory;
+            int slotFirstEmpty = 0, slotSameItem = 0;
             bool foundEmptySlot = false, foundSameItem = false;
             ItemInfo itemCurrent;
 
-            for (i = 0; i < inv.Length; i++)
+            for (int i = 0; i < inv.Count; i++)
             {
                 itemCurrent = inv[i].Item;
 
@@ -199,31 +227,61 @@ namespace SpaceGame
             {
                 slot = inv[slotSameItem];
                 slot.Amount += amount;
-                slot.UpdateText();
-                instance.UpdateInventoryUI();
-                return true;
             }
             else if (foundEmptySlot)
             {
                 slot = inv[slotFirstEmpty];
                 slot.Item = item;
                 slot.Amount = amount;
-                slot.UpdateText();
-                instance.UpdateInventoryUI();
-                return true;
             }
             else
             {
                 return false;
             }
+
+            slot.UpdateText();
+            instance.UpdateInventoryUI();
+            return true;
         }
 
         public static void ToggleInventory()
         {
             GameObject ui = instance.parentInvUI;
-            bool toEnable = !ui.activeSelf;
+            ui.SetActive(!ui.activeSelf);
+        }
 
-            ui.SetActive(toEnable);
+        public static void SelectSlot(UIInventorySlot slot)
+        {
+            GameInfo gi = GameInfo.instance;
+            UIInventorySlot slotSel = gi.selectedSlot;
+
+            // If no slot selected...
+            if (slotSel == null)
+            {
+                if (slot.Item != null)
+                {
+                    // Set slot
+                    gi.selectedSlot = slot;
+                }
+            }
+            else
+            {
+                // Swap items
+                ItemInfo swapItem = slot.Item;
+                int swapAmount = slot.Amount;
+
+                slot.Item = slotSel.Item;
+                slot.Amount = slotSel.Amount;
+
+                slotSel.Item = swapItem;
+                slotSel.Amount = swapAmount;
+
+                // Reset
+                gi.selectedSlot = null;
+            }
+
+            // Update UI
+            gi.UpdateInventoryUI();
         }
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectSettings sos, Vector2 pos)
@@ -361,7 +419,7 @@ namespace SpaceGame
             {
                 player.Fire();
 
-                yield return new WaitForSeconds(player.Stats.TimeBetweenShots);
+                yield return new WaitForSeconds(player.Stats.Weapon.TimeBetweenShots);
             }
 
             routineFiring = null;
