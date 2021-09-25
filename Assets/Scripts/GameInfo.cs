@@ -6,6 +6,7 @@ using SpaceGame.SpaceObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace SpaceGame
 {
@@ -45,9 +46,10 @@ namespace SpaceGame
         [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceObjects;
         [SerializeField] private TMP_Text textCredits;
+        [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
+        [SerializeField] private GameObject parentInvUI;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
-        [SerializeField] private Animator uiInvAnimator;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] inventory = new UIInventorySlot[5];
 
@@ -56,7 +58,6 @@ namespace SpaceGame
         // TODO add input slow down
         private bool inputAddForce = false;
         private bool inputFire = false;
-        private bool inputInventory = false;
         private bool inputMenu = false;
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
@@ -105,12 +106,17 @@ namespace SpaceGame
             player.Rotate(direction);
 
             player.Animator.SetBool("Moving", inputAddForce);
-            uiInvAnimator.SetBool("ShowInv", inputInventory);
+
+            textInfoPanel.text = $"position: {((Vector2)player.transform.position).ToString()}\n" +
+                $"velocity: {player.Rigidbody.velocity}, magnitude: {player.Rigidbody.velocity.magnitude}\n" +
+                $"angular velocity: {player.Rigidbody.angularVelocity}";
         }
 
-        private void UpdateTextCredits() => textCredits.text = credits.ToString();
+        private void UpdateTextCredits()
+        {
+            textCredits.text = credits.ToString();
+        }
 
-        // Iterates through inventory slots and disables them if nothing is in them
         private void UpdateInventoryUI()
         {
             UIInventorySlot[] inv = instance.inventory;
@@ -210,6 +216,14 @@ namespace SpaceGame
             {
                 return false;
             }
+        }
+
+        public static void ToggleInventory()
+        {
+            GameObject ui = instance.parentInvUI;
+            bool toEnable = !ui.activeSelf;
+
+            ui.SetActive(toEnable);
         }
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectSettings sos, Vector2 pos)
@@ -312,7 +326,6 @@ namespace SpaceGame
             }
         }
 
-        // Routine to clean distance Space Objects
         private IEnumerator RoutineCleanDistantSpaceObjects()
         {
             List<SpaceObject> objectsToRemove = new List<SpaceObject>();
@@ -373,7 +386,7 @@ namespace SpaceGame
         {
             if (ctx.performed)
             {
-                inputInventory = !inputInventory;
+                ToggleInventory();
             }
         }
         #endregion
