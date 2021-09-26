@@ -193,11 +193,13 @@ namespace SpaceGame
         public static bool GiveItem(ItemInfo item, int amount)
         {
             var inv = instance.inventory;
-            int slotFirstEmpty = 0, slotSameItem = 0;
-            bool foundEmptySlot = false, foundSameItem = false;
+            bool foundEmptySlot = false;
+            bool foundSameItem = false;
+            int slotFirstEmpty = 0;
+            int i;
             ItemInfo itemCurrent;
 
-            for (int i = 0; i < inv.Count; i++)
+            for (i = 0; i < inv.Count; i++)
             {
                 itemCurrent = inv[i].Item;
 
@@ -206,26 +208,37 @@ namespace SpaceGame
                     foundSameItem = true;
                     break;
                 }
-                else
-                {
-                    ++slotSameItem;
-                }
-
-                if (itemCurrent == null)
+                else if (!foundEmptySlot && itemCurrent == null)
                 {
                     foundEmptySlot = true;
+                    slotFirstEmpty = i;
                 }
-                else
-                {
-                    ++slotFirstEmpty;
-                }
+
+                // if (itemCurrent == item)
+                // {
+                //     foundSameItem = true;
+                //     break;
+                // }
+                // else
+                // {
+                //     ++slotSameItem;
+                // }
+
+                // if (itemCurrent == null)
+                // {
+                //     foundEmptySlot = true;
+                // }
+                // else if (!foundEmptySlot)
+                // {
+                //     ++slotFirstEmpty;
+                // }
             }
 
             UIInventorySlot slot;
 
             if (foundSameItem)
             {
-                slot = inv[slotSameItem];
+                slot = inv[i];
                 slot.Amount += amount;
             }
             else if (foundEmptySlot)
