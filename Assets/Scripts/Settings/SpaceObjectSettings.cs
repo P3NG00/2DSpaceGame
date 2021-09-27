@@ -19,7 +19,9 @@ namespace SpaceGame.Settings
 
         [Header("References [SpaceObjectSettings]", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
-        [SerializeField] private ItemInfo[] itemDrops;
+        [SerializeField] private ItemDrop[] itemDrops;
+
+        private int totalWeight = 0;
 
         protected void ValidateMinMax(float min, ref float max)
         {
@@ -36,11 +38,40 @@ namespace SpaceGame.Settings
             ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
         }
 
+        private void Awake()
+        {
+            foreach (ItemDrop drop in itemDrops)
+            {
+                totalWeight += drop.Weight;
+            }
+        }
+
         public float RandomScale => Random.Range(minScale, maxScale);
         public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
         public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
         public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
-        public ItemInfo RandomItemDrop => itemDrops[Random.Range(0, itemDrops.Length)];
+        public ItemDrop RandomItemDrop
+        {
+            get
+            {
+                int randomWeight = Random.Range(0, totalWeight);
+                int weight;
+
+                foreach (ItemDrop itemDrop in itemDrops)
+                {
+                    weight = itemDrop.Weight;
+
+                    if (randomWeight < weight)
+                    {
+                        return itemDrop;
+                    }
+
+                    randomWeight -= weight;
+                }
+
+                return null;
+            }
+        }
 
         public string Tag => tagName;
         public Color Color => color;

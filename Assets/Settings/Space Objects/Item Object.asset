@@ -22,7 +22,5 @@ MonoBehaviour:
   maxAngularVelocity: 20
   distanceMax: 80
   prefabSpaceObjects:
-  - {fileID: 2452851676518499770, guid: 5f299ded775940d4da4ba2b2f45059ba, type: 3}
-  - {fileID: 5199835733904565838, guid: 8764d807ad766f0418116535ecc57b7d, type: 3}
-  - {fileID: 2711211640931509725, guid: 35d92a4e5d6a7d444bea02943fab4b46, type: 3}
+  - {fileID: -160183931098287300, guid: 678271c7454158f4da07cfeff49cb710, type: 3}
   itemDrops: []

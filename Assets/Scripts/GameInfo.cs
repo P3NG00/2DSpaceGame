@@ -1,5 +1,3 @@
-using System.Security.AccessControl;
-using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceGame.Settings;
@@ -269,7 +267,11 @@ namespace SpaceGame
             UIInventorySlot slotSel = gi.selectedSlot;
 
             // If no slot selected...
-            if (slotSel == null)
+            if (slotSel == slot)
+            {
+                gi.selectedSlot = null;
+            }
+            else if (slotSel == null)
             {
                 if (slot.Item != null)
                 {

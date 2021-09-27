@@ -18,6 +18,9 @@ namespace SpaceGame.SpaceObjects
         {
             this.item = item;
             this.amount = amount;
+
+            SpriteRenderer.sprite = item.Sprite;
+            SpriteRenderer.color = item.Color;
         }
     }
 }

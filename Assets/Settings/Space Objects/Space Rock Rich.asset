@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Rich Space Rock
   color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  minScale: 7.5
-  maxScale: 15
+  minScale: 5
+  maxScale: 12
   minVelocity: 5
   maxVelocity: 15
   minAngularVelocity: 10
@@ -26,8 +26,18 @@ MonoBehaviour:
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
-  - {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
-  - {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
+  - item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
+    weight: 5
+    minAmount: 3
+    maxVariance: 4
+  - item: {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
+    weight: 4
+    minAmount: 3
+    maxVariance: 4
+  - item: {fileID: 11400000, guid: 3e45daed6cdfc524daaa559ac74a1795, type: 2}
+    weight: 3
+    minAmount: 5
+    maxVariance: 10
   distanceSpawn: 75
   minDropAmount: 3
   maxDropAmount: 5
@@ -36,6 +46,6 @@ MonoBehaviour:
   timeBetweenChance: 2
   chanceSpawn: 0.3
   scaleMissileImpactForce: 0.75
-  scaleMissileImpactStep: 0.5
+  scaleMissileImpactStep: 0.8
   spawnRateType: 1
   spawnAreaType: 2

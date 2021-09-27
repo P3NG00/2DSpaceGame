@@ -21,6 +21,7 @@ namespace SpaceGame.SpaceObjects
                 Scale -= settings.ScaleMissileImpactStep;
                 int reward = 1;
 
+                // If Space Rock too small...
                 if (Scale < settings.MinScale)
                 {
                     // Give bonus credit
@@ -31,7 +32,8 @@ namespace SpaceGame.SpaceObjects
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
-                    itemObject.SetInfo(settings.RandomItemDrop, settings.RandomDropAmount);
+                    ItemDrop drop = settings.RandomItemDrop;
+                    itemObject.SetInfo(drop.ItemInfo, drop.RandomAmount);
                 }
                 else
                 {

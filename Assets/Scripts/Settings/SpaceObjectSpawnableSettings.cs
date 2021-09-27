@@ -1,4 +1,3 @@
-using SpaceGame.SpaceObjects;
 using UnityEngine;
 
 namespace SpaceGame.Settings
@@ -8,8 +7,6 @@ namespace SpaceGame.Settings
     {
         [Header("Info [SpaceObjectSpawnableSettings]", order = 30)]
         [SerializeField, Min(0f)] private float distanceSpawn;
-        [SerializeField, Min(0)] private int minDropAmount;
-        [SerializeField] private int maxDropAmount;
         [SerializeField, Min(0f)] private float widthSpawn;
         [SerializeField] private float scaleSpawnRate;
         [SerializeField, Min(0f)] private float timeBetweenChance;
@@ -27,7 +24,6 @@ namespace SpaceGame.Settings
 
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
         public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
-        public int RandomDropAmount => Random.Range(minDropAmount, maxDropAmount + 1);
 
         public float DistanceSpawn => distanceSpawn;
         public float ScaleSpawnRate => scaleSpawnRate;
