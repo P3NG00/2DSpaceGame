@@ -21,8 +21,6 @@ namespace SpaceGame.Settings
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
         [SerializeField] private ItemDrop[] itemDrops;
 
-        private int totalWeight = 0;
-
         protected void ValidateMinMax(float min, ref float max)
         {
             if (min > max)
@@ -38,38 +36,38 @@ namespace SpaceGame.Settings
             ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
         }
 
-        private void Awake()
-        {
-            foreach (ItemDrop drop in itemDrops)
-            {
-                totalWeight += drop.Weight;
-            }
-        }
-
         public float RandomScale => Random.Range(minScale, maxScale);
         public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
         public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
         public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
+
         public ItemDrop RandomItemDrop
         {
             get
             {
-                int randomWeight = Random.Range(0, totalWeight);
-                int weight;
+                int weight = Random.Range(0, TotalWeight);
 
                 foreach (ItemDrop itemDrop in itemDrops)
                 {
-                    weight = itemDrop.Weight;
+                    weight -= itemDrop.Weight;
 
-                    if (randomWeight < weight)
+                    if (weight < 0)
                     {
                         return itemDrop;
                     }
-
-                    randomWeight -= weight;
                 }
 
-                return null;
+                throw new System.Exception("No random item drop selected");
+            }
+        }
+
+        public int TotalWeight
+        {
+            get
+            {
+                int w = 0;
+                System.Array.ForEach(itemDrops, drop => w += drop.Weight);
+                return w;
             }
         }
 
