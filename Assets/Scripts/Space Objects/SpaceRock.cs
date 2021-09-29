@@ -60,12 +60,8 @@ namespace SpaceGame.SpaceObjects
                 // TODO mess with damage from collision
                 float force = collision.rigidbody.velocity.magnitude;
 
-                // TODO make 10f slider to mess with
-                if (force > 10f)
-                {
-                    Ship ship = transformShip.GetComponent<Ship>();
-                    ship.Damage(force);
-                }
+                Ship ship = transformShip.GetComponent<Ship>();
+                ship.Damage(force);
             }
         }
     }

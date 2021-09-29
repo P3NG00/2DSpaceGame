@@ -6,5 +6,10 @@ namespace SpaceGame.Ships
         private void Update()
         {
         }
+
+        protected override void OnDeath()
+        {
+            Destroy(gameObject);
+        }
     }
 }

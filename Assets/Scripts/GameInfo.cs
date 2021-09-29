@@ -31,8 +31,6 @@ namespace SpaceGame
         #endregion
 
         [Header("Game", order = 0)]
-        [SerializeField] private float health;
-        [SerializeField] private float maxHealth;
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
 
@@ -59,6 +57,10 @@ namespace SpaceGame
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private List<UIInventorySlot> inventory;
+
+        [Header("DEBUG", order = 100)]
+        [SerializeField] private Color colorPointing;
+        [SerializeField] private Color colorFacing;
 
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
@@ -120,8 +122,8 @@ namespace SpaceGame
             Vector2 mouseOffset = mousePosition - playerPosition;
 
             // Draw rays to display in editor
-            Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), Color.magenta);
-            Debug.DrawLine(playerPosition, mousePosition, Color.white);
+            Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), colorFacing);
+            Debug.DrawLine(playerPosition, mousePosition, colorPointing);
 
             float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
             player.Rotate(direction);
@@ -134,7 +136,7 @@ namespace SpaceGame
                 $"angular velocity: {player.Rigidbody.angularVelocity}";
 
             // Health
-            imageHealthBar.fillAmount = health / maxHealth;
+            imageHealthBar.fillAmount = player.Health / player.MaxHealth;
         }
 
         private void UpdateTextCredits()

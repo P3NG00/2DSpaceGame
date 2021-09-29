@@ -21,6 +21,11 @@ namespace SpaceGame.Ships
         public ShipStats Stats => stats;
         public Rigidbody2D Rigidbody => rigidbody;
 
+        public float Health => health;
+        public float MaxHealth => maxHealth;
+
+        public bool IsAlive => health > 0f;
+
         private void OnValidate()
         {
             GameInfo.ValidateMinMax(health, ref maxHealth);
@@ -33,30 +38,42 @@ namespace SpaceGame.Ships
 
         public void AddForce()
         {
-            Vector2 velocity = transform.up * stats.MultiplierForce;
-            rigidbody.AddForce(velocity);
+            if (IsAlive)
+            {
+                Vector2 velocity = transform.up * stats.MultiplierForce;
+                rigidbody.AddForce(velocity);
+            }
         }
 
         public void Rotate(float rotation)
         {
-            float torque = -rotation * stats.MultiplierRotate * Time.deltaTime;
-            rigidbody.AddTorque(torque);
+            if (IsAlive)
+            {
+                float torque = -rotation * stats.MultiplierRotate * Time.deltaTime;
+                rigidbody.AddTorque(torque);
+            }
         }
 
         public void Fire()
         {
-            Vector3 posMissile = transform.position;
-            posMissile += transform.up * 0.1f;
+            if (IsAlive)
+            {
+                Vector3 posMissile = transform.position;
+                posMissile += transform.up * 0.1f;
 
-            Rigidbody2D missile = Instantiate(GameInfo.PrefabMissile, posMissile, transform.rotation);
-            missile.velocity = transform.up * stats.Weapon.ProjectileSpeed;
+                Rigidbody2D missile = Instantiate(GameInfo.PrefabMissile, posMissile, transform.rotation);
+                missile.velocity = transform.up * stats.Weapon.ProjectileSpeed;
 
-            Destroy(missile.gameObject, stats.Weapon.LifetimeMax);
+                Destroy(missile.gameObject, stats.Weapon.LifetimeMax);
+            }
         }
 
         public void ApplyDrag(bool drag)
         {
-            rigidbody.drag = drag ? Stats.Drag : 0;
+            if (IsAlive)
+            {
+                rigidbody.drag = drag ? Stats.Drag : 0;
+            }
         }
 
         public void Heal(float amount)
@@ -76,7 +93,6 @@ namespace SpaceGame.Ships
             if (health <= 0f)
             {
                 health = 0f;
-                Destroy(gameObject);
                 OnDeath();
             }
         }
