@@ -13,6 +13,7 @@ namespace SpaceGame.Settings
         [SerializeField] private Color colorSecondary;
         [SerializeField, Min(0f)] private float multiplierForce;
         [SerializeField, Min(0f)] private float multiplierRotate;
+        [SerializeField] private float drag;
 
         public Weapon Weapon => weapon;
 
@@ -20,5 +21,6 @@ namespace SpaceGame.Settings
         public Color ColorSecondary => colorSecondary;
         public float MultiplierForce => multiplierForce;
         public float MultiplierRotate => multiplierRotate;
+        public float Drag => drag;
     }
 }

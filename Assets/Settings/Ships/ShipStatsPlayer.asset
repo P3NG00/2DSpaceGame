@@ -17,3 +17,4 @@ MonoBehaviour:
   colorSecondary: {r: 0, g: 0.2, b: 1, a: 1}
   multiplierForce: 10
   multiplierRotate: 250
+  drag: 2

@@ -49,5 +49,10 @@ namespace SpaceGame.Ships
 
             Destroy(missile.gameObject, stats.Weapon.LifetimeMax);
         }
+
+        public void ApplyDrag(bool drag)
+        {
+            rigidbody.drag = drag ? Stats.Drag : 0;
+        }
     }
 }

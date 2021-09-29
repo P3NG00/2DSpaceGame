@@ -172,6 +172,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3f9f38c2-fa50-4ece-bd98-6c87238ffef6
     m_ActionName: Input/Mouse Position[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputSlowDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b44f9430-4cb6-4553-9224-0dc4c95188db
+    m_ActionName: Input/Slow Down[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 33063dee-766e-4c81-9c8f-1ed363d508f0

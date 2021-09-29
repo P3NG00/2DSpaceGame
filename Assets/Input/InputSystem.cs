@@ -57,6 +57,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Slow Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""b44f9430-4cb6-4553-9224-0dc4c95188db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -125,6 +133,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Mouse Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Slow Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +174,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
         m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
+        m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -209,6 +229,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Inventory;
     private readonly InputAction m_Input_Menu;
     private readonly InputAction m_Input_MousePosition;
+    private readonly InputAction m_Input_SlowDown;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -218,6 +239,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
         public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
+        public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -242,6 +264,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -261,6 +286,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @SlowDown.started += instance.OnSlowDown;
+                @SlowDown.performed += instance.OnSlowDown;
+                @SlowDown.canceled += instance.OnSlowDown;
             }
         }
     }
@@ -281,5 +309,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnSlowDown(InputAction.CallbackContext context);
     }
 }
