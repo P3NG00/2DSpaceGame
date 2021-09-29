@@ -31,6 +31,20 @@ public class UIInventorySlot : MonoBehaviour
         textAmount.enabled = visible;
     }
 
+    public int AddAmount(int amount)
+    {
+        Amount += amount;
+        int d = 0;
+
+        if (Amount > Item.MaxStackSize)
+        {
+            d = Amount - Item.MaxStackSize;
+            Amount = Item.MaxStackSize;
+        }
+
+        return d;
+    }
+
     public void SelectSlot()
     {
         GameInfo.SelectSlot(this);

@@ -171,6 +171,14 @@ namespace SpaceGame
             }
         }
 
+        public static void ValidateMinMax(float min, ref float max)
+        {
+            if (min > max)
+            {
+                max = min;
+            }
+        }
+
         public static void GiveCredits(int amount, Vector2 position)
         {
             GameInfo gi = GameInfo.instance;
@@ -191,52 +199,40 @@ namespace SpaceGame
             gi.UpdateTextCredits();
         }
 
-        public static bool GiveItem(ItemInfo item, int amount)
+        public static int GiveItem(ItemInfo item, int amount)
         {
-            var inv = instance.inventory;
-            bool foundEmptySlot = false;
-            bool foundSameItem = false;
-            int slotFirstEmpty = 0;
-            int i;
+            Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
+            List<UIInventorySlot> inv = instance.inventory;
+            UIInventorySlot slot;
             ItemInfo itemCurrent;
 
-            for (i = 0; i < inv.Count; i++)
+            for (int i = 0; i < inv.Count & amount > 0; ++i)
             {
-                itemCurrent = inv[i].Item;
+                slot = inv[i];
+                itemCurrent = slot.Item;
 
                 if (itemCurrent == item)
                 {
-                    foundSameItem = true;
-                    break;
+                    // Add amount and update remaining amount
+                    amount = slot.AddAmount(amount);
                 }
-                else if (!foundEmptySlot && itemCurrent == null)
+                else if (itemCurrent == null)
                 {
-                    foundEmptySlot = true;
-                    slotFirstEmpty = i;
+                    // Add to empty slot list
+                    emptySlots.Enqueue(slot);
                 }
             }
 
-            UIInventorySlot slot;
-
-            if (foundSameItem)
+            // Fill empty slots with extra
+            while (amount > 0 & emptySlots.Count > 0)
             {
-                slot = inv[i];
-                slot.Amount += amount;
-            }
-            else if (foundEmptySlot)
-            {
-                slot = inv[slotFirstEmpty];
+                slot = emptySlots.Dequeue();
                 slot.Item = item;
-                slot.Amount = amount;
-            }
-            else
-            {
-                return false;
+                amount = slot.AddAmount(amount);
             }
 
-            slot.UpdateText();
             instance.UpdateInventoryUI();
-            return true;
+            return amount;
         }
 
         public static void ToggleInventory()

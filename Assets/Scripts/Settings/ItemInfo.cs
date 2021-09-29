@@ -9,10 +9,11 @@ namespace SpaceGame.Settings
         [SerializeField] private string itemName;
         [SerializeField] private Sprite sprite;
         [SerializeField] private Color color;
-        // TODO implement max stack size (if given more than available in slot, move to next slot) (if no more slots available, leave on ground)
+        [SerializeField] private int maxStackSize;
 
         public Sprite Sprite => sprite;
         public Color Color => color;
         public string Name => name;
+        public int MaxStackSize => maxStackSize;
     }
 }

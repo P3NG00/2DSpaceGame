@@ -8,5 +8,10 @@ namespace SpaceGame.Ships
         [SerializeField] private Animator animator;
 
         public Animator Animator => animator;
+
+        protected override void OnDeath()
+        {
+            // TODO on player death
+        }
     }
 }

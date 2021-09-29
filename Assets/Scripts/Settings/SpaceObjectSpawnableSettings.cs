@@ -19,7 +19,7 @@ namespace SpaceGame.Settings
         protected override void OnValidate()
         {
             base.OnValidate();
-            ValidateMinMax(distanceSpawn, ref distanceMax);
+            GameInfo.ValidateMinMax(distanceSpawn, ref distanceMax);
         }
 
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);

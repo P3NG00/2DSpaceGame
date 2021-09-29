@@ -21,19 +21,11 @@ namespace SpaceGame.Settings
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
         [SerializeField] private ItemDrop[] itemDrops;
 
-        protected void ValidateMinMax(float min, ref float max)
-        {
-            if (min > max)
-            {
-                max = min;
-            }
-        }
-
         protected virtual void OnValidate()
         {
-            ValidateMinMax(minScale, ref maxScale);
-            ValidateMinMax(minVelocity, ref maxVelocity);
-            ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
+            GameInfo.ValidateMinMax(minScale, ref maxScale);
+            GameInfo.ValidateMinMax(minVelocity, ref maxVelocity);
+            GameInfo.ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
         }
 
         public float RandomScale => Random.Range(minScale, maxScale);

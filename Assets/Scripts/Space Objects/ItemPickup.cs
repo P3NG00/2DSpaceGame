@@ -16,11 +16,15 @@ namespace SpaceGame.SpaceObjects
             // If player triggered and item declared...
             if (collider.tag == GameInfo.TagPlayer & parentItem.Item != null)
             {
-                bool given = GameInfo.GiveItem(parentItem.Item, parentItem.Amount);
+                int remaining = GameInfo.GiveItem(parentItem.Item, parentItem.Amount);
 
-                if (given)
+                if (remaining == 0)
                 {
                     GameInfo.DestroySpaceObject(parentItem);
+                }
+                else
+                {
+                    parentItem.Amount = remaining;
                 }
             }
         }

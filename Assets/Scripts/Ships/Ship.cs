@@ -6,6 +6,8 @@ namespace SpaceGame.Ships
     public abstract class Ship : MonoBehaviour
     {
         [Header("Info", order = 0)]
+        [SerializeField] private float health;
+        [SerializeField] private float maxHealth;
         [SerializeField] private ShipStats stats;
 
         [Header("References (as Ship)", order = 90)]
@@ -21,6 +23,8 @@ namespace SpaceGame.Ships
 
         private void OnValidate()
         {
+            GameInfo.ValidateMinMax(health, ref maxHealth);
+
             srPrimary.color = stats.ColorPrimary;
             srSecondary.color = stats.ColorSecondary;
 
@@ -54,5 +58,29 @@ namespace SpaceGame.Ships
         {
             rigidbody.drag = drag ? Stats.Drag : 0;
         }
+
+        public void Heal(float amount)
+        {
+            health += amount;
+
+            if (health > maxHealth)
+            {
+                health = maxHealth;
+            }
+        }
+
+        public void Damage(float damage)
+        {
+            health -= damage;
+
+            if (health <= 0f)
+            {
+                health = 0f;
+                Destroy(gameObject);
+                OnDeath();
+            }
+        }
+
+        protected virtual void OnDeath() { }
     }
 }

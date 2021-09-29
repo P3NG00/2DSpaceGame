@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73ecc0d41116ac4389e72ac6aa543ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
   stats: {fileID: 11400000, guid: 2077de58226784b4492be6d2a54b7c6c, type: 2}
   rigidbody: {fileID: 4979323623273713214}
   srPrimary: {fileID: 1846706566606818846}
