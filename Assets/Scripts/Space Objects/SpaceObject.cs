@@ -18,10 +18,7 @@ namespace SpaceGame.SpaceObjects
         public float Scale
         {
             get => transform.localScale.x;
-            set
-            {
-                transform.localScale = Vector2.one * value;
-            }
+            set => transform.localScale = Vector2.one * value;
         }
 
         private void Start()
@@ -33,12 +30,10 @@ namespace SpaceGame.SpaceObjects
 
         protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.tag == GameInfo.TagMissile)
+            if (Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
             {
                 Destroy(collider.gameObject);
             }
         }
-
-        protected virtual void OnCollisionEnter2D(Collision2D collision) { }
     }
 }

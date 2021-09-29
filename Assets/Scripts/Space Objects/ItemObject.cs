@@ -6,18 +6,20 @@ namespace SpaceGame.SpaceObjects
     public sealed class ItemObject : SpaceObject
     {
         [Header("Info (as ItemObject)", order = 10)]
-        public ItemInfo Item;
+        [SerializeField] private ItemInfo item;
         public int Amount;
 
-        protected override Color GetColor() => Item.Color;
-
-        public void SetInfo(ItemInfo item, int amount)
+        public ItemInfo Item
         {
-            this.Item = item;
-            this.Amount = amount;
-
-            SpriteRenderer.sprite = item.Sprite;
-            SpriteRenderer.color = item.Color;
+            get => item;
+            set
+            {
+                this.item = value;
+                SpriteRenderer.sprite = item.Sprite;
+                SpriteRenderer.color = item.Color;
+            }
         }
+
+        protected override Color GetColor() => Item.Color;
     }
 }

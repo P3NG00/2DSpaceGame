@@ -21,12 +21,11 @@ MonoBehaviour:
   minAngularVelocity: 5
   maxAngularVelocity: 20
   distanceMax: 300
+  destroyMissile: 1
   prefabSpaceObjects:
   - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}
   itemDrops: []
   distanceSpawn: 250
-  minDropAmount: 0
-  maxDropAmount: 0
   widthSpawn: 50
   scaleSpawnRate: 1
   timeBetweenChance: 30

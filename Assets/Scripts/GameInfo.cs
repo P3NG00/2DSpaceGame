@@ -40,6 +40,7 @@ namespace SpaceGame
         [SerializeField] private int framerate;
 
         [Header("Tags", order = 5)]
+        [SerializeField] private string tagShip;
         [SerializeField] private string tagPlayer;
         [SerializeField] private string tagMissile;
 
@@ -62,6 +63,7 @@ namespace SpaceGame
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
         private bool inputAddForce = false;
+        private bool inputSlowDown = false;
         private bool inputFire = false;
         private bool inputMenu = false;
         private Vector2 inputMousePosition = Vector2.zero;
@@ -72,6 +74,7 @@ namespace SpaceGame
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
         public static Sprite[] Sprites => instance.sprites;
 
+        public static string TagShip => instance.tagShip;
         public static string TagPlayer => instance.tagPlayer;
         public static string TagMissile => instance.tagMissile;
 
@@ -97,9 +100,18 @@ namespace SpaceGame
         // Unity Update method
         private void FixedUpdate()
         {
-            if (inputAddForce)
+            if (inputSlowDown)
             {
-                player.AddForce();
+                player.ApplyDrag(true);
+            }
+            else
+            {
+                player.ApplyDrag(false);
+
+                if (inputAddForce)
+                {
+                    player.AddForce();
+                }
             }
 
             Vector2 playerPosition = player.transform.position;
@@ -420,9 +432,10 @@ namespace SpaceGame
 
         #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => inputAddForce = ctx.performed;
+        public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => inputSlowDown = ctx.performed;
         public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
-
+        public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
             inputFire = ctx.performed;
@@ -431,19 +444,6 @@ namespace SpaceGame
             {
                 instance.routineFiring = StartCoroutine(RoutineFire());
             }
-        }
-
-        public void CallbackInputInventory(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed)
-            {
-                ToggleInventory();
-            }
-        }
-
-        public void CallbackInputSlowDown(InputAction.CallbackContext ctx)
-        {
-            player.ApplyDrag(ctx.performed);
         }
         #endregion
     }

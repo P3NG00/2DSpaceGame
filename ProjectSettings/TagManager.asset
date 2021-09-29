@@ -8,6 +8,7 @@ TagManager:
   - Space Rock
   - Planet
   - Item
+  - Ship
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Space Object
   - Item Object
   - Item Pickup
-  - 
+  - Ship
   - 
   - 
   - 

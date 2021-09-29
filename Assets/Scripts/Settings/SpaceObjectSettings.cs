@@ -16,6 +16,7 @@ namespace SpaceGame.Settings
         [SerializeField, Min(0f)] private float minAngularVelocity;
         [SerializeField] private float maxAngularVelocity;
         [SerializeField] protected float distanceMax;
+        [SerializeField] private bool destroyMissile;
 
         [Header("References [SpaceObjectSettings]", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
@@ -67,5 +68,6 @@ namespace SpaceGame.Settings
         public Color Color => color;
         public float MinScale => minScale;
         public float DistanceMax => distanceMax;
+        public bool DestroyMissile => destroyMissile;
     }
 }

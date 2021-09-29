@@ -36,9 +36,5 @@ TODO implement a "base"
     able to travel to whenever
     able to switch out ships
 
-TODO implement health
-even if not used at first
-to have it there would be good for future game modes
-
 TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"

@@ -1,4 +1,5 @@
 using SpaceGame.Settings;
+using SpaceGame.Ships;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
@@ -33,7 +34,8 @@ namespace SpaceGame.SpaceObjects
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
                     ItemDrop drop = settings.RandomItemDrop;
-                    itemObject.SetInfo(drop.ItemInfo, drop.RandomAmount);
+                    itemObject.Item = drop.ItemInfo;
+                    itemObject.Amount = drop.RandomAmount;
                 }
                 else
                 {
@@ -49,15 +51,22 @@ namespace SpaceGame.SpaceObjects
             }
         }
 
-        protected override void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            base.OnCollisionEnter2D(collision);
+            Transform transformShip = collision.transform;
 
-            // TODO Space Rock / Player collision - add damage, effect, other?
-            // ideas
-            //  hurt player in relation to velocity
-            //  create collision particle system effect
-            //  audio feedback
+            if (transformShip.tag == GameInfo.TagShip || transformShip.tag == GameInfo.TagPlayer)
+            {
+                // TODO mess with damage from collision
+                float force = collision.rigidbody.velocity.magnitude;
+
+                // TODO make 10f slider to mess with
+                if (force > 10f)
+                {
+                    Ship ship = transformShip.GetComponent<Ship>();
+                    ship.Damage(force);
+                }
+            }
         }
     }
 }

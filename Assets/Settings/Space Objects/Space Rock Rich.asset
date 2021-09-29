@@ -21,6 +21,7 @@ MonoBehaviour:
   minAngularVelocity: 10
   maxAngularVelocity: 90
   distanceMax: 200
+  missileDestroy: 1
   prefabSpaceObjects:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
@@ -39,8 +40,6 @@ MonoBehaviour:
     minAmount: 5
     maxVariance: 10
   distanceSpawn: 75
-  minDropAmount: 3
-  maxDropAmount: 5
   widthSpawn: 200
   scaleSpawnRate: 0.05
   timeBetweenChance: 2
