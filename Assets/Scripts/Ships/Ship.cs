@@ -35,13 +35,8 @@ namespace SpaceGame.Ships
 
         public void Rotate(float rotation)
         {
-            Vector2 force = transform.right * rotation;
-            force *= stats.MultiplierRotate * Time.deltaTime;
-
-            Vector2 position = transform.position;
-            position += (Vector2)transform.up * 0.5773f; // TODO test increasing height?
-
-            rigidbody.AddForceAtPosition(force, position);
+            float torque = -rotation * stats.MultiplierRotate * Time.deltaTime;
+            rigidbody.AddTorque(torque);
         }
 
         public void Fire()
