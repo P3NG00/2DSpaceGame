@@ -31,7 +31,8 @@ namespace SpaceGame
         #endregion
 
         [Header("Game", order = 0)]
-        // TODO add health
+        [SerializeField] private float health;
+        [SerializeField] private float maxHealth;
         [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
 
@@ -53,13 +54,13 @@ namespace SpaceGame
         [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private GameObject parentInvUI;
         [SerializeField] private Image slotHighlight;
+        [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private List<UIInventorySlot> inventory;
 
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
 
-        // TODO add input slow down
         private bool inputAddForce = false;
         private bool inputFire = false;
         private bool inputMenu = false;
@@ -119,6 +120,9 @@ namespace SpaceGame
                 $"y: {playerPosition.y}\n" +
                 $"magnitude: {player.Rigidbody.velocity.magnitude}\n" +
                 $"angular velocity: {player.Rigidbody.angularVelocity}";
+
+            // Health
+            imageHealthBar.fillAmount = health / maxHealth;
         }
 
         private void UpdateTextCredits()
@@ -156,7 +160,6 @@ namespace SpaceGame
             }
             else
             {
-                // TODO move highlight slot to center of slot properly
                 slotHighlight.rectTransform.SetParent(selectedSlot.transform);
 
                 RectTransform rectH = slotHighlight.rectTransform;
@@ -211,25 +214,6 @@ namespace SpaceGame
                     foundEmptySlot = true;
                     slotFirstEmpty = i;
                 }
-
-                // if (itemCurrent == item)
-                // {
-                //     foundSameItem = true;
-                //     break;
-                // }
-                // else
-                // {
-                //     ++slotSameItem;
-                // }
-
-                // if (itemCurrent == null)
-                // {
-                //     foundEmptySlot = true;
-                // }
-                // else if (!foundEmptySlot)
-                // {
-                //     ++slotFirstEmpty;
-                // }
             }
 
             UIInventorySlot slot;
@@ -422,8 +406,6 @@ namespace SpaceGame
 
                 // Remove Space Objects
                 objectsToRemove.ForEach(so => DestroySpaceObject(so));
-
-                // Reset
                 objectsToRemove.Clear();
             }
         }
@@ -461,6 +443,11 @@ namespace SpaceGame
             {
                 ToggleInventory();
             }
+        }
+
+        public void CallbackInputSlowDown(InputAction.CallbackContext ctx)
+        {
+            player.ApplyDrag(ctx.performed);
         }
         #endregion
     }
