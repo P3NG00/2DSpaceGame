@@ -384,7 +384,7 @@ namespace SpaceGame
                             break;
 
                         case SpaceObjectSpawnAreaType.AroundPlayer:
-                            spawnPos += RandomUnitVector * Random.Range(soss.DistanceSpawn, soss.DistanceMax);
+                            spawnPos += RandomUnitVector * soss.RandomSpawnDistance;
                             break;
                     }
 

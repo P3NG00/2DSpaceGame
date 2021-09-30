@@ -25,7 +25,6 @@ namespace SpaceGame.Settings
         public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
         public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
 
-        public float DistanceSpawn => distanceSpawn;
         public float ScaleSpawnRate => scaleSpawnRate;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
