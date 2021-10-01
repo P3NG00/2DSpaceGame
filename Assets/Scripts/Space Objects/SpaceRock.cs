@@ -7,6 +7,7 @@ namespace SpaceGame.SpaceObjects
     public sealed class SpaceRock : SpaceObject
     {
         private SpaceObjectSpawnableSettings settings;
+        private bool alive = true;
 
         private void Start()
         {
@@ -17,7 +18,7 @@ namespace SpaceGame.SpaceObjects
         {
             base.OnTriggerEnter2D(collider);
 
-            if (collider.tag == GameInfo.TagMissile)
+            if (this.alive & collider.tag == GameInfo.TagMissile)
             {
                 Missile missile = collider.GetComponent<Missile>();
                 this.Scale -= missile.Weapon.MultSpaceRock * this.settings.ScaleMissileDamage;
@@ -26,6 +27,8 @@ namespace SpaceGame.SpaceObjects
                 // If Space Rock too small...
                 if (this.Scale < this.settings.MinScale)
                 {
+                    this.alive = false;
+
                     // Destroy Space Rock
                     GameInfo.DestroySpaceObject(this);
 
