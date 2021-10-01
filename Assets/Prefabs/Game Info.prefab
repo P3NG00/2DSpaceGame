@@ -90,6 +90,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  doDebugStuff: 1
   colorPointing: {r: 1, g: 1, b: 1, a: 1}
   colorFacing: {r: 1, g: 0, b: 1, a: 1}
 --- !u!114 &3068602627571150779
