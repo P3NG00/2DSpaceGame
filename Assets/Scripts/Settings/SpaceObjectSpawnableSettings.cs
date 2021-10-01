@@ -11,8 +11,8 @@ namespace SpaceGame.Settings
         [SerializeField] private float scaleSpawnRate;
         [SerializeField, Min(0f)] private float timeBetweenChance;
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
-        [SerializeField, Min(0f)] private float scaleMissileImpactForce; // TODO replace with scale for how quickly incoming damage from missiles affects the step
-        [SerializeField, Min(0f)] private float scaleMissileImpactStep; // TODO remove
+        [SerializeField, Min(0f)] private float scaleMissileDamage;
+        [SerializeField, Min(0f)] private float scaleMissileImpactForce;
         [SerializeField] private SpaceObjectSpawnRateType spawnRateType;
         [SerializeField] private SpaceObjectSpawnAreaType spawnAreaType;
 
@@ -28,8 +28,8 @@ namespace SpaceGame.Settings
         public float ScaleSpawnRate => scaleSpawnRate;
         public float TimeBetweenChance => timeBetweenChance;
         public float ChanceSpawn => chanceSpawn;
+        public float ScaleMissileDamage => scaleMissileDamage;
         public float ScaleMissileImpactForce => scaleMissileImpactForce;
-        public float ScaleMissileImpactStep => scaleMissileImpactStep;
         public SpaceObjectSpawnRateType SpawnRateType => spawnRateType;
         public SpaceObjectSpawnAreaType SpawnAreaType => spawnAreaType;
     }

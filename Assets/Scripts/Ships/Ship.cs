@@ -76,7 +76,7 @@ namespace SpaceGame.Ships
 
                     // Instantiate
                     missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
-                    missile.Damage = weapon.Damage;
+                    missile.Weapon = weapon;
 
                     // Set velocity
                     missile.Rigidbody.velocity = missile.transform.up * weapon.ProjectileSpeed;

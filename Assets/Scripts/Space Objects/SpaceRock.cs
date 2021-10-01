@@ -10,7 +10,7 @@ namespace SpaceGame.SpaceObjects
 
         private void Start()
         {
-            this.settings = (SpaceObjectSpawnableSettings)base.Settings;
+            settings = (SpaceObjectSpawnableSettings)base.Settings;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collider)
@@ -19,7 +19,8 @@ namespace SpaceGame.SpaceObjects
 
             if (collider.tag == GameInfo.TagMissile)
             {
-                Scale -= settings.ScaleMissileImpactStep;
+                Missile missile = collider.GetComponent<Missile>();
+                Scale -= missile.Weapon.MultSpaceRock * settings.ScaleMissileDamage;
                 int reward = 1;
 
                 // If Space Rock too small...

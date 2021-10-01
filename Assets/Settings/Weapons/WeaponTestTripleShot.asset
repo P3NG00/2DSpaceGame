@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ca74c2bdd84b94aa4eebdb7ff57cf3, type: 3}
   m_Name: WeaponTestTripleShot
   m_EditorClassIdentifier: 
+  multShip: 15
+  multSpaceRock: 3
   projectileSpeed: 125
   lifetimeMax: 1
   timeBetweenShots: 0.38
   amountOfShots: 3
-  angleBetweenShots: 20
+  angleBetweenShots: 15

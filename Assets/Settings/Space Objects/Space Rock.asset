@@ -48,7 +48,7 @@ MonoBehaviour:
   scaleSpawnRate: 0.075
   timeBetweenChance: 0.55
   chanceSpawn: 0.4
+  scaleMissileDamage: 0.075
   scaleMissileImpactForce: 1
-  scaleMissileImpactStep: 0.5
   spawnRateType: 1
   spawnAreaType: 2

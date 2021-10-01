@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using SpaceGame.Settings;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
@@ -5,7 +7,7 @@ namespace SpaceGame.SpaceObjects
     public class Missile : MonoBehaviour
     {
         [Header("Info", order = 0)]
-        public float Damage;
+        public Weapon Weapon;
 
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;

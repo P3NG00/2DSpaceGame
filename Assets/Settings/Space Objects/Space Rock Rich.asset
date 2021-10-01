@@ -29,22 +29,22 @@ MonoBehaviour:
   itemDrops:
   - item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
     weight: 5
-    minAmount: 3
+    minAmount: 6
     maxVariance: 4
   - item: {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
     weight: 4
-    minAmount: 3
-    maxVariance: 4
+    minAmount: 4
+    maxVariance: 6
   - item: {fileID: 11400000, guid: 3e45daed6cdfc524daaa559ac74a1795, type: 2}
     weight: 3
-    minAmount: 5
-    maxVariance: 10
+    minAmount: 6
+    maxVariance: 8
   distanceSpawn: 75
   widthSpawn: 200
   scaleSpawnRate: 0.05
   timeBetweenChance: 2
   chanceSpawn: 0.3
+  scaleMissileDamage: 0.1
   scaleMissileImpactForce: 0.75
-  scaleMissileImpactStep: 0.8
   spawnRateType: 1
   spawnAreaType: 2
