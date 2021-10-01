@@ -87,11 +87,7 @@ namespace SpaceGame
         // Unity Start method
         private void Start()
         {
-            foreach (SpaceObjectSpawnableSettings sos in settings.SpaceObjectsToSpawn)
-            {
-                StartCoroutine(RoutineSpawnSpaceObject(sos));
-            }
-
+            System.Array.ForEach(settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
             UpdateTextCredits();
             UpdateInventoryUI();
