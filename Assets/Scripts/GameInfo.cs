@@ -43,7 +43,7 @@ namespace SpaceGame
         [SerializeField] private string tagMissile;
 
         [Header("Prefabs", order = 50)]
-        [SerializeField] private Rigidbody2D prefabMissile;
+        [SerializeField] private Missile prefabMissile;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
 
         [Header("References", order = 99)]
@@ -80,7 +80,7 @@ namespace SpaceGame
         public static string TagPlayer => instance.tagPlayer;
         public static string TagMissile => instance.tagMissile;
 
-        public static Rigidbody2D PrefabMissile => instance.prefabMissile;
+        public static Missile PrefabMissile => instance.prefabMissile;
 
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
@@ -426,7 +426,7 @@ namespace SpaceGame
             {
                 player.Fire();
 
-                yield return new WaitForSeconds(player.Stats.Weapon.TimeBetweenShots);
+                yield return new WaitForSeconds(player.Weapon.TimeBetweenShots);
             }
 
             routineFiring = null;

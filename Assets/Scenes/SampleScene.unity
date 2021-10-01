@@ -4882,6 +4882,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 4246cf0b8cc40924fb460d0a0fff14b9, type: 2}
+    - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: textCredits
       value: 
       objectReference: {fileID: 930916115}

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using SpaceGame.Settings;
+using SpaceGame.SpaceObjects;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -9,6 +11,7 @@ namespace SpaceGame.Ships
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private ShipStats stats;
+        [SerializeField] private Weapon weapon;
 
         [Header("References (as Ship)", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -19,6 +22,7 @@ namespace SpaceGame.Ships
         [SerializeField] private bool FORCE_VALIDATE;
 
         public ShipStats Stats => stats;
+        public Weapon Weapon => weapon;
         public Rigidbody2D Rigidbody => rigidbody;
 
         public float Health => health;
@@ -61,10 +65,28 @@ namespace SpaceGame.Ships
                 Vector3 posMissile = transform.position;
                 posMissile += transform.up * 0.1f;
 
-                Rigidbody2D missile = Instantiate(GameInfo.PrefabMissile, posMissile, transform.rotation);
-                missile.velocity = transform.up * stats.Weapon.ProjectileSpeed;
+                Missile missile;
+                float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
-                Destroy(missile.gameObject, stats.Weapon.LifetimeMax);
+                for (int i = 0; i < weapon.AmountOfShots; ++i)
+                {
+                    // Projectile rotation
+                    Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
+                    Quaternion rotation = transform.rotation * rotOffset;
+
+                    // Instantiate
+                    missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
+                    missile.Damage = weapon.Damage;
+
+                    // Set velocity
+                    missile.Rigidbody.velocity = missile.transform.up * weapon.ProjectileSpeed;
+
+                    // Destroy after time
+                    Destroy(missile.gameObject, weapon.LifetimeMax);
+
+                    // Set for next shot
+                    angle -= weapon.AngleBetweenShots;
+                }
             }
         }
 
