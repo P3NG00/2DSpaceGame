@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ca74c2bdd84b94aa4eebdb7ff57cf3, type: 3}
-  m_Name: WeaponDefault
+  m_Name: Weapon Lazer Shot
   m_EditorClassIdentifier: 
+  itemName: Lazer Shot
+  sprite: {fileID: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  maxStackSize: 1
   multShip: 2
   multSpaceRock: 10
   projectileSpeed: 125

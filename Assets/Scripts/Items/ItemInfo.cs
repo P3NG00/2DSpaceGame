@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Item", fileName = "Item Info")]
+    [CreateAssetMenu(menuName = "2D Space Game/Item/Item", fileName = "Item Info")]
     public class ItemInfo : ScriptableObject
     {
         [Header("Info", order = 0)]

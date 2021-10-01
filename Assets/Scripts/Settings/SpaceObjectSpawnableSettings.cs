@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Space Object Spawnable", fileName = "Space Object Spawnable Settings")]
+    [CreateAssetMenu(menuName = "2D Space Game/Space Object/Spawnable", fileName = "Space Object Spawnable Settings")]
     public sealed class SpaceObjectSpawnableSettings : SpaceObjectSettings
     {
         [Header("Info [SpaceObjectSpawnableSettings]", order = 30)]

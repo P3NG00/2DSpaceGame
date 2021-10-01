@@ -38,3 +38,8 @@ TODO implement a "base"
 
 TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"
+
+
+TODO add sprites for weapons
+
+TODO add crafting for items
