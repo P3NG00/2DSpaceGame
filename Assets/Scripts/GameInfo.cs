@@ -17,14 +17,14 @@ namespace SpaceGame
 
         private void Awake()
         {
-            if (instance == null)
+            if (GameInfo.instance == null)
             {
-                instance = this;
+                GameInfo.instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else
             {
-                Destroy(gameObject);
+                Destroy(this.gameObject);
                 throw new System.Exception("GameInfo attempted second instance.");
             }
         }
@@ -74,16 +74,16 @@ namespace SpaceGame
         private UIInventorySlot selectedSlot;
 
         // Public Getters
-        public static bool DO_DEBUG_STUFF => instance.doDebugStuff;
-        public static GameModeSettings GMSettings => instance.settings;
-        public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
-        public static Sprite[] Sprites => instance.sprites;
-        public static Missile PrefabMissile => instance.prefabMissile;
+        public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
+        public static GameModeSettings GMSettings => GameInfo.instance.settings;
+        public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
+        public static Sprite[] Sprites => GameInfo.instance.sprites;
+        public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
 
         // Tags
-        public static string TagShip => instance.tagShip;
-        public static string TagPlayer => instance.tagPlayer;
-        public static string TagMissile => instance.tagMissile;
+        public static string TagShip => GameInfo.instance.tagShip;
+        public static string TagPlayer => GameInfo.instance.tagPlayer;
+        public static string TagMissile => GameInfo.instance.tagMissile;
 
         // Util
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
@@ -91,110 +91,109 @@ namespace SpaceGame
         // Unity Start method
         private void Start()
         {
-            System.Array.ForEach(settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
+            System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
             UpdateTextCredits();
             UpdateInventoryUI();
             ToggleInventory();
-            Application.targetFrameRate = framerate;
+            Application.targetFrameRate = this.framerate;
         }
 
         // Unity Update method
         private void FixedUpdate()
         {
-            if (inputSlowDown)
+            // Move Player
+            if (this.inputSlowDown)
             {
-                player.ApplyDrag(true);
+                this.player.ApplyDrag(true);
             }
             else
             {
-                player.ApplyDrag(false);
+                this.player.ApplyDrag(false);
 
-                if (inputAddForce)
+                if (this.inputAddForce)
                 {
-                    player.AddForce();
+                    this.player.AddForce();
                 }
             }
 
-            Vector2 playerPosition = player.transform.position;
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(inputMousePosition);
+            // Variables to make player look at mouse
+            Vector2 playerPosition = this.player.transform.position;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
 
             Vector2 mouseOffset = mousePosition - playerPosition;
 
             if (DO_DEBUG_STUFF)
             {
                 // Draw rays to display in editor
-                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), colorFacing);
-                Debug.DrawLine(playerPosition, mousePosition, colorPointing);
+                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)this.player.transform.up * mouseOffset.magnitude), this.colorFacing);
+                Debug.DrawLine(playerPosition, mousePosition, this.colorPointing);
             }
 
-            float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
-            player.Rotate(direction);
+            // Rotate Player
+            float direction = Vector2.Dot(mouseOffset.normalized, this.player.transform.right);
+            this.player.Rotate(direction);
 
-            player.Animator.SetBool("Moving", inputAddForce);
+            // Update Player Animator
+            this.player.Animator.SetBool("Moving", this.inputAddForce);
 
-            textInfoPanel.text = $"x: {playerPosition.x}\n" +
+            // Update Info Panel Text
+            Rigidbody2D prb = this.player.Rigidbody;
+            this.textInfoPanel.text = $"x: {playerPosition.x}\n" +
                 $"y: {playerPosition.y}\n" +
-                $"magnitude: {player.Rigidbody.velocity.magnitude}\n" +
-                $"angular velocity: {player.Rigidbody.angularVelocity}";
+                $"magnitude: {prb.velocity.magnitude}\n" +
+                $"angular velocity: {prb.angularVelocity}";
 
             // Health
-            imageHealthBar.fillAmount = player.Health / player.MaxHealth;
+            this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
         }
 
         private void UpdateTextCredits()
         {
-            textCredits.text = credits.ToString();
+            this.textCredits.text = this.credits.ToString();
         }
 
         private void UpdateInventoryUI()
         {
-            var inv = instance.inventory;
-            UIInventorySlot slotCurrent;
+            List<UIInventorySlot> inv = GameInfo.instance.inventory;
+            UIInventorySlot slot;
             ItemInfo itemCurrent;
 
             for (int i = 0; i < inv.Count; i++)
             {
-                slotCurrent = inv[i];
-                itemCurrent = slotCurrent.Item;
+                slot = inv[i];
+                itemCurrent = slot.Item;
 
                 if (itemCurrent == null)
                 {
-                    slotCurrent.SetVisible(false);
+                    slot.SetVisible(false);
                 }
                 else
                 {
-                    slotCurrent.Image.color = itemCurrent.Color;
-                    slotCurrent.Image.sprite = itemCurrent.Sprite;
-                    slotCurrent.SetVisible(true);
-                    slotCurrent.UpdateText();
+                    slot.Image.color = itemCurrent.Color;
+                    slot.Image.sprite = itemCurrent.Sprite;
+                    slot.SetVisible(true);
+                    slot.UpdateText();
                 }
             }
 
             if (selectedSlot == null)
             {
-                slotHighlight.enabled = false;
+                this.slotHighlight.enabled = false;
             }
             else
             {
-                slotHighlight.rectTransform.SetParent(selectedSlot.transform);
+                this.slotHighlight.rectTransform.SetParent(this.selectedSlot.transform);
 
-                RectTransform rectH = slotHighlight.rectTransform;
-                RectTransform rectS = selectedSlot.RectTransform;
+                RectTransform rectH = this.slotHighlight.rectTransform;
+                RectTransform rectS = this.selectedSlot.RectTransform;
 
-                slotHighlight.transform.localPosition = new Vector3(0f, 0f, -5f);
-
-                slotHighlight.enabled = true;
+                this.slotHighlight.transform.localPosition = new Vector3(0f, 0f, -5f);
+                this.slotHighlight.enabled = true;
             }
         }
 
-        public static void ValidateMinMax(float min, ref float max)
-        {
-            if (min > max)
-            {
-                max = min;
-            }
-        }
+        public static void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
 
         public static void GiveCredits(int amount, Vector2 position)
         {
@@ -219,7 +218,7 @@ namespace SpaceGame
         public static int GiveItem(ItemInfo item, int amount)
         {
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
-            List<UIInventorySlot> inv = instance.inventory;
+            List<UIInventorySlot> inv = GameInfo.instance.inventory;
             UIInventorySlot slot;
             ItemInfo itemCurrent;
 
@@ -248,13 +247,13 @@ namespace SpaceGame
                 amount = slot.AddAmount(amount);
             }
 
-            instance.UpdateInventoryUI();
+            GameInfo.instance.UpdateInventoryUI();
             return amount;
         }
 
         public static void ToggleInventory()
         {
-            GameObject ui = instance.parentInvUI;
+            GameObject ui = GameInfo.instance.parentInvUI;
             ui.SetActive(!ui.activeSelf);
         }
 
@@ -298,16 +297,15 @@ namespace SpaceGame
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectSettings sos, Vector2 pos)
         {
+            GameInfo gi = GameInfo.instance;
             SpaceObject r = null;
-
-            // Setup variable for checks
             bool pass = true;
 
             // If single instance type spawning...
             if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
-                foreach (SpaceObject so in instance.SpaceObjects)
+                foreach (SpaceObject so in gi.SpaceObjects)
                 {
                     if (so.tag == sos.Tag)
                     {
@@ -323,7 +321,7 @@ namespace SpaceGame
             {
                 // Instantiate space object
                 Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, pos, rot, instance.parentSpaceObjects);
+                SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, pos, rot, gi.parentSpaceObjects);
                 spaceObject.Settings = sos;
                 spaceObject.Scale = sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
@@ -331,7 +329,7 @@ namespace SpaceGame
                 spaceObject.Rigidbody.velocity = RandomUnitVector * sos.RandomVelocity;
                 spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
 
-                instance.SpaceObjects.Add(spaceObject);
+                gi.SpaceObjects.Add(spaceObject);
                 r = spaceObject;
             }
 
@@ -340,7 +338,7 @@ namespace SpaceGame
 
         public static void DestroySpaceObject(SpaceObject spaceObject)
         {
-            instance.SpaceObjects.Remove(spaceObject);
+            GameInfo.instance.SpaceObjects.Remove(spaceObject);
             Destroy(spaceObject.gameObject);
         }
 
@@ -356,7 +354,7 @@ namespace SpaceGame
                 // If scale wait time...
                 if (soss.SpawnRateType == SpaceObjectSpawnRateType.ScaleWithMagnitude)
                 {
-                    magnitude = player.Rigidbody.velocity.magnitude * soss.ScaleSpawnRate;
+                    magnitude = this.player.Rigidbody.velocity.magnitude * soss.ScaleSpawnRate;
 
                     if (magnitude > 1f)
                     {
@@ -371,14 +369,14 @@ namespace SpaceGame
                 if (Random.value <= soss.ChanceSpawn)
                 {
                     // Spawn Space Object
-                    Transform player = instance.player.transform;
-                    Vector2 spawnOffset, spawnPos = player.position;
+                    Transform transformPlayer = this.player.transform;
+                    Vector2 spawnOffset, spawnPos = transformPlayer.position;
 
                     switch (soss.SpawnAreaType)
                     {
                         case SpaceObjectSpawnAreaType.FrontOfPlayer:
-                            spawnOffset = player.transform.up * soss.RandomSpawnDistance;
-                            spawnOffset += (Vector2)player.transform.right * soss.RandomSpawnWidth;
+                            spawnOffset = transformPlayer.up * soss.RandomSpawnDistance;
+                            spawnOffset += (Vector2)transformPlayer.right * soss.RandomSpawnWidth;
                             spawnPos += spawnOffset;
                             break;
 
@@ -400,13 +398,13 @@ namespace SpaceGame
             while (true)
             {
                 // Wait...
-                yield return new WaitForSeconds(settings.TimeBetweenCleanup);
+                yield return new WaitForSeconds(this.settings.TimeBetweenCleanup);
 
                 // Check all Space Objects...
-                SpaceObjects.ForEach(so =>
+                this.SpaceObjects.ForEach(so =>
                 {
                     // If Space Object too far away...
-                    if (Vector2.Distance(player.transform.position, so.transform.position) > so.Settings.DistanceMax)
+                    if (Vector2.Distance(this.player.transform.position, so.transform.position) > so.Settings.DistanceMax)
                     {
                         // Add to disposal list
                         objectsToRemove.Add(so);
@@ -421,28 +419,28 @@ namespace SpaceGame
 
         private IEnumerator RoutineFire()
         {
-            while (inputFire)
+            while (this.inputFire)
             {
-                player.Fire();
-                yield return new WaitForSeconds(player.Weapon.TimeBetweenShots);
+                this.player.Fire();
+                yield return new WaitForSeconds(this.player.Weapon.TimeBetweenShots);
             }
 
-            routineFiring = null;
+            this.routineFiring = null;
         }
 
         #region Input Callbacks
-        public void CallbackInputAddForce(InputAction.CallbackContext ctx) => inputAddForce = ctx.performed;
-        public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => inputSlowDown = ctx.performed;
-        public void CallbackMousePosition(InputAction.CallbackContext ctx) => inputMousePosition = ctx.ReadValue<Vector2>();
-        public void CallbackInputMenu(InputAction.CallbackContext ctx) => inputMenu = ctx.performed;
+        public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
+        public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
+        public void CallbackMousePosition(InputAction.CallbackContext ctx) => this.inputMousePosition = ctx.ReadValue<Vector2>();
+        public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
         public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
-            inputFire = ctx.performed;
+            this.inputFire = ctx.performed;
 
-            if (inputFire & instance.routineFiring == null)
+            if (this.inputFire & this.routineFiring == null)
             {
-                instance.routineFiring = StartCoroutine(RoutineFire());
+                this.routineFiring = StartCoroutine(RoutineFire());
             }
         }
         #endregion

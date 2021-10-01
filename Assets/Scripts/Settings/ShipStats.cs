@@ -12,10 +12,10 @@ namespace SpaceGame.Settings
         [SerializeField, Min(0f)] private float multiplierRotate;
         [SerializeField] private float drag;
 
-        public Color ColorPrimary => colorPrimary;
-        public Color ColorSecondary => colorSecondary;
-        public float MultiplierForce => multiplierForce;
-        public float MultiplierRotate => multiplierRotate;
-        public float Drag => drag;
+        public Color ColorPrimary => this.colorPrimary;
+        public Color ColorSecondary => this.colorSecondary;
+        public float MultiplierForce => this.multiplierForce;
+        public float MultiplierRotate => this.multiplierRotate;
+        public float Drag => this.drag;
     }
 }

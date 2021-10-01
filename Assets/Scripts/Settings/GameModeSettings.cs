@@ -10,6 +10,6 @@ namespace SpaceGame.Settings
         [SerializeField] private SpaceObjectSpawnableSettings[] spaceObjects;
 
         public float TimeBetweenCleanup => timeBetweenCleanup;
-        public SpaceObjectSpawnableSettings[] SpaceObjectsToSpawn => spaceObjects;
+        public SpaceObjectSpawnableSettings[] SpaceObjectsToSpawn => this.spaceObjects;
     }
 }

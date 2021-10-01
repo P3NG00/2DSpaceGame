@@ -15,11 +15,11 @@ namespace SpaceGame.SpaceObjects
             set
             {
                 this.item = value;
-                SpriteRenderer.sprite = item.Sprite;
-                SpriteRenderer.color = item.Color;
+                this.SpriteRenderer.sprite = this.item.Sprite;
+                this.SpriteRenderer.color = this.item.Color;
             }
         }
 
-        protected override Color GetColor() => Item.Color;
+        protected override Color GetColor() => this.Item.Color;
     }
 }

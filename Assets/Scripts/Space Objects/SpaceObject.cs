@@ -12,25 +12,25 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
-        public SpriteRenderer SpriteRenderer => spriteRenderer;
-        public Rigidbody2D Rigidbody => rigidbody;
+        public SpriteRenderer SpriteRenderer => this.spriteRenderer;
+        public Rigidbody2D Rigidbody => this.rigidbody;
 
         public float Scale
         {
-            get => transform.localScale.x;
-            set => transform.localScale = Vector2.one * value;
+            get => this.transform.localScale.x;
+            set => this.transform.localScale = Vector2.one * value;
         }
 
         private void Start()
         {
-            spriteRenderer.color = GetColor();
+            this.SpriteRenderer.color = this.GetColor();
         }
 
-        protected virtual Color GetColor() => Settings.Color;
+        protected virtual Color GetColor() => this.Settings.Color;
 
         protected virtual void OnTriggerEnter2D(Collider2D collider)
         {
-            if (Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
+            if (this.Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
             {
                 Destroy(collider.gameObject);
             }

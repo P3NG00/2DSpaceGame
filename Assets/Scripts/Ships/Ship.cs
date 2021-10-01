@@ -21,40 +21,40 @@ namespace SpaceGame.Ships
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
-        public ShipStats Stats => stats;
-        public Weapon Weapon => weapon;
-        public Rigidbody2D Rigidbody => rigidbody;
+        public ShipStats Stats => this.stats;
+        public Weapon Weapon => this.weapon;
+        public Rigidbody2D Rigidbody => this.rigidbody;
 
-        public float Health => health;
-        public float MaxHealth => maxHealth;
+        public float Health => this.health;
+        public float MaxHealth => this.maxHealth;
 
-        public bool IsAlive => health > 0f;
+        public bool IsAlive => this.health > 0f;
 
         private void OnValidate()
         {
-            GameInfo.ValidateMinMax(health, ref maxHealth);
+            GameInfo.ValidateMinMax(this.health, ref this.maxHealth);
 
-            srPrimary.color = stats.ColorPrimary;
-            srSecondary.color = stats.ColorSecondary;
+            this.srPrimary.color = this.stats.ColorPrimary;
+            this.srSecondary.color = this.stats.ColorSecondary;
 
-            FORCE_VALIDATE = false;
+            this.FORCE_VALIDATE = false;
         }
 
         public void AddForce()
         {
-            if (IsAlive)
+            if (this.IsAlive)
             {
-                Vector2 velocity = transform.up * stats.MultiplierForce;
-                rigidbody.AddForce(velocity);
+                Vector2 velocity = this.transform.up * this.stats.MultiplierForce;
+                this.rigidbody.AddForce(velocity);
             }
         }
 
         public void Rotate(float rotation)
         {
-            if (IsAlive)
+            if (this.IsAlive)
             {
-                float torque = -rotation * stats.MultiplierRotate * Time.deltaTime;
-                rigidbody.AddTorque(torque);
+                float torque = -rotation * this.stats.MultiplierRotate * Time.deltaTime;
+                this.rigidbody.AddTorque(torque);
             }
         }
 
@@ -62,56 +62,58 @@ namespace SpaceGame.Ships
         {
             if (IsAlive)
             {
-                Vector3 posMissile = transform.position;
-                posMissile += transform.up * 0.1f;
+                Vector3 posMissile = this.transform.position;
+                posMissile += this.transform.up * 0.1f;
+                float angle = (this.weapon.AngleBetweenShots / 2f) * (this.weapon.AmountOfShots - 1);
 
-                for (int i = 0; i < weapon.AmountOfShots; ++i)
+                for (int i = 0; i < this.weapon.AmountOfShots; ++i)
                 {
-                    float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
-
                     // Projectile rotation
                     Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
-                    Quaternion rotation = transform.rotation * rotOffset;
+                    Quaternion rotation = this.transform.rotation * rotOffset;
 
                     // Instantiate
                     Missile missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
-                    missile.Weapon = weapon;
+                    missile.Weapon = this.weapon;
 
                     // Set velocity
-                    missile.Rigidbody.velocity = missile.transform.up * weapon.ProjectileSpeed;
+                    missile.Rigidbody.velocity = missile.transform.up * this.weapon.ProjectileSpeed;
 
                     // Destroy after time
-                    Destroy(missile.gameObject, weapon.LifetimeMax);
+                    Destroy(missile.gameObject, this.weapon.LifetimeMax);
+
+                    // Set for next missile
+                    angle -= this.weapon.AngleBetweenShots;
                 }
             }
         }
 
         public void ApplyDrag(bool drag)
         {
-            if (IsAlive)
+            if (this.IsAlive)
             {
-                rigidbody.drag = drag ? Stats.Drag : 0;
+                this.rigidbody.drag = drag ? this.Stats.Drag : 0f;
             }
         }
 
         public void Heal(float amount)
         {
-            health += amount;
+            this.health += amount;
 
-            if (health > maxHealth)
+            if (this.health > this.maxHealth)
             {
-                health = maxHealth;
+                this.health = this.maxHealth;
             }
         }
 
         public void Damage(float damage)
         {
-            health -= damage;
+            this.health -= damage;
 
-            if (health <= 0f)
+            if (this.health <= 0f)
             {
-                health = 0f;
-                OnDeath();
+                this.health = 0f;
+                this.OnDeath();
             }
         }
 

@@ -7,7 +7,7 @@ namespace SpaceGame.Ships
         [Header("References (as ShipPlayer)", order = 99)]
         [SerializeField] private Animator animator;
 
-        public Animator Animator => animator;
+        public Animator Animator => this.animator;
 
         protected override void OnDeath()
         {

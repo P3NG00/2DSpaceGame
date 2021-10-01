@@ -14,12 +14,12 @@ namespace SpaceGame.Settings
         [SerializeField, Min(1)] private int amountOfShots = 1;
         [SerializeField, Min(0f)] private float angleBetweenShots;
 
-        public float MultShip => multShip;
-        public float MultSpaceRock => multSpaceRock;
-        public float ProjectileSpeed => projectileSpeed;
-        public float LifetimeMax => lifetimeMax;
-        public float TimeBetweenShots => timeBetweenShots;
-        public int AmountOfShots => amountOfShots;
-        public float AngleBetweenShots => angleBetweenShots;
+        public float MultShip => this.multShip;
+        public float MultSpaceRock => this.multSpaceRock;
+        public float ProjectileSpeed => this.projectileSpeed;
+        public float LifetimeMax => this.lifetimeMax;
+        public float TimeBetweenShots => this.timeBetweenShots;
+        public int AmountOfShots => this.amountOfShots;
+        public float AngleBetweenShots => this.angleBetweenShots;
     }
 }

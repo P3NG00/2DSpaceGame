@@ -10,7 +10,7 @@ namespace SpaceGame.SpaceObjects
 
         private void Start()
         {
-            settings = (SpaceObjectSpawnableSettings)base.Settings;
+            this.settings = (SpaceObjectSpawnableSettings)base.Settings;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collider)
@@ -20,11 +20,11 @@ namespace SpaceGame.SpaceObjects
             if (collider.tag == GameInfo.TagMissile)
             {
                 Missile missile = collider.GetComponent<Missile>();
-                Scale -= missile.Weapon.MultSpaceRock * settings.ScaleMissileDamage;
+                this.Scale -= missile.Weapon.MultSpaceRock * this.settings.ScaleMissileDamage;
                 int reward = 1;
 
                 // If Space Rock too small...
-                if (Scale < settings.MinScale)
+                if (this.Scale < this.settings.MinScale)
                 {
                     // Destroy Space Rock
                     GameInfo.DestroySpaceObject(this);
@@ -33,21 +33,19 @@ namespace SpaceGame.SpaceObjects
                     ++reward;
 
                     // Instantiate Item Object
-                    ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);
-                    ItemDrop drop = settings.RandomItemDrop;
+                    ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
+                    ItemDrop drop = this.settings.RandomItemDrop;
                     itemObject.Item = drop.ItemInfo;
                     itemObject.Amount = drop.RandomAmount;
                 }
                 else
                 {
-                    Rigidbody2D otherRigidbody = collider.gameObject.GetComponent<Rigidbody2D>();
-                    Vector2 force = otherRigidbody.velocity * settings.ScaleMissileImpactForce;
-                    Vector2 position = Rigidbody.position;
-                    Rigidbody.AddForceAtPosition(force, position);
+                    Vector2 force = collider.attachedRigidbody.velocity * this.settings.ScaleMissileImpactForce;
+                    Rigidbody.AddForceAtPosition(force, this.Rigidbody.position);
                 }
 
                 // Give player credit(s)
-                Vector2 pos = transform.position;
+                Vector2 pos = this.transform.position;
                 GameInfo.GiveCredits(reward, pos);
             }
         }

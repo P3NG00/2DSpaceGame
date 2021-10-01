@@ -19,19 +19,19 @@ namespace SpaceGame.Settings
         protected override void OnValidate()
         {
             base.OnValidate();
-            GameInfo.ValidateMinMax(distanceSpawn, ref distanceMax);
+            GameInfo.ValidateMinMax(this.distanceSpawn, ref this.distanceMax);
         }
 
-        public float RandomSpawnDistance => Random.Range(distanceSpawn, distanceMax);
-        public float RandomSpawnWidth => Random.Range(-widthSpawn, widthSpawn);
+        public float RandomSpawnDistance => Random.Range(this.distanceSpawn, this.distanceMax);
+        public float RandomSpawnWidth => Random.Range(-this.widthSpawn, this.widthSpawn);
 
-        public float ScaleSpawnRate => scaleSpawnRate;
-        public float TimeBetweenChance => timeBetweenChance;
-        public float ChanceSpawn => chanceSpawn;
-        public float ScaleMissileDamage => scaleMissileDamage;
-        public float ScaleMissileImpactForce => scaleMissileImpactForce;
-        public SpaceObjectSpawnRateType SpawnRateType => spawnRateType;
-        public SpaceObjectSpawnAreaType SpawnAreaType => spawnAreaType;
+        public float ScaleSpawnRate => this.scaleSpawnRate;
+        public float TimeBetweenChance => this.timeBetweenChance;
+        public float ChanceSpawn => this.chanceSpawn;
+        public float ScaleMissileDamage => this.scaleMissileDamage;
+        public float ScaleMissileImpactForce => this.scaleMissileImpactForce;
+        public SpaceObjectSpawnRateType SpawnRateType => this.spawnRateType;
+        public SpaceObjectSpawnAreaType SpawnAreaType => this.spawnAreaType;
     }
 
     public enum SpaceObjectSpawnRateType

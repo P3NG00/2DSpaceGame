@@ -12,6 +12,6 @@ namespace SpaceGame.SpaceObjects
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
 
-        public Rigidbody2D Rigidbody => rigidbody;
+        public Rigidbody2D Rigidbody => this.rigidbody;
     }
 }

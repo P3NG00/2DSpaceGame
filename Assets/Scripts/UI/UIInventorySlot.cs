@@ -16,33 +16,33 @@ public class UIInventorySlot : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private RectTransform rectTransform;
 
-    public Image Image => image;
-    public Button Button => button;
-    public RectTransform RectTransform => rectTransform;
+    public Image Image => this.image;
+    public Button Button => this.button;
+    public RectTransform RectTransform => this.rectTransform;
 
     public void UpdateText()
     {
-        textAmount.text = Amount.ToString();
+        this.textAmount.text = this.Amount.ToString();
     }
 
     public void SetVisible(bool visible)
     {
-        image.enabled = visible;
-        textAmount.enabled = visible;
+        this.image.enabled = visible;
+        this.textAmount.enabled = visible;
     }
 
     public int AddAmount(int amount)
     {
-        Amount += amount;
-        int d = 0;
+        this.Amount += amount;
+        int difference = 0;
 
-        if (Amount > Item.MaxStackSize)
+        if (this.Amount > this.Item.MaxStackSize)
         {
-            d = Amount - Item.MaxStackSize;
-            Amount = Item.MaxStackSize;
+            difference = this.Amount - this.Item.MaxStackSize;
+            this.Amount = this.Item.MaxStackSize;
         }
 
-        return d;
+        return difference;
     }
 
     public void SelectSlot()

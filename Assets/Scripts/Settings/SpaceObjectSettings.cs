@@ -24,23 +24,23 @@ namespace SpaceGame.Settings
 
         protected virtual void OnValidate()
         {
-            GameInfo.ValidateMinMax(minScale, ref maxScale);
-            GameInfo.ValidateMinMax(minVelocity, ref maxVelocity);
-            GameInfo.ValidateMinMax(minAngularVelocity, ref maxAngularVelocity);
+            GameInfo.ValidateMinMax(this.minScale, ref this.maxScale);
+            GameInfo.ValidateMinMax(this.minVelocity, ref this.maxVelocity);
+            GameInfo.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
         }
 
-        public float RandomScale => Random.Range(minScale, maxScale);
-        public float RandomVelocity => Random.Range(minVelocity, maxVelocity);
-        public float RandomAngularVelocity => Random.Range(minAngularVelocity, maxAngularVelocity);
-        public SpaceObject RandomSpaceObject => prefabSpaceObjects[Random.Range(0, prefabSpaceObjects.Length)];
+        public float RandomScale => Random.Range(this.minScale, this.maxScale);
+        public float RandomVelocity => Random.Range(this.minVelocity, this.maxVelocity);
+        public float RandomAngularVelocity => Random.Range(this.minAngularVelocity, this.maxAngularVelocity);
+        public SpaceObject RandomSpaceObject => this.prefabSpaceObjects[Random.Range(0, this.prefabSpaceObjects.Length)];
 
         public ItemDrop RandomItemDrop
         {
             get
             {
-                int weight = Random.Range(0, TotalWeight);
+                int weight = Random.Range(0, this.TotalWeight);
 
-                foreach (ItemDrop itemDrop in itemDrops)
+                foreach (ItemDrop itemDrop in this.itemDrops)
                 {
                     weight -= itemDrop.Weight;
 
@@ -60,15 +60,15 @@ namespace SpaceGame.Settings
             get
             {
                 int w = 0;
-                System.Array.ForEach(itemDrops, drop => w += drop.Weight);
+                System.Array.ForEach(this.itemDrops, drop => w += drop.Weight);
                 return w;
             }
         }
 
-        public string Tag => tagName;
-        public Color Color => color;
-        public float MinScale => minScale;
-        public float DistanceMax => distanceMax;
-        public bool DestroyMissile => destroyMissile;
+        public string Tag => this.tagName;
+        public Color Color => this.color;
+        public float MinScale => this.minScale;
+        public float DistanceMax => this.distanceMax;
+        public bool DestroyMissile => this.destroyMissile;
     }
 }
