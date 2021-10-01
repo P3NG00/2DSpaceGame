@@ -59,11 +59,12 @@ namespace SpaceGame
         [SerializeField] private List<UIInventorySlot> inventory;
 
         [Header("DEBUG", order = 100)]
+        [SerializeField] private bool doDebugStuff;
         [SerializeField] private Color colorPointing;
         [SerializeField] private Color colorFacing;
 
+        // Cache
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
-
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
         private bool inputFire = false;
@@ -72,16 +73,19 @@ namespace SpaceGame
         private Coroutine routineFiring = null;
         private UIInventorySlot selectedSlot;
 
+        // Public Getters
+        public static bool DO_DEBUG_STUFF => instance.doDebugStuff;
         public static GameModeSettings GMSettings => instance.settings;
         public static SpaceObjectSettings SettingsItemObject => instance.settingsItemObject;
         public static Sprite[] Sprites => instance.sprites;
+        public static Missile PrefabMissile => instance.prefabMissile;
 
+        // Tags
         public static string TagShip => instance.tagShip;
         public static string TagPlayer => instance.tagPlayer;
         public static string TagMissile => instance.tagMissile;
 
-        public static Missile PrefabMissile => instance.prefabMissile;
-
+        // Util
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
         // Unity Start method
@@ -117,9 +121,12 @@ namespace SpaceGame
 
             Vector2 mouseOffset = mousePosition - playerPosition;
 
-            // Draw rays to display in editor
-            Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), colorFacing);
-            Debug.DrawLine(playerPosition, mousePosition, colorPointing);
+            if (DO_DEBUG_STUFF)
+            {
+                // Draw rays to display in editor
+                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)player.transform.up * mouseOffset.magnitude), colorFacing);
+                Debug.DrawLine(playerPosition, mousePosition, colorPointing);
+            }
 
             float direction = Vector2.Dot(mouseOffset.normalized, player.transform.right);
             player.Rotate(direction);
@@ -396,7 +403,7 @@ namespace SpaceGame
                 yield return new WaitForSeconds(settings.TimeBetweenCleanup);
 
                 // Check all Space Objects...
-                foreach (SpaceObject so in SpaceObjects)
+                SpaceObjects.ForEach(so =>
                 {
                     // If Space Object too far away...
                     if (Vector2.Distance(player.transform.position, so.transform.position) > so.Settings.DistanceMax)
@@ -404,7 +411,7 @@ namespace SpaceGame
                         // Add to disposal list
                         objectsToRemove.Add(so);
                     }
-                }
+                });
 
                 // Remove Space Objects
                 objectsToRemove.ForEach(so => DestroySpaceObject(so));
@@ -417,7 +424,6 @@ namespace SpaceGame
             while (inputFire)
             {
                 player.Fire();
-
                 yield return new WaitForSeconds(player.Weapon.TimeBetweenShots);
             }
 
