@@ -26,11 +26,11 @@ namespace SpaceGame.SpaceObjects
                 // If Space Rock too small...
                 if (Scale < settings.MinScale)
                 {
-                    // Give bonus credit
-                    ++reward;
-
                     // Destroy Space Rock
                     GameInfo.DestroySpaceObject(this);
+
+                    // Give bonus credit
+                    ++reward;
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, transform.position);

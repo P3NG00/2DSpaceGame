@@ -319,18 +319,14 @@ namespace SpaceGame
             if (pass)
             {
                 // Instantiate space object
-                SpaceObject newSpaceObject = sos.RandomSpaceObject;
-                Transform parent = instance.parentSpaceObjects;
                 Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-                SpaceObject spaceObject = Instantiate(newSpaceObject, pos, rot, parent);
+                SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, pos, rot, instance.parentSpaceObjects);
                 spaceObject.Settings = sos;
                 spaceObject.Scale = sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
 
-                Vector2 velocity = RandomUnitVector * sos.RandomVelocity;
-                float angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
-                spaceObject.Rigidbody.velocity = velocity;
-                spaceObject.Rigidbody.angularVelocity = angularVelocity;
+                spaceObject.Rigidbody.velocity = RandomUnitVector * sos.RandomVelocity;
+                spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
 
                 instance.SpaceObjects.Add(spaceObject);
                 r = spaceObject;

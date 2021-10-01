@@ -65,17 +65,16 @@ namespace SpaceGame.Ships
                 Vector3 posMissile = transform.position;
                 posMissile += transform.up * 0.1f;
 
-                Missile missile;
-                float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
-
                 for (int i = 0; i < weapon.AmountOfShots; ++i)
                 {
+                    float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
+
                     // Projectile rotation
                     Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
                     Quaternion rotation = transform.rotation * rotOffset;
 
                     // Instantiate
-                    missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
+                    Missile missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
                     missile.Weapon = weapon;
 
                     // Set velocity
@@ -83,9 +82,6 @@ namespace SpaceGame.Ships
 
                     // Destroy after time
                     Destroy(missile.gameObject, weapon.LifetimeMax);
-
-                    // Set for next shot
-                    angle -= weapon.AngleBetweenShots;
                 }
             }
         }

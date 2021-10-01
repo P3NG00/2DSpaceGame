@@ -50,6 +50,7 @@ namespace SpaceGame.Settings
                     }
                 }
 
+                // This should not be reached, something should return in the loop
                 throw new System.Exception("No random item drop selected");
             }
         }
