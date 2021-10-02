@@ -1,6 +1,5 @@
 using SpaceGame.SpaceObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SpaceGame.Settings
 {
@@ -10,6 +9,8 @@ namespace SpaceGame.Settings
         [Header("Info [SpaceObjectSettings]", order = 20)]
         [SerializeField] private string tagName;
         [SerializeField] private Color color;
+        [SerializeField] protected float distanceMax;
+        [SerializeField] private bool destroyMissile;
         [SerializeField, Min(0f)] private float minSpawnScale;
         [SerializeField] private float maxSpawnScale;
         [SerializeField, Min(0f)] private float destroyBelowScale;
@@ -17,8 +18,6 @@ namespace SpaceGame.Settings
         [SerializeField] private float maxVelocity;
         [SerializeField, Min(0f)] private float minAngularVelocity;
         [SerializeField] private float maxAngularVelocity;
-        [SerializeField] protected float distanceMax;
-        [SerializeField] private bool destroyMissile;
 
         [Header("References [SpaceObjectSettings]", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;

@@ -125,8 +125,9 @@ namespace SpaceGame
             // Debug rays
             if (GameInfo.DO_DEBUG_STUFF)
             {
+                Vector2 facingPosition = ((Vector2)this.player.transform.up * mouseOffset.magnitude) + playerPosition;
                 // Draw rays to display in editor
-                Debug.DrawLine(playerPosition, playerPosition + ((Vector2)this.player.transform.up * mouseOffset.magnitude), this.colorFacing);
+                Debug.DrawLine(playerPosition, facingPosition, this.colorFacing);
                 Debug.DrawLine(playerPosition, mousePosition, this.colorPointing);
             }
 

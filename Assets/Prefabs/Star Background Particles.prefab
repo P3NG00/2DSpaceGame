@@ -2404,7 +2404,8 @@ ParticleSystem:
     influenceMask:
       serializedVersion: 2
       m_Bits: 4294967295
-    influenceList: []
+    influenceList:
+    - {fileID: 0}
   ClampVelocityModule:
     enabled: 0
     x:
