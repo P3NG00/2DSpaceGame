@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Rich Space Rock
   color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  distanceMax: 200
+  destroyMissile: 1
   minSpawnScale: 5
   maxSpawnScale: 12
   destroyBelowScale: 2
@@ -21,8 +23,6 @@ MonoBehaviour:
   maxVelocity: 15
   minAngularVelocity: 10
   maxAngularVelocity: 90
-  distanceMax: 200
-  destroyMissile: 1
   prefabSpaceObjects:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}

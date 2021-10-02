@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Item
   color: {r: 1, g: 1, b: 1, a: 1}
-  minScale: 4
-  maxScale: 4
+  distanceMax: 80
+  destroyMissile: 0
+  minSpawnScale: 3
+  maxSpawnScale: 3
+  destroyBelowScale: 0
   minVelocity: 0.5
   maxVelocity: 2
   minAngularVelocity: 5
   maxAngularVelocity: 20
-  distanceMax: 80
   prefabSpaceObjects:
   - {fileID: -160183931098287300, guid: 678271c7454158f4da07cfeff49cb710, type: 3}
   itemDrops: []

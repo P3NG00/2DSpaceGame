@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Space Rock
   color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  distanceMax: 200
+  destroyMissile: 1
   minSpawnScale: 3
   maxSpawnScale: 6
-  destroyBelowScale: 1.5
+  destroyBelowScale: 3
   minVelocity: 2
   maxVelocity: 25
   minAngularVelocity: 10
   maxAngularVelocity: 90
-  distanceMax: 200
-  destroyMissile: 1
   prefabSpaceObjects:
   - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
