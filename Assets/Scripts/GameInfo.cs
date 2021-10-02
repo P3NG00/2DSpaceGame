@@ -75,9 +75,8 @@ namespace SpaceGame
 
         // Public Getters
         public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
-        public static GameModeSettings GMSettings => GameInfo.instance.settings;
+        public static ShipPlayer Player => GameInfo.instance.player;
         public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
-        public static Sprite[] Sprites => GameInfo.instance.sprites;
         public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
 
         // Tags
@@ -123,7 +122,8 @@ namespace SpaceGame
 
             Vector2 mouseOffset = mousePosition - playerPosition;
 
-            if (DO_DEBUG_STUFF)
+            // Debug rays
+            if (GameInfo.DO_DEBUG_STUFF)
             {
                 // Draw rays to display in editor
                 Debug.DrawLine(playerPosition, playerPosition + ((Vector2)this.player.transform.up * mouseOffset.magnitude), this.colorFacing);

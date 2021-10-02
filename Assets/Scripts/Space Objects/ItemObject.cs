@@ -9,17 +9,17 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private ItemInfo item;
         public int Amount;
 
-        public ItemInfo Item
-        {
-            get => item;
-            set
-            {
-                this.item = value;
-                this.SpriteRenderer.sprite = this.item.Sprite;
-                this.SpriteRenderer.color = this.item.Color;
-            }
-        }
+        public ItemInfo Item => this.item;
 
-        protected override Color GetColor() => this.Item.Color;
+        protected override Color GetColor() => this.item.Color;
+
+        public void SetItemDrop(ItemDrop itemDrop)
+        {
+            ItemInfo itemInfo = itemDrop.ItemInfo;
+            this.item = itemInfo;
+            this.SpriteRenderer.sprite = itemInfo.Sprite;
+            this.SpriteRenderer.color = itemInfo.Color;
+            this.Amount = itemDrop.RandomAmount;
+        }
     }
 }

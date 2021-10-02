@@ -131,9 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c04289f7b7517943980e3b4ff4cf53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
+  health: 20
+  maxHealth: 20
   stats: {fileID: 11400000, guid: 627bb4e57d6c99848b4d5ef1744eda37, type: 2}
+  weapon: {fileID: 0}
   rigidbody: {fileID: 4979323623273713214}
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}

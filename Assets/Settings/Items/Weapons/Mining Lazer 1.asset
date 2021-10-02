@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ca74c2bdd84b94aa4eebdb7ff57cf3, type: 3}
-  m_Name: Weapon Lazer Shot
+  m_Name: Mining Lazer 1
   m_EditorClassIdentifier: 
-  itemName: Lazer Shot
-  sprite: {fileID: 0}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  itemName: Mining Lazer 1
+  sprite: {fileID: 21300000, guid: 544aa337d893676468c2b31dd9a0a198, type: 3}
+  color: {r: 1, g: 0.6, b: 0.6, a: 1}
   maxStackSize: 1
   multShip: 2
-  multSpaceRock: 10
-  projectileSpeed: 125
-  lifetimeMax: 1
-  timeBetweenShots: 0.25
+  multSpaceRock: 5
+  projectileSpeed: 80
+  lifetimeMax: 0.6
+  timeBetweenShots: 0.5
   amountOfShots: 1
   angleBetweenShots: 0

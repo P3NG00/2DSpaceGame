@@ -1,5 +1,6 @@
 using SpaceGame.SpaceObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceGame.Settings
 {
@@ -9,8 +10,9 @@ namespace SpaceGame.Settings
         [Header("Info [SpaceObjectSettings]", order = 20)]
         [SerializeField] private string tagName;
         [SerializeField] private Color color;
-        [SerializeField, Min(0f)] private float minScale;
-        [SerializeField] private float maxScale;
+        [SerializeField, Min(0f)] private float minSpawnScale;
+        [SerializeField] private float maxSpawnScale;
+        [SerializeField, Min(0f)] private float destroyBelowScale;
         [SerializeField, Min(0f)] private float minVelocity;
         [SerializeField] private float maxVelocity;
         [SerializeField, Min(0f)] private float minAngularVelocity;
@@ -24,12 +26,13 @@ namespace SpaceGame.Settings
 
         protected virtual void OnValidate()
         {
-            GameInfo.ValidateMinMax(this.minScale, ref this.maxScale);
+            GameInfo.ValidateMinMax(this.minSpawnScale, ref this.maxSpawnScale);
+            GameInfo.ValidateMinMax(this.destroyBelowScale, ref this.minSpawnScale);
             GameInfo.ValidateMinMax(this.minVelocity, ref this.maxVelocity);
             GameInfo.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
         }
 
-        public float RandomScale => Random.Range(this.minScale, this.maxScale);
+        public float RandomScale => Random.Range(this.minSpawnScale, this.maxSpawnScale);
         public float RandomVelocity => Random.Range(this.minVelocity, this.maxVelocity);
         public float RandomAngularVelocity => Random.Range(this.minAngularVelocity, this.maxAngularVelocity);
         public SpaceObject RandomSpaceObject => this.prefabSpaceObjects[Random.Range(0, this.prefabSpaceObjects.Length)];
@@ -67,7 +70,7 @@ namespace SpaceGame.Settings
 
         public string Tag => this.tagName;
         public Color Color => this.color;
-        public float MinScale => this.minScale;
+        public float DestroyBelowScale => this.destroyBelowScale;
         public float DistanceMax => this.distanceMax;
         public bool DestroyMissile => this.destroyMissile;
     }

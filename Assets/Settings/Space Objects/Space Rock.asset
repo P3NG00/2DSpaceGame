@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Space Rock
   color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
-  minScale: 3
-  maxScale: 6
+  minSpawnScale: 3
+  maxSpawnScale: 6
+  destroyBelowScale: 1.5
   minVelocity: 2
   maxVelocity: 25
   minAngularVelocity: 10

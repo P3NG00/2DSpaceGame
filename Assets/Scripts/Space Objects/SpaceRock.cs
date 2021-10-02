@@ -25,7 +25,7 @@ namespace SpaceGame.SpaceObjects
                 int reward = 1;
 
                 // If Space Rock too small...
-                if (this.Scale < this.settings.MinScale)
+                if (this.Scale < this.settings.DestroyBelowScale)
                 {
                     this.alive = false;
 
@@ -37,9 +37,7 @@ namespace SpaceGame.SpaceObjects
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
-                    ItemDrop drop = this.settings.RandomItemDrop;
-                    itemObject.Item = drop.ItemInfo;
-                    itemObject.Amount = drop.RandomAmount;
+                    itemObject.SetItemDrop(this.settings.RandomItemDrop);
                 }
                 else
                 {

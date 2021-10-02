@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6704204849026478971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b82488fde64d5749a4ff5a8c91e9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Weapon: {fileID: 0}
   rigidbody: {fileID: -6234159493842483732}
+  spriteRenderer: {fileID: 2488316607995940359}
 --- !u!50 &-6234159493842483732
 Rigidbody2D:
   serializedVersion: 4
@@ -93,7 +94,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.15, y: 0.7}
   m_EdgeRadius: 0
 --- !u!212 &2488316607995940359
 SpriteRenderer:
@@ -135,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 00910b9ea88bc3944a7b80544f9cc4dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 544aa337d893676468c2b31dd9a0a198, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3ca74c2bdd84b94aa4eebdb7ff57cf3, type: 3}
-  m_Name: Weapon Trazer
+  m_Name: Mining Lazer 3
   m_EditorClassIdentifier: 
-  itemName: Trazer
-  sprite: {fileID: 0}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  itemName: Mining Lazer 3
+  sprite: {fileID: 21300000, guid: 46b7da12977229446a6b4135019e3441, type: 3}
+  color: {r: 1, g: 0.6, b: 0.6, a: 1}
   maxStackSize: 1
   multShip: 15
-  multSpaceRock: 3
+  multSpaceRock: 40
   projectileSpeed: 125
   lifetimeMax: 1
-  timeBetweenShots: 0.38
+  timeBetweenShots: 0.25
   amountOfShots: 3
-  angleBetweenShots: 15
+  angleBetweenShots: 10

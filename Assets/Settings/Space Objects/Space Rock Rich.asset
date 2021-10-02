@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Rich Space Rock
   color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  minScale: 5
-  maxScale: 12
+  minSpawnScale: 5
+  maxSpawnScale: 12
+  destroyBelowScale: 2
   minVelocity: 5
   maxVelocity: 15
   minAngularVelocity: 10

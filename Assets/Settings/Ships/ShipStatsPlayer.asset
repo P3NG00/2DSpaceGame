@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dfbc84bb7acce4abf99f89383aa7e6, type: 3}
   m_Name: ShipStatsPlayer
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 76cc84ee8508d484cb01dc93ba40b618, type: 2}
   colorPrimary: {r: 1, g: 1, b: 1, a: 1}
   colorSecondary: {r: 0, g: 0.2, b: 1, a: 1}
   multiplierForce: 10
   multiplierRotate: 250
-  drag: 2
+  drag: 1.5
