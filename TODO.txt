@@ -43,3 +43,5 @@ TODO create tutorial dialogue on how to control your player
 TODO add sprites for weapons
 
 TODO add crafting for items
+
+TODO add seperate ui highlight box for hotbar selection

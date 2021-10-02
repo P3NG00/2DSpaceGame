@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace SpaceGame.Ships
 {
     public sealed class ShipAI : Ship
@@ -8,14 +6,7 @@ namespace SpaceGame.Ships
         private void FixedUpdate()
         {
             this.AddForce();
-
-            Vector2 pos = this.transform.position;
-            Vector2 posPlayer = GameInfo.Player.transform.position;
-            Vector2 playerOffset = posPlayer - pos;
-
-            // Rotate ship
-            float direction = Vector2.Dot(playerOffset.normalized, this.transform.right);
-            this.Rotate(direction);
+            this.Rotate(GetRotationToLookAt(GameInfo.Player.Position));
         }
 
         protected override void OnDeath()

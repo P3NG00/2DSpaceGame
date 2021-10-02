@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using SpaceGame.Settings;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
@@ -29,15 +28,31 @@ namespace SpaceGame.Ships
         public float MaxHealth => this.maxHealth;
 
         public bool IsAlive => this.health > 0f;
+        public Vector2 Position => this.transform.position;
 
         private void OnValidate()
         {
             GameInfo.ValidateMinMax(this.health, ref this.maxHealth);
-
             this.srPrimary.color = this.stats.ColorPrimary;
             this.srSecondary.color = this.stats.ColorSecondary;
-
             this.FORCE_VALIDATE = false;
+        }
+
+        public float GetRotationToLookAt(Vector2 pos)
+        {
+            Vector2 posShip = this.Position;
+            Vector2 offsetObj = pos - posShip;
+
+            // Debug rays
+            if (GameInfo.DO_DEBUG_STUFF)
+            {
+                Vector2 facingPosition = ((Vector2)this.transform.up * offsetObj.magnitude) + posShip;
+                // Draw rays to display in editor
+                Debug.DrawLine(posShip, facingPosition, Color.blue);
+                Debug.DrawLine(posShip, pos, Color.magenta);
+            }
+
+            return Vector2.Dot(offsetObj.normalized, this.transform.right);
         }
 
         public void AddForce()

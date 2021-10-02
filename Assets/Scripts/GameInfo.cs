@@ -60,8 +60,6 @@ namespace SpaceGame
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool doDebugStuff;
-        [SerializeField] private Color colorPointing;
-        [SerializeField] private Color colorFacing;
 
         // Cache
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
@@ -116,34 +114,20 @@ namespace SpaceGame
                 }
             }
 
-            // Variables to make player look at mouse
-            Vector2 playerPosition = this.player.transform.position;
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
-
-            Vector2 mouseOffset = mousePosition - playerPosition;
-
-            // Debug rays
-            if (GameInfo.DO_DEBUG_STUFF)
-            {
-                Vector2 facingPosition = ((Vector2)this.player.transform.up * mouseOffset.magnitude) + playerPosition;
-                // Draw rays to display in editor
-                Debug.DrawLine(playerPosition, facingPosition, this.colorFacing);
-                Debug.DrawLine(playerPosition, mousePosition, this.colorPointing);
-            }
-
             // Rotate Player
-            float direction = Vector2.Dot(mouseOffset.normalized, this.player.transform.right);
-            this.player.Rotate(direction);
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
+            float rotation = this.player.GetRotationToLookAt(mousePosition);
+            this.player.Rotate(rotation);
 
             // Update Player Animator
             this.player.Animator.SetBool("Moving", this.inputAddForce);
 
             // Update Info Panel Text
             Rigidbody2D prb = this.player.Rigidbody;
-            this.textInfoPanel.text = $"x: {playerPosition.x}\n" +
-                $"y: {playerPosition.y}\n" +
-                $"magnitude: {prb.velocity.magnitude}\n" +
-                $"angular velocity: {prb.angularVelocity}";
+            Vector2 playerPosition = this.player.Position;
+            this.textInfoPanel.text = $"pos x: {playerPosition.x}\n" +
+                $"pos y: {playerPosition.y}\n" +
+                $"velocity: {prb.velocity.magnitude}";
 
             // Health
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
@@ -156,14 +140,9 @@ namespace SpaceGame
 
         private void UpdateInventoryUI()
         {
-            List<UIInventorySlot> inv = GameInfo.instance.inventory;
-            UIInventorySlot slot;
-            ItemInfo itemCurrent;
-
-            for (int i = 0; i < inv.Count; i++)
+            foreach (UIInventorySlot slot in GameInfo.instance.inventory)
             {
-                slot = inv[i];
-                itemCurrent = slot.Item;
+                ItemInfo itemCurrent = slot.Item;
 
                 if (itemCurrent == null)
                 {
