@@ -18,7 +18,7 @@ MonoBehaviour:
   destroyMissile: 1
   minSpawnScale: 5
   maxSpawnScale: 12
-  destroyBelowScale: 2
+  destroyBelowScale: 3
   minVelocity: 5
   maxVelocity: 15
   minAngularVelocity: 10

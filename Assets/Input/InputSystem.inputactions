@@ -52,6 +52,46 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Hotbar 1",
+                    "type": "Button",
+                    "id": "e539be18-f555-4101-b6b5-42dd5b1c6d30",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Hotbar 2",
+                    "type": "Button",
+                    "id": "6d8119a5-b884-4794-bdf3-bc20058b7b1e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Hotbar 3",
+                    "type": "Button",
+                    "id": "27ec11c0-7fce-4cbc-99c9-1b17b36527d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Hotbar 4",
+                    "type": "Button",
+                    "id": "e34a4a2c-e14a-4035-adec-91d9f07b6cce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Hotbar 5",
+                    "type": "Button",
+                    "id": "e4f00b57-052a-4326-b836-a019814b5854",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -129,6 +169,61 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Slow Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a3243263-f80b-4616-a4cf-a5b6422b798c",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Hotbar 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06ed8e1c-cddc-4a61-aba1-51c52bb47981",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Hotbar 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfa37fbc-1de0-4f9f-b42a-8a8123c06b52",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Hotbar 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27a43fc4-ec1d-4f40-987c-aa5ef1edc232",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Hotbar 4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "336683f7-0cfe-43bc-8187-c6d342dd3876",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Hotbar 5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

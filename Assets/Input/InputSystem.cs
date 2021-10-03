@@ -65,6 +65,46 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hotbar 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""e539be18-f555-4101-b6b5-42dd5b1c6d30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hotbar 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d8119a5-b884-4794-bdf3-bc20058b7b1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hotbar 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""27ec11c0-7fce-4cbc-99c9-1b17b36527d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hotbar 4"",
+                    ""type"": ""Button"",
+                    ""id"": ""e34a4a2c-e14a-4035-adec-91d9f07b6cce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Hotbar 5"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4f00b57-052a-4326-b836-a019814b5854"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -144,6 +184,61 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Slow Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3243263-f80b-4616-a4cf-a5b6422b798c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Hotbar 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06ed8e1c-cddc-4a61-aba1-51c52bb47981"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Hotbar 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfa37fbc-1de0-4f9f-b42a-8a8123c06b52"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Hotbar 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27a43fc4-ec1d-4f40-987c-aa5ef1edc232"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Hotbar 4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""336683f7-0cfe-43bc-8187-c6d342dd3876"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Hotbar 5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +270,11 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
         m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
+        m_Input_Hotbar1 = m_Input.FindAction("Hotbar 1", throwIfNotFound: true);
+        m_Input_Hotbar2 = m_Input.FindAction("Hotbar 2", throwIfNotFound: true);
+        m_Input_Hotbar3 = m_Input.FindAction("Hotbar 3", throwIfNotFound: true);
+        m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
+        m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -230,6 +330,11 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Menu;
     private readonly InputAction m_Input_MousePosition;
     private readonly InputAction m_Input_SlowDown;
+    private readonly InputAction m_Input_Hotbar1;
+    private readonly InputAction m_Input_Hotbar2;
+    private readonly InputAction m_Input_Hotbar3;
+    private readonly InputAction m_Input_Hotbar4;
+    private readonly InputAction m_Input_Hotbar5;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -240,6 +345,11 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
         public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
+        public InputAction @Hotbar1 => m_Wrapper.m_Input_Hotbar1;
+        public InputAction @Hotbar2 => m_Wrapper.m_Input_Hotbar2;
+        public InputAction @Hotbar3 => m_Wrapper.m_Input_Hotbar3;
+        public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
+        public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +377,21 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @Hotbar1.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
+                @Hotbar1.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
+                @Hotbar1.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
+                @Hotbar2.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar2;
+                @Hotbar2.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar2;
+                @Hotbar2.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar2;
+                @Hotbar3.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar3;
+                @Hotbar3.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar3;
+                @Hotbar3.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar3;
+                @Hotbar4.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar4;
+                @Hotbar4.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar4;
+                @Hotbar4.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar4;
+                @Hotbar5.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
+                @Hotbar5.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
+                @Hotbar5.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -289,6 +414,21 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
+                @Hotbar1.started += instance.OnHotbar1;
+                @Hotbar1.performed += instance.OnHotbar1;
+                @Hotbar1.canceled += instance.OnHotbar1;
+                @Hotbar2.started += instance.OnHotbar2;
+                @Hotbar2.performed += instance.OnHotbar2;
+                @Hotbar2.canceled += instance.OnHotbar2;
+                @Hotbar3.started += instance.OnHotbar3;
+                @Hotbar3.performed += instance.OnHotbar3;
+                @Hotbar3.canceled += instance.OnHotbar3;
+                @Hotbar4.started += instance.OnHotbar4;
+                @Hotbar4.performed += instance.OnHotbar4;
+                @Hotbar4.canceled += instance.OnHotbar4;
+                @Hotbar5.started += instance.OnHotbar5;
+                @Hotbar5.performed += instance.OnHotbar5;
+                @Hotbar5.canceled += instance.OnHotbar5;
             }
         }
     }
@@ -310,5 +450,10 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnMenu(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
+        void OnHotbar1(InputAction.CallbackContext context);
+        void OnHotbar2(InputAction.CallbackContext context);
+        void OnHotbar3(InputAction.CallbackContext context);
+        void OnHotbar4(InputAction.CallbackContext context);
+        void OnHotbar5(InputAction.CallbackContext context);
     }
 }

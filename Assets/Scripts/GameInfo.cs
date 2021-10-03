@@ -6,6 +6,7 @@ using SpaceGame.SpaceObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SpaceGame
@@ -52,7 +53,8 @@ namespace SpaceGame
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private GameObject parentInvUI;
-        [SerializeField] private Image slotHighlight;
+        [FormerlySerializedAs("slotHighlight"), SerializeField] private Image highlightSlot;
+        [SerializeField] private Image highlightHotbar;
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
@@ -69,7 +71,8 @@ namespace SpaceGame
         private bool inputMenu = false;
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
-        private UIInventorySlot selectedSlot;
+        private UIInventorySlot selectedSlot = null;
+        private UIInventorySlot selectedHotbar = null;
 
         // Public Getters
         public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
@@ -90,6 +93,7 @@ namespace SpaceGame
         {
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
+            SelectHotbar(1);
             UpdateTextCredits();
             UpdateInventoryUI();
             ToggleInventory();
@@ -157,20 +161,24 @@ namespace SpaceGame
                 }
             }
 
-            if (selectedSlot == null)
+            void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
             {
-                this.slotHighlight.enabled = false;
+                if (selected == null)
+                {
+                    highlight.enabled = false;
+                }
+                else
+                {
+                    highlight.rectTransform.SetParent(selected.transform);
+                    RectTransform rectHighlight = highlight.rectTransform;
+                    RectTransform rectSelected = selected.RectTransform;
+                    highlight.transform.localPosition = new Vector3(0f, 0f, layer);
+                    highlight.enabled = true;
+                }
             }
-            else
-            {
-                this.slotHighlight.rectTransform.SetParent(this.selectedSlot.transform);
 
-                RectTransform rectH = this.slotHighlight.rectTransform;
-                RectTransform rectS = this.selectedSlot.RectTransform;
-
-                this.slotHighlight.transform.localPosition = new Vector3(0f, 0f, -5f);
-                this.slotHighlight.enabled = true;
-            }
+            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -2f);
+            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -4f);
         }
 
         public static void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
@@ -235,6 +243,13 @@ namespace SpaceGame
         {
             GameObject ui = GameInfo.instance.parentInvUI;
             ui.SetActive(!ui.activeSelf);
+        }
+
+        public static void SelectHotbar(int index)
+        {
+            GameInfo gi = GameInfo.instance;
+            gi.selectedHotbar = gi.inventory[index];
+            gi.UpdateInventoryUI();
         }
 
         public static void SelectSlot(UIInventorySlot slot)
@@ -423,6 +438,11 @@ namespace SpaceGame
                 this.routineFiring = StartCoroutine(RoutineFire());
             }
         }
+        public void CallbackInputHotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
+        public void CallbackInputHotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
+        public void CallbackInputHotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
+        public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
+        public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         #endregion
     }
 }

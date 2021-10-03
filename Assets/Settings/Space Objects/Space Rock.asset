@@ -16,9 +16,9 @@ MonoBehaviour:
   color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   distanceMax: 200
   destroyMissile: 1
-  minSpawnScale: 3
+  minSpawnScale: 3.5
   maxSpawnScale: 6
-  destroyBelowScale: 3
+  destroyBelowScale: 3.5
   minVelocity: 2
   maxVelocity: 25
   minAngularVelocity: 10
@@ -49,7 +49,7 @@ MonoBehaviour:
   scaleSpawnRate: 0.075
   timeBetweenChance: 0.55
   chanceSpawn: 0.4
-  scaleMissileDamage: 0.075
+  scaleMissileDamage: 0.15
   scaleMissileImpactForce: 1
   spawnRateType: 1
   spawnAreaType: 2

@@ -57,7 +57,8 @@ MonoBehaviour:
   textCredits: {fileID: 0}
   textInfoPanel: {fileID: 0}
   parentInvUI: {fileID: 0}
-  slotHighlight: {fileID: 0}
+  highlightSlot: {fileID: 0}
+  highlightHotbar: {fileID: 0}
   imageHealthBar: {fileID: 0}
   settingsItemObject: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
   sprites:
@@ -91,8 +92,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   doDebugStuff: 1
-  colorPointing: {r: 1, g: 1, b: 1, a: 1}
-  colorFacing: {r: 1, g: 0, b: 1, a: 1}
 --- !u!114 &3068602627571150779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +213,86 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b44f9430-4cb6-4553-9224-0dc4c95188db
     m_ActionName: Input/Slow Down[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputHotbar1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e539be18-f555-4101-b6b5-42dd5b1c6d30
+    m_ActionName: Input/Hotbar 1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputHotbar2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6d8119a5-b884-4794-bdf3-bc20058b7b1e
+    m_ActionName: Input/Hotbar 2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputHotbar3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 27ec11c0-7fce-4cbc-99c9-1b17b36527d3
+    m_ActionName: Input/Hotbar 3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputHotbar4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e34a4a2c-e14a-4035-adec-91d9f07b6cce
+    m_ActionName: Input/Hotbar 4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputHotbar5
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4f00b57-052a-4326-b836-a019814b5854
+    m_ActionName: Input/Hotbar 5[/Keyboard/5]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input
