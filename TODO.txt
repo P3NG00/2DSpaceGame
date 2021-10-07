@@ -40,10 +40,6 @@ TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"
 
 
-TODO add sprites for weapons
-
 TODO add crafting for items
-
-TODO add seperate ui highlight box for hotbar selection
 
 TODO add ship func that combines GetDirectionToRotate and Rotate() RotatePlayerToLookAt(pos)

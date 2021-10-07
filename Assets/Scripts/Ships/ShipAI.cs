@@ -6,7 +6,7 @@ namespace SpaceGame.Ships
         private void FixedUpdate()
         {
             this.AddForce();
-            this.Rotate(GetRotationToLookAt(GameInfo.Player.Position));
+            this.RotateToLookAt(GameInfo.Player.Position);
         }
 
         protected override void OnDeath()

@@ -93,7 +93,7 @@ namespace SpaceGame
         {
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
-            SelectHotbar(1);
+            SelectHotbar(0);
             UpdateTextCredits();
             UpdateInventoryUI();
             ToggleInventory();
@@ -120,8 +120,7 @@ namespace SpaceGame
 
             // Rotate Player
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
-            float rotation = this.player.GetRotationToLookAt(mousePosition);
-            this.player.Rotate(rotation);
+            this.player.RotateToLookAt(mousePosition);
 
             // Update Player Animator
             this.player.Animator.SetBool("Moving", this.inputAddForce);
