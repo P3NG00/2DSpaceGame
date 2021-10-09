@@ -46,6 +46,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "b54c0df7-699a-42aa-bb06-7b434d99daa1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Slow Down",
                     "type": "Button",
                     "id": "b44f9430-4cb6-4553-9224-0dc4c95188db",
@@ -90,14 +98,6 @@
                     "type": "Button",
                     "id": "e4f00b57-052a-4326-b836-a019814b5854",
                     "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Rotate",
-                    "type": "Value",
-                    "id": "b54c0df7-699a-42aa-bb06-7b434d99daa1",
-                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }

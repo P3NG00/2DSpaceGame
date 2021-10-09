@@ -59,6 +59,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Slow Down"",
                     ""type"": ""Button"",
                     ""id"": ""b44f9430-4cb6-4553-9224-0dc4c95188db"",
@@ -103,14 +111,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""e4f00b57-052a-4326-b836-a019814b5854"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Rotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
-                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -409,13 +409,13 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
         m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
+        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
         m_Input_Hotbar1 = m_Input.FindAction("Hotbar 1", throwIfNotFound: true);
         m_Input_Hotbar2 = m_Input.FindAction("Hotbar 2", throwIfNotFound: true);
         m_Input_Hotbar3 = m_Input.FindAction("Hotbar 3", throwIfNotFound: true);
         m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
         m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
-        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -470,13 +470,13 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Inventory;
     private readonly InputAction m_Input_Menu;
     private readonly InputAction m_Input_MousePosition;
+    private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_SlowDown;
     private readonly InputAction m_Input_Hotbar1;
     private readonly InputAction m_Input_Hotbar2;
     private readonly InputAction m_Input_Hotbar3;
     private readonly InputAction m_Input_Hotbar4;
     private readonly InputAction m_Input_Hotbar5;
-    private readonly InputAction m_Input_Rotate;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -486,13 +486,13 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
         public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
+        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputAction @Hotbar1 => m_Wrapper.m_Input_Hotbar1;
         public InputAction @Hotbar2 => m_Wrapper.m_Input_Hotbar2;
         public InputAction @Hotbar3 => m_Wrapper.m_Input_Hotbar3;
         public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
-        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -517,6 +517,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
@@ -535,9 +538,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
-                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -557,6 +557,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
@@ -575,9 +578,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started += instance.OnHotbar5;
                 @Hotbar5.performed += instance.OnHotbar5;
                 @Hotbar5.canceled += instance.OnHotbar5;
-                @Rotate.started += instance.OnRotate;
-                @Rotate.performed += instance.OnRotate;
-                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -607,12 +607,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnInventory(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
         void OnHotbar1(InputAction.CallbackContext context);
         void OnHotbar2(InputAction.CallbackContext context);
         void OnHotbar3(InputAction.CallbackContext context);
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
     }
 }
