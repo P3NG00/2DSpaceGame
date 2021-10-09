@@ -116,6 +116,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Cheat Menu",
+                    "type": "Button",
+                    "id": "15a5c2a1-4090-4872-8ce0-09a8117e52cb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -391,6 +399,17 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Mouse Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0cff634-79a1-4a28-b430-55982808b3f6",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Cheat Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

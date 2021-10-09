@@ -129,6 +129,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cheat Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""15a5c2a1-4090-4872-8ce0-09a8117e52cb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -406,6 +414,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Mouse Position"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0cff634-79a1-4a28-b430-55982808b3f6"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Cheat Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -456,6 +475,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
         m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
         m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
+        m_Input_CheatMenu = m_Input.FindAction("Cheat Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -519,6 +539,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Hotbar4;
     private readonly InputAction m_Input_Hotbar5;
     private readonly InputAction m_Input_Exit;
+    private readonly InputAction m_Input_CheatMenu;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -537,6 +558,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
         public InputAction @Exit => m_Wrapper.m_Input_Exit;
+        public InputAction @CheatMenu => m_Wrapper.m_Input_CheatMenu;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -588,6 +610,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
+                @CheatMenu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @CheatMenu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @CheatMenu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -634,6 +659,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
+                @CheatMenu.started += instance.OnCheatMenu;
+                @CheatMenu.performed += instance.OnCheatMenu;
+                @CheatMenu.canceled += instance.OnCheatMenu;
             }
         }
     }
@@ -672,5 +700,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnCheatMenu(InputAction.CallbackContext context);
     }
 }

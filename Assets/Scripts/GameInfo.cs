@@ -6,7 +6,6 @@ using SpaceGame.SpaceObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SpaceGame
@@ -53,7 +52,8 @@ namespace SpaceGame
         [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private GameObject parentInvUI;
-        [FormerlySerializedAs("slotHighlight"), SerializeField] private Image highlightSlot;
+        [SerializeField] private GameObject parentCheatMenu;
+        [SerializeField] private Image highlightSlot;
         [SerializeField] private Image highlightHotbar;
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
@@ -99,7 +99,6 @@ namespace SpaceGame
             SelectHotbar(0);
             UpdateTextCredits();
             UpdateInventoryUI();
-            ToggleInventory();
             Application.targetFrameRate = this.framerate;
         }
 
@@ -256,11 +255,7 @@ namespace SpaceGame
             return amount;
         }
 
-        public static void ToggleInventory()
-        {
-            GameObject ui = GameInfo.instance.parentInvUI;
-            ui.SetActive(!ui.activeSelf);
-        }
+        public static void ToggleActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
 
         public static void SelectHotbar(int index)
         {
@@ -319,7 +314,7 @@ namespace SpaceGame
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in gi.SpaceObjects)
                 {
-                    if (so.tag == sos.Tag)
+                    if (so.Settings.Tag == sos.Tag)
                     {
                         // Cannot pass
                         pass = false;
@@ -343,6 +338,11 @@ namespace SpaceGame
 
                 gi.SpaceObjects.Add(spaceObject);
                 r = spaceObject;
+            }
+
+            if (GameInfo.DO_DEBUG_STUFF)
+            {
+                print($"[{sos.name}] Spawned: {pass}");
             }
 
             return r;
@@ -468,7 +468,7 @@ namespace SpaceGame
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
-        public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
+        public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleActive(this.parentInvUI); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
             this.inputFire = ctx.performed;
@@ -484,13 +484,14 @@ namespace SpaceGame
         public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
+        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleActive(this.parentCheatMenu); } }
         #endregion
 
         private enum RotationType
         {
             RotateAxis,     // Rotate Left/Right keys (controller & keyboard)
-            AimAtMouse,     // Mouse F
-            AimInDirection, // Controllers (right stick)
+            AimAtMouse,     // Mouse pointer
+            AimInDirection, // Controllers (right stick on controller)
         }
     }
 }

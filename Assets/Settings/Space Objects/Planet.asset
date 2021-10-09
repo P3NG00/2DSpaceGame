@@ -24,13 +24,13 @@ MonoBehaviour:
   minAngularVelocity: 5
   maxAngularVelocity: 20
   prefabSpaceObjects:
-  - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}
+  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   itemDrops: []
   distanceSpawn: 250
   widthSpawn: 50
   scaleSpawnRate: 1
   timeBetweenChance: 30
-  chanceSpawn: 1
+  chanceSpawn: 0.6
   scaleMissileDamage: 0
   scaleMissileImpactForce: 0
   spawnRateType: 2

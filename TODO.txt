@@ -44,17 +44,13 @@ TODO add crafting for items
 
 
 
-`
+
 
 TODO implement keybind for cheat menu
     possible features
         able to change values of the game like:
             - time scale
         able to give any item or weapon
-
-TODO add toggleable rotation method
-    able to toggle between rotating with mouse and keys
-    TODO test
 
 TODO fix using controller right stick to aim
 
