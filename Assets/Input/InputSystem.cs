@@ -43,14 +43,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""f20c52fe-a657-4c9d-9981-09a9a161724a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Mouse Position"",
                     ""type"": ""Value"",
                     ""id"": ""03dce504-6579-42a0-b1cf-2024f60e6df8"",
@@ -214,28 +206,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Inventory Toggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f3a80431-a895-4efd-8ee0-a836cbfd8b5c"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c64fe491-e101-45cc-9f10-98d0c1015f97"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -464,7 +434,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_AddForce = m_Input.FindAction("Add Force", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_InventoryToggle = m_Input.FindAction("Inventory Toggle", throwIfNotFound: true);
-        m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
         m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
         m_Input_Direction = m_Input.FindAction("Direction", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
@@ -528,7 +497,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_AddForce;
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_InventoryToggle;
-    private readonly InputAction m_Input_Menu;
     private readonly InputAction m_Input_MousePosition;
     private readonly InputAction m_Input_Direction;
     private readonly InputAction m_Input_Rotate;
@@ -547,7 +515,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @AddForce => m_Wrapper.m_Input_AddForce;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @InventoryToggle => m_Wrapper.m_Input_InventoryToggle;
-        public InputAction @Menu => m_Wrapper.m_Input_Menu;
         public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
         public InputAction @Direction => m_Wrapper.m_Input_Direction;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
@@ -577,9 +544,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @InventoryToggle.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
                 @InventoryToggle.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
                 @InventoryToggle.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
-                @Menu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
                 @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
@@ -626,9 +590,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @InventoryToggle.started += instance.OnInventoryToggle;
                 @InventoryToggle.performed += instance.OnInventoryToggle;
                 @InventoryToggle.canceled += instance.OnInventoryToggle;
-                @Menu.started += instance.OnMenu;
-                @Menu.performed += instance.OnMenu;
-                @Menu.canceled += instance.OnMenu;
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
@@ -689,7 +650,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnAddForce(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnInventoryToggle(InputAction.CallbackContext context);
-        void OnMenu(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnDirection(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);

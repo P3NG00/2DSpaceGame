@@ -68,7 +68,6 @@ namespace SpaceGame
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
         private bool inputFire = false;
-        private bool inputMenu = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
@@ -467,7 +466,6 @@ namespace SpaceGame
             this.rotationType = RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
         public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleActive(this.parentInvUI); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)
         {
