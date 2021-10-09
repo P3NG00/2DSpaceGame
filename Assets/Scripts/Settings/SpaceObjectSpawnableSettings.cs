@@ -16,6 +16,9 @@ namespace SpaceGame.Settings
         [SerializeField] private SpaceObjectSpawnRateType spawnRateType;
         [SerializeField] private SpaceObjectSpawnAreaType spawnAreaType;
 
+        [Header("DEBUG [SpaceObjectSpawnableSettings]", order = 101)]
+        [SerializeField] private bool debugAnnounceSpawn;
+
         protected override void OnValidate()
         {
             base.OnValidate();
@@ -32,6 +35,8 @@ namespace SpaceGame.Settings
         public float ScaleMissileImpactForce => this.scaleMissileImpactForce;
         public SpaceObjectSpawnRateType SpawnRateType => this.spawnRateType;
         public SpaceObjectSpawnAreaType SpawnAreaType => this.spawnAreaType;
+
+        public bool DebugAnnounceSpawn => this.debugAnnounceSpawn;
     }
 
     public enum SpaceObjectSpawnRateType

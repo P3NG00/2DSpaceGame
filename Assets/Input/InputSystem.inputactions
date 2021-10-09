@@ -38,11 +38,19 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Mouse Position",
+                    "type": "Value",
+                    "id": "03dce504-6579-42a0-b1cf-2024f60e6df8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Direction",
                     "type": "Value",
                     "id": "3f9f38c2-fa50-4ece-bd98-6c87238ffef6",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "interactions": ""
                 },
                 {
@@ -212,17 +220,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4563df86-f8d4-4bb6-999f-c98e98328fdc",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Direction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -383,6 +380,17 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0bdd35c-0dca-4afe-9463-3c44cd643863",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Mouse Position",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

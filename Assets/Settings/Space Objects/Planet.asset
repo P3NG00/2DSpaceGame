@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagName: Planet
   color: {r: 1, g: 1, b: 1, a: 1}
-  minScale: 75
-  maxScale: 150
+  distanceMax: 300
+  destroyMissile: 1
+  minSpawnScale: 75
+  maxSpawnScale: 150
+  destroyBelowScale: 0
   minVelocity: 0.5
   maxVelocity: 5
   minAngularVelocity: 5
   maxAngularVelocity: 20
-  distanceMax: 300
-  destroyMissile: 1
   prefabSpaceObjects:
   - {fileID: 4986142547781944143, guid: ae429197568bcfa4091a5aeadcd33ede, type: 3}
   itemDrops: []
@@ -30,7 +31,8 @@ MonoBehaviour:
   scaleSpawnRate: 1
   timeBetweenChance: 30
   chanceSpawn: 1
+  scaleMissileDamage: 0
   scaleMissileImpactForce: 0
-  scaleMissileImpactStep: 0
   spawnRateType: 2
   spawnAreaType: 1
+  debugAnnounceSpawn: 1

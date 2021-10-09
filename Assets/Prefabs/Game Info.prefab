@@ -185,7 +185,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5258815394248899773}
         m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
-        m_MethodName: CallbackInputMousePosition
+        m_MethodName: CallbackInputAimInDirection
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -325,6 +325,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 962cd95c-12ca-4046-be24-364f014dec43
     m_ActionName: Input/Exit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInputAimAtMouse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 03dce504-6579-42a0-b1cf-2024f60e6df8
+    m_ActionName: Input/Mouse Position[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

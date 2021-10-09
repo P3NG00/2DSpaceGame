@@ -51,11 +51,19 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Mouse Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""03dce504-6579-42a0-b1cf-2024f60e6df8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Direction"",
                     ""type"": ""Value"",
                     ""id"": ""3f9f38c2-fa50-4ece-bd98-6c87238ffef6"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
                 },
                 {
@@ -225,17 +233,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4563df86-f8d4-4bb6-999f-c98e98328fdc"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -398,6 +395,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0bdd35c-0dca-4afe-9463-3c44cd643863"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Mouse Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -438,6 +446,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_InventoryToggle = m_Input.FindAction("Inventory Toggle", throwIfNotFound: true);
         m_Input_Menu = m_Input.FindAction("Menu", throwIfNotFound: true);
+        m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
         m_Input_Direction = m_Input.FindAction("Direction", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
@@ -500,6 +509,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_InventoryToggle;
     private readonly InputAction m_Input_Menu;
+    private readonly InputAction m_Input_MousePosition;
     private readonly InputAction m_Input_Direction;
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_SlowDown;
@@ -517,6 +527,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @InventoryToggle => m_Wrapper.m_Input_InventoryToggle;
         public InputAction @Menu => m_Wrapper.m_Input_Menu;
+        public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
         public InputAction @Direction => m_Wrapper.m_Input_Direction;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
@@ -547,6 +558,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenu;
+                @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
                 @Direction.started -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
                 @Direction.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
                 @Direction.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
@@ -590,6 +604,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
                 @Direction.started += instance.OnDirection;
                 @Direction.performed += instance.OnDirection;
                 @Direction.canceled += instance.OnDirection;
@@ -645,6 +662,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnInventoryToggle(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
         void OnDirection(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);

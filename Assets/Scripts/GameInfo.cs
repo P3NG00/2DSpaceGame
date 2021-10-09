@@ -71,10 +71,11 @@ namespace SpaceGame
         private bool inputMenu = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
+        private Vector2 inputDirection = Vector2.zero;
         private Coroutine routineFiring = null;
         private UIInventorySlot selectedSlot = null;
         private UIInventorySlot selectedHotbar = null;
-        private bool inputRotationType = true; // true = direction from center, false = rotational keys
+        private RotationType rotationType = RotationType.RotateAxis;
 
         // Public Getters
         public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
@@ -121,14 +122,22 @@ namespace SpaceGame
             }
 
             // Rotate Player
-            if (inputRotationType) // if mouse rotation
+            switch (this.rotationType)
             {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
-                this.player.RotateToLookAt(mousePosition);
-            }
-            else // if axis rotation
-            {
-                this.player.Rotate(inputRotation);
+                case RotationType.RotateAxis:
+                    this.player.Rotate(inputRotation);
+                    break;
+
+                case RotationType.AimAtMouse:
+                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
+                    this.player.RotateToLookAt(mousePosition);
+                    break;
+
+                // TODO needs testing with controller
+                case RotationType.AimInDirection:
+                    Vector2 direction = this.player.Position + inputDirection;
+                    this.player.RotateToLookAt(direction);
+                    break;
             }
 
             // Update Player Animator
@@ -368,8 +377,11 @@ namespace SpaceGame
                 // Wait...
                 yield return new WaitForSeconds(waitTime);
 
+                // Find if chance occurred...
+                bool b = Random.value <= soss.ChanceSpawn;
+
                 // If chance passes...
-                if (Random.value <= soss.ChanceSpawn)
+                if (b)
                 {
                     // Spawn Space Object
                     Transform transformPlayer = this.player.transform;
@@ -389,6 +401,12 @@ namespace SpaceGame
                     }
 
                     SpawnSpaceObject(soss, spawnPos);
+                }
+
+                if (GameInfo.DO_DEBUG_STUFF && soss.DebugAnnounceSpawn)
+                {
+                    string msg = b ? "SUCCESS" : "FAILURE";
+                    print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {msg}");
                 }
             }
         }
@@ -434,15 +452,20 @@ namespace SpaceGame
         #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInputMousePosition(InputAction.CallbackContext ctx)
-        {
-            this.inputRotationType = true;
-            this.inputMousePosition = ctx.ReadValue<Vector2>();
-        }
         public void CallbackInputRotate(InputAction.CallbackContext ctx)
         {
-            this.inputRotationType = false;
+            this.rotationType = RotationType.RotateAxis;
             this.inputRotation = ctx.ReadValue<float>();
+        }
+        public void CallbackInputAimAtMouse(InputAction.CallbackContext ctx)
+        {
+            this.rotationType = RotationType.AimAtMouse;
+            this.inputMousePosition = ctx.ReadValue<Vector2>();
+        }
+        public void CallbackInputAimInDirection(InputAction.CallbackContext ctx)
+        {
+            this.rotationType = RotationType.AimInDirection;
+            this.inputDirection = ctx.ReadValue<Vector2>();
         }
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
         public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
@@ -462,5 +485,12 @@ namespace SpaceGame
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
         #endregion
+
+        private enum RotationType
+        {
+            RotateAxis,     // Rotate Left/Right keys (controller & keyboard)
+            AimAtMouse,     // Mouse F
+            AimInDirection, // Controllers (right stick)
+        }
     }
 }
