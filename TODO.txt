@@ -55,14 +55,4 @@ TODO implement keybind for cheat menu
 TODO add toggleable rotation method
     able to toggle between rotating with mouse and keys
 
-TODO controls
-    able to switch between two rotation settings by using different keybinds:
-        - rotational
-            choose which direction to rotate
-                keyboard - left/right
-                controller - left/right
-        - directional
-            choose which direction to aim
-                keyboard - mouse pointer
-                controller - right stick direction
-    add controller inputs for existing buttons
+TODO fix using controller right stick to aim

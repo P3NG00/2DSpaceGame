@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Inventory",
+                    "name": "Inventory Toggle",
                     "type": "Button",
                     "id": "00c7eef2-64bf-4137-a39d-cf3fd0b40bec",
                     "expectedControlType": "Button",
@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Mouse Position",
+                    "name": "Direction",
                     "type": "Value",
                     "id": "3f9f38c2-fa50-4ece-bd98-6c87238ffef6",
                     "expectedControlType": "Vector2",
@@ -97,6 +97,14 @@
                     "name": "Hotbar 5",
                     "type": "Button",
                     "id": "e4f00b57-052a-4326-b836-a019814b5854",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "962cd95c-12ca-4046-be24-364f014dec43",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -165,7 +173,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
-                    "action": "Inventory",
+                    "action": "Inventory Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -176,7 +184,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Inventory",
+                    "action": "Inventory Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -209,7 +217,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
-                    "action": "Mouse Position",
+                    "action": "Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Direction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -355,6 +374,17 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "302db301-833e-43ce-ac4b-14c393937e4b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

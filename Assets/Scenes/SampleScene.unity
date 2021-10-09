@@ -5104,6 +5104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3068602627571150779, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5258815394248899770, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: m_Name
       value: Game Info

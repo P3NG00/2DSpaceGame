@@ -69,11 +69,12 @@ namespace SpaceGame
         private bool inputSlowDown = false;
         private bool inputFire = false;
         private bool inputMenu = false;
-        private float inputRotation = 0f; // TODO implement
+        private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
         private UIInventorySlot selectedSlot = null;
         private UIInventorySlot selectedHotbar = null;
+        private bool inputRotationType = true; // true = direction from center, false = rotational keys
 
         // Public Getters
         public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
@@ -120,8 +121,15 @@ namespace SpaceGame
             }
 
             // Rotate Player
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
-            this.player.RotateToLookAt(mousePosition);
+            if (inputRotationType) // if mouse rotation
+            {
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
+                this.player.RotateToLookAt(mousePosition);
+            }
+            else // if axis rotation
+            {
+                this.player.Rotate(inputRotation);
+            }
 
             // Update Player Animator
             this.player.Animator.SetBool("Moving", this.inputAddForce);
@@ -426,8 +434,16 @@ namespace SpaceGame
         #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackMousePosition(InputAction.CallbackContext ctx) => this.inputMousePosition = ctx.ReadValue<Vector2>();
-        public void CallbackRotate(InputAction.CallbackContext ctx) => this.inputRotation = ctx.ReadValue<float>();
+        public void CallbackInputMousePosition(InputAction.CallbackContext ctx)
+        {
+            this.inputRotationType = true;
+            this.inputMousePosition = ctx.ReadValue<Vector2>();
+        }
+        public void CallbackInputRotate(InputAction.CallbackContext ctx)
+        {
+            this.inputRotationType = false;
+            this.inputRotation = ctx.ReadValue<float>();
+        }
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
         public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)
@@ -444,6 +460,7 @@ namespace SpaceGame
         public void CallbackInputHotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
         public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
+        public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
         #endregion
     }
 }
