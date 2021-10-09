@@ -69,6 +69,7 @@ namespace SpaceGame
         private bool inputSlowDown = false;
         private bool inputFire = false;
         private bool inputMenu = false;
+        private float inputRotation = 0f; // TODO implement
         private Vector2 inputMousePosition = Vector2.zero;
         private Coroutine routineFiring = null;
         private UIInventorySlot selectedSlot = null;
@@ -426,6 +427,7 @@ namespace SpaceGame
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
         public void CallbackMousePosition(InputAction.CallbackContext ctx) => this.inputMousePosition = ctx.ReadValue<Vector2>();
+        public void CallbackRotate(InputAction.CallbackContext ctx) => this.inputRotation = ctx.ReadValue<float>();
         public void CallbackInputMenu(InputAction.CallbackContext ctx) => this.inputMenu = ctx.performed;
         public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleInventory(); } }
         public void CallbackInputFire(InputAction.CallbackContext ctx)

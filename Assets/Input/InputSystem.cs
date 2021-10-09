@@ -105,6 +105,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -115,6 +123,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Add Force"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""077fd388-4d2c-4f67-9003-8b45316911ed"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Add Force"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -143,6 +162,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""24b0065e-4b6c-4eeb-95da-57362e4a5db9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""398dad8c-3a97-4588-af62-2df56d4bfdc8"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -154,11 +184,33 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""723f9c93-a974-4e8a-be70-6a2e5e07c1b4"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f3a80431-a895-4efd-8ee0-a836cbfd8b5c"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c64fe491-e101-45cc-9f10-98d0c1015f97"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -181,6 +233,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Slow Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Slow Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -239,6 +302,72 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Hotbar 5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""3210c6d1-23a1-440a-a2d4-07498d2a30d2"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""39a89dd7-7e08-409f-80e6-ee2058f860d3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d95c8829-0fd8-4535-8635-04a63ec3ef44"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Controller"",
+                    ""id"": ""aeb65b9c-7258-436a-b853-5cc87add7103"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""78a0230b-20a2-4ae7-82bb-6052027a972a"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""2a845a8d-845f-4673-b1d7-1c5b13577173"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -259,6 +388,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -275,6 +415,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Hotbar3 = m_Input.FindAction("Hotbar 3", throwIfNotFound: true);
         m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
         m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
+        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -335,6 +476,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Hotbar3;
     private readonly InputAction m_Input_Hotbar4;
     private readonly InputAction m_Input_Hotbar5;
+    private readonly InputAction m_Input_Rotate;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -350,6 +492,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Hotbar3 => m_Wrapper.m_Input_Hotbar3;
         public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
+        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -392,6 +535,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
+                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -429,6 +575,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started += instance.OnHotbar5;
                 @Hotbar5.performed += instance.OnHotbar5;
                 @Hotbar5.canceled += instance.OnHotbar5;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -440,6 +589,15 @@ public class @InputSystem : IInputActionCollection, IDisposable
         {
             if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard + Mouse");
             return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
         }
     }
     public interface IInputActions
@@ -455,5 +613,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnHotbar3(InputAction.CallbackContext context);
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

@@ -61,8 +61,8 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                Vector2 velocity = this.transform.up * this.stats.MultiplierForce;
-                this.rigidbody.AddForce(velocity);
+                Vector2 v = this.transform.up * this.stats.MultiplierForce;
+                this.rigidbody.AddForce(v);
             }
         }
 
@@ -70,14 +70,14 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                float torque = -rotation * this.stats.MultiplierRotate * Time.deltaTime;
-                this.rigidbody.AddTorque(torque);
+                float r = -rotation * this.stats.MultiplierRotate * Time.deltaTime;
+                this.rigidbody.AddTorque(r);
             }
         }
 
         public void Fire()
         {
-            if (IsAlive)
+            if (this.IsAlive)
             {
                 Vector3 posMissile = this.transform.position;
                 posMissile += this.transform.up * 0.1f;
