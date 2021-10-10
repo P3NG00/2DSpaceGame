@@ -53,7 +53,3 @@ TODO implement keybind for cheat menu
         able to give any item or weapon
 
 TODO fix using controller right stick to aim
-
-TODO remove planet prefab, use space object instead.
-need to add mass to spaceobjectspawnablesettings?
-mark down any other differences that need to be kept

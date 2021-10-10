@@ -115,7 +115,7 @@ namespace SpaceGame
 
                 if (this.inputAddForce)
                 {
-                    this.player.AddForce();
+                    this.player.ApplyForce();
                 }
             }
 

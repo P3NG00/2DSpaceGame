@@ -57,7 +57,7 @@ namespace SpaceGame.Ships
 
         public void RotateToLookAt(Vector2 pos) => this.Rotate(this.GetRotationToLookAt(pos));
 
-        public void AddForce()
+        public void ApplyForce()
         {
             if (this.IsAlive)
             {

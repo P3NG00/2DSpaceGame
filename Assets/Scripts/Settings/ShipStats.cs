@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Ship Stats", fileName = "Ship Stats")]
-    public sealed class ShipStats : ScriptableObject
+    [CreateAssetMenu(menuName = "2D Space Game/Ship Stats/Ship", fileName = "Ship Stats")]
+    public class ShipStats : ScriptableObject
     {
-        [Header("Info", order = 10)]
+        [Header("Info [ShipStats]", order = 0)]
         [SerializeField] private Color colorPrimary;
         [SerializeField] private Color colorSecondary;
         [SerializeField, Min(0f)] private float multiplierForce;
