@@ -1,3 +1,4 @@
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Settings
@@ -22,7 +23,7 @@ namespace SpaceGame.Settings
         protected override void OnValidate()
         {
             base.OnValidate();
-            GameInfo.ValidateMinMax(this.distanceSpawn, ref this.distanceMax);
+            Util.ValidateMinMax(this.distanceSpawn, ref this.distanceMax);
         }
 
         public float RandomSpawnDistance => Random.Range(this.distanceSpawn, this.distanceMax);

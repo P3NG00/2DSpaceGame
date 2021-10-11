@@ -1,4 +1,5 @@
 using SpaceGame.Settings;
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -13,7 +14,7 @@ namespace SpaceGame.Ships
         private void Awake()
         {
             this.statsAI = (ShipAIStats)this.Stats;
-            this.shipAIType = GameInfo.RandomEnum<ShipAIType>();
+            this.shipAIType = Util.RandomEnum<ShipAIType>();
         }
 
         private void FixedUpdate()

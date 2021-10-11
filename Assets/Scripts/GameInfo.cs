@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
+using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -84,9 +85,6 @@ namespace SpaceGame
         public static string TagShip => GameInfo.instance.tagShip;
         public static string TagPlayer => GameInfo.instance.tagPlayer;
         public static string TagMissile => GameInfo.instance.tagMissile;
-
-        // Util
-        public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
         // Unity Start method
         private void Start()
@@ -192,15 +190,6 @@ namespace SpaceGame
 
             UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -2f);
             UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -4f);
-        }
-
-        public static void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
-
-        public static T RandomEnum<T>()
-        {
-            System.Array items = System.Enum.GetValues(typeof(T));
-            int index = Random.Range(0, items.Length);
-            return (T)items.GetValue(index);
         }
 
         public static void GiveCredits(int amount, Vector2 position)
@@ -337,7 +326,7 @@ namespace SpaceGame
                 spaceObject.Scale = sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
 
-                spaceObject.Rigidbody.velocity = RandomUnitVector * sos.RandomVelocity;
+                spaceObject.Rigidbody.velocity = Util.RandomUnitVector * sos.RandomVelocity;
                 spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
 
                 gi.SpaceObjects.Add(spaceObject);
@@ -400,7 +389,7 @@ namespace SpaceGame
                             break;
 
                         case SpaceObjectSpawnAreaType.AroundPlayer:
-                            spawnPos += RandomUnitVector * soss.RandomSpawnDistance;
+                            spawnPos += Util.RandomUnitVector * soss.RandomSpawnDistance;
                             break;
                     }
 

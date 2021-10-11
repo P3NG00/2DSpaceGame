@@ -1,6 +1,7 @@
 using System.Collections;
 using SpaceGame.Settings;
 using SpaceGame.SpaceObjects;
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -49,7 +50,7 @@ namespace SpaceGame.Ships
 
         private void OnValidate()
         {
-            GameInfo.ValidateMinMax(this.health, ref this.maxHealth);
+            Util.ValidateMinMax(this.health, ref this.maxHealth);
             this.srPrimary.color = this.stats.ColorPrimary;
             this.srSecondary.color = this.stats.ColorSecondary;
             this.FORCE_VALIDATE = false;

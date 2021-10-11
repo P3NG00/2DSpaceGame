@@ -1,4 +1,5 @@
 using SpaceGame.SpaceObjects;
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Settings
@@ -25,10 +26,10 @@ namespace SpaceGame.Settings
 
         protected virtual void OnValidate()
         {
-            GameInfo.ValidateMinMax(this.minSpawnScale, ref this.maxSpawnScale);
-            GameInfo.ValidateMinMax(this.destroyBelowScale, ref this.minSpawnScale);
-            GameInfo.ValidateMinMax(this.minVelocity, ref this.maxVelocity);
-            GameInfo.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
+            Util.ValidateMinMax(this.minSpawnScale, ref this.maxSpawnScale);
+            Util.ValidateMinMax(this.destroyBelowScale, ref this.minSpawnScale);
+            Util.ValidateMinMax(this.minVelocity, ref this.maxVelocity);
+            Util.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
         }
 
         public float RandomScale => Random.Range(this.minSpawnScale, this.maxSpawnScale);
