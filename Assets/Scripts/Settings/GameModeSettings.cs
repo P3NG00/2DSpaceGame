@@ -1,3 +1,4 @@
+using SpaceGame.Ships;
 using UnityEngine;
 
 namespace SpaceGame.Settings

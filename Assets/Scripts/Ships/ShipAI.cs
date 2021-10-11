@@ -5,30 +5,65 @@ namespace SpaceGame.Ships
 {
     public sealed class ShipAI : Ship
     {
-        private ShipAIStats stats;
+        [Header("DEBUG [ShipAI]", order = 110)]
+        [SerializeField] private ShipAIType shipAIType; // TODO move to scriptable object? (reassess after working on getting mechanic working)
 
-        private void Awake() => stats = (ShipAIStats)this.Stats;
+        private ShipAIStats statsAI;
+
+        private void Awake()
+        {
+            this.statsAI = (ShipAIStats)this.Stats;
+            this.shipAIType = GameInfo.RandomEnum<ShipAIType>();
+        }
 
         private void FixedUpdate()
         {
-            float distance = Vector2.Distance(this.Position, GameInfo.Player.Position);
+            Vector2 playerPos = GameInfo.Player.Position;
+            float distance = Vector2.Distance(this.Position, playerPos);
+            bool withinDistance = distance < this.statsAI.DistanceStopFromPlayer;
 
-            if (distance < this.stats.DistanceStopFromPlayer)
+            switch (this.shipAIType)
             {
-                this.ApplyDrag(true);
-            }
-            else
-            {
-                this.ApplyDrag(false);
-                this.ApplyForce();
+                case ShipAIType.Enemy:
+                    this.RotateToLookAt(playerPos);
+                    this.IsFiring = true;
+                    this.ApplyDrag(withinDistance);
+
+                    if (!withinDistance)
+                    {
+                        this.ApplyForce();
+                    }
+                    break;
+
+                case ShipAIType.Passive:
+                    this.ApplyForce();
+                    this.IsFiring = false;
+                    break;
+
+                case ShipAIType.TalkToPlayer:
+                    this.RotateToLookAt(playerPos);
+                    this.IsFiring = false;
+                    this.ApplyDrag(withinDistance);
+
+                    if (!withinDistance)
+                    {
+                        this.ApplyForce();
+                    }
+                    break;
             }
 
-            this.RotateToLookAt(GameInfo.Player.Position);
         }
 
         protected override void OnDeath()
         {
             Destroy(gameObject);
+        }
+
+        private enum ShipAIType
+        {
+            Passive,
+            Enemy,
+            TalkToPlayer,
         }
     }
 }

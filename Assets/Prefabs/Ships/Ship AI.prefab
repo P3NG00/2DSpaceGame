@@ -139,6 +139,7 @@ MonoBehaviour:
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}
   FORCE_VALIDATE: 0
+  shipAIType: 0
 --- !u!114 &3331545610729043388
 MonoBehaviour:
   m_ObjectHideFlags: 0

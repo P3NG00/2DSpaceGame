@@ -4582,6 +4582,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6940278727701347721, guid: 08d9a6983d3c95742930bd09a8ebbe4c, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 51c37d1bd4c41e24b82ac732c7979e76, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08d9a6983d3c95742930bd09a8ebbe4c, type: 3}
 --- !u!1 &1784799600
@@ -5231,7 +5235,7 @@ PrefabInstance:
     - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: weapon
       value: 
-      objectReference: {fileID: 11400000, guid: 09d95cd4c821da14d81c90e0c087f24e, type: 2}
+      objectReference: {fileID: 11400000, guid: 5cbb5d441f2a08447975f4a98e8917a6, type: 2}
     - target: {fileID: 805840465613134679, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: textCredits
       value: 

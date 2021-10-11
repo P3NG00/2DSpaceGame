@@ -1,3 +1,4 @@
+using System.Collections;
 using SpaceGame.Settings;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace SpaceGame.Ships
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
+        private bool isFiring = false;
+        private Coroutine routineFiring = null;
+
         public ShipStats Stats => this.stats;
         public Weapon Weapon => this.weapon;
         public Rigidbody2D Rigidbody => this.rigidbody;
@@ -29,6 +33,19 @@ namespace SpaceGame.Ships
 
         public bool IsAlive => this.health > 0f;
         public Vector2 Position => this.transform.position;
+        public bool IsFiring
+        {
+            get => this.isFiring;
+            set
+            {
+                this.isFiring = value;
+
+                if (value & this.routineFiring == null)
+                {
+                    this.routineFiring = StartCoroutine(this.RoutineFire());
+                }
+            }
+        }
 
         private void OnValidate()
         {
@@ -75,7 +92,7 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void Fire()
+        private void Fire()
         {
             if (this.IsAlive)
             {
@@ -135,5 +152,16 @@ namespace SpaceGame.Ships
         }
 
         protected virtual void OnDeath() { }
+
+        private IEnumerator RoutineFire()
+        {
+            while (this.IsFiring)
+            {
+                this.Fire();
+                yield return new WaitForSeconds(this.Weapon.TimeBetweenShots);
+            }
+
+            this.routineFiring = null;
+        }
     }
 }

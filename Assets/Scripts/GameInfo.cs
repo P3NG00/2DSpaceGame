@@ -67,11 +67,9 @@ namespace SpaceGame
         private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
-        private bool inputFire = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
-        private Coroutine routineFiring = null;
         private UIInventorySlot selectedSlot = null;
         private UIInventorySlot selectedHotbar = null;
         private RotationType rotationType = RotationType.RotateAxis;
@@ -197,6 +195,13 @@ namespace SpaceGame
         }
 
         public static void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
+
+        public static T RandomEnum<T>()
+        {
+            System.Array items = System.Enum.GetValues(typeof(T));
+            int index = Random.Range(0, items.Length);
+            return (T)items.GetValue(index);
+        }
 
         public static void GiveCredits(int amount, Vector2 position)
         {
@@ -437,17 +442,6 @@ namespace SpaceGame
             }
         }
 
-        private IEnumerator RoutineFire()
-        {
-            while (this.inputFire)
-            {
-                this.player.Fire();
-                yield return new WaitForSeconds(this.player.Weapon.TimeBetweenShots);
-            }
-
-            this.routineFiring = null;
-        }
-
         #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
@@ -466,23 +460,17 @@ namespace SpaceGame
             this.rotationType = RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputInventory(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleActive(this.parentInvUI); } }
-        public void CallbackInputFire(InputAction.CallbackContext ctx)
-        {
-            this.inputFire = ctx.performed;
-
-            if (this.inputFire & this.routineFiring == null)
-            {
-                this.routineFiring = StartCoroutine(RoutineFire());
-            }
-        }
+        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnPress(ctx, () => ToggleActive(this.parentInvUI));
+        public void CallbackInputFire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
         public void CallbackInputHotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
         public void CallbackInputHotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
         public void CallbackInputHotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
         public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
-        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) { if (ctx.performed) { ToggleActive(this.parentCheatMenu); } }
+        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnPress(ctx, () => ToggleActive(this.parentCheatMenu));
+
+        private void OnPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion
 
         private enum RotationType
