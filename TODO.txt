@@ -58,5 +58,4 @@ TODO make weapon type that is a constant lazer
 lazer should take energy to use,
 TODO add energy to ship
 
-TODO dont update ui every time GameInfo.UpdateInventoryUI() is called.
-instead, use the function to mark a bool true for update next time FixedUpdate is called
+TODO add crafting recipes for use with button in Inventory Crafting

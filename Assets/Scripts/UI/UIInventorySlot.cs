@@ -4,48 +4,51 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIInventorySlot : MonoBehaviour
+namespace SpaceGame.UI
 {
-    [Header("Info", order = 5)]
-    public ItemStack ItemStack;
-
-    [Header("References", order = 99)]
-    [SerializeField] private Image image;
-    [SerializeField] private TMP_Text textAmount;
-    [SerializeField] private Button button;
-    [SerializeField] private RectTransform rectTransform;
-
-    public Image Image => this.image;
-    public Button Button => this.button;
-    public RectTransform RectTransform => this.rectTransform;
-
-    public void UpdateText()
+    public sealed class UIInventorySlot : MonoBehaviour
     {
-        this.textAmount.text = this.ItemStack.Amount.ToString();
-    }
+        [Header("Info", order = 5)]
+        public ItemStack ItemStack;
 
-    public void SetVisible(bool visible)
-    {
-        this.image.enabled = visible;
-        this.textAmount.enabled = visible;
-    }
+        [Header("References", order = 99)]
+        [SerializeField] private Image image;
+        [SerializeField] private TMP_Text textAmount;
+        [SerializeField] private Button button;
+        [SerializeField] private RectTransform rectTransform;
 
-    public int AddAmount(int amount)
-    {
-        this.ItemStack.Amount += amount;
-        int difference = 0, maxStackSize = this.ItemStack.Item.MaxStackSize;
+        public Image Image => this.image;
+        public Button Button => this.button;
+        public RectTransform RectTransform => this.rectTransform;
 
-        if (this.ItemStack.Amount > maxStackSize)
+        public void UpdateText()
         {
-            difference = this.ItemStack.Amount - maxStackSize;
-            this.ItemStack.Amount = maxStackSize;
+            this.textAmount.text = this.ItemStack.Amount.ToString();
         }
 
-        return difference;
-    }
+        public void SetVisible(bool visible)
+        {
+            this.image.enabled = visible;
+            this.textAmount.enabled = visible;
+        }
 
-    public void SelectSlot()
-    {
-        GameInfo.SelectSlot(this);
+        public int AddAmount(int amount)
+        {
+            this.ItemStack.Amount += amount;
+            int difference = 0, maxStackSize = this.ItemStack.Item.MaxStackSize;
+
+            if (this.ItemStack.Amount > maxStackSize)
+            {
+                difference = this.ItemStack.Amount - maxStackSize;
+                this.ItemStack.Amount = maxStackSize;
+            }
+
+            return difference;
+        }
+
+        public void SelectSlot()
+        {
+            GameInfo.SelectSlot(this);
+        }
     }
 }

@@ -4,6 +4,7 @@ using SpaceGame.Items;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
+using SpaceGame.UI;
 using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
@@ -68,6 +69,7 @@ namespace SpaceGame
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
+        private bool updateUI = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
@@ -145,51 +147,53 @@ namespace SpaceGame
 
             // Health
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
-        }
 
-        private void UpdateInventoryUI()
-        {
-            UpdateInventorySlots(this.inventory);
-            UpdateInventorySlots(this.invCrafting);
-            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
-            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
-
-            void UpdateInventorySlots(List<UIInventorySlot> slots)
+            // UI
+            if (this.updateUI)
             {
-                foreach (UIInventorySlot slot in slots)
-                {
-                    Item itemCurrent = slot.ItemStack.Item;
+                this.updateUI = false;
+                UpdateInventorySlots(this.inventory);
+                UpdateInventorySlots(this.invCrafting);
+                UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
+                UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
 
-                    if (itemCurrent == null)
+                void UpdateInventorySlots(List<UIInventorySlot> slots)
+                {
+                    foreach (UIInventorySlot slot in slots)
                     {
-                        slot.SetVisible(false);
+                        Item itemCurrent = slot.ItemStack.Item;
+                        bool hasItem = itemCurrent == null;
+
+                        if (hasItem)
+                        {
+                            slot.Image.color = itemCurrent.Color;
+                            slot.Image.sprite = itemCurrent.Sprite;
+                            slot.UpdateText();
+                        }
+
+                        slot.SetVisible(hasItem);
+                    }
+                }
+
+                void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
+                {
+                    if (selected == null)
+                    {
+                        highlight.enabled = false;
                     }
                     else
                     {
-                        slot.Image.color = itemCurrent.Color;
-                        slot.Image.sprite = itemCurrent.Sprite;
-                        slot.SetVisible(true);
-                        slot.UpdateText();
+                        highlight.rectTransform.SetParent(selected.transform);
+                        RectTransform rectHighlight = highlight.rectTransform;
+                        RectTransform rectSelected = selected.RectTransform;
+                        highlight.transform.localPosition = new Vector3(0f, 0f, layer);
+                        highlight.enabled = true;
                     }
                 }
             }
-
-            void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
-            {
-                if (selected == null)
-                {
-                    highlight.enabled = false;
-                }
-                else
-                {
-                    highlight.rectTransform.SetParent(selected.transform);
-                    RectTransform rectHighlight = highlight.rectTransform;
-                    RectTransform rectSelected = selected.RectTransform;
-                    highlight.transform.localPosition = new Vector3(0f, 0f, layer);
-                    highlight.enabled = true;
-                }
-            }
         }
+
+        public void UpdateInventoryUI() => this.updateUI = true;
 
         public static int GiveItem(ItemStack itemStack)
         {
