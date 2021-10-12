@@ -6,15 +6,14 @@ namespace SpaceGame.Ships
 {
     public sealed class ShipAI : Ship
     {
-        [Header("DEBUG [ShipAI]", order = 110)]
-        [SerializeField] private ShipAIType shipAIType; // TODO move to scriptable object? (reassess after working on getting mechanic working)
+        [Header("Info [ShipAI]", order = 10)]
+        [SerializeField] private ShipAIType shipAIType;
 
         private ShipAIStats statsAI;
 
         private void Awake()
         {
             this.statsAI = (ShipAIStats)this.Stats;
-            this.shipAIType = Util.RandomEnum<ShipAIType>();
         }
 
         private void FixedUpdate()
@@ -25,34 +24,40 @@ namespace SpaceGame.Ships
 
             switch (this.shipAIType)
             {
-                case ShipAIType.Enemy:
-                    this.RotateToLookAt(playerPos);
-                    this.IsFiring = true;
-                    this.ApplyDrag(withinDistance);
-
-                    if (!withinDistance)
-                    {
-                        this.ApplyForce();
-                    }
-                    break;
-
-                case ShipAIType.Passive:
-                    this.ApplyForce();
-                    this.IsFiring = false;
-                    break;
-
-                case ShipAIType.TalkToPlayer:
-                    this.RotateToLookAt(playerPos);
-                    this.IsFiring = false;
-                    this.ApplyDrag(withinDistance);
-
-                    if (!withinDistance)
-                    {
-                        this.ApplyForce();
-                    }
-                    break;
+                case ShipAIType.Aggressive: this.ShipAI_Aggressive(playerPos, withinDistance); break;
+                case ShipAIType.Passive: this.ShipAI_Passive(); break;
+                case ShipAIType.Stalk: this.ShipAI_Stalk(playerPos, withinDistance); break;
             }
+        }
 
+        private void ShipAI_Passive()
+        {
+            this.IsFiring = false;
+            this.ApplyForce();
+        }
+
+        private void ShipAI_Aggressive(Vector2 playerPos, bool withinDistance)
+        {
+            this.RotateToLookAt(playerPos);
+            this.IsFiring = true;
+            this.ApplyDrag(withinDistance);
+
+            if (!withinDistance)
+            {
+                this.ApplyForce();
+            }
+        }
+
+        private void ShipAI_Stalk(Vector2 playerPos, bool withinDistance)
+        {
+            this.RotateToLookAt(playerPos);
+            this.IsFiring = false;
+            this.ApplyDrag(withinDistance);
+
+            if (!withinDistance)
+            {
+                this.ApplyForce();
+            }
         }
 
         protected override void OnDeath()
@@ -63,8 +68,8 @@ namespace SpaceGame.Ships
         private enum ShipAIType
         {
             Passive,
-            Enemy,
-            TalkToPlayer,
+            Aggressive,
+            Stalk,
         }
     }
 }

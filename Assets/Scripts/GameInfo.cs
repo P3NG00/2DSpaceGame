@@ -21,7 +21,7 @@ namespace SpaceGame
             if (GameInfo.instance == null)
             {
                 GameInfo.instance = this;
-                DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(this.gameObject);
             }
             else
             {
@@ -65,7 +65,7 @@ namespace SpaceGame
         [SerializeField] private bool doDebugStuff;
 
         // Cache
-        private List<SpaceObject> SpaceObjects = new List<SpaceObject>();
+        private List<SpaceObject> spaceObjects = new List<SpaceObject>();
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
         private float inputRotation = 0f;
@@ -305,7 +305,7 @@ namespace SpaceGame
             if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
-                foreach (SpaceObject so in gi.SpaceObjects)
+                foreach (SpaceObject so in gi.spaceObjects)
                 {
                     if (so.Settings.Tag == sos.Tag)
                     {
@@ -329,7 +329,7 @@ namespace SpaceGame
                 spaceObject.Rigidbody.velocity = Util.RandomUnitVector * sos.RandomVelocity;
                 spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
 
-                gi.SpaceObjects.Add(spaceObject);
+                gi.spaceObjects.Add(spaceObject);
                 r = spaceObject;
             }
 
@@ -343,7 +343,7 @@ namespace SpaceGame
 
         public static void DestroySpaceObject(SpaceObject spaceObject)
         {
-            GameInfo.instance.SpaceObjects.Remove(spaceObject);
+            GameInfo.instance.spaceObjects.Remove(spaceObject);
             Destroy(spaceObject.gameObject);
         }
 
@@ -415,7 +415,7 @@ namespace SpaceGame
                 yield return new WaitForSeconds(this.settings.TimeBetweenCleanup);
 
                 // Check all Space Objects...
-                this.SpaceObjects.ForEach(so =>
+                this.spaceObjects.ForEach(so =>
                 {
                     // If Space Object too far away...
                     if (Vector2.Distance(this.player.transform.position, so.transform.position) > so.Settings.DistanceMax)
@@ -449,7 +449,7 @@ namespace SpaceGame
             this.rotationType = RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnPress(ctx, () => ToggleActive(this.parentInvUI));
+        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => ToggleActive(this.parentInvUI));
         public void CallbackInputFire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
         public void CallbackInputHotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
         public void CallbackInputHotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
@@ -457,9 +457,9 @@ namespace SpaceGame
         public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
-        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnPress(ctx, () => ToggleActive(this.parentCheatMenu));
+        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => ToggleActive(this.parentCheatMenu));
 
-        private void OnPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
+        private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion
 
         private enum RotationType

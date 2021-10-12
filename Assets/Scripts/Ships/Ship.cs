@@ -32,8 +32,8 @@ namespace SpaceGame.Ships
         public float Health => this.health;
         public float MaxHealth => this.maxHealth;
 
-        public bool IsAlive => this.health > 0f;
         public Vector2 Position => this.transform.position;
+        public bool IsAlive => this.health > 0f;
         public bool IsFiring
         {
             get => this.isFiring;
@@ -66,8 +66,8 @@ namespace SpaceGame.Ships
             {
                 Vector2 facingPosition = ((Vector2)this.transform.up * offsetObj.magnitude) + posShip;
                 // Draw rays to display in editor
-                Debug.DrawLine(posShip, facingPosition, Color.blue);
-                Debug.DrawLine(posShip, pos, Color.magenta);
+                Debug.DrawLine(posShip, facingPosition, Color.red);
+                Debug.DrawLine(posShip, pos, Color.green);
             }
 
             return Vector2.Dot(offsetObj.normalized, this.transform.right);
@@ -98,7 +98,7 @@ namespace SpaceGame.Ships
             if (this.IsAlive)
             {
                 Vector3 posMissile = this.transform.position;
-                posMissile += this.transform.up * 0.1f;
+                posMissile += this.transform.up * this.transform.localScale.y;
                 float angle = (this.weapon.AngleBetweenShots / 2f) * (this.weapon.AmountOfShots - 1);
 
                 for (int i = 0; i < this.weapon.AmountOfShots; ++i)
@@ -143,7 +143,7 @@ namespace SpaceGame.Ships
 
         public void Damage(float damage)
         {
-            this.health -= damage;
+            this.health -= damage * this.stats.ScaleMissileDamage;
 
             if (this.health <= 0f)
             {
@@ -163,6 +163,16 @@ namespace SpaceGame.Ships
             }
 
             this.routineFiring = null;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.tag == GameInfo.TagMissile)
+            {
+                Destroy(collider.gameObject);
+                Missile missile = collider.GetComponent<Missile>();
+                this.Damage(missile.Weapon.MultShip);
+            }
         }
     }
 }

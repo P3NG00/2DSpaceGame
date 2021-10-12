@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6234159493842483732}
   - component: {fileID: 4069779875367142785}
   - component: {fileID: 2488316607995940359}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Missile
   m_TagString: Missile
   m_Icon: {fileID: 0}
@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b82488fde64d5749a4ff5a8c91e9527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon: {fileID: 0}
   rigidbody: {fileID: -6234159493842483732}
   spriteRenderer: {fileID: 2488316607995940359}
 --- !u!50 &-6234159493842483732
