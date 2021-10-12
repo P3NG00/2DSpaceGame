@@ -22,7 +22,6 @@ namespace SpaceGame.SpaceObjects
             {
                 Missile missile = collider.GetComponent<Missile>();
                 this.Scale -= missile.Weapon.MultSpaceRock * this.settings.ScaleMissileDamage;
-                int reward = 1;
 
                 // If Space Rock too small...
                 if (this.Scale < this.settings.DestroyBelowScale)
@@ -31,9 +30,6 @@ namespace SpaceGame.SpaceObjects
 
                     // Destroy Space Rock
                     GameInfo.DestroySpaceObject(this);
-
-                    // Give bonus credit
-                    ++reward;
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
@@ -44,10 +40,6 @@ namespace SpaceGame.SpaceObjects
                     Vector2 force = collider.attachedRigidbody.velocity * this.settings.ScaleMissileImpactForce;
                     Rigidbody.AddForceAtPosition(force, this.Rigidbody.position);
                 }
-
-                // Give player credit(s)
-                Vector2 pos = this.transform.position;
-                GameInfo.GiveCredits(reward, pos);
             }
         }
 

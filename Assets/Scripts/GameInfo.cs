@@ -32,10 +32,7 @@ namespace SpaceGame
         #endregion
 
         [Header("Game", order = 0)]
-        [SerializeField] private int credits;
         [SerializeField] private GameModeSettings settings;
-
-        [Header("Init", order = 1)]
         [SerializeField] private int framerate;
 
         [Header("Tags", order = 5)]
@@ -92,7 +89,6 @@ namespace SpaceGame
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
             SelectHotbar(0);
-            UpdateTextCredits();
             UpdateInventoryUI();
             Application.targetFrameRate = this.framerate;
         }
@@ -148,11 +144,6 @@ namespace SpaceGame
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
         }
 
-        private void UpdateTextCredits()
-        {
-            this.textCredits.text = this.credits.ToString();
-        }
-
         private void UpdateInventoryUI()
         {
             foreach (UIInventorySlot slot in GameInfo.instance.inventory)
@@ -188,28 +179,8 @@ namespace SpaceGame
                 }
             }
 
-            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -2f);
-            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -4f);
-        }
-
-        public static void GiveCredits(int amount, Vector2 position)
-        {
-            GameInfo gi = GameInfo.instance;
-
-            // Add credits
-            gi.credits += amount;
-
-            // Position to spawn
-            Vector3 pos = position;
-            pos.z = -1f;
-
-            // Instantiate Text Object
-            TMP_Text textPopup = Instantiate(gi.prefabTextCreditPopup, pos, Quaternion.identity);
-            textPopup.text = $"+{amount}";
-            Destroy(textPopup.gameObject, 0.5f);
-
-            // Update Credits Text
-            gi.UpdateTextCredits();
+            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
+            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
         }
 
         public static int GiveItem(ItemInfo item, int amount)

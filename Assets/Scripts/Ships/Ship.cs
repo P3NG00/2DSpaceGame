@@ -53,7 +53,12 @@ namespace SpaceGame.Ships
             Util.ValidateMinMax(this.health, ref this.maxHealth);
             this.srPrimary.color = this.stats.ColorPrimary;
             this.srSecondary.color = this.stats.ColorSecondary;
-            this.FORCE_VALIDATE = false;
+
+            if (this.FORCE_VALIDATE)
+            {
+                this.FORCE_VALIDATE = false;
+                print("FORCE VALIDATE SUCCESSFUL");
+            }
         }
 
         public float GetRotationToLookAt(Vector2 pos)

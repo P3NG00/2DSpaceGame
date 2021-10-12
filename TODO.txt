@@ -53,3 +53,7 @@ TODO implement keybind for cheat menu
         able to give any item or weapon
 
 TODO fix using controller right stick to aim
+
+TODO make weapon type that is a constant lazer
+lazer should take energy to use,
+TODO add energy to ship
