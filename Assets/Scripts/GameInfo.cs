@@ -57,6 +57,8 @@ namespace SpaceGame
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private List<UIInventorySlot> inventory;
+        [SerializeField] private List<UIInventorySlot> invCrafting; // TODO implement
+        // TODO when inventory closes, take all items out of invCrafting and put back into inventory
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool doDebugStuff;
@@ -221,13 +223,6 @@ namespace SpaceGame
 
         public static void ToggleActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
 
-        public static void SelectHotbar(int index)
-        {
-            GameInfo gi = GameInfo.instance;
-            gi.selectedHotbar = gi.inventory[index];
-            gi.UpdateInventoryUI();
-        }
-
         public static void SelectSlot(UIInventorySlot slot)
         {
             GameInfo gi = GameInfo.instance;
@@ -263,6 +258,13 @@ namespace SpaceGame
             }
 
             // Update UI
+            gi.UpdateInventoryUI();
+        }
+
+        public static void SelectHotbar(int index)
+        {
+            GameInfo gi = GameInfo.instance;
+            gi.selectedHotbar = gi.inventory[index];
             gi.UpdateInventoryUI();
         }
 
@@ -432,6 +434,13 @@ namespace SpaceGame
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion
+
+        // Button Callbacks
+        public void ButtonCraft()
+        {
+            // TODO craft using items in this.invCraft
+            print("ATTEMPTED CRAFTING");
+        }
 
         private enum RotationType
         {
