@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Weapon Settings")]
-    public sealed class Weapon : ItemInfo
+    [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Weapon")]
+    public sealed class Weapon : Item
     {
         [Header("Info [Weapon]", order = 1)]
         [SerializeField, Min(0f)] private float multShip;

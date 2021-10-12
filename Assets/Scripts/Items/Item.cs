@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Item/Item", fileName = "Item Info")]
-    public class ItemInfo : ScriptableObject
+    [CreateAssetMenu(menuName = "2D Space Game/Item/Item", fileName = "Item")]
+    public class Item : ScriptableObject
     {
         [Header("Info", order = 0)]
         [SerializeField] private string itemName;

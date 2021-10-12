@@ -158,7 +158,7 @@ namespace SpaceGame
             {
                 foreach (UIInventorySlot slot in slots)
                 {
-                    ItemInfo itemCurrent = slot.ItemStack.Item;
+                    Item itemCurrent = slot.ItemStack.Item;
 
                     if (itemCurrent == null)
                     {
@@ -196,7 +196,7 @@ namespace SpaceGame
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
             List<UIInventorySlot> inv = GameInfo.instance.inventory;
             UIInventorySlot slot;
-            ItemInfo itemCurrent;
+            Item itemCurrent;
 
             for (int i = 0; i < inv.Count & itemStack.Amount > 0; ++i)
             {

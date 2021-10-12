@@ -60,5 +60,3 @@ TODO add energy to ship
 
 TODO dont update ui every time GameInfo.UpdateInventoryUI() is called.
 instead, use the function to mark a bool true for update next time FixedUpdate is called
-
-TODO rename "ItemInfo" to "Item"
