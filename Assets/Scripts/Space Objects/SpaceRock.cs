@@ -1,3 +1,4 @@
+using SpaceGame.Items;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace SpaceGame.SpaceObjects
 
                     // Instantiate Item Object
                     ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
-                    itemObject.SetItemDrop(this.settings.RandomItemDrop);
+                    itemObject.SetItem(this.settings.RandomItemDrop);
                 }
                 else
                 {

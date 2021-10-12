@@ -1,3 +1,4 @@
+using SpaceGame.Items;
 using SpaceGame.SpaceObjects;
 using SpaceGame.Utilities;
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace SpaceGame.Settings
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
         [SerializeField] private ItemDrop[] itemDrops;
 
+        private int totalWeight = 0;
+
         protected virtual void OnValidate()
         {
             Util.ValidateMinMax(this.minSpawnScale, ref this.maxSpawnScale);
@@ -32,39 +35,34 @@ namespace SpaceGame.Settings
             Util.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
         }
 
+        private void Awake()
+        {
+            System.Array.ForEach(itemDrops, drop => totalWeight += drop.Weight);
+        }
+
         public float RandomScale => Random.Range(this.minSpawnScale, this.maxSpawnScale);
         public float RandomVelocity => Random.Range(this.minVelocity, this.maxVelocity);
         public float RandomAngularVelocity => Random.Range(this.minAngularVelocity, this.maxAngularVelocity);
         public SpaceObject RandomSpaceObject => this.prefabSpaceObjects[Random.Range(0, this.prefabSpaceObjects.Length)];
 
-        public ItemDrop RandomItemDrop
+        public ItemStack RandomItemDrop
         {
             get
             {
-                int weight = Random.Range(0, this.TotalWeight);
+                int weight = Random.Range(0, this.totalWeight);
 
-                foreach (ItemDrop itemDrop in this.itemDrops)
+                foreach (ItemDrop drop in this.itemDrops)
                 {
-                    weight -= itemDrop.Weight;
+                    weight -= drop.Weight;
 
                     if (weight < 0)
                     {
-                        return itemDrop;
+                        return new ItemStack(drop.Item, drop.RandomAmount);
                     }
                 }
 
                 // This should not be reached, something should return in the loop
                 throw new System.Exception("No random item drop selected");
-            }
-        }
-
-        public int TotalWeight
-        {
-            get
-            {
-                int w = 0;
-                System.Array.ForEach(this.itemDrops, drop => w += drop.Weight);
-                return w;
             }
         }
 

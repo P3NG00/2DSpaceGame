@@ -57,3 +57,8 @@ TODO fix using controller right stick to aim
 TODO make weapon type that is a constant lazer
 lazer should take energy to use,
 TODO add energy to ship
+
+TODO dont update ui every time GameInfo.UpdateInventoryUI() is called.
+instead, use the function to mark a bool true for update next time FixedUpdate is called
+
+TODO rename "ItemInfo" to "Item"

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SpaceGame.Items;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
@@ -148,20 +149,28 @@ namespace SpaceGame
 
         private void UpdateInventoryUI()
         {
-            foreach (UIInventorySlot slot in GameInfo.instance.inventory)
-            {
-                ItemInfo itemCurrent = slot.Item;
+            UpdateInventorySlots(this.inventory);
+            UpdateInventorySlots(this.invCrafting);
+            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
+            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
 
-                if (itemCurrent == null)
+            void UpdateInventorySlots(List<UIInventorySlot> slots)
+            {
+                foreach (UIInventorySlot slot in slots)
                 {
-                    slot.SetVisible(false);
-                }
-                else
-                {
-                    slot.Image.color = itemCurrent.Color;
-                    slot.Image.sprite = itemCurrent.Sprite;
-                    slot.SetVisible(true);
-                    slot.UpdateText();
+                    ItemInfo itemCurrent = slot.ItemStack.Item;
+
+                    if (itemCurrent == null)
+                    {
+                        slot.SetVisible(false);
+                    }
+                    else
+                    {
+                        slot.Image.color = itemCurrent.Color;
+                        slot.Image.sprite = itemCurrent.Sprite;
+                        slot.SetVisible(true);
+                        slot.UpdateText();
+                    }
                 }
             }
 
@@ -180,27 +189,24 @@ namespace SpaceGame
                     highlight.enabled = true;
                 }
             }
-
-            UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
-            UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
         }
 
-        public static int GiveItem(ItemInfo item, int amount)
+        public static int GiveItem(ItemStack itemStack)
         {
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
             List<UIInventorySlot> inv = GameInfo.instance.inventory;
             UIInventorySlot slot;
             ItemInfo itemCurrent;
 
-            for (int i = 0; i < inv.Count & amount > 0; ++i)
+            for (int i = 0; i < inv.Count & itemStack.Amount > 0; ++i)
             {
                 slot = inv[i];
-                itemCurrent = slot.Item;
+                itemCurrent = slot.ItemStack.Item;
 
-                if (itemCurrent == item)
+                if (itemCurrent == itemStack.Item)
                 {
                     // Add amount and update remaining amount
-                    amount = slot.AddAmount(amount);
+                    itemStack.Amount = slot.AddAmount(itemStack.Amount);
                 }
                 else if (itemCurrent == null)
                 {
@@ -210,15 +216,15 @@ namespace SpaceGame
             }
 
             // Fill empty slots with extra
-            while (amount > 0 & emptySlots.Count > 0)
+            while (itemStack.Amount > 0 & emptySlots.Count > 0)
             {
                 slot = emptySlots.Dequeue();
-                slot.Item = item;
-                amount = slot.AddAmount(amount);
+                slot.ItemStack.Item = itemStack.Item;
+                itemStack.Amount = slot.AddAmount(itemStack.Amount);
             }
 
             GameInfo.instance.UpdateInventoryUI();
-            return amount;
+            return itemStack.Amount;
         }
 
         public static void ToggleActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
@@ -235,7 +241,7 @@ namespace SpaceGame
             }
             else if (slotSel == null)
             {
-                if (slot.Item != null)
+                if (slot.ItemStack.Item != null)
                 {
                     // Set slot
                     gi.selectedSlot = slot;
@@ -244,14 +250,9 @@ namespace SpaceGame
             else
             {
                 // Swap items
-                ItemInfo swapItem = slot.Item;
-                int swapAmount = slot.Amount;
-
-                slot.Item = slotSel.Item;
-                slot.Amount = slotSel.Amount;
-
-                slotSel.Item = swapItem;
-                slotSel.Amount = swapAmount;
+                ItemStack swap = slot.ItemStack;
+                slot.ItemStack = slotSel.ItemStack;
+                slotSel.ItemStack = swap;
 
                 // Reset
                 gi.selectedSlot = null;

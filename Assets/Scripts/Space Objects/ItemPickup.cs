@@ -14,9 +14,9 @@ namespace SpaceGame.SpaceObjects
         private void OnTriggerEnter2D(Collider2D collider)
         {
             // If player triggered and item declared...
-            if (collider.tag == GameInfo.TagPlayer & this.parentItem.Item != null)
+            if (collider.tag == GameInfo.TagPlayer & this.parentItem.ItemStack != null)
             {
-                int remaining = GameInfo.GiveItem(this.parentItem.Item, this.parentItem.Amount);
+                int remaining = GameInfo.GiveItem(this.parentItem.ItemStack);
 
                 if (remaining == 0)
                 {
@@ -24,7 +24,7 @@ namespace SpaceGame.SpaceObjects
                 }
                 else
                 {
-                    this.parentItem.Amount = remaining;
+                    this.parentItem.ItemStack.Amount = remaining;
                 }
             }
         }

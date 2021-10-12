@@ -1,5 +1,5 @@
 using SpaceGame;
-using SpaceGame.Settings;
+using SpaceGame.Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class UIInventorySlot : MonoBehaviour
 {
     [Header("Info", order = 5)]
-    public ItemInfo Item;
-    public int Amount;
+    public ItemStack ItemStack;
 
     [Header("References", order = 99)]
     [SerializeField] private Image image;
@@ -22,7 +21,7 @@ public class UIInventorySlot : MonoBehaviour
 
     public void UpdateText()
     {
-        this.textAmount.text = this.Amount.ToString();
+        this.textAmount.text = this.ItemStack.Amount.ToString();
     }
 
     public void SetVisible(bool visible)
@@ -33,13 +32,13 @@ public class UIInventorySlot : MonoBehaviour
 
     public int AddAmount(int amount)
     {
-        this.Amount += amount;
-        int difference = 0;
+        this.ItemStack.Amount += amount;
+        int difference = 0, maxStackSize = this.ItemStack.Item.MaxStackSize;
 
-        if (this.Amount > this.Item.MaxStackSize)
+        if (this.ItemStack.Amount > maxStackSize)
         {
-            difference = this.Amount - this.Item.MaxStackSize;
-            this.Amount = this.Item.MaxStackSize;
+            difference = this.ItemStack.Amount - maxStackSize;
+            this.ItemStack.Amount = maxStackSize;
         }
 
         return difference;

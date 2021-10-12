@@ -10,7 +10,7 @@ namespace SpaceGame.Settings
         [SerializeField] private int minAmount;
         [SerializeField] private int maxVariance;
 
-        public ItemInfo ItemInfo => this.item;
+        public ItemInfo Item => this.item;
         public int Weight => this.weight;
         public int RandomAmount => this.minAmount + Random.Range(0, this.maxVariance + 1);
     }

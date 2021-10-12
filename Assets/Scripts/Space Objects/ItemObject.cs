@@ -1,3 +1,4 @@
+using SpaceGame.Items;
 using SpaceGame.Settings;
 using UnityEngine;
 
@@ -6,20 +7,17 @@ namespace SpaceGame.SpaceObjects
     public sealed class ItemObject : SpaceObject
     {
         [Header("Info (as ItemObject)", order = 10)]
-        [SerializeField] private ItemInfo item;
-        public int Amount;
+        [SerializeField] private ItemStack itemStack;
 
-        public ItemInfo Item => this.item;
+        public ItemStack ItemStack => this.itemStack;
 
-        protected override Color GetColor() => this.item.Color;
+        protected override Color GetColor() => this.itemStack.Item.Color;
 
-        public void SetItemDrop(ItemDrop itemDrop)
+        public void SetItem(ItemStack itemStack)
         {
-            ItemInfo itemInfo = itemDrop.ItemInfo;
-            this.item = itemInfo;
-            this.SpriteRenderer.sprite = itemInfo.Sprite;
-            this.SpriteRenderer.color = itemInfo.Color;
-            this.Amount = itemDrop.RandomAmount;
+            this.itemStack = itemStack;
+            this.SpriteRenderer.sprite = itemStack.Item.Sprite;
+            this.SpriteRenderer.color = itemStack.Item.Color;
         }
     }
 }
