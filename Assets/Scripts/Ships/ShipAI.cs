@@ -19,8 +19,7 @@ namespace SpaceGame.Ships
         private void FixedUpdate()
         {
             Vector2 playerPos = GameInfo.Player.Position;
-            float distance = Vector2.Distance(this.Position, playerPos);
-            bool withinDistance = distance < this.statsAI.DistanceStopFromPlayer;
+            bool withinDistance = Vector2.Distance(this.Position, playerPos) < this.statsAI.DistanceStopFromPlayer;
 
             switch (this.shipAIType)
             {

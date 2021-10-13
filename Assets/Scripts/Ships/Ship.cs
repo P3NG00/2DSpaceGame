@@ -67,7 +67,7 @@ namespace SpaceGame.Ships
             Vector2 offsetObj = pos - posShip;
 
             // Debug rays
-            if (GameInfo.DO_DEBUG_STUFF)
+            if (GameInfo.DEBUG_RAYS)
             {
                 Vector2 facingPosition = ((Vector2)this.transform.up * offsetObj.magnitude) + posShip;
                 // Draw rays to display in editor

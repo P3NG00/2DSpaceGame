@@ -32,20 +32,6 @@ namespace SpaceGame.UI
             this.textAmount.enabled = visible;
         }
 
-        public int AddAmount(int amount)
-        {
-            this.ItemStack.Amount += amount;
-            int difference = 0, maxStackSize = this.ItemStack.Item.MaxStackSize;
-
-            if (this.ItemStack.Amount > maxStackSize)
-            {
-                difference = this.ItemStack.Amount - maxStackSize;
-                this.ItemStack.Amount = maxStackSize;
-            }
-
-            return difference;
-        }
-
         public void SelectSlot()
         {
             GameInfo.SelectSlot(this);

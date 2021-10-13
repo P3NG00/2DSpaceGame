@@ -49,7 +49,6 @@ namespace SpaceGame
         [Header("References", order = 99)]
         [SerializeField] private ShipPlayer player;
         [SerializeField] private Transform parentSpaceObjects;
-        [SerializeField] private TMP_Text textCredits;
         [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private GameObject parentInvUI;
         [SerializeField] private GameObject parentCheatMenu;
@@ -63,7 +62,8 @@ namespace SpaceGame
         // TODO when inventory closes, take all items out of invCrafting and put back into inventory
 
         [Header("DEBUG", order = 100)]
-        [SerializeField] private bool doDebugStuff;
+        [SerializeField] private bool doDebugRays;
+        [SerializeField] private bool doDebugLog;
 
         // Cache
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
@@ -78,7 +78,8 @@ namespace SpaceGame
         private RotationType rotationType = RotationType.RotateAxis;
 
         // Public Getters
-        public static bool DO_DEBUG_STUFF => GameInfo.instance.doDebugStuff;
+        public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
+        public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
         public static ShipPlayer Player => GameInfo.instance.player;
         public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
@@ -162,7 +163,7 @@ namespace SpaceGame
                     foreach (UIInventorySlot slot in slots)
                     {
                         Item itemCurrent = slot.ItemStack.Item;
-                        bool hasItem = itemCurrent == null;
+                        bool hasItem = itemCurrent != null;
 
                         if (hasItem)
                         {
@@ -193,7 +194,7 @@ namespace SpaceGame
             }
         }
 
-        public void UpdateInventoryUI() => this.updateUI = true;
+        public static void UpdateInventoryUI() => GameInfo.instance.updateUI = true;
 
         public static int GiveItem(ItemStack itemStack)
         {
@@ -210,7 +211,7 @@ namespace SpaceGame
                 if (itemCurrent == itemStack.Item)
                 {
                     // Add amount and update remaining amount
-                    itemStack.Amount = slot.AddAmount(itemStack.Amount);
+                    itemStack.Amount = slot.ItemStack.AddAmount(itemStack.Amount);
                 }
                 else if (itemCurrent == null)
                 {
@@ -224,10 +225,10 @@ namespace SpaceGame
             {
                 slot = emptySlots.Dequeue();
                 slot.ItemStack.Item = itemStack.Item;
-                itemStack.Amount = slot.AddAmount(itemStack.Amount);
+                itemStack.Amount = slot.ItemStack.AddAmount(itemStack.Amount);
             }
 
-            GameInfo.instance.UpdateInventoryUI();
+            UpdateInventoryUI();
             return itemStack.Amount;
         }
 
@@ -263,14 +264,14 @@ namespace SpaceGame
             }
 
             // Update UI
-            gi.UpdateInventoryUI();
+            UpdateInventoryUI();
         }
 
         public static void SelectHotbar(int index)
         {
             GameInfo gi = GameInfo.instance;
             gi.selectedHotbar = gi.inventory[index];
-            gi.UpdateInventoryUI();
+            UpdateInventoryUI();
         }
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectSettings sos, Vector2 pos)
@@ -311,7 +312,7 @@ namespace SpaceGame
                 r = spaceObject;
             }
 
-            if (GameInfo.DO_DEBUG_STUFF)
+            if (GameInfo.DEBUG_LOG)
             {
                 print($"[{sos.name}] Spawned: {pass}");
             }
@@ -374,7 +375,7 @@ namespace SpaceGame
                     SpawnSpaceObject(soss, spawnPos);
                 }
 
-                if (GameInfo.DO_DEBUG_STUFF && soss.DebugAnnounceSpawn)
+                if (GameInfo.DEBUG_LOG && soss.DebugAnnounceSpawn)
                 {
                     string msg = b ? "SUCCESS" : "FAILURE";
                     print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {msg}");
@@ -393,7 +394,7 @@ namespace SpaceGame
                 yield return new WaitForSeconds(this.settings.TimeBetweenCleanup);
 
                 // Check all Space Objects...
-                this.spaceObjects.ForEach(so =>
+                foreach (SpaceObject so in this.spaceObjects)
                 {
                     // If Space Object too far away...
                     if (Vector2.Distance(this.player.transform.position, so.transform.position) > so.Settings.DistanceMax)
@@ -401,7 +402,7 @@ namespace SpaceGame
                         // Add to disposal list
                         objectsToRemove.Add(so);
                     }
-                });
+                }
 
                 // Remove Space Objects
                 objectsToRemove.ForEach(so => DestroySpaceObject(so));
