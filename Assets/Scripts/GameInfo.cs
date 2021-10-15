@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceGame.Items;
@@ -37,6 +38,9 @@ namespace SpaceGame
         [SerializeField] private GameModeSettings settings;
         [SerializeField] private int framerate;
 
+        [Header("Recipes", order = 3)]
+        [SerializeField] private Recipe[] recipes;
+
         [Header("Tags", order = 5)]
         [SerializeField] private string tagShip;
         [SerializeField] private string tagPlayer;
@@ -57,8 +61,8 @@ namespace SpaceGame
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
-        [SerializeField] private List<UIInventorySlot> inventory;
-        [SerializeField] private List<UIInventorySlot> invCrafting; // TODO implement
+        [SerializeField] private UIInventorySlot[] inventory;
+        [SerializeField] private UIInventorySlot[] invCrafting; // TODO implement
         // TODO when inventory closes, take all items out of invCrafting and put back into inventory
 
         [Header("DEBUG", order = 100)]
@@ -140,11 +144,10 @@ namespace SpaceGame
             this.player.Animator.SetBool("Moving", this.inputAddForce);
 
             // Update Info Panel Text
-            Rigidbody2D prb = this.player.Rigidbody;
-            Vector2 playerPosition = this.player.Position;
-            this.textInfoPanel.text = $"pos x: {playerPosition.x}\n" +
-                $"pos y: {playerPosition.y}\n" +
-                $"velocity: {prb.velocity.magnitude}";
+            this.textInfoPanel.text =
+                $"pos x: {this.player.Position.x}\n" +
+                $"pos y: {this.player.Position.y}\n" +
+                $"velocity: {this.player.Rigidbody.velocity.magnitude}";
 
             // Health
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
@@ -158,18 +161,27 @@ namespace SpaceGame
                 UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
                 UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
 
-                void UpdateInventorySlots(List<UIInventorySlot> slots)
+                void UpdateInventorySlots(UIInventorySlot[] slots)
                 {
                     foreach (UIInventorySlot slot in slots)
                     {
-                        Item itemCurrent = slot.ItemStack.Item;
+                        ItemStack itemStack = slot.ItemStack;
+                        Item itemCurrent = itemStack.Item;
                         bool hasItem = itemCurrent != null;
 
                         if (hasItem)
                         {
-                            slot.Image.color = itemCurrent.Color;
-                            slot.Image.sprite = itemCurrent.Sprite;
-                            slot.UpdateText();
+                            if (itemStack.Amount <= 0)
+                            {
+                                itemStack.Item = null;
+                                hasItem = false;
+                            }
+                            else
+                            {
+                                slot.Image.color = itemCurrent.Color;
+                                slot.Image.sprite = itemCurrent.Sprite;
+                                slot.UpdateText();
+                            }
                         }
 
                         slot.SetVisible(hasItem);
@@ -199,11 +211,11 @@ namespace SpaceGame
         public static int GiveItem(ItemStack itemStack)
         {
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
-            List<UIInventorySlot> inv = GameInfo.instance.inventory;
+            UIInventorySlot[] inv = GameInfo.instance.inventory;
             UIInventorySlot slot;
             Item itemCurrent;
 
-            for (int i = 0; i < inv.Count & itemStack.Amount > 0; ++i)
+            for (int i = 0; i < inv.Length & itemStack.Amount > 0; ++i)
             {
                 slot = inv[i];
                 itemCurrent = slot.ItemStack.Item;
@@ -232,7 +244,22 @@ namespace SpaceGame
             return itemStack.Amount;
         }
 
-        public static void ToggleActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
+        public static bool RemoveItemsFromInventory(UIInventorySlot[] invSlots, params ItemStack[] itemStackList)
+        {
+            UIInventorySlot slot;
+
+            foreach (ItemStack itemStack in itemStackList)
+            {
+                for (int i = 0; i < invSlots.Length & itemStack.Amount > 0; i++)
+                {
+                    slot = invSlots[i];
+
+                    // TODO
+                }
+            }
+
+            return false;
+        }
 
         public static void SelectSlot(UIInventorySlot slot)
         {
@@ -410,6 +437,41 @@ namespace SpaceGame
             }
         }
 
+        // Button Callbacks
+        public void ButtonCraft() // TODO finish this function
+        {
+            List<ItemStack> input = new List<ItemStack>();
+
+            // Find what is in crafting slots
+            System.Array.ForEach(this.invCrafting, slot => input.Add(slot.ItemStack));
+
+            ItemStack[] inputArray = input.ToArray();
+            Recipe recipe = null;
+
+            // Check if this matches any recipes
+            foreach (Recipe r in this.recipes)
+            {
+                if (r.AreIngredientsValid(inputArray))
+                {
+                    recipe = r;
+                    break;
+                }
+            }
+
+            // If recipe found...
+            if (recipe != null)
+            {
+                // Remove specific amount of items from crafting slots
+                // cache the items that need to be removed, create function
+                // to remove items from inventory, and returns true/false (true = success)
+                // if it returns false at all during this time, throw exception because
+                // for some reason the items aren't available anymore or some other error
+
+                // Give item to player
+                GiveItem(recipe.Output);
+            }
+        }
+
         #region Input Callbacks
         public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
@@ -428,7 +490,7 @@ namespace SpaceGame
             this.rotationType = RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => ToggleActive(this.parentInvUI));
+        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
         public void CallbackInputFire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
         public void CallbackInputHotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
         public void CallbackInputHotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
@@ -436,17 +498,10 @@ namespace SpaceGame
         public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
-        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => ToggleActive(this.parentCheatMenu));
+        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion
-
-        // Button Callbacks
-        public void ButtonCraft()
-        {
-            // TODO craft using items in this.invCraft
-            print("ATTEMPTED CRAFTING");
-        }
 
         private enum RotationType
         {

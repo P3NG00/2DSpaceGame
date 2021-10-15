@@ -1,4 +1,3 @@
-using System.Globalization;
 using SpaceGame.Settings;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace SpaceGame.Items
     public sealed class ItemStack
     {
         public Item Item;
-        [SerializeField] private int amount;
+        [SerializeField, Min(0)] private int amount;
 
         public ItemStack(Item item, int amount)
         {
@@ -22,17 +21,19 @@ namespace SpaceGame.Items
             set
             {
                 this.amount = value;
-                this.CheckStackSize();
+                this.ValidateStackSize();
             }
         }
 
+        // Adds amount to stack, then returns
+        // remaining amount that couldn't be added
         public int AddAmount(int amount)
         {
             this.amount += amount;
-            return this.CheckStackSize();
+            return this.ValidateStackSize();
         }
 
-        private int CheckStackSize()
+        private int ValidateStackSize()
         {
             int difference = 0, maxStackSize = this.Item.MaxStackSize;
 
@@ -40,6 +41,10 @@ namespace SpaceGame.Items
             {
                 difference = this.amount - maxStackSize;
                 this.amount = maxStackSize;
+            }
+            else if (this.amount < 0)
+            {
+                this.amount = 0;
             }
 
             return difference;

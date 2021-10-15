@@ -314,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
-      value: Slot (1)
+      value: Slot Crafting (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5025847937989096853, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_fontSizeBase
@@ -572,7 +572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
-      value: Slot (4)
+      value: Slot Crafting (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5025847937989096853, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_fontSizeBase
@@ -2312,7 +2312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
-      value: Slot (3)
+      value: Slot Crafting (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5025847937989096853, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_fontSizeBase
@@ -4763,7 +4763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
-      value: Slot
+      value: Slot Crafting
       objectReference: {fileID: 0}
     - target: {fileID: 5025847937989096853, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_fontSizeBase
@@ -5841,7 +5841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
-      value: Slot (2)
+      value: Slot Crafting (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5025847937989096853, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_fontSizeBase

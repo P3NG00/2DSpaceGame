@@ -1,5 +1,4 @@
 using SpaceGame.Items;
-using SpaceGame.Settings;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects

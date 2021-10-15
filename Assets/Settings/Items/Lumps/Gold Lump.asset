@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Gold Lump
   sprite: {fileID: 21300000, guid: 34c1beda7462d084587837b2a5ad474e, type: 3}
   color: {r: 0.95, g: 0.8391667, b: 0.285, a: 1}
-  maxStackSize: 99
+  maxStackSize: 100

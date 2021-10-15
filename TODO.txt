@@ -44,6 +44,7 @@ TODO add crafting for items
 
 
 
+TODO big round boss creature that can only be attacked from certain sides. you need to fake him out to get enough time to attack his spots
 
 
 TODO implement keybind for cheat menu
@@ -59,3 +60,17 @@ lazer should take energy to use,
 TODO add energy to ship
 
 TODO add crafting recipes for use with button in Inventory Crafting
+
+TODO keep stats about game
+    shots fired
+    shots landed
+    hit/miss ratio
+    distance traveled (cache last location in fixed update and find difference between them and add it to stats?)
+    space rocks destroyed
+    items picked up
+    space rocks ran into
+    planets ran into
+    deaths
+    total play time
+
+TODO regenerate player health when not taking damage

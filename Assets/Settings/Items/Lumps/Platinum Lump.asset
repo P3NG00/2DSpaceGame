@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64c172d4ae0541a48b93805010037d56, type: 3}
-  m_Name: Silver Lump
+  m_Name: Platinum Lump
   m_EditorClassIdentifier: 
-  itemName: Silver Lump
+  itemName: Platinum Lump
   sprite: {fileID: 21300000, guid: 34c1beda7462d084587837b2a5ad474e, type: 3}
-  color: {r: 0.5, g: 0.83333325, b: 1, a: 1}
-  maxStackSize: 99
+  color: {r: 0.765, g: 0.8325, b: 0.9, a: 1}
+  maxStackSize: 100

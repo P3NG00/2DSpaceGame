@@ -44,10 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adb4b2c7d9ed0c41a9ec895be0b1b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: 0
   settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
-  mainSceneName: SampleScene
   framerate: 150
+  recipes:
+  - {fileID: 11400000, guid: 64b81c970f3b0cd4a9c8d11e141a1973, type: 2}
+  - {fileID: 11400000, guid: 40172206780c005408889c636f1a5078, type: 2}
+  - {fileID: 11400000, guid: 7bbebbe86bb95f2489c7af03dbba3bdd, type: 2}
+  - {fileID: 11400000, guid: f73d41a2016b87245bba872a722c0b93, type: 2}
+  - {fileID: 11400000, guid: e3d952e641cdfd7449bedc6f958f8d46, type: 2}
   tagShip: Ship
   tagPlayer: Player
   tagMissile: Missile
@@ -55,7 +59,6 @@ MonoBehaviour:
   prefabTextCreditPopup: {fileID: 5284667503819923402, guid: 052644854a10f5b4e984287ef05b8f00, type: 3}
   player: {fileID: 0}
   parentSpaceObjects: {fileID: 0}
-  textCredits: {fileID: 0}
   textInfoPanel: {fileID: 0}
   parentInvUI: {fileID: 0}
   parentCheatMenu: {fileID: 0}
@@ -93,7 +96,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  doDebugStuff: 1
+  invCrafting: []
+  doDebugRays: 0
+  doDebugLog: 0
 --- !u!114 &3068602627571150779
 MonoBehaviour:
   m_ObjectHideFlags: 0

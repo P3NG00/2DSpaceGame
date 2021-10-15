@@ -1,5 +1,4 @@
 using SpaceGame.Settings;
-using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -35,9 +34,9 @@ namespace SpaceGame.Ships
             this.ApplyForce();
         }
 
-        private void ShipAI_Aggressive(Vector2 playerPos, bool withinDistance)
+        private void ShipAI_Aggressive(Vector2 target, bool withinDistance)
         {
-            this.RotateToLookAt(playerPos);
+            this.RotateToLookAt(target);
             this.IsFiring = true;
             this.ApplyDrag(withinDistance);
 
@@ -47,9 +46,9 @@ namespace SpaceGame.Ships
             }
         }
 
-        private void ShipAI_Stalk(Vector2 playerPos, bool withinDistance)
+        private void ShipAI_Stalk(Vector2 target, bool withinDistance)
         {
-            this.RotateToLookAt(playerPos);
+            this.RotateToLookAt(target);
             this.IsFiring = false;
             this.ApplyDrag(withinDistance);
 
