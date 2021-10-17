@@ -6,6 +6,7 @@ namespace SpaceGame.Ships
     public sealed class ShipAI : Ship
     {
         [Header("Info [ShipAI]", order = 10)]
+        [SerializeField] private Weapon weapon;
         [SerializeField] private ShipAIType shipAIType;
 
         private ShipAIStats statsAI;
@@ -57,6 +58,8 @@ namespace SpaceGame.Ships
                 this.ApplyForce();
             }
         }
+
+        public override Weapon GetWeapon() => this.weapon;
 
         protected override void OnDeath()
         {

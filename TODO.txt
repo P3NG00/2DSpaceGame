@@ -74,3 +74,10 @@ TODO keep stats about game
     total play time
 
 TODO regenerate player health when not taking damage
+
+TODO add slots to UI for placing weapon/defense/quick use item?
+
+
+TODO cheat menu
+    "revive" button to refill health
+    "invincible" button to not take damage

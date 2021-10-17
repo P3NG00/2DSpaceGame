@@ -11,6 +11,7 @@ namespace SpaceGame.Settings
         [SerializeField] private Color color;
         [SerializeField] private int maxStackSize;
 
+        public string ItemName => this.itemName;
         public Sprite Sprite => this.sprite;
         public Color Color => this.color;
         public int MaxStackSize => this.maxStackSize;

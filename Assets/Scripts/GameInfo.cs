@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceGame.Items;
@@ -61,11 +60,11 @@ namespace SpaceGame
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
-        [SerializeField] private UIInventorySlot[] inventory;
-        [SerializeField] private UIInventorySlot[] invCrafting; // TODO implement
-        // TODO when inventory closes, take all items out of invCrafting and put back into inventory
+        [SerializeField] private UIInventorySlot[] slotsInventory;
+        [SerializeField] private UIInventorySlot slotWeapon;
 
         [Header("DEBUG", order = 100)]
+        [SerializeField] private bool updateUI = false;
         [SerializeField] private bool doDebugRays;
         [SerializeField] private bool doDebugLog;
 
@@ -73,7 +72,6 @@ namespace SpaceGame
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
         private bool inputAddForce = false;
         private bool inputSlowDown = false;
-        private bool updateUI = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
@@ -82,11 +80,12 @@ namespace SpaceGame
         private RotationType rotationType = RotationType.RotateAxis;
 
         // Public Getters
+        public static ShipPlayer Player => GameInfo.instance.player;
+        public static Weapon PlayerWeapon => (Weapon)GameInfo.instance.slotWeapon.ItemStack.Item;
+        public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
+        public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
-        public static ShipPlayer Player => GameInfo.instance.player;
-        public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
-        public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
 
         // Tags
         public static string TagShip => GameInfo.instance.tagShip;
@@ -98,6 +97,7 @@ namespace SpaceGame
         {
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
+            this.parentInvUI.SetActive(false);
             SelectHotbar(0);
             UpdateInventoryUI();
             Application.targetFrameRate = this.framerate;
@@ -156,37 +156,33 @@ namespace SpaceGame
             if (this.updateUI)
             {
                 this.updateUI = false;
-                UpdateInventorySlots(this.inventory);
-                UpdateInventorySlots(this.invCrafting);
+
+                // Update slot visual info
+                foreach (UIInventorySlot slot in this.slotsInventory)
+                {
+                    ItemStack slotStack = slot.ItemStack;
+                    bool hasItem = slotStack.Item != null;
+
+                    if (hasItem)
+                    {
+                        if (slotStack.Amount <= 0)
+                        {
+                            slotStack.Item = null;
+                            hasItem = false;
+                        }
+                        else
+                        {
+                            slot.Image.color = slotStack.Item.Color;
+                            slot.Image.sprite = slotStack.Item.Sprite;
+                            slot.UpdateText();
+                        }
+                    }
+
+                    slot.SetVisible(hasItem);
+                }
+
                 UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
                 UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
-
-                void UpdateInventorySlots(UIInventorySlot[] slots)
-                {
-                    foreach (UIInventorySlot slot in slots)
-                    {
-                        ItemStack itemStack = slot.ItemStack;
-                        Item itemCurrent = itemStack.Item;
-                        bool hasItem = itemCurrent != null;
-
-                        if (hasItem)
-                        {
-                            if (itemStack.Amount <= 0)
-                            {
-                                itemStack.Item = null;
-                                hasItem = false;
-                            }
-                            else
-                            {
-                                slot.Image.color = itemCurrent.Color;
-                                slot.Image.sprite = itemCurrent.Sprite;
-                                slot.UpdateText();
-                            }
-                        }
-
-                        slot.SetVisible(hasItem);
-                    }
-                }
 
                 void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
                 {
@@ -211,7 +207,7 @@ namespace SpaceGame
         public static int GiveItem(ItemStack itemStack)
         {
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
-            UIInventorySlot[] inv = GameInfo.instance.inventory;
+            UIInventorySlot[] inv = GameInfo.instance.slotsInventory;
             UIInventorySlot slot;
             Item itemCurrent;
 
@@ -223,6 +219,7 @@ namespace SpaceGame
                 if (itemCurrent == itemStack.Item)
                 {
                     // Add amount and update remaining amount
+                    slot.ItemStack.Amount += itemStack.Amount;
                     itemStack.Amount = slot.ItemStack.AddAmount(itemStack.Amount);
                 }
                 else if (itemCurrent == null)
@@ -244,21 +241,22 @@ namespace SpaceGame
             return itemStack.Amount;
         }
 
-        public static bool RemoveItemsFromInventory(UIInventorySlot[] invSlots, params ItemStack[] itemStackList)
+        public static bool RemoveItemFromSlots(UIInventorySlot[] invSlots, ItemStack itemStack)
         {
-            UIInventorySlot slot;
+            ItemStack slotStack;
 
-            foreach (ItemStack itemStack in itemStackList)
+            for (int i = 0; i < invSlots.Length & itemStack.Amount != 0; i++)
             {
-                for (int i = 0; i < invSlots.Length & itemStack.Amount > 0; i++)
-                {
-                    slot = invSlots[i];
+                slotStack = invSlots[i].ItemStack;
 
-                    // TODO
+                if (slotStack.Item == itemStack.Item)
+                {
+                    slotStack.Amount = Mathf.Abs(slotStack.AddAmount(-itemStack.Amount));
                 }
             }
 
-            return false;
+            UpdateInventoryUI();
+            return itemStack.Amount == 0;
         }
 
         public static void SelectSlot(UIInventorySlot slot)
@@ -266,38 +264,59 @@ namespace SpaceGame
             GameInfo gi = GameInfo.instance;
             UIInventorySlot slotSel = gi.selectedSlot;
 
-            // If no slot selected...
+            // If selecting selected slot...
             if (slotSel == slot)
             {
+                // Deselect slot
                 gi.selectedSlot = null;
+                UpdateInventoryUI();
             }
+            // Else if no slot selected...
             else if (slotSel == null)
             {
+                // If slot stack has item...
                 if (slot.ItemStack.Item != null)
                 {
-                    // Set slot
+                    // Select slot
                     gi.selectedSlot = slot;
+                    UpdateInventoryUI();
                 }
             }
+            // Else, selected slot exists and is selecting different slot...
             else
             {
-                // Swap items
-                ItemStack swap = slot.ItemStack;
-                slot.ItemStack = slotSel.ItemStack;
-                slotSel.ItemStack = swap;
+                // If selecting weapon slot...
+                if (slot == gi.slotWeapon)
+                {
+                    // If item being moved is a weapon...
+                    if (slotSel.ItemStack.Item is Weapon)
+                    {
+                        SwapItems();
+                    }
+                }
+                else
+                {
+                    SwapItems();
+                }
 
-                // Reset
-                gi.selectedSlot = null;
+                void SwapItems()
+                {
+                    // Swap items
+                    ItemStack swap = slot.ItemStack;
+                    slot.ItemStack = slotSel.ItemStack;
+                    slotSel.ItemStack = swap;
+
+                    // Reset
+                    gi.selectedSlot = null;
+                    UpdateInventoryUI();
+                }
             }
-
-            // Update UI
-            UpdateInventoryUI();
         }
 
         public static void SelectHotbar(int index)
         {
             GameInfo gi = GameInfo.instance;
-            gi.selectedHotbar = gi.inventory[index];
+            gi.selectedHotbar = gi.slotsInventory[index];
             UpdateInventoryUI();
         }
 
@@ -434,41 +453,6 @@ namespace SpaceGame
                 // Remove Space Objects
                 objectsToRemove.ForEach(so => DestroySpaceObject(so));
                 objectsToRemove.Clear();
-            }
-        }
-
-        // Button Callbacks
-        public void ButtonCraft() // TODO finish this function
-        {
-            List<ItemStack> input = new List<ItemStack>();
-
-            // Find what is in crafting slots
-            System.Array.ForEach(this.invCrafting, slot => input.Add(slot.ItemStack));
-
-            ItemStack[] inputArray = input.ToArray();
-            Recipe recipe = null;
-
-            // Check if this matches any recipes
-            foreach (Recipe r in this.recipes)
-            {
-                if (r.AreIngredientsValid(inputArray))
-                {
-                    recipe = r;
-                    break;
-                }
-            }
-
-            // If recipe found...
-            if (recipe != null)
-            {
-                // Remove specific amount of items from crafting slots
-                // cache the items that need to be removed, create function
-                // to remove items from inventory, and returns true/false (true = success)
-                // if it returns false at all during this time, throw exception because
-                // for some reason the items aren't available anymore or some other error
-
-                // Give item to player
-                GiveItem(recipe.Output);
             }
         }
 

@@ -6,6 +6,7 @@ namespace SpaceGame.Items
     [System.Serializable]
     public sealed class ItemStack
     {
+        [Header("ItemStack Info", order = 0)]
         public Item Item;
         [SerializeField, Min(0)] private int amount;
 
@@ -21,7 +22,7 @@ namespace SpaceGame.Items
             set
             {
                 this.amount = value;
-                this.ValidateStackSize();
+                this.FixStackSize();
             }
         }
 
@@ -30,10 +31,10 @@ namespace SpaceGame.Items
         public int AddAmount(int amount)
         {
             this.amount += amount;
-            return this.ValidateStackSize();
+            return this.FixStackSize();
         }
 
-        private int ValidateStackSize()
+        private int FixStackSize()
         {
             int difference = 0, maxStackSize = this.Item.MaxStackSize;
 
@@ -45,9 +46,12 @@ namespace SpaceGame.Items
             else if (this.amount < 0)
             {
                 this.amount = 0;
+                this.Item = null;
             }
 
             return difference;
         }
+
+        public override string ToString() => this.Item == null ? "Empty" : $"{this.Item.ItemName} - {this.amount}";
     }
 }

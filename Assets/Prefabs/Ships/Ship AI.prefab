@@ -134,11 +134,11 @@ MonoBehaviour:
   health: 20
   maxHealth: 20
   stats: {fileID: 11400000, guid: c2e3da5393d33b847a1e796a556ee76e, type: 2}
-  weapon: {fileID: 0}
   rigidbody: {fileID: 4979323623273713214}
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}
   FORCE_VALIDATE: 0
+  weapon: {fileID: 0}
   shipAIType: 0
 --- !u!114 &3331545610729043388
 MonoBehaviour:

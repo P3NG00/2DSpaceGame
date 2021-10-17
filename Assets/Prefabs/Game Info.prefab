@@ -47,11 +47,36 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
   framerate: 150
   recipes:
-  - {fileID: 11400000, guid: 64b81c970f3b0cd4a9c8d11e141a1973, type: 2}
-  - {fileID: 11400000, guid: 40172206780c005408889c636f1a5078, type: 2}
-  - {fileID: 11400000, guid: 7bbebbe86bb95f2489c7af03dbba3bdd, type: 2}
-  - {fileID: 11400000, guid: f73d41a2016b87245bba872a722c0b93, type: 2}
-  - {fileID: 11400000, guid: e3d952e641cdfd7449bedc6f958f8d46, type: 2}
+  - ingredients:
+    - Item: {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
+      amount: 3
+    output:
+      Item: {fileID: 11400000, guid: 9d16f728f6454e740a5a760084cd9be2, type: 2}
+      amount: 1
+  - ingredients:
+    - Item: {fileID: 11400000, guid: 12d4719f9fa635c48b9c52d1bb59ff66, type: 2}
+      amount: 3
+    output:
+      Item: {fileID: 11400000, guid: 1623b427a9f3b864899f72d1a3f2739f, type: 2}
+      amount: 1
+  - ingredients:
+    - Item: {fileID: 11400000, guid: 1e47bc25f918b7c4c8ed34be3afffc94, type: 2}
+      amount: 3
+    output:
+      Item: {fileID: 11400000, guid: a508c20830bcb37439b701b387960ed6, type: 2}
+      amount: 1
+  - ingredients:
+    - Item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
+      amount: 3
+    output:
+      Item: {fileID: 11400000, guid: fbb83dfccd911714c9dc5930a5e5921e, type: 2}
+      amount: 1
+  - ingredients:
+    - Item: {fileID: 11400000, guid: 2cc1c85d90eed354fb2b93f0944a45e5, type: 2}
+      amount: 3
+    output:
+      Item: {fileID: 11400000, guid: 5606934a5271f7b42980022c661c62e4, type: 2}
+      amount: 1
   tagShip: Ship
   tagPlayer: Player
   tagMissile: Missile
@@ -70,7 +95,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 47b3ab2d12542894b8b67de6cf382703, type: 3}
   - {fileID: 21300000, guid: 00910b9ea88bc3944a7b80544f9cc4dd, type: 3}
   - {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  inventory:
+  slotsInventory:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -91,13 +116,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  invCrafting: []
-  doDebugRays: 0
+  slotWeapon: {fileID: 0}
+  updateUI: 0
+  doDebugRays: 1
   doDebugLog: 0
 --- !u!114 &3068602627571150779
 MonoBehaviour:

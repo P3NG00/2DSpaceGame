@@ -12,7 +12,6 @@ namespace SpaceGame.Ships
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private ShipStats stats;
-        [SerializeField] private Weapon weapon;
 
         [Header("References (as Ship)", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -26,7 +25,6 @@ namespace SpaceGame.Ships
         private Coroutine routineFiring = null;
 
         public ShipStats Stats => this.stats;
-        public Weapon Weapon => this.weapon;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
         public float Health => this.health;
@@ -41,7 +39,7 @@ namespace SpaceGame.Ships
             {
                 this.isFiring = value;
 
-                if (value & this.routineFiring == null)
+                if (value & GetWeapon() != null & this.routineFiring == null)
                 {
                     this.routineFiring = StartCoroutine(this.RoutineFire());
                 }
@@ -98,36 +96,6 @@ namespace SpaceGame.Ships
             }
         }
 
-        private void Fire()
-        {
-            if (this.IsAlive)
-            {
-                Vector3 posMissile = this.transform.position;
-                posMissile += this.transform.up * this.transform.localScale.y;
-                float angle = (this.weapon.AngleBetweenShots / 2f) * (this.weapon.AmountOfShots - 1);
-
-                for (int i = 0; i < this.weapon.AmountOfShots; ++i)
-                {
-                    // Projectile rotation
-                    Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
-                    Quaternion rotation = this.transform.rotation * rotOffset;
-
-                    // Instantiate
-                    Missile missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
-                    missile.Weapon = this.weapon;
-
-                    // Set velocity
-                    missile.Rigidbody.velocity = missile.transform.up * this.weapon.ProjectileSpeed;
-
-                    // Destroy after time
-                    Destroy(missile.gameObject, this.weapon.LifetimeMax);
-
-                    // Set for next missile
-                    angle -= this.weapon.AngleBetweenShots;
-                }
-            }
-        }
-
         public void ApplyDrag(bool drag)
         {
             if (this.IsAlive)
@@ -157,14 +125,46 @@ namespace SpaceGame.Ships
             }
         }
 
+        public abstract Weapon GetWeapon();
+
         protected virtual void OnDeath() { }
+
+        private void Fire()
+        {
+            if (this.IsAlive)
+            {
+                Vector3 posMissile = this.transform.position;
+                posMissile += this.transform.up * this.transform.localScale.y;
+                float angle = (this.GetWeapon().AngleBetweenShots / 2f) * (this.GetWeapon().AmountOfShots - 1);
+
+                for (int i = 0; i < this.GetWeapon().AmountOfShots; ++i)
+                {
+                    // Projectile rotation
+                    Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
+                    Quaternion rotation = this.transform.rotation * rotOffset;
+
+                    // Instantiate
+                    Missile missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
+                    missile.Weapon = this.GetWeapon();
+
+                    // Set velocity
+                    missile.Rigidbody.velocity = missile.transform.up * this.GetWeapon().ProjectileSpeed;
+
+                    // Destroy after time
+                    Destroy(missile.gameObject, this.GetWeapon().LifetimeMax);
+
+                    // Set for next missile
+                    angle -= this.GetWeapon().AngleBetweenShots;
+                }
+            }
+        }
 
         private IEnumerator RoutineFire()
         {
             while (this.IsFiring)
             {
                 this.Fire();
-                yield return new WaitForSeconds(this.Weapon.TimeBetweenShots);
+                yield return new WaitForSeconds(this.GetWeapon().TimeBetweenShots);
             }
 
             this.routineFiring = null;
