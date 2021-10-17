@@ -95,12 +95,13 @@ namespace SpaceGame
         // Unity Start method
         private void Start()
         {
+            Application.targetFrameRate = this.framerate;
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
             this.parentInvUI.SetActive(false);
+            this.parentCheatMenu.SetActive(false);
             SelectHotbar(0);
             UpdateInventoryUI();
-            Application.targetFrameRate = this.framerate;
         }
 
         // Unity Update method
@@ -133,7 +134,6 @@ namespace SpaceGame
                     this.player.RotateToLookAt(mousePosition);
                     break;
 
-                // TODO needs testing with controller
                 case RotationType.AimInDirection:
                     Vector2 direction = this.player.Position + inputDirection;
                     this.player.RotateToLookAt(direction);
@@ -396,10 +396,10 @@ namespace SpaceGame
                 yield return new WaitForSeconds(waitTime);
 
                 // Find if chance occurred...
-                bool b = Random.value <= soss.ChanceSpawn;
+                bool chancePassed = Random.value <= soss.ChanceSpawn;
 
                 // If chance passes...
-                if (b)
+                if (chancePassed)
                 {
                     // Spawn Space Object
                     Transform transformPlayer = this.player.transform;
@@ -423,8 +423,7 @@ namespace SpaceGame
 
                 if (GameInfo.DEBUG_LOG && soss.DebugAnnounceSpawn)
                 {
-                    string msg = b ? "SUCCESS" : "FAILURE";
-                    print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {msg}");
+                    print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {(chancePassed ? "SUCCESS" : "FAILURE")}");
                 }
             }
         }
@@ -456,33 +455,38 @@ namespace SpaceGame
             }
         }
 
+        #region Button Callbacks
+        public void CallbackButton_CheatToggleInvincible() => Util.ToggleBool(ref this.player.Invincible);
+        public void CallbackButton_CheatFullHeal() => this.player.Heal(this.player.MaxHealth);
+        #endregion
+
         #region Input Callbacks
-        public void CallbackInputAddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
-        public void CallbackInputSlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInputRotate(InputAction.CallbackContext ctx)
-        {
-            this.rotationType = RotationType.RotateAxis;
-            this.inputRotation = ctx.ReadValue<float>();
-        }
-        public void CallbackInputAimAtMouse(InputAction.CallbackContext ctx)
+        public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
+        public void CallbackInput_AimAtMouse(InputAction.CallbackContext ctx)
         {
             this.rotationType = RotationType.AimAtMouse;
             this.inputMousePosition = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputAimInDirection(InputAction.CallbackContext ctx)
+        public void CallbackInput_AimInDirection(InputAction.CallbackContext ctx)
         {
             this.rotationType = RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        public void CallbackInputInventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
-        public void CallbackInputFire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
-        public void CallbackInputHotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
-        public void CallbackInputHotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
-        public void CallbackInputHotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
-        public void CallbackInputHotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
-        public void CallbackInputHotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
-        public void CallbackInputExit(InputAction.CallbackContext ctx) => Application.Quit();
-        public void CallbackInputCheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
+        public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
+        public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();
+        public void CallbackInput_Fire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
+        public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
+        public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
+        public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
+        public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
+        public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
+        public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
+        public void CallbackInput_Rotate(InputAction.CallbackContext ctx)
+        {
+            this.rotationType = RotationType.RotateAxis;
+            this.inputRotation = ctx.ReadValue<float>();
+        }
+        public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion

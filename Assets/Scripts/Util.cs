@@ -6,6 +6,7 @@ namespace SpaceGame.Utilities
     {
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
+        public static void ToggleBool(ref bool b) => b = !b;
         public static void ToggleActive(GameObject obj) => obj.SetActive(!obj.activeSelf);
         public static void ValidateMinMax(float min, ref float max) { if (min > max) { max = min; } }
 

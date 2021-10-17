@@ -17,4 +17,6 @@ MonoBehaviour:
   multiplierForce: 5
   multiplierRotate: 50
   drag: 0.5
+  scaleCollisionDamage: 1
+  scaleMissileDamage: 1
   distanceStopFromPlayer: 20

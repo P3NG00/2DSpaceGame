@@ -14,23 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fire",
-                    "type": "Button",
-                    "id": "bf94d510-7c98-43c0-a0a4-21f7c345335e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Inventory Toggle",
-                    "type": "Button",
-                    "id": "00c7eef2-64bf-4137-a39d-cf3fd0b40bec",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Mouse Position",
+                    "name": "Aim At Mouse",
                     "type": "Value",
                     "id": "03dce504-6579-42a0-b1cf-2024f60e6df8",
                     "expectedControlType": "Vector2",
@@ -38,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Direction",
+                    "name": "Aim In Direction",
                     "type": "Value",
                     "id": "3f9f38c2-fa50-4ece-bd98-6c87238ffef6",
                     "expectedControlType": "Vector2",
@@ -46,17 +30,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Rotate",
-                    "type": "Value",
-                    "id": "b54c0df7-699a-42aa-bb06-7b434d99daa1",
-                    "expectedControlType": "Axis",
+                    "name": "Cheat Menu",
+                    "type": "Button",
+                    "id": "15a5c2a1-4090-4872-8ce0-09a8117e52cb",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Slow Down",
+                    "name": "Exit",
                     "type": "Button",
-                    "id": "b44f9430-4cb6-4553-9224-0dc4c95188db",
+                    "id": "962cd95c-12ca-4046-be24-364f014dec43",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "bf94d510-7c98-43c0-a0a4-21f7c345335e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -102,17 +94,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Exit",
+                    "name": "Inventory",
                     "type": "Button",
-                    "id": "962cd95c-12ca-4046-be24-364f014dec43",
+                    "id": "00c7eef2-64bf-4137-a39d-cf3fd0b40bec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Cheat Menu",
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "b54c0df7-699a-42aa-bb06-7b434d99daa1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Slow Down",
                     "type": "Button",
-                    "id": "15a5c2a1-4090-4872-8ce0-09a8117e52cb",
+                    "id": "b44f9430-4cb6-4553-9224-0dc4c95188db",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -176,61 +176,6 @@
                 },
                 {
                     "name": "",
-                    "id": "398dad8c-3a97-4588-af62-2df56d4bfdc8",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Inventory Toggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "723f9c93-a974-4e8a-be70-6a2e5e07c1b4",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Inventory Toggle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Direction",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7221955b-19cd-4ba2-8414-5b972b9898e5",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Slow Down",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7e9f732d-e458-4007-bcc2-97811912b201",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Slow Down",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a3243263-f80b-4616-a4cf-a5b6422b798c",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -281,6 +226,72 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Hotbar 5",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0bdd35c-0dca-4afe-9463-3c44cd643863",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Aim At Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Aim In Direction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0cff634-79a1-4a28-b430-55982808b3f6",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Cheat Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "302db301-833e-43ce-ac4b-14c393937e4b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "398dad8c-3a97-4588-af62-2df56d4bfdc8",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "723f9c93-a974-4e8a-be70-6a2e5e07c1b4",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -352,34 +363,23 @@
                 },
                 {
                     "name": "",
-                    "id": "302db301-833e-43ce-ac4b-14c393937e4b",
-                    "path": "<Keyboard>/escape",
+                    "id": "7221955b-19cd-4ba2-8414-5b972b9898e5",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
-                    "action": "Exit",
+                    "action": "Slow Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c0bdd35c-0dca-4afe-9463-3c44cd643863",
-                    "path": "<Mouse>/position",
+                    "id": "7e9f732d-e458-4007-bcc2-97811912b201",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Mouse Position",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e0cff634-79a1-4a28-b430-55982808b3f6",
-                    "path": "<Keyboard>/f8",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Cheat Menu",
+                    "groups": "Controller",
+                    "action": "Slow Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

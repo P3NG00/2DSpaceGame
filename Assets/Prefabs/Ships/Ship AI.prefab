@@ -137,6 +137,7 @@ MonoBehaviour:
   rigidbody: {fileID: 4979323623273713214}
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}
+  Invincible: 0
   FORCE_VALIDATE: 0
   weapon: {fileID: 0}
   shipAIType: 0
@@ -262,9 +263,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0.5
-  m_AngularDrag: 3
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 1

@@ -29,7 +29,7 @@ namespace SpaceGame.UI
         public void SetVisible(bool visible)
         {
             this.image.enabled = visible;
-            this.textAmount.enabled = visible;
+            this.textAmount.enabled = this.ItemStack.Amount > 1;
         }
 
         public void SelectSlot()

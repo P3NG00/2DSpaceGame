@@ -18,6 +18,9 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srPrimary;
         [SerializeField] private SpriteRenderer srSecondary;
 
+        [Header("Cheats", order = 95)]
+        public bool Invincible;
+
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
@@ -114,14 +117,23 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void Damage(float damage)
+        public void Damage(float damage, DamageType damageType)
         {
-            this.health -= damage * this.stats.ScaleMissileDamage;
-
-            if (this.health <= 0f)
+            if (!Invincible)
             {
-                this.health = 0f;
-                this.OnDeath();
+                switch (damageType)
+                {
+                    case DamageType.Collision: damage *= this.stats.ScaleCollisionDamage; break;
+                    case DamageType.Missile: damage *= this.stats.ScaleMissileDamage; break;
+                }
+
+                this.health -= damage;
+
+                if (this.health <= 0f)
+                {
+                    this.health = 0f;
+                    this.OnDeath();
+                }
             }
         }
 
@@ -176,8 +188,14 @@ namespace SpaceGame.Ships
             {
                 Destroy(collider.gameObject);
                 Missile missile = collider.GetComponent<Missile>();
-                this.Damage(missile.Weapon.MultShip);
+                this.Damage(missile.Weapon.MultShip, DamageType.Missile);
             }
+        }
+
+        public enum DamageType
+        {
+            Collision,
+            Missile,
         }
     }
 }

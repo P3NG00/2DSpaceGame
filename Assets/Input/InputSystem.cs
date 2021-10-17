@@ -27,23 +27,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""bf94d510-7c98-43c0-a0a4-21f7c345335e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Inventory Toggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""00c7eef2-64bf-4137-a39d-cf3fd0b40bec"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Mouse Position"",
+                    ""name"": ""Aim At Mouse"",
                     ""type"": ""Value"",
                     ""id"": ""03dce504-6579-42a0-b1cf-2024f60e6df8"",
                     ""expectedControlType"": ""Vector2"",
@@ -51,7 +35,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Direction"",
+                    ""name"": ""Aim In Direction"",
                     ""type"": ""Value"",
                     ""id"": ""3f9f38c2-fa50-4ece-bd98-6c87238ffef6"",
                     ""expectedControlType"": ""Vector2"",
@@ -59,17 +43,25 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Rotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""Cheat Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""15a5c2a1-4090-4872-8ce0-09a8117e52cb"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Slow Down"",
+                    ""name"": ""Exit"",
                     ""type"": ""Button"",
-                    ""id"": ""b44f9430-4cb6-4553-9224-0dc4c95188db"",
+                    ""id"": ""962cd95c-12ca-4046-be24-364f014dec43"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf94d510-7c98-43c0-a0a4-21f7c345335e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -115,17 +107,25 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Exit"",
+                    ""name"": ""Inventory"",
                     ""type"": ""Button"",
-                    ""id"": ""962cd95c-12ca-4046-be24-364f014dec43"",
+                    ""id"": ""00c7eef2-64bf-4137-a39d-cf3fd0b40bec"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Cheat Menu"",
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Slow Down"",
                     ""type"": ""Button"",
-                    ""id"": ""15a5c2a1-4090-4872-8ce0-09a8117e52cb"",
+                    ""id"": ""b44f9430-4cb6-4553-9224-0dc4c95188db"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -189,61 +189,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""398dad8c-3a97-4588-af62-2df56d4bfdc8"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Inventory Toggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""723f9c93-a974-4e8a-be70-6a2e5e07c1b4"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Inventory Toggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Slow Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Slow Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a3243263-f80b-4616-a4cf-a5b6422b798c"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
@@ -294,6 +239,72 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Hotbar 5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0bdd35c-0dca-4afe-9463-3c44cd643863"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Aim At Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Aim In Direction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0cff634-79a1-4a28-b430-55982808b3f6"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Cheat Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""302db301-833e-43ce-ac4b-14c393937e4b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""398dad8c-3a97-4588-af62-2df56d4bfdc8"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""723f9c93-a974-4e8a-be70-6a2e5e07c1b4"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -365,34 +376,23 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""302db301-833e-43ce-ac4b-14c393937e4b"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Slow Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c0bdd35c-0dca-4afe-9463-3c44cd643863"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Mouse Position"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e0cff634-79a1-4a28-b430-55982808b3f6"",
-                    ""path"": ""<Keyboard>/f8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Cheat Menu"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Slow Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -432,19 +432,19 @@ public class @InputSystem : IInputActionCollection, IDisposable
         // Input
         m_Input = asset.FindActionMap("Input", throwIfNotFound: true);
         m_Input_AddForce = m_Input.FindAction("Add Force", throwIfNotFound: true);
+        m_Input_AimAtMouse = m_Input.FindAction("Aim At Mouse", throwIfNotFound: true);
+        m_Input_AimInDirection = m_Input.FindAction("Aim In Direction", throwIfNotFound: true);
+        m_Input_CheatMenu = m_Input.FindAction("Cheat Menu", throwIfNotFound: true);
+        m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
-        m_Input_InventoryToggle = m_Input.FindAction("Inventory Toggle", throwIfNotFound: true);
-        m_Input_MousePosition = m_Input.FindAction("Mouse Position", throwIfNotFound: true);
-        m_Input_Direction = m_Input.FindAction("Direction", throwIfNotFound: true);
-        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
-        m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
         m_Input_Hotbar1 = m_Input.FindAction("Hotbar 1", throwIfNotFound: true);
         m_Input_Hotbar2 = m_Input.FindAction("Hotbar 2", throwIfNotFound: true);
         m_Input_Hotbar3 = m_Input.FindAction("Hotbar 3", throwIfNotFound: true);
         m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
         m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
-        m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
-        m_Input_CheatMenu = m_Input.FindAction("Cheat Menu", throwIfNotFound: true);
+        m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
+        m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
+        m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -495,37 +495,37 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Input;
     private IInputActions m_InputActionsCallbackInterface;
     private readonly InputAction m_Input_AddForce;
+    private readonly InputAction m_Input_AimAtMouse;
+    private readonly InputAction m_Input_AimInDirection;
+    private readonly InputAction m_Input_CheatMenu;
+    private readonly InputAction m_Input_Exit;
     private readonly InputAction m_Input_Fire;
-    private readonly InputAction m_Input_InventoryToggle;
-    private readonly InputAction m_Input_MousePosition;
-    private readonly InputAction m_Input_Direction;
-    private readonly InputAction m_Input_Rotate;
-    private readonly InputAction m_Input_SlowDown;
     private readonly InputAction m_Input_Hotbar1;
     private readonly InputAction m_Input_Hotbar2;
     private readonly InputAction m_Input_Hotbar3;
     private readonly InputAction m_Input_Hotbar4;
     private readonly InputAction m_Input_Hotbar5;
-    private readonly InputAction m_Input_Exit;
-    private readonly InputAction m_Input_CheatMenu;
+    private readonly InputAction m_Input_Inventory;
+    private readonly InputAction m_Input_Rotate;
+    private readonly InputAction m_Input_SlowDown;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
         public InputActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @AddForce => m_Wrapper.m_Input_AddForce;
+        public InputAction @AimAtMouse => m_Wrapper.m_Input_AimAtMouse;
+        public InputAction @AimInDirection => m_Wrapper.m_Input_AimInDirection;
+        public InputAction @CheatMenu => m_Wrapper.m_Input_CheatMenu;
+        public InputAction @Exit => m_Wrapper.m_Input_Exit;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
-        public InputAction @InventoryToggle => m_Wrapper.m_Input_InventoryToggle;
-        public InputAction @MousePosition => m_Wrapper.m_Input_MousePosition;
-        public InputAction @Direction => m_Wrapper.m_Input_Direction;
-        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
-        public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputAction @Hotbar1 => m_Wrapper.m_Input_Hotbar1;
         public InputAction @Hotbar2 => m_Wrapper.m_Input_Hotbar2;
         public InputAction @Hotbar3 => m_Wrapper.m_Input_Hotbar3;
         public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
-        public InputAction @Exit => m_Wrapper.m_Input_Exit;
-        public InputAction @CheatMenu => m_Wrapper.m_Input_CheatMenu;
+        public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
+        public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
+        public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -538,24 +538,21 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AddForce.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
                 @AddForce.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
                 @AddForce.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAddForce;
+                @AimAtMouse.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAimAtMouse;
+                @AimAtMouse.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAimAtMouse;
+                @AimAtMouse.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAimAtMouse;
+                @AimInDirection.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
+                @AimInDirection.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
+                @AimInDirection.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
+                @CheatMenu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @CheatMenu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @CheatMenu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Fire.started -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
-                @InventoryToggle.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
-                @InventoryToggle.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
-                @InventoryToggle.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInventoryToggle;
-                @MousePosition.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMousePosition;
-                @Direction.started -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
-                @Direction.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
-                @Direction.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnDirection;
-                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
-                @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
-                @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
-                @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @Hotbar1.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
                 @Hotbar1.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
                 @Hotbar1.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar1;
@@ -571,12 +568,15 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
                 @Hotbar5.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnHotbar5;
-                @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @CheatMenu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
-                @CheatMenu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
-                @CheatMenu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
+                @Inventory.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -584,24 +584,21 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AddForce.started += instance.OnAddForce;
                 @AddForce.performed += instance.OnAddForce;
                 @AddForce.canceled += instance.OnAddForce;
+                @AimAtMouse.started += instance.OnAimAtMouse;
+                @AimAtMouse.performed += instance.OnAimAtMouse;
+                @AimAtMouse.canceled += instance.OnAimAtMouse;
+                @AimInDirection.started += instance.OnAimInDirection;
+                @AimInDirection.performed += instance.OnAimInDirection;
+                @AimInDirection.canceled += instance.OnAimInDirection;
+                @CheatMenu.started += instance.OnCheatMenu;
+                @CheatMenu.performed += instance.OnCheatMenu;
+                @CheatMenu.canceled += instance.OnCheatMenu;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
-                @InventoryToggle.started += instance.OnInventoryToggle;
-                @InventoryToggle.performed += instance.OnInventoryToggle;
-                @InventoryToggle.canceled += instance.OnInventoryToggle;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
-                @Direction.started += instance.OnDirection;
-                @Direction.performed += instance.OnDirection;
-                @Direction.canceled += instance.OnDirection;
-                @Rotate.started += instance.OnRotate;
-                @Rotate.performed += instance.OnRotate;
-                @Rotate.canceled += instance.OnRotate;
-                @SlowDown.started += instance.OnSlowDown;
-                @SlowDown.performed += instance.OnSlowDown;
-                @SlowDown.canceled += instance.OnSlowDown;
                 @Hotbar1.started += instance.OnHotbar1;
                 @Hotbar1.performed += instance.OnHotbar1;
                 @Hotbar1.canceled += instance.OnHotbar1;
@@ -617,12 +614,15 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Hotbar5.started += instance.OnHotbar5;
                 @Hotbar5.performed += instance.OnHotbar5;
                 @Hotbar5.canceled += instance.OnHotbar5;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
-                @CheatMenu.started += instance.OnCheatMenu;
-                @CheatMenu.performed += instance.OnCheatMenu;
-                @CheatMenu.canceled += instance.OnCheatMenu;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @SlowDown.started += instance.OnSlowDown;
+                @SlowDown.performed += instance.OnSlowDown;
+                @SlowDown.canceled += instance.OnSlowDown;
             }
         }
     }
@@ -648,18 +648,18 @@ public class @InputSystem : IInputActionCollection, IDisposable
     public interface IInputActions
     {
         void OnAddForce(InputAction.CallbackContext context);
+        void OnAimAtMouse(InputAction.CallbackContext context);
+        void OnAimInDirection(InputAction.CallbackContext context);
+        void OnCheatMenu(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnInventoryToggle(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
-        void OnDirection(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
-        void OnSlowDown(InputAction.CallbackContext context);
         void OnHotbar1(InputAction.CallbackContext context);
         void OnHotbar2(InputAction.CallbackContext context);
         void OnHotbar3(InputAction.CallbackContext context);
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
-        void OnCheatMenu(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+        void OnSlowDown(InputAction.CallbackContext context);
     }
 }

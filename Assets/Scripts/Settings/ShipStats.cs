@@ -11,6 +11,7 @@ namespace SpaceGame.Settings
         [SerializeField, Min(0f)] private float multiplierForce;
         [SerializeField, Min(0f)] private float multiplierRotate;
         [SerializeField] private float drag;
+        [SerializeField, Min(0f)] private float scaleCollisionDamage;
         [SerializeField, Min(0f)] private float scaleMissileDamage;
 
         public Color ColorPrimary => this.colorPrimary;
@@ -18,6 +19,7 @@ namespace SpaceGame.Settings
         public float MultiplierForce => this.multiplierForce;
         public float MultiplierRotate => this.multiplierRotate;
         public float Drag => this.drag;
+        public float ScaleCollisionDamage => this.scaleCollisionDamage;
         public float ScaleMissileDamage => this.scaleMissileDamage;
     }
 }

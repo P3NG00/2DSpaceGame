@@ -54,7 +54,7 @@ namespace SpaceGame.SpaceObjects
                 float force = collision.rigidbody.velocity.magnitude;
 
                 Ship ship = transformShip.GetComponent<Ship>();
-                ship.Damage(force);
+                ship.Damage(force, Ship.DamageType.Collision);
             }
         }
     }
