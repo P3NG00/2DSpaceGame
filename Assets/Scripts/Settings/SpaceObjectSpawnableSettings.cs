@@ -14,8 +14,8 @@ namespace SpaceGame.Settings
         [SerializeField, Range(0f, 1f)] private float chanceSpawn;
         [SerializeField, Min(0f)] private float scaleMissileDamage;
         [SerializeField, Min(0f)] private float scaleMissileImpactForce;
-        [SerializeField] private SpaceObjectSpawnRateType spawnRateType;
-        [SerializeField] private SpaceObjectSpawnAreaType spawnAreaType;
+        [SerializeField] private Enums.SpaceObjectSpawnRateType spawnRateType;
+        [SerializeField] private Enums.SpaceObjectSpawnAreaType spawnAreaType;
 
         [Header("DEBUG [SpaceObjectSpawnableSettings]", order = 101)]
         [SerializeField] private bool debugAnnounceSpawn;
@@ -34,23 +34,9 @@ namespace SpaceGame.Settings
         public float ChanceSpawn => this.chanceSpawn;
         public float ScaleMissileDamage => this.scaleMissileDamage;
         public float ScaleMissileImpactForce => this.scaleMissileImpactForce;
-        public SpaceObjectSpawnRateType SpawnRateType => this.spawnRateType;
-        public SpaceObjectSpawnAreaType SpawnAreaType => this.spawnAreaType;
+        public Enums.SpaceObjectSpawnRateType SpawnRateType => this.spawnRateType;
+        public Enums.SpaceObjectSpawnAreaType SpawnAreaType => this.spawnAreaType;
 
         public bool DebugAnnounceSpawn => this.debugAnnounceSpawn;
-    }
-
-    public enum SpaceObjectSpawnRateType
-    {
-        Default,
-        ScaleWithMagnitude,
-        SingleInstance,
-    }
-
-    public enum SpaceObjectSpawnAreaType
-    {
-        Default,
-        AroundPlayer,
-        FrontOfPlayer,
     }
 }

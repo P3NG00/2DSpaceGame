@@ -56,6 +56,12 @@ TODO implement keybind for cheat menu
 TODO make weapon type that is a constant lazer
 lazer should take energy to use,
 TODO add energy to ship
+TODO add weapons that swing in a range in front of you
+ideas:
+    pickaxe for breaking space rocks
+    sword that swings hurting enemies
+    buzzsaw hangs out in fron of you
+
 TODO add projectile weapons
     projectile ideas
         explosive missiles (explode after a certain distance or hit enemy)
@@ -80,7 +86,6 @@ TODO regenerate player health when not taking damage
 
 TODO add slots to UI for placing weapon/defense/quick use item?
 
-
-TODO cheat menu
-    "revive" button to refill health
-    "invincible" button to not take damage
+TODO add button for controller to switch between rotation and aim in direction
+left stick will be used for both
+clicking in left stick toggles control mode?

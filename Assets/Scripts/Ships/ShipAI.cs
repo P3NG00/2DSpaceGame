@@ -1,4 +1,5 @@
 using SpaceGame.Settings;
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -7,7 +8,7 @@ namespace SpaceGame.Ships
     {
         [Header("Info [ShipAI]", order = 10)]
         [SerializeField] private Weapon weapon;
-        [SerializeField] private ShipAIType shipAIType;
+        [SerializeField] private Enums.ShipAIType shipAIType;
 
         private ShipAIStats statsAI;
 
@@ -23,9 +24,9 @@ namespace SpaceGame.Ships
 
             switch (this.shipAIType)
             {
-                case ShipAIType.Aggressive: this.ShipAI_Aggressive(playerPos, withinDistance); break;
-                case ShipAIType.Passive: this.ShipAI_Passive(); break;
-                case ShipAIType.Stalk: this.ShipAI_Stalk(playerPos, withinDistance); break;
+                case Enums.ShipAIType.Aggressive: this.ShipAI_Aggressive(playerPos, withinDistance); break;
+                case Enums.ShipAIType.Passive: this.ShipAI_Passive(); break;
+                case Enums.ShipAIType.Stalk: this.ShipAI_Stalk(playerPos, withinDistance); break;
             }
         }
 
@@ -64,13 +65,6 @@ namespace SpaceGame.Ships
         protected override void OnDeath()
         {
             Destroy(gameObject);
-        }
-
-        private enum ShipAIType
-        {
-            Passive,
-            Aggressive,
-            Stalk,
         }
     }
 }

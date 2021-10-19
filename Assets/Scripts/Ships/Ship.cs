@@ -101,6 +101,8 @@ namespace SpaceGame.Ships
 
         public void ApplyDrag(bool drag)
         {
+            // TODO if applying drag, make red rectangles on back of ship light up as "braking lights"
+
             if (this.IsAlive)
             {
                 this.rigidbody.drag = drag ? this.Stats.Drag : 0f;
@@ -117,14 +119,14 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void Damage(float damage, DamageType damageType)
+        public void Damage(float damage, Enums.DamageType damageType)
         {
             if (!Invincible)
             {
                 switch (damageType)
                 {
-                    case DamageType.Collision: damage *= this.stats.ScaleCollisionDamage; break;
-                    case DamageType.Missile: damage *= this.stats.ScaleMissileDamage; break;
+                    case Enums.DamageType.Collision: damage *= this.stats.ScaleCollisionDamage; break;
+                    case Enums.DamageType.Missile: damage *= this.stats.ScaleMissileDamage; break;
                 }
 
                 this.health -= damage;
@@ -188,14 +190,8 @@ namespace SpaceGame.Ships
             {
                 Destroy(collider.gameObject);
                 Missile missile = collider.GetComponent<Missile>();
-                this.Damage(missile.Weapon.MultShip, DamageType.Missile);
+                this.Damage(missile.Weapon.MultShip, Enums.DamageType.Missile);
             }
-        }
-
-        public enum DamageType
-        {
-            Collision,
-            Missile,
         }
     }
 }

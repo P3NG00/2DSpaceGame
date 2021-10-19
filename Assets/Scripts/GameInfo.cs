@@ -55,13 +55,13 @@ namespace SpaceGame
         [SerializeField] private TMP_Text textInfoPanel;
         [SerializeField] private GameObject parentInvUI;
         [SerializeField] private GameObject parentCheatMenu;
-        [SerializeField] private Image highlightSlot;
+        [SerializeField] private Image highlightSlotSelected;
+        [SerializeField] private Image highlightSlotHover;
         [SerializeField] private Image highlightHotbar;
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] slotsInventory;
-        [SerializeField] private UIInventorySlot slotWeapon;
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool updateUI = false;
@@ -75,13 +75,17 @@ namespace SpaceGame
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
-        private UIInventorySlot selectedSlot = null;
-        private UIInventorySlot selectedHotbar = null;
-        private RotationType rotationType = RotationType.RotateAxis;
+        private UIInventorySlot selectedSlot;
+        private UIInventorySlot hoverSlot;
+        private UIInventorySlot selectedHotbar;
+        private Enums.RotationType rotationType = Enums.RotationType.RotateAxis;
+
+        // Private Getters
+        private UIInventorySlot SlotWeapon => this.slotsInventory[5];
 
         // Public Getters
         public static ShipPlayer Player => GameInfo.instance.player;
-        public static Weapon PlayerWeapon => (Weapon)GameInfo.instance.slotWeapon.ItemStack.Item;
+        public static Weapon PlayerWeapon => (Weapon)GameInfo.instance.SlotWeapon.ItemStack.Item;
         public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
         public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
@@ -101,6 +105,7 @@ namespace SpaceGame
             this.parentInvUI.SetActive(false);
             this.parentCheatMenu.SetActive(false);
             SelectHotbar(0);
+            HoverSlot(SlotWeapon);
             UpdateInventoryUI();
         }
 
@@ -125,16 +130,16 @@ namespace SpaceGame
             // Rotate Player
             switch (this.rotationType)
             {
-                case RotationType.RotateAxis:
+                case Enums.RotationType.RotateAxis:
                     this.player.Rotate(inputRotation);
                     break;
 
-                case RotationType.AimAtMouse:
+                case Enums.RotationType.AimAtMouse:
                     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(this.inputMousePosition);
                     this.player.RotateToLookAt(mousePosition);
                     break;
 
-                case RotationType.AimInDirection:
+                case Enums.RotationType.AimInDirection:
                     Vector2 direction = this.player.Position + inputDirection;
                     this.player.RotateToLookAt(direction);
                     break;
@@ -181,8 +186,9 @@ namespace SpaceGame
                     slot.SetVisible(hasItem);
                 }
 
-                UpdateSelectedSlot(this.selectedSlot, this.highlightSlot, -1f);
-                UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -2f);
+                UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1f);
+                UpdateSelectedSlot(this.hoverSlot, this.highlightSlotHover, -2f);
+                UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -3f);
 
                 void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
                 {
@@ -241,6 +247,7 @@ namespace SpaceGame
             return itemStack.Amount;
         }
 
+        // TODO needs testing
         public static bool RemoveItemFromSlots(UIInventorySlot[] invSlots, ItemStack itemStack)
         {
             ItemStack slotStack;
@@ -261,55 +268,72 @@ namespace SpaceGame
 
         public static void SelectSlot(UIInventorySlot slot)
         {
-            GameInfo gi = GameInfo.instance;
-            UIInventorySlot slotSel = gi.selectedSlot;
-
-            // If selecting selected slot...
-            if (slotSel == slot)
+            if (slot != null)
             {
-                // Deselect slot
-                gi.selectedSlot = null;
-                UpdateInventoryUI();
-            }
-            // Else if no slot selected...
-            else if (slotSel == null)
-            {
-                // If slot stack has item...
-                if (slot.ItemStack.Item != null)
-                {
-                    // Select slot
-                    gi.selectedSlot = slot;
-                    UpdateInventoryUI();
-                }
-            }
-            // Else, selected slot exists and is selecting different slot...
-            else
-            {
-                // If selecting weapon slot...
-                if (slot == gi.slotWeapon)
-                {
-                    // If item being moved is a weapon...
-                    if (slotSel.ItemStack.Item is Weapon)
-                    {
-                        SwapItems();
-                    }
-                }
-                else
-                {
-                    SwapItems();
-                }
+                GameInfo gi = GameInfo.instance;
 
-                void SwapItems()
+                // If selecting selected slot...
+                if (gi.selectedSlot == slot)
                 {
-                    // Swap items
-                    ItemStack swap = slot.ItemStack;
-                    slot.ItemStack = slotSel.ItemStack;
-                    slotSel.ItemStack = swap;
-
-                    // Reset
+                    // Deselect slot
                     gi.selectedSlot = null;
                     UpdateInventoryUI();
                 }
+                // Else if no slot selected...
+                else if (gi.selectedSlot == null)
+                {
+                    // TODO need to change. create different "selectedSlot" object for "highlightedSlot"
+                    // hovering with "highlightedSlot" you can select it. it will then become the "selectedSlot"
+                    // if you select something while there is another selected, it will swap,
+                    // highlightedSlot cannot select empty slots
+                    // TODO above, important for menuing
+
+                    // If slot stack has item...
+                    if (slot.ItemStack.Item != null)
+                    {
+                        // Select slot
+                        gi.selectedSlot = slot;
+                        UpdateInventoryUI();
+                    }
+                }
+                // Else, selected slot exists and is selecting different slot...
+                else
+                {
+                    // If selecting weapon slot...
+                    if (slot == gi.SlotWeapon)
+                    {
+                        // If item being moved is a weapon...
+                        if (gi.selectedSlot.ItemStack.Item is Weapon)
+                        {
+                            SwapItems();
+                        }
+                    }
+                    else
+                    {
+                        SwapItems();
+                    }
+
+                    void SwapItems()
+                    {
+                        // Swap items
+                        ItemStack swap = slot.ItemStack;
+                        slot.ItemStack = gi.selectedSlot.ItemStack;
+                        gi.selectedSlot.ItemStack = swap;
+
+                        // Reset
+                        gi.selectedSlot = null;
+                        UpdateInventoryUI();
+                    }
+                }
+            }
+        }
+
+        public static void HoverSlot(UIInventorySlot slot)
+        {
+            if (slot != null)
+            {
+                GameInfo.instance.hoverSlot = slot;
+                UpdateInventoryUI();
             }
         }
 
@@ -327,7 +351,7 @@ namespace SpaceGame
             bool pass = true;
 
             // If single instance type spawning...
-            if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == SpaceObjectSpawnRateType.SingleInstance)
+            if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == Enums.SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in gi.spaceObjects)
@@ -382,7 +406,7 @@ namespace SpaceGame
                 waitTime = soss.TimeBetweenChance;
 
                 // If scale wait time...
-                if (soss.SpawnRateType == SpaceObjectSpawnRateType.ScaleWithMagnitude)
+                if (soss.SpawnRateType == Enums.SpaceObjectSpawnRateType.ScaleWithMagnitude)
                 {
                     magnitude = this.player.Rigidbody.velocity.magnitude * soss.ScaleSpawnRate;
 
@@ -407,13 +431,13 @@ namespace SpaceGame
 
                     switch (soss.SpawnAreaType)
                     {
-                        case SpaceObjectSpawnAreaType.FrontOfPlayer:
+                        case Enums.SpaceObjectSpawnAreaType.FrontOfPlayer:
                             spawnOffset = transformPlayer.up * soss.RandomSpawnDistance;
                             spawnOffset += (Vector2)transformPlayer.right * soss.RandomSpawnWidth;
                             spawnPos += spawnOffset;
                             break;
 
-                        case SpaceObjectSpawnAreaType.AroundPlayer:
+                        case Enums.SpaceObjectSpawnAreaType.AroundPlayer:
                             spawnPos += Util.RandomUnitVector * soss.RandomSpawnDistance;
                             break;
                     }
@@ -464,12 +488,12 @@ namespace SpaceGame
         public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
         public void CallbackInput_AimAtMouse(InputAction.CallbackContext ctx)
         {
-            this.rotationType = RotationType.AimAtMouse;
+            this.rotationType = Enums.RotationType.AimAtMouse;
             this.inputMousePosition = ctx.ReadValue<Vector2>();
         }
         public void CallbackInput_AimInDirection(InputAction.CallbackContext ctx)
         {
-            this.rotationType = RotationType.AimInDirection;
+            this.rotationType = Enums.RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
@@ -481,21 +505,19 @@ namespace SpaceGame
         public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
         public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
         public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
+        // TODO test menu-ing function controls
+        public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Down));
+        public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Left));
+        public void CallbackInput_MenuRight(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Right));
+        public void CallbackInput_MenuUp(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Up));
         public void CallbackInput_Rotate(InputAction.CallbackContext ctx)
         {
-            this.rotationType = RotationType.RotateAxis;
+            this.rotationType = Enums.RotationType.RotateAxis;
             this.inputRotation = ctx.ReadValue<float>();
         }
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion
-
-        private enum RotationType
-        {
-            RotateAxis,     // Rotate Left/Right keys (controller & keyboard)
-            AimAtMouse,     // Mouse pointer
-            AimInDirection, // Controllers (right stick on controller)
-        }
     }
 }

@@ -53,8 +53,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5b9a28fca412a4fbc2bb765c7ab0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
-  Amount: 0
+  ItemStack:
+    Item: {fileID: 0}
+    amount: 0
+  slotUp: {fileID: 0}
+  slotLeft: {fileID: 0}
+  slotRight: {fileID: 0}
+  slotDown: {fileID: 0}
   image: {fileID: 3957803019766042036}
   textAmount: {fileID: 5025847937989096853}
   button: {fileID: 5374423402595145776}
@@ -429,8 +434,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5025847936675032995}
-        m_TargetAssemblyTypeName: UIInventorySlot, Assembly-CSharp
-        m_MethodName: SelectSlot
+        m_TargetAssemblyTypeName: SpaceGame.UI.UIInventorySlot, Assembly-CSharp
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

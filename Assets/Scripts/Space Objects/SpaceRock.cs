@@ -1,6 +1,6 @@
-using SpaceGame.Items;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
+using SpaceGame.Utilities;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
@@ -54,7 +54,7 @@ namespace SpaceGame.SpaceObjects
                 float force = collision.rigidbody.velocity.magnitude;
 
                 Ship ship = transformShip.GetComponent<Ship>();
-                ship.Damage(force, Ship.DamageType.Collision);
+                ship.Damage(force, Enums.DamageType.Collision);
             }
         }
     }

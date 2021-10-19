@@ -115,11 +115,43 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Menu Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""2765cd99-289d-4af8-a9f5-d5772ad2923f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""03bc9f2e-cc15-4a05-898d-7c219335ca1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f2b0702-32ac-4c25-9459-ee64a8a0b271"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e4c67e1-b665-4b4a-af0a-0dc948340ba7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Rotate"",
                     ""type"": ""Value"",
                     ""id"": ""b54c0df7-699a-42aa-bb06-7b434d99daa1"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
+                    ""processors"": ""Scale(factor=1.2)"",
                     ""interactions"": """"
                 },
                 {
@@ -309,37 +341,26 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""3210c6d1-23a1-440a-a2d4-07498d2a30d2"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Slow Down"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""39a89dd7-7e08-409f-80e6-ee2058f860d3"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""name"": """",
+                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Rotate"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Slow Down"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""d95c8829-0fd8-4535-8635-04a63ec3ef44"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""Controller"",
@@ -347,7 +368,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Controller"",
                     ""action"": ""Rotate"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
@@ -375,24 +396,123 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""38a2f8ef-9f7d-4207-84e0-a77926269297"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""36b9ee6b-2760-4db7-9aa5-c12662e098e7"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Slow Down"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""92b36960-8a9f-4386-bd9d-82fc8b94dcc6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86868716-b6c6-4048-86c4-8b317f25f2fc"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Menu Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""id"": ""47cde2cf-5425-4048-b546-42dfbce51e8f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Menu Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5d92fa6-2d28-41ce-a543-af2c43c4c5ed"",
+                    ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""Slow Down"",
+                    ""action"": ""Menu Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c4c5289-b7bf-4a1b-8d73-32371256e5d1"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Menu Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c85b26fc-3806-4c2f-895c-ed7daa7df08c"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Menu Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cff24113-fcb8-466d-ad4a-e8a82e259553"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Menu Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15963fef-dec7-4acf-81b1-4c68d03b8a9a"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Menu Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""876f0877-3aab-4493-b327-9f828f5d0a7e"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Menu Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -443,6 +563,10 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Hotbar4 = m_Input.FindAction("Hotbar 4", throwIfNotFound: true);
         m_Input_Hotbar5 = m_Input.FindAction("Hotbar 5", throwIfNotFound: true);
         m_Input_Inventory = m_Input.FindAction("Inventory", throwIfNotFound: true);
+        m_Input_MenuDown = m_Input.FindAction("Menu Down", throwIfNotFound: true);
+        m_Input_MenuLeft = m_Input.FindAction("Menu Left", throwIfNotFound: true);
+        m_Input_MenuRight = m_Input.FindAction("Menu Right", throwIfNotFound: true);
+        m_Input_MenuUp = m_Input.FindAction("Menu Up", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
     }
@@ -506,6 +630,10 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Hotbar4;
     private readonly InputAction m_Input_Hotbar5;
     private readonly InputAction m_Input_Inventory;
+    private readonly InputAction m_Input_MenuDown;
+    private readonly InputAction m_Input_MenuLeft;
+    private readonly InputAction m_Input_MenuRight;
+    private readonly InputAction m_Input_MenuUp;
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_SlowDown;
     public struct InputActions
@@ -524,6 +652,10 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Hotbar4 => m_Wrapper.m_Input_Hotbar4;
         public InputAction @Hotbar5 => m_Wrapper.m_Input_Hotbar5;
         public InputAction @Inventory => m_Wrapper.m_Input_Inventory;
+        public InputAction @MenuDown => m_Wrapper.m_Input_MenuDown;
+        public InputAction @MenuLeft => m_Wrapper.m_Input_MenuLeft;
+        public InputAction @MenuRight => m_Wrapper.m_Input_MenuRight;
+        public InputAction @MenuUp => m_Wrapper.m_Input_MenuUp;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
@@ -571,6 +703,18 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnInventory;
+                @MenuDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuDown;
+                @MenuDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuDown;
+                @MenuDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuDown;
+                @MenuLeft.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuLeft;
+                @MenuLeft.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuLeft;
+                @MenuRight.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuRight;
+                @MenuRight.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuRight;
+                @MenuRight.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuRight;
+                @MenuUp.started -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuUp;
+                @MenuUp.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuUp;
+                @MenuUp.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnMenuUp;
                 @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
@@ -617,6 +761,18 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @MenuDown.started += instance.OnMenuDown;
+                @MenuDown.performed += instance.OnMenuDown;
+                @MenuDown.canceled += instance.OnMenuDown;
+                @MenuLeft.started += instance.OnMenuLeft;
+                @MenuLeft.performed += instance.OnMenuLeft;
+                @MenuLeft.canceled += instance.OnMenuLeft;
+                @MenuRight.started += instance.OnMenuRight;
+                @MenuRight.performed += instance.OnMenuRight;
+                @MenuRight.canceled += instance.OnMenuRight;
+                @MenuUp.started += instance.OnMenuUp;
+                @MenuUp.performed += instance.OnMenuUp;
+                @MenuUp.canceled += instance.OnMenuUp;
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
@@ -659,6 +815,10 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnHotbar4(InputAction.CallbackContext context);
         void OnHotbar5(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnMenuDown(InputAction.CallbackContext context);
+        void OnMenuLeft(InputAction.CallbackContext context);
+        void OnMenuRight(InputAction.CallbackContext context);
+        void OnMenuUp(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
     }
