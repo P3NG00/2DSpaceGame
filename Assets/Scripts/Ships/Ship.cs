@@ -149,26 +149,20 @@ namespace SpaceGame.Ships
             {
                 Vector3 posMissile = this.transform.position;
                 posMissile += this.transform.up * this.transform.localScale.y;
-                float angle = (this.GetWeapon().AngleBetweenShots / 2f) * (this.GetWeapon().AmountOfShots - 1);
+                Weapon weapon = this.GetWeapon();
+                float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
-                for (int i = 0; i < this.GetWeapon().AmountOfShots; ++i)
+                for (int i = 0; i < weapon.AmountOfShots; ++i)
                 {
                     // Projectile rotation
                     Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
                     Quaternion rotation = this.transform.rotation * rotOffset;
 
                     // Instantiate
-                    Missile missile = Instantiate(GameInfo.PrefabMissile, posMissile, rotation);
-                    missile.Weapon = this.GetWeapon();
-
-                    // Set velocity
-                    missile.Rigidbody.velocity = missile.transform.up * this.GetWeapon().ProjectileSpeed;
-
-                    // Destroy after time
-                    Destroy(missile.gameObject, this.GetWeapon().LifetimeMax);
+                    Missile.Create(posMissile, rotation, weapon, this);
 
                     // Set for next missile
-                    angle -= this.GetWeapon().AngleBetweenShots;
+                    angle -= weapon.AngleBetweenShots;
                 }
             }
         }
@@ -188,9 +182,13 @@ namespace SpaceGame.Ships
         {
             if (collider.tag == GameInfo.TagMissile)
             {
-                Destroy(collider.gameObject);
                 Missile missile = collider.GetComponent<Missile>();
-                this.Damage(missile.Weapon.MultShip, Enums.DamageType.Missile);
+
+                if (missile.SourceShip != this)
+                {
+                    this.Damage(missile.Weapon.MultShip, Enums.DamageType.Missile);
+                    Destroy(collider.gameObject);
+                }
             }
         }
     }
