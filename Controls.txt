@@ -6,7 +6,7 @@ Keyboard + Mouse:
     Aim:
         Rotate: A / D (left / right)
         Mouse: Aim towards mouse
-    Fire: Space or Left Mouse
+    Fire: E or Left Mouse
 
 Controller:
     Forward: South Button
