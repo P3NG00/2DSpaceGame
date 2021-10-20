@@ -105,7 +105,7 @@ namespace SpaceGame
             this.parentInvUI.SetActive(false);
             this.parentCheatMenu.SetActive(false);
             SelectHotbar(0);
-            HoverSlot(SlotWeapon);
+            HoverSlot(SlotWeapon, true);
             UpdateInventoryUI();
         }
 
@@ -179,6 +179,8 @@ namespace SpaceGame
 
                     slot.SetVisible(hasItem);
                 }
+
+                this.highlightSlotHover.gameObject.SetActive(this.parentInvUI.activeSelf);
 
                 UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1f);
                 UpdateSelectedSlot(this.hoverSlot, this.highlightSlotHover, -2f);
@@ -276,12 +278,6 @@ namespace SpaceGame
                 // Else if no slot selected...
                 else if (gi.selectedSlot == null)
                 {
-                    // TODO need to change. create different "selectedSlot" object for "highlightedSlot"
-                    // hovering with "highlightedSlot" you can select it. it will then become the "selectedSlot"
-                    // if you select something while there is another selected, it will swap,
-                    // highlightedSlot cannot select empty slots
-                    // TODO above, important for menuing
-
                     // If slot stack has item...
                     if (slot.ItemStack.Item != null)
                     {
@@ -322,9 +318,9 @@ namespace SpaceGame
             }
         }
 
-        public static void HoverSlot(UIInventorySlot slot)
+        public static void HoverSlot(UIInventorySlot slot, bool ovrd = false)
         {
-            if (slot != null)
+            if (slot != null & (ovrd | GameInfo.instance.parentInvUI.activeSelf))
             {
                 GameInfo.instance.hoverSlot = slot;
                 UpdateInventoryUI();
@@ -492,13 +488,16 @@ namespace SpaceGame
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
         public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();
         public void CallbackInput_Fire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
-        public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => SelectHotbar(0);
-        public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => SelectHotbar(1);
-        public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => SelectHotbar(2);
-        public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => SelectHotbar(3);
-        public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => SelectHotbar(4);
-        public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
-        // TODO test menu-ing function controls
+        public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(0));
+        public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(1));
+        public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(2));
+        public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(3));
+        public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(4));
+        public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
+        {
+            Util.ToggleActive(this.parentInvUI);
+            UpdateInventoryUI();
+        });
         public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Down));
         public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Left));
         public void CallbackInput_MenuRight(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Right));
@@ -508,6 +507,7 @@ namespace SpaceGame
             this.rotationType = Enums.RotationType.RotateAxis;
             this.inputRotation = ctx.ReadValue<float>();
         }
+        public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }

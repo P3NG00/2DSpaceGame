@@ -87,7 +87,8 @@ MonoBehaviour:
   textInfoPanel: {fileID: 0}
   parentInvUI: {fileID: 0}
   parentCheatMenu: {fileID: 0}
-  highlightSlot: {fileID: 0}
+  highlightSlotSelected: {fileID: 0}
+  highlightSlotHover: {fileID: 0}
   highlightHotbar: {fileID: 0}
   imageHealthBar: {fileID: 0}
   settingsItemObject: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
@@ -122,7 +123,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  slotWeapon: {fileID: 0}
   updateUI: 0
   doDebugRays: 1
   doDebugLog: 0
@@ -439,6 +439,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5e4c67e1-b665-4b4a-af0a-0dc948340ba7
     m_ActionName: Input/Menu Up
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInput_SelectSlot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ff35ade7-1265-456f-b404-544e6e65b5da
+    m_ActionName: Input/Select Slot[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

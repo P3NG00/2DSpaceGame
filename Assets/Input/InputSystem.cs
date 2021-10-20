@@ -155,6 +155,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Select Slot"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff35ade7-1265-456f-b404-544e6e65b5da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Slow Down"",
                     ""type"": ""Button"",
                     ""id"": ""b44f9430-4cb6-4553-9224-0dc4c95188db"",
@@ -189,7 +197,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""503de463-2ced-4d34-b879-51adb98e4825"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -515,6 +523,28 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Menu Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be137146-9171-492a-a16b-831c39279426"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Select Slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc9dbd3e-f7f3-4d4a-a4e2-16540e1ca7a1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Select Slot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -568,6 +598,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_MenuRight = m_Input.FindAction("Menu Right", throwIfNotFound: true);
         m_Input_MenuUp = m_Input.FindAction("Menu Up", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
+        m_Input_SelectSlot = m_Input.FindAction("Select Slot", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
     }
 
@@ -635,6 +666,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_MenuRight;
     private readonly InputAction m_Input_MenuUp;
     private readonly InputAction m_Input_Rotate;
+    private readonly InputAction m_Input_SelectSlot;
     private readonly InputAction m_Input_SlowDown;
     public struct InputActions
     {
@@ -657,6 +689,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @MenuRight => m_Wrapper.m_Input_MenuRight;
         public InputAction @MenuUp => m_Wrapper.m_Input_MenuUp;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
+        public InputAction @SelectSlot => m_Wrapper.m_Input_SelectSlot;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
@@ -718,6 +751,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnRotate;
+                @SelectSlot.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
+                @SelectSlot.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
+                @SelectSlot.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
                 @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
@@ -776,6 +812,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @SelectSlot.started += instance.OnSelectSlot;
+                @SelectSlot.performed += instance.OnSelectSlot;
+                @SelectSlot.canceled += instance.OnSelectSlot;
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
@@ -820,6 +859,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnMenuRight(InputAction.CallbackContext context);
         void OnMenuUp(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnSelectSlot(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
     }
 }
