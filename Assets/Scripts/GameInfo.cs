@@ -70,7 +70,7 @@ namespace SpaceGame
 
         // Cache
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
-        private bool inputAddForce = false;
+        private bool inputApplyForce = false;
         private bool inputSlowDown = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
@@ -113,18 +113,12 @@ namespace SpaceGame
         private void FixedUpdate()
         {
             // Move Player
-            if (this.inputSlowDown)
-            {
-                this.player.ApplyDrag(true);
-            }
-            else
-            {
-                this.player.ApplyDrag(false);
+            this.player.ApplyDrag(this.inputSlowDown);
 
-                if (this.inputAddForce)
-                {
-                    this.player.ApplyForce();
-                }
+            // TODO test movement, slowdown and applyforce
+            if (!this.inputSlowDown & this.inputApplyForce)
+            {
+                this.player.ApplyForce();
             }
 
             // Rotate Player
@@ -146,7 +140,7 @@ namespace SpaceGame
             }
 
             // Update Player Animator
-            this.player.Animator.SetBool("Moving", this.inputAddForce);
+            this.player.Animator.SetBool("Moving", this.inputApplyForce);
 
             // Update Info Panel Text
             this.textInfoPanel.text =
@@ -339,8 +333,7 @@ namespace SpaceGame
 
         public static void SelectHotbar(int index)
         {
-            GameInfo gi = GameInfo.instance;
-            gi.selectedHotbar = gi.slotsInventory[index];
+            GameInfo.instance.selectedHotbar = GameInfo.instance.slotsInventory[index];
             UpdateInventoryUI();
         }
 
@@ -485,7 +478,7 @@ namespace SpaceGame
         #endregion
 
         #region Input Callbacks
-        public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.inputAddForce = ctx.performed;
+        public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.inputApplyForce = ctx.performed;
         public void CallbackInput_AimAtMouse(InputAction.CallbackContext ctx)
         {
             this.rotationType = Enums.RotationType.AimAtMouse;
