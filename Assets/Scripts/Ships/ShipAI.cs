@@ -17,47 +17,50 @@ namespace SpaceGame.Ships
             this.statsAI = (ShipAIStats)this.Stats;
         }
 
+        // TODO test ship ai
         private void FixedUpdate()
         {
-            Vector2 playerPos = GameInfo.Player.Position;
-            bool withinDistance = Vector2.Distance(this.Position, playerPos) < this.statsAI.DistanceStopFromPlayer;
-
-            switch (this.shipAIType)
+            // If AI Type is 'Aggressive' or 'Stalk' (because they need tracking variables)
+            if (this.shipAIType == Enums.ShipAIType.Aggressive || this.shipAIType == Enums.ShipAIType.Stalk)
             {
-                case Enums.ShipAIType.Aggressive: this.ShipAI_Aggressive(playerPos, withinDistance); break;
-                case Enums.ShipAIType.Passive: this.ShipAI_Passive(); break;
-                case Enums.ShipAIType.Stalk: this.ShipAI_Stalk(playerPos, withinDistance); break;
+                // TODO change playerPos to 'target' ship
+                Vector2 target = GameInfo.Player.Position;
+                bool withinDistance = Vector2.Distance(this.Position, target) < this.statsAI.DistanceStopFromPlayer;
+
+                if (this.shipAIType == Enums.ShipAIType.Aggressive)
+                {
+                    // Aggressive AI
+                    // TODO add firing distance
+                    this.UpdateAI(true, withinDistance, !withinDistance, target);
+                }
+                else
+                {
+                    // Stalk AI
+                    this.UpdateAI(false, withinDistance, !withinDistance, target);
+                }
+            }
+            // If AI Type is 'Passive' (does not need tracking variables)
+            else
+            {
+                // Passive AI
+                this.UpdateAI(false, false, true);
             }
         }
 
-        private void ShipAI_Passive()
+        private void UpdateAI(bool firing, bool drag, bool applyForce, Vector2? target = null)
         {
-            this.IsFiring = false;
-            this.ApplyForce();
-        }
+            if (target != null)
+            {
+                this.RotateToLookAt((Vector2)target);
+            }
 
-        private void ShipAI_Aggressive(Vector2 target, bool withinDistance)
-        {
-            this.RotateToLookAt(target);
-            this.IsFiring = true;
-            this.ApplyDrag(withinDistance);
-
-            if (!withinDistance)
+            if (!drag & applyForce)
             {
                 this.ApplyForce();
             }
-        }
 
-        private void ShipAI_Stalk(Vector2 target, bool withinDistance)
-        {
-            this.RotateToLookAt(target);
-            this.IsFiring = false;
-            this.ApplyDrag(withinDistance);
-
-            if (!withinDistance)
-            {
-                this.ApplyForce();
-            }
+            this.IsFiring = firing;
+            this.ApplyDrag(drag);
         }
 
         public override Weapon GetWeapon() => this.weapon;
