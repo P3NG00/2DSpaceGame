@@ -10,8 +10,6 @@ namespace SpaceGame.Utilities
 
         public enum Direction
         {
-            Backward,
-            Forward,
             Down,
             Left,
             Right,
