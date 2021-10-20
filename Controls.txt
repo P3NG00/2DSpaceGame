@@ -1,0 +1,16 @@
+TODO write controls in here
+TODO make sure controls are right before committing
+
+Keyboard + Mouse:
+    Forward: W
+    Aim:
+        Rotate: A / D (left / right)
+        Mouse: Aim towards mouse
+    Fire: Space or Left Mouse
+
+Controller:
+    Forward: South Button
+    Rotate (two modes):
+        Left-Stick: Left-Right
+        Right-Stick: Aim Direction
+    Fire: Right Trigger
