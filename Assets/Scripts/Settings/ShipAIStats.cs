@@ -6,8 +6,10 @@ namespace SpaceGame.Settings
     public sealed class ShipAIStats : ShipStats
     {
         [Header("Info [ShipAIStats]", order = 5)]
-        [SerializeField] private float distanceStopFromPlayer;
+        [SerializeField] private float distanceStopFromTarget;
+        [SerializeField] private float distanceFireAtTarget;
 
-        public float DistanceStopFromPlayer => this.distanceStopFromPlayer;
+        public float DistanceStopFromTarget => this.distanceStopFromTarget;
+        public float DistanceFireAtTarget => this.distanceFireAtTarget;
     }
 }

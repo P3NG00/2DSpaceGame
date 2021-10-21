@@ -1,8 +1,4 @@
-using System.Collections.Concurrent;
-using System.IO;
-using SpaceGame;
 using SpaceGame.Items;
-using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,10 +11,10 @@ namespace SpaceGame.UI
         public ItemStack ItemStack;
 
         [Header("Linked Inventory Movement", order = 10)]
-        [SerializeField] private UIInventorySlot slotUp;
+        [SerializeField] private UIInventorySlot slotDown;
         [SerializeField] private UIInventorySlot slotLeft;
         [SerializeField] private UIInventorySlot slotRight;
-        [SerializeField] private UIInventorySlot slotDown;
+        [SerializeField] private UIInventorySlot slotUp;
 
         [Header("References", order = 99)]
         [SerializeField] private Image image;
@@ -30,33 +26,18 @@ namespace SpaceGame.UI
         public Button Button => this.button;
         public RectTransform RectTransform => this.rectTransform;
 
+        public UIInventorySlot SlotDown => this.slotDown;
+        public UIInventorySlot SlotLeft => this.slotLeft;
+        public UIInventorySlot SlotRight => this.slotRight;
+        public UIInventorySlot SlotUp => this.slotUp;
+
+        public bool Visible { set { this.image.enabled = value; } }
+
         public void UpdateText()
         {
-            this.textAmount.text = this.ItemStack.Amount.ToString();
-        }
-
-        public void SetVisible(bool visible)
-        {
-            this.image.enabled = visible;
-            this.textAmount.enabled = this.ItemStack.Amount > 1;
-        }
-
-        public void NextSlot(Enums.Direction direction)
-        {
-            UIInventorySlot slot = null;
-
-            switch (direction)
-            {
-                case Enums.Direction.Down: slot = this.slotDown; break;
-                case Enums.Direction.Left: slot = this.slotLeft; break;
-                case Enums.Direction.Right: slot = this.slotRight; break;
-                case Enums.Direction.Up: slot = this.slotUp; break;
-            }
-
-            if (slot != null)
-            {
-                GameInfo.HoverSlot(slot);
-            }
+            int amount = this.ItemStack.Amount;
+            this.textAmount.text = amount.ToString();
+            this.textAmount.enabled = amount > 1;
         }
 
         public void Select() => GameInfo.SelectSlot(this);

@@ -13,10 +13,11 @@ namespace SpaceGame.Ships
         [SerializeField] private float maxHealth;
         [SerializeField] private ShipStats stats;
 
-        [Header("References (as Ship)", order = 90)]
+        [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer srPrimary;
         [SerializeField] private SpriteRenderer srSecondary;
+        [SerializeField] private Animator animator;
 
         [Header("Cheats", order = 95)]
         public bool Invincible;
@@ -34,6 +35,7 @@ namespace SpaceGame.Ships
         public float MaxHealth => this.maxHealth;
 
         public Vector2 Position => this.transform.position;
+        public bool Dragging => this.rigidbody.drag == this.stats.Drag;
         public bool IsAlive => this.health > 0f;
         public bool IsFiring
         {
@@ -60,6 +62,11 @@ namespace SpaceGame.Ships
                 this.FORCE_VALIDATE = false;
                 print("FORCE VALIDATE SUCCESSFUL");
             }
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            this.animator.SetBool("Drag", Dragging);
         }
 
         public float GetRotationToLookAt(Vector2 pos)

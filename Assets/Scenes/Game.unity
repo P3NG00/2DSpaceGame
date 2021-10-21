@@ -6414,18 +6414,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 3331545610729043389, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3331545610729043389, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3331545610729043389, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3331545610729043390, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6442,7 +6430,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
 --- !u!95 &3331545609375779388 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 3470504029433804715, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2700718572034551383, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
   m_PrefabInstance: {fileID: 3331545609375779387}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5258815395778528081

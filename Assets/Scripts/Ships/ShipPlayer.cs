@@ -6,15 +6,13 @@ namespace SpaceGame.Ships
     public sealed class ShipPlayer : Ship
     {
         [Header("References [ShipPlayer]", order = 99)]
-        [SerializeField] private Animator animator;
+        [SerializeField] private Animator animatorPlayer;
 
-        public Animator Animator => this.animator;
+        public Animator Animator => this.animatorPlayer;
 
         public override Weapon GetWeapon() => GameInfo.PlayerWeapon;
 
-        protected override void OnDeath()
-        {
-            // TODO on player death
-        }
+        // TODO on player death
+        protected override void OnDeath() { }
     }
 }

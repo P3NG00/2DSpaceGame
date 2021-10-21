@@ -11,6 +11,7 @@ namespace SpaceGame.Ships
         [SerializeField] private Enums.ShipAIType shipAIType;
 
         private ShipAIStats statsAI;
+        private Ship target;
 
         private void Awake()
         {
@@ -18,25 +19,27 @@ namespace SpaceGame.Ships
         }
 
         // TODO test ship ai
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
+            base.FixedUpdate();
+
             // If AI Type is 'Aggressive' or 'Stalk' (because they need tracking variables)
             if (this.shipAIType == Enums.ShipAIType.Aggressive || this.shipAIType == Enums.ShipAIType.Stalk)
             {
-                // TODO change playerPos to 'target' ship
-                Vector2 target = GameInfo.Player.Position;
-                bool withinDistance = Vector2.Distance(this.Position, target) < this.statsAI.DistanceStopFromPlayer;
+                Vector2 targetPos = this.target.Position;
+                float distanceFromTarget = Vector2.Distance(this.Position, targetPos);
+                bool withinDistance = distanceFromTarget < this.statsAI.DistanceStopFromTarget;
 
                 if (this.shipAIType == Enums.ShipAIType.Aggressive)
                 {
                     // Aggressive AI
-                    // TODO add firing distance
-                    this.UpdateAI(true, withinDistance, !withinDistance, target);
+                    bool withinFireDistance = distanceFromTarget < this.statsAI.DistanceFireAtTarget;
+                    this.UpdateAI(withinFireDistance, withinDistance, !withinDistance, targetPos);
                 }
                 else
                 {
                     // Stalk AI
-                    this.UpdateAI(false, withinDistance, !withinDistance, target);
+                    this.UpdateAI(false, withinDistance, !withinDistance, targetPos);
                 }
             }
             // If AI Type is 'Passive' (does not need tracking variables)

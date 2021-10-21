@@ -115,7 +115,6 @@ namespace SpaceGame
             // Move Player
             this.player.ApplyDrag(this.inputSlowDown);
 
-            // TODO test movement, slowdown and applyforce
             if (!this.inputSlowDown & this.inputApplyForce)
             {
                 this.player.ApplyForce();
@@ -177,7 +176,7 @@ namespace SpaceGame
                         }
                     }
 
-                    slot.SetVisible(hasItem);
+                    slot.Visible = hasItem;
                 }
 
                 this.highlightSlotHover.gameObject.SetActive(this.parentInvUI.activeSelf);
@@ -498,10 +497,10 @@ namespace SpaceGame
             Util.ToggleActive(this.parentInvUI);
             UpdateInventoryUI();
         });
-        public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Down));
-        public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Left));
-        public void CallbackInput_MenuRight(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Right));
-        public void CallbackInput_MenuUp(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.hoverSlot.NextSlot(Enums.Direction.Up));
+        public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotDown));
+        public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotLeft));
+        public void CallbackInput_MenuRight(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotRight));
+        public void CallbackInput_MenuUp(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotUp));
         public void CallbackInput_Rotate(InputAction.CallbackContext ctx)
         {
             this.rotationType = Enums.RotationType.RotateAxis;

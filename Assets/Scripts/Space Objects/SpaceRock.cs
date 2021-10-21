@@ -50,9 +50,7 @@ namespace SpaceGame.SpaceObjects
 
             if (transformShip.tag == GameInfo.TagShip || transformShip.tag == GameInfo.TagPlayer)
             {
-                // TODO mess with damage from collision
                 float force = collision.rigidbody.velocity.magnitude;
-
                 Ship ship = transformShip.GetComponent<Ship>();
                 ship.Damage(force, Enums.DamageType.Collision);
             }
