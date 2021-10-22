@@ -34,7 +34,7 @@ namespace SpaceGame
         #endregion
 
         [Header("Game", order = 0)]
-        [SerializeField] private GameModeSettings settings;
+        [SerializeField] private GameModeInfo settings;
         [SerializeField] private int framerate;
 
         [Header("Recipes", order = 3)]
@@ -59,7 +59,7 @@ namespace SpaceGame
         [SerializeField] private Image highlightHoverSlot;
         [SerializeField] private Image highlightSelectedHotbar;
         [SerializeField] private Image imageHealthBar;
-        [SerializeField] private SpaceObjectSettings settingsItemObject;
+        [SerializeField] private SpaceObjectInfo settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] slotsInventory;
 
@@ -85,9 +85,9 @@ namespace SpaceGame
 
         // Public Getters
         public static ShipPlayer Player => GameInfo.instance.player;
-        public static Weapon PlayerWeapon => (Weapon)GameInfo.instance.SlotWeapon.ItemStack.Item;
+        public static ItemWeapon PlayerWeapon => (ItemWeapon)GameInfo.instance.SlotWeapon.ItemStack.Item;
         [System.Obsolete] public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
-        public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
+        public static SpaceObjectInfo SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
 
@@ -292,7 +292,7 @@ namespace SpaceGame
                     if (slot == gi.SlotWeapon)
                     {
                         // If item being moved is a weapon...
-                        if (gi.selectedSlot.ItemStack.Item is Weapon)
+                        if (gi.selectedSlot.ItemStack.Item is ItemWeapon)
                         {
                             SwapItems();
                         }
@@ -332,14 +332,14 @@ namespace SpaceGame
             UpdateInventoryUI();
         }
 
-        public static SpaceObject SpawnSpaceObject(SpaceObjectSettings sos, Vector2 pos)
+        public static SpaceObject SpawnSpaceObject(SpaceObjectInfo sos, Vector2 pos)
         {
             GameInfo gi = GameInfo.instance;
             SpaceObject r = null;
             bool pass = true;
 
             // If single instance type spawning...
-            if (sos is SpaceObjectSpawnableSettings soss && soss.SpawnRateType == Enums.SpaceObjectSpawnRateType.SingleInstance)
+            if (sos is SpaceObjectSpawnableInfo soss && soss.SpawnRateType == Enums.SpaceObjectSpawnRateType.SingleInstance)
             {
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in gi.spaceObjects)
@@ -378,13 +378,18 @@ namespace SpaceGame
             return r;
         }
 
+        public static void SpawnProjectileObject(ProjectileObject projectile)
+        {
+            // TODO SpawnProjectileObject
+        }
+
         public static void DestroySpaceObject(SpaceObject spaceObject)
         {
             GameInfo.instance.spaceObjects.Remove(spaceObject);
             Destroy(spaceObject.gameObject);
         }
 
-        private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSpawnableSettings soss)
+        private IEnumerator RoutineSpawnSpaceObject(SpaceObjectSpawnableInfo soss)
         {
             float waitTime, magnitude;
 

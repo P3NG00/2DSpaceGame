@@ -7,12 +7,12 @@ namespace SpaceGame.SpaceObjects
 {
     public sealed class SpaceRock : SpaceObject
     {
-        private SpaceObjectSpawnableSettings settings;
+        private SpaceObjectSpawnableInfo settings;
         private bool alive = true;
 
         private void Start()
         {
-            this.settings = (SpaceObjectSpawnableSettings)base.Settings;
+            this.settings = (SpaceObjectSpawnableInfo)base.Settings;
         }
 
         protected override void OnTriggerEnter2D(Collider2D collider)

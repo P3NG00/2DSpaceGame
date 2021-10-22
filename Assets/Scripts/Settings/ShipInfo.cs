@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Ship Stats/Ship", fileName = "Ship Stats")]
-    public class ShipStats : ScriptableObject
+    [CreateAssetMenu(menuName = "2D Space Game/Ship Stats/Ship", fileName = "Ship Info")]
+    public class ShipInfo : ScriptableObject
     {
         [Header("Info [ShipStats]", order = 0)]
         [SerializeField] private Color colorPrimary;

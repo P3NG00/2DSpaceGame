@@ -11,7 +11,7 @@ namespace SpaceGame.Ships
         [Header("Info", order = 0)]
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
-        [SerializeField] private ShipStats stats;
+        [SerializeField] private ShipInfo stats;
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -28,7 +28,7 @@ namespace SpaceGame.Ships
         private bool isFiring = false;
         private Coroutine routineFiring = null;
 
-        public ShipStats Stats => this.stats;
+        public ShipInfo Stats => this.stats;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
         public float Health => this.health;
@@ -146,7 +146,7 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract Weapon GetWeapon();
+        public abstract ItemWeapon GetWeapon();
 
         protected virtual void OnDeath() { }
 
@@ -156,7 +156,7 @@ namespace SpaceGame.Ships
             {
                 Vector3 posMissile = this.transform.position;
                 posMissile += this.transform.up * this.transform.localScale.y;
-                Weapon weapon = this.GetWeapon();
+                ItemWeapon weapon = this.GetWeapon();
                 float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
                 for (int i = 0; i < weapon.AmountOfShots; ++i)

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Space Object/Spawnable", fileName = "Space Object Spawnable Settings")]
-    public sealed class SpaceObjectSpawnableSettings : SpaceObjectSettings
+    [CreateAssetMenu(menuName = "2D Space Game/Space Object/Spawnable", fileName = "Space Object Spawnable Info")]
+    public sealed class SpaceObjectSpawnableInfo : SpaceObjectInfo
     {
         [Header("Info [SpaceObjectSpawnableSettings]", order = 30)]
         [SerializeField, Min(0f)] private float distanceSpawn;

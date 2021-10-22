@@ -10,7 +10,7 @@ namespace SpaceGame.Ships
 
         public Animator Animator => this.animatorPlayer;
 
-        public override Weapon GetWeapon() => GameInfo.PlayerWeapon;
+        public override ItemWeapon GetWeapon() => GameInfo.PlayerWeapon;
 
         // TODO protected override void OnDeath() { }
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace SpaceGame.Settings
 {
     [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Item Weapon")]
-    public sealed class Weapon : Item
+    public sealed class ItemWeapon : Item
     {
         // TODO implement projectiles
 
