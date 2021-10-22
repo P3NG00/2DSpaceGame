@@ -156,6 +156,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "93b38658-2dfc-435e-a86d-8a4a8cf3fa8a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -173,7 +181,7 @@
                 {
                     "name": "",
                     "id": "077fd388-4d2c-4f67-9003-8b45316911ed",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -184,7 +192,7 @@
                 {
                     "name": "",
                     "id": "503de463-2ced-4d34-b879-51adb98e4825",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard + Mouse",
@@ -530,6 +538,28 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Select Slot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb3b4092-95af-4194-938f-506d5d715f2b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Use Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4159b4d7-e1f9-4abf-87df-29f2f8a84f0d",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Use Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

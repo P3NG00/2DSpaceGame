@@ -169,6 +169,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""93b38658-2dfc-435e-a86d-8a4a8cf3fa8a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -186,7 +194,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""077fd388-4d2c-4f67-9003-8b45316911ed"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -197,7 +205,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""503de463-2ced-4d34-b879-51adb98e4825"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
@@ -545,6 +553,28 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Select Slot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb3b4092-95af-4194-938f-506d5d715f2b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4159b4d7-e1f9-4abf-87df-29f2f8a84f0d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -600,6 +630,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_SelectSlot = m_Input.FindAction("Select Slot", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
+        m_Input_UseItem = m_Input.FindAction("Use Item", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -668,6 +699,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_SelectSlot;
     private readonly InputAction m_Input_SlowDown;
+    private readonly InputAction m_Input_UseItem;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -691,6 +723,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @SelectSlot => m_Wrapper.m_Input_SelectSlot;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
+        public InputAction @UseItem => m_Wrapper.m_Input_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -757,6 +790,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
+                @UseItem.started -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
+                @UseItem.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
+                @UseItem.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -818,6 +854,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
+                @UseItem.started += instance.OnUseItem;
+                @UseItem.performed += instance.OnUseItem;
+                @UseItem.canceled += instance.OnUseItem;
             }
         }
     }
@@ -861,5 +900,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnSelectSlot(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }

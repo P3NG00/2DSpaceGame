@@ -6,6 +6,8 @@ namespace SpaceGame.SpaceObjects
 {
     public class Missile : MonoBehaviour
     {
+        // TODO turn into Projectile, get rid of 'Missile'
+
         [Header("Info", order = 0)]
         [SerializeField] private Weapon weapon;
 
@@ -13,7 +15,7 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
-        private Ship sourceShip;
+        private Ship sourceShip = null;
 
         public Ship SourceShip => this.sourceShip;
 

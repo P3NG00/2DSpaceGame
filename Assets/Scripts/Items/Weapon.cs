@@ -2,9 +2,11 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Weapon")]
+    [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Item Weapon")]
     public sealed class Weapon : Item
     {
+        // TODO implement projectiles
+
         [Header("Info [Weapon]", order = 1)]
         [SerializeField, Min(0f)] private float multShip;
         [SerializeField, Min(0f)] private float multSpaceRock;

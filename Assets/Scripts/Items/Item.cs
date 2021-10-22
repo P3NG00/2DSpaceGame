@@ -15,5 +15,7 @@ namespace SpaceGame.Settings
         public Sprite Sprite => this.sprite;
         public Color Color => this.color;
         public int MaxStackSize => this.maxStackSize;
+
+        public virtual void Use() { }
     }
 }

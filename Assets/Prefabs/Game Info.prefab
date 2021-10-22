@@ -455,6 +455,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ff35ade7-1265-456f-b404-544e6e65b5da
     m_ActionName: Input/Select Slot[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInput_UseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 93b38658-2dfc-435e-a86d-8a4a8cf3fa8a
+    m_ActionName: Input/Use Item[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

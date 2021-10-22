@@ -12,7 +12,6 @@ namespace SpaceGame.Ships
 
         public override Weapon GetWeapon() => GameInfo.PlayerWeapon;
 
-        // TODO on player death
-        protected override void OnDeath() { }
+        // TODO protected override void OnDeath() { }
     }
 }

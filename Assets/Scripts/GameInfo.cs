@@ -46,7 +46,7 @@ namespace SpaceGame
         [SerializeField] private string tagMissile;
 
         [Header("Prefabs", order = 50)]
-        [SerializeField] private Missile prefabMissile;
+        [SerializeField, System.Obsolete] private Missile prefabMissile;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
 
         [Header("References", order = 99)]
@@ -56,15 +56,15 @@ namespace SpaceGame
         [SerializeField] private GameObject parentInvUI;
         [SerializeField] private GameObject parentCheatMenu;
         [SerializeField] private Image highlightSlotSelected;
-        [SerializeField] private Image highlightSlotHover;
-        [SerializeField] private Image highlightHotbar;
+        [SerializeField] private Image highlightHoverSlot;
+        [SerializeField] private Image highlightSelectedHotbar;
         [SerializeField] private Image imageHealthBar;
         [SerializeField] private SpaceObjectSettings settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] slotsInventory;
 
         [Header("DEBUG", order = 100)]
-        [SerializeField] private bool updateUI = false;
+        [SerializeField] private bool updateUI;
         [SerializeField] private bool doDebugRays;
         [SerializeField] private bool doDebugLog;
 
@@ -86,7 +86,7 @@ namespace SpaceGame
         // Public Getters
         public static ShipPlayer Player => GameInfo.instance.player;
         public static Weapon PlayerWeapon => (Weapon)GameInfo.instance.SlotWeapon.ItemStack.Item;
-        public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
+        [System.Obsolete] public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
         public static SpaceObjectSettings SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
@@ -179,11 +179,11 @@ namespace SpaceGame
                     slot.Visible = hasItem;
                 }
 
-                this.highlightSlotHover.gameObject.SetActive(this.parentInvUI.activeSelf);
+                this.highlightHoverSlot.gameObject.SetActive(this.parentInvUI.activeSelf);
 
                 UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1f);
-                UpdateSelectedSlot(this.hoverSlot, this.highlightSlotHover, -2f);
-                UpdateSelectedSlot(this.selectedHotbar, this.highlightHotbar, -3f);
+                UpdateSelectedSlot(this.hoverSlot, this.highlightHoverSlot, -2f);
+                UpdateSelectedSlot(this.selectedHotbar, this.highlightSelectedHotbar, -3f);
 
                 void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
                 {
@@ -508,6 +508,11 @@ namespace SpaceGame
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
+        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
+        {
+            // TODO use item code
+            this.hoverSlot.ItemStack.Item.Use();
+        });
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion

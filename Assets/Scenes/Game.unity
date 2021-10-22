@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 40746536}
   - component: {fileID: 40746535}
   m_Layer: 5
-  m_Name: Highlight Hotbar
+  m_Name: Highlight Selected Hotbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3695,7 +3695,7 @@ GameObject:
   - component: {fileID: 1054285549}
   - component: {fileID: 1054285548}
   m_Layer: 5
-  m_Name: Highlight Slot Hover
+  m_Name: Highlight Hover Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6440,6 +6440,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3068602627571150779, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 33063dee-766e-4c81-9c8f-1ed363d508f0
+      objectReference: {fileID: 0}
     - target: {fileID: 5258815394248899770, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: m_Name
       value: Game Info
@@ -6521,6 +6525,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 941126444}
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: highlightHoverSlot
+      value: 
+      objectReference: {fileID: 1054285548}
+    - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: highlightSlotHover
       value: 
       objectReference: {fileID: 1054285548}
@@ -6532,6 +6540,10 @@ PrefabInstance:
       propertyPath: highlightSlotSelected
       value: 
       objectReference: {fileID: 1784799602}
+    - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: highlightSelectedHotbar
+      value: 
+      objectReference: {fileID: 40746535}
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: slotsInventory.Array.data[0]
       value: 
