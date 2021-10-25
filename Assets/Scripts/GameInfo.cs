@@ -47,7 +47,6 @@ namespace SpaceGame
         [SerializeField] private string tagMissile;
 
         [Header("Prefabs", order = 50)]
-        [SerializeField, System.Obsolete] private Missile prefabMissile;
         [SerializeField] private TMP_Text prefabTextCreditPopup;
 
         [Header("References", order = 99)]
@@ -90,17 +89,16 @@ namespace SpaceGame
 
         // Public Getters
         public static ShipPlayer Player => GameInfo.instance.player;
-        [System.Obsolete] public static Missile PrefabMissile => GameInfo.instance.prefabMissile;
         public static SpaceObjectInfo SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
 
-        public static ItemWeaponInfo PlayerWeapon
+        public static ItemProjectileInfo PlayerWeapon
         {
             get
             {
                 ItemInfo itemInfo = GameInfo.instance.SlotWeapon.ItemStack.ItemInfo;
-                return itemInfo == null ? null : (ItemWeaponInfo)itemInfo;
+                return itemInfo == null ? null : (ItemProjectileInfo)itemInfo;
             }
         }
 
@@ -194,11 +192,11 @@ namespace SpaceGame
 
                 this.highlightHoverSlot.gameObject.SetActive(this.parentInvUI.activeSelf);
 
-                UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1f);
-                UpdateSelectedSlot(this.hoverSlot, this.highlightHoverSlot, -2f);
-                UpdateSelectedSlot(this.selectedHotbar, this.highlightSelectedHotbar, -3f);
+                UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1);
+                UpdateSelectedSlot(this.hoverSlot, this.highlightHoverSlot, -2);
+                UpdateSelectedSlot(this.selectedHotbar, this.highlightSelectedHotbar, -3);
 
-                void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, float layer)
+                void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, int layer)
                 {
                     bool b = selected != null;
                     highlight.enabled = b;
@@ -311,7 +309,7 @@ namespace SpaceGame
                     if (slot == gi.SlotWeapon)
                     {
                         // If item being moved is a weapon...
-                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemWeaponInfo)
+                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemProjectileInfo)
                         {
                             SwapItems();
                         }
@@ -382,10 +380,8 @@ namespace SpaceGame
                 spaceObject.Settings = sos;
                 spaceObject.Scale = sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
-
                 spaceObject.Rigidbody.velocity = Util.RandomUnitVector * sos.RandomVelocity;
                 spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
-
                 gi.spaceObjects.Add(spaceObject);
                 r = spaceObject;
             }
@@ -398,11 +394,10 @@ namespace SpaceGame
             return r;
         }
 
-        public static void SpawnProjectileObject(ProjectileInfo projectile, Ship
-         source)
+        public static void SpawnProjectileObject(ProjectileInfo projectile, Ship source)
         {
-            SpaceObjectProjectile projectileObject = Instantiate(projectile.ProjectileObject, source.transform.forward, source.transform.rotation);
-            Vector2 velocity = source.transform.forward * projectile.Magnitude;
+            Projectile projectileObject = Instantiate(projectile.ProjectileObject, source.transform.position, source.transform.rotation);
+            Vector2 velocity = source.transform.up * projectile.Magnitude;
             projectileObject.Rigidbody.velocity = velocity;
             projectileObject.ProjectileInfo = projectile;
             projectileObject.SourceShip = source;
@@ -543,11 +538,7 @@ namespace SpaceGame
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
-        {
-            this.selectedHotbar.ItemStack.ItemInfo?.Use(this.player);
-            // TODO make able to use selected hotbar item
-        });
+        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.selectedHotbar.ItemStack.ItemInfo?.Use(this.player));
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion

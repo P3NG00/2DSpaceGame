@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Missile
   - Space Rock
   - Planet
   - Item
   - Ship
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - Item Object
   - Item Pickup
   - Ship
-  - 
+  - Projectile
   - 
   - 
   - 

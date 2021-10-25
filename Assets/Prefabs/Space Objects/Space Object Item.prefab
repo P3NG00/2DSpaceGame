@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 2634249643401036137}
   - component: {fileID: 2827563328434330724}
   m_Layer: 7
-  m_Name: Item Object
+  m_Name: Space Object Item
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

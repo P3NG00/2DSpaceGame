@@ -8,8 +8,7 @@ namespace SpaceGame.Items
     public sealed class ItemStack
     {
         [Header("ItemStack Info", order = 0)]
-        // TODO remove FormerlySerializedAs tag
-        [FormerlySerializedAs("Item")] public ItemInfo ItemInfo;
+        public ItemInfo ItemInfo;
         [SerializeField, Min(0)] private int amount;
 
         public ItemStack(ItemInfo item, int amount)

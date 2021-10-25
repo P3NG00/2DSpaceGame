@@ -1,4 +1,4 @@
-using SpaceGame.Settings;
+using SpaceGame.Items;
 using UnityEngine;
 
 namespace SpaceGame.Ships
@@ -10,8 +10,8 @@ namespace SpaceGame.Ships
 
         public Animator Animator => this.animatorPlayer;
 
-        public override ItemWeaponInfo GetWeapon() => GameInfo.PlayerWeapon;
+        public override ItemProjectileInfo GetProjectile() => GameInfo.PlayerWeapon;
 
-        // TODO protected override void OnDeath() { }
+        // protected override void OnDeath() { }
     }
 }

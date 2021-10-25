@@ -15,37 +15,39 @@ namespace SpaceGame.SpaceObjects
             this.settings = (SpaceObjectSpawnableInfo)base.Settings;
         }
 
-        protected override void OnTriggerEnter2D(Collider2D collider)
-        {
-            base.OnTriggerEnter2D(collider);
+        // TODO move triggers to Projectile class
+        // protected override void OnTriggerEnter2D(Collider2D collider)
+        // {
+        //     base.OnTriggerEnter2D(collider);
 
-            if (this.alive & collider.tag == GameInfo.TagMissile)
-            {
-                Missile missile = collider.GetComponent<Missile>();
-                this.Scale -= missile.Weapon.MultSpaceRock * this.settings.ScaleMissileDamage;
+        //     if (this.alive & collider.tag == GameInfo.TagMissile)
+        //     {
+        //         Missile missile = collider.GetComponent<Missile>();
+        //         this.Scale -= missile.Weapon.MultSpaceRock * this.settings.ScaleMissileDamage;
 
-                // If Space Rock too small...
-                if (this.Scale < this.settings.DestroyBelowScale)
-                {
-                    this.alive = false;
+        //         // If Space Rock too small...
+        //         if (this.Scale < this.settings.DestroyBelowScale)
+        //         {
+        //             this.alive = false;
 
-                    // Destroy Space Rock
-                    GameInfo.DestroySpaceObject(this);
+        //             // Destroy Space Rock
+        //             GameInfo.DestroySpaceObject(this);
 
-                    // Instantiate Item Object
-                    SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
-                    itemObject.SetItem(this.settings.RandomItemDrop);
-                }
-                else
-                {
-                    Vector2 force = collider.attachedRigidbody.velocity * this.settings.ScaleMissileImpactForce;
-                    Rigidbody.AddForceAtPosition(force, this.Rigidbody.position);
-                }
-            }
-        }
+        //             // Instantiate Item Object
+        //             SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
+        //             itemObject.SetItem(this.settings.RandomItemDrop);
+        //         }
+        //         else
+        //         {
+        //             Vector2 force = collider.attachedRigidbody.velocity * this.settings.ScaleMissileImpactForce;
+        //             Rigidbody.AddForceAtPosition(force, this.Rigidbody.position);
+        //         }
+        //     }
+        // }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            // TODO move collision to Ship
             Transform transformShip = collision.transform;
 
             if (transformShip.tag == GameInfo.TagShip || transformShip.tag == GameInfo.TagPlayer)

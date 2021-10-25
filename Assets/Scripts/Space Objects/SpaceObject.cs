@@ -28,12 +28,13 @@ namespace SpaceGame.SpaceObjects
 
         protected virtual Color GetColor() => this.Settings.Color;
 
-        protected virtual void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (this.Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
-            {
-                Destroy(collider.gameObject);
-            }
-        }
+        // TODO move projectile Triggers to Projectile class
+        // protected virtual void OnTriggerEnter2D(Collider2D collider)
+        // {
+        //     if (this.Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
+        //     {
+        //         Destroy(collider.gameObject);
+        //     }
+        // }
     }
 }

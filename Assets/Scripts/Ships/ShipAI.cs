@@ -1,3 +1,4 @@
+using SpaceGame.Items;
 using SpaceGame.Settings;
 using SpaceGame.Utilities;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace SpaceGame.Ships
     public sealed class ShipAI : Ship
     {
         [Header("Info [ShipAI]", order = 10)]
-        [SerializeField] private ItemWeaponInfo weapon;
+        [SerializeField] private ItemProjectileInfo itemProjectile;
         [SerializeField] private Enums.ShipAIType shipAIType;
 
         private ShipAIInfo statsAI;
@@ -18,7 +19,6 @@ namespace SpaceGame.Ships
             this.statsAI = (ShipAIInfo)this.Stats;
         }
 
-        // TODO test ship ai
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -66,7 +66,7 @@ namespace SpaceGame.Ships
             this.ApplyDrag(drag);
         }
 
-        public override ItemWeaponInfo GetWeapon() => this.weapon;
+        public override ItemProjectileInfo GetProjectile() => this.itemProjectile;
 
         protected override void OnDeath()
         {

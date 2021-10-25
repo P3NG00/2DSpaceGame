@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
+    [System.Obsolete]
     [CreateAssetMenu(menuName = "2D Space Game/Item/Weapon", fileName = "Item Weapon")]
     public sealed class ItemWeaponInfo : ItemInfo
     {

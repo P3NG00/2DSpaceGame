@@ -10,13 +10,10 @@ namespace SpaceGame.Items
     {
         [Header("Info [ItemProjectile]", order = 5)]
         [SerializeField] private ProjectileInfo projectile;
+        [SerializeField] private float timeBetweenShots;
 
-        public sealed override void Use(Ship source)
-        {
-            // TODO spawn projectile
-            // make rock chunks an ItemProjectile for testing
-            // also make missiles into projetiles
-            GameInfo.SpawnProjectileObject(projectile, source);
-        }
+        public float TimeBetweenShots => this.timeBetweenShots;
+
+        public sealed override void Use(Ship source) => GameInfo.SpawnProjectileObject(projectile, source);
     }
 }

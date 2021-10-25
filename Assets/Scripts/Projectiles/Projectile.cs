@@ -13,6 +13,8 @@ namespace SpaceGame.Projectiles
         public ProjectileInfo ProjectileInfo;
         public Ship SourceShip;
 
+        public Rigidbody2D Rigidbody => this.rigidbody;
+
         private void OnTriggerEnter2D(Collider2D collider)
         {
             // TODO move all projectile collisions (from things like space objects or ships) into here

@@ -1,6 +1,6 @@
 using System.Collections;
+using SpaceGame.Items;
 using SpaceGame.Settings;
-using SpaceGame.SpaceObjects;
 using SpaceGame.Utilities;
 using UnityEngine;
 
@@ -44,7 +44,7 @@ namespace SpaceGame.Ships
             {
                 this.isFiring = value;
 
-                if (value & GetWeapon() != null & this.routineFiring == null)
+                if (value & GetProjectile() != null & this.routineFiring == null)
                 {
                     this.routineFiring = StartCoroutine(this.RoutineFire());
                 }
@@ -133,7 +133,7 @@ namespace SpaceGame.Ships
                 switch (damageType)
                 {
                     case Enums.DamageType.Collision: damage *= this.stats.ScaleCollisionDamage; break;
-                    case Enums.DamageType.Missile: damage *= this.stats.ScaleMissileDamage; break;
+                    case Enums.DamageType.Projectile: damage *= this.stats.ScaleMissileDamage; break;
                 }
 
                 this.health -= damage;
@@ -146,32 +146,33 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract ItemWeaponInfo GetWeapon();
+        public abstract ItemProjectileInfo GetProjectile();
 
         protected virtual void OnDeath() { }
 
         private void Fire()
         {
-            if (this.IsAlive)
-            {
-                Vector3 posMissile = this.transform.position;
-                posMissile += this.transform.up * this.transform.localScale.y;
-                ItemWeaponInfo weapon = this.GetWeapon();
-                float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
+            // TODO use Projectile instead of Missile
+            // if (this.IsAlive)
+            // {
+            //     Vector3 posMissile = this.transform.position;
+            //     posMissile += this.transform.up * this.transform.localScale.y;
+            //     ItemWeaponInfo weapon = this.GetWeapon();
+            //     float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
-                for (int i = 0; i < weapon.AmountOfShots; ++i)
-                {
-                    // Projectile rotation
-                    Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
-                    Quaternion rotation = this.transform.rotation * rotOffset;
+            //     for (int i = 0; i < weapon.AmountOfShots; ++i)
+            //     {
+            //         // Projectile rotation
+            //         Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
+            //         Quaternion rotation = this.transform.rotation * rotOffset;
 
-                    // Instantiate
-                    Missile.Create(posMissile, rotation, weapon, this);
+            //         // Instantiate
+            //         Missile.Create(posMissile, rotation, weapon, this);
 
-                    // Set for next missile
-                    angle -= weapon.AngleBetweenShots;
-                }
-            }
+            //         // Set for next missile
+            //         angle -= weapon.AngleBetweenShots;
+            //     }
+            // }
         }
 
         private IEnumerator RoutineFire()
@@ -179,24 +180,27 @@ namespace SpaceGame.Ships
             while (this.IsFiring)
             {
                 this.Fire();
-                yield return new WaitForSeconds(this.GetWeapon().TimeBetweenShots);
+                yield return new WaitForSeconds(this.GetProjectile().TimeBetweenShots);
             }
 
             this.routineFiring = null;
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (collider.tag == GameInfo.TagMissile)
-            {
-                Missile missile = collider.GetComponent<Missile>();
+        // TODO remvoe
+        // Missile class doesn't exist anymore, use Projectile instead
+        // Projectile damage should be dealt with in the Projectile's OnTriggerEnter function
+        // private void OnTriggerEnter2D(Collider2D collider)
+        // {
+        //     if (collider.tag == GameInfo.TagMissile)
+        //     {
+        //         Missile missile = collider.GetComponent<Missile>();
 
-                if (missile.SourceShip != this)
-                {
-                    this.Damage(missile.Weapon.MultShip, Enums.DamageType.Missile);
-                    Destroy(collider.gameObject);
-                }
-            }
-        }
+        //         if (missile.SourceShip != this)
+        //         {
+        //             this.Damage(missile.Weapon.MultShip, Enums.DamageType.Projectile);
+        //             Destroy(collider.gameObject);
+        //         }
+        //     }
+        // }
     }
 }

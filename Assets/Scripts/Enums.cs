@@ -5,7 +5,7 @@ namespace SpaceGame.Utilities
         public enum DamageType
         {
             Collision,
-            Missile,
+            Projectile,
         }
 
         public enum Direction

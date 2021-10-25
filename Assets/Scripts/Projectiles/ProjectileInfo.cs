@@ -1,4 +1,3 @@
-using SpaceGame.SpaceObjects;
 using UnityEngine;
 
 namespace SpaceGame.Projectiles
@@ -8,19 +7,17 @@ namespace SpaceGame.Projectiles
     {
         [Header("Info", order = 0)]
         [SerializeField] private string projectileName;
-        [SerializeField] private float damage;
-        [SerializeField] private float damageMultShip;
-        [SerializeField] private float damageMultObject;
+        [SerializeField] private float damageShip;
+        [SerializeField] private float damageSpaceObject;
         [SerializeField] private float magnitude;
 
         [Header("References", order = 100)]
-        [SerializeField] private SpaceObjectProjectile projectileObject;
-        // TODO implement projectileObject for spawning projectile prefab and setting variables
+        [SerializeField] private Projectile projectileObject;
 
         public string Name => this.projectileName;
-        public float DamageShip => this.damage * this.damageMultShip;
-        public float DamageObject => this.damage * this.damageMultObject;
+        public float DamageShip => this.damageShip;
+        public float DamageSpaceObject => this.damageSpaceObject;
         public float Magnitude => this.magnitude;
-        public SpaceObjectProjectile ProjectileObject => this.projectileObject;
+        public Projectile ProjectileObject => this.projectileObject;
     }
 }

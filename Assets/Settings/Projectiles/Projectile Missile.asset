@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Projectile Missile
   m_EditorClassIdentifier: 
   projectileName: Projectile Missile
-  damage: 5
-  damageMultShip: 1
-  damageMultObject: 0.2
-  magnitude: 0
-  projectileObject: {fileID: 2728376075278832358, guid: c13f0e073acf4f8488706ce198ca7e93, type: 3}
+  damageShip: 5
+  damageSpaceObject: 1
+  magnitude: 100
+  projectileObject: {fileID: 5900169560255849357, guid: 1a0defda548efb741bc2eb79c9fd9288, type: 3}
