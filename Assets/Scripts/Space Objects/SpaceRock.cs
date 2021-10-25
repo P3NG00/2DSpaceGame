@@ -33,7 +33,7 @@ namespace SpaceGame.SpaceObjects
                     GameInfo.DestroySpaceObject(this);
 
                     // Instantiate Item Object
-                    ItemObject itemObject = (ItemObject)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
+                    SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
                     itemObject.SetItem(this.settings.RandomItemDrop);
                 }
                 else

@@ -1,5 +1,6 @@
 using SpaceGame.Settings;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceGame.Items
 {
@@ -7,12 +8,13 @@ namespace SpaceGame.Items
     public sealed class ItemStack
     {
         [Header("ItemStack Info", order = 0)]
-        public Item Item;
+        // TODO remove FormerlySerializedAs tag
+        [FormerlySerializedAs("Item")] public ItemInfo ItemInfo;
         [SerializeField, Min(0)] private int amount;
 
-        public ItemStack(Item item, int amount)
+        public ItemStack(ItemInfo item, int amount)
         {
-            this.Item = item;
+            this.ItemInfo = item;
             this.amount = amount;
         }
 
@@ -36,7 +38,7 @@ namespace SpaceGame.Items
 
         private int FixStackSize()
         {
-            int difference = 0, maxStackSize = this.Item.MaxStackSize;
+            int difference = 0, maxStackSize = this.ItemInfo.MaxStackSize;
 
             if (this.amount > maxStackSize)
             {
@@ -46,12 +48,12 @@ namespace SpaceGame.Items
             else if (this.amount < 0)
             {
                 this.amount = 0;
-                this.Item = null;
+                this.ItemInfo = null;
             }
 
             return difference;
         }
 
-        public override string ToString() => this.Item == null ? "Empty" : $"{this.Item.ItemName} - {this.amount}";
+        public override string ToString() => this.ItemInfo == null ? "Empty" : $"{this.ItemInfo.ItemName} - {this.amount}";
     }
 }

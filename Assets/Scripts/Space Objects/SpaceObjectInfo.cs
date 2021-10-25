@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceGame.Settings
 {
-    [CreateAssetMenu(menuName = "2D Space Game/Space Object/Space Object", fileName = "Space Object Info")]
+    [CreateAssetMenu(menuName = "2D Space Game/Space Object/Info", fileName = "Space Object Info")]
     public class SpaceObjectInfo : ScriptableObject
     {
         [Header("Info [SpaceObjectSettings]", order = 20)]

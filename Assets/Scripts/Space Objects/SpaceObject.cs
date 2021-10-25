@@ -5,10 +5,10 @@ namespace SpaceGame.SpaceObjects
 {
     public abstract class SpaceObject : MonoBehaviour
     {
-        [Header("Info (as SpaceObject)", order = 5)]
+        [Header("Info [SpaceObject]", order = 5)]
         public SpaceObjectInfo Settings;
 
-        [Header("References (as SpaceObject)", order = 99)]
+        [Header("References [SpaceObject]", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 

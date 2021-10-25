@@ -9,7 +9,7 @@ namespace SpaceGame.SpaceObjects
         // TODO turn into Projectile, get rid of 'Missile'
 
         [Header("Info", order = 0)]
-        [SerializeField] private ItemWeapon weapon;
+        [SerializeField] private ItemWeaponInfo weapon;
 
         [Header("References", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -19,7 +19,7 @@ namespace SpaceGame.SpaceObjects
 
         public Ship SourceShip => this.sourceShip;
 
-        public ItemWeapon Weapon
+        public ItemWeaponInfo Weapon
         {
             get => this.weapon;
             set
@@ -31,7 +31,7 @@ namespace SpaceGame.SpaceObjects
 
         public Rigidbody2D Rigidbody => this.rigidbody;
 
-        public static Missile Create(Vector2 position, Quaternion rotation, ItemWeapon weapon, Ship source)
+        public static Missile Create(Vector2 position, Quaternion rotation, ItemWeaponInfo weapon, Ship source)
         {
             Missile missile = Instantiate(GameInfo.PrefabMissile, position, rotation);
             missile.sourceShip = source;

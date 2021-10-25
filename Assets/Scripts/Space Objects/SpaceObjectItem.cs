@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
 {
-    public sealed class ItemObject : SpaceObject
+    public sealed class SpaceObjectItem : SpaceObject
     {
         [Header("Info (as ItemObject)", order = 10)]
         [SerializeField] private ItemStack itemStack;
 
         public ItemStack ItemStack => this.itemStack;
 
-        protected override Color GetColor() => this.itemStack.Item.Color;
+        protected override Color GetColor() => this.itemStack.ItemInfo.Color;
 
         public void SetItem(ItemStack itemStack)
         {
             this.itemStack = itemStack;
-            this.SpriteRenderer.sprite = itemStack.Item.Sprite;
-            this.SpriteRenderer.color = itemStack.Item.Color;
+            this.SpriteRenderer.sprite = itemStack.ItemInfo.Sprite;
+            this.SpriteRenderer.color = itemStack.ItemInfo.Color;
         }
     }
 }

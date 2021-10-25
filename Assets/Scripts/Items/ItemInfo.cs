@@ -1,9 +1,10 @@
+using SpaceGame.Ships;
 using UnityEngine;
 
 namespace SpaceGame.Settings
 {
     [CreateAssetMenu(menuName = "2D Space Game/Item/Item", fileName = "Item")]
-    public class Item : ScriptableObject
+    public class ItemInfo : ScriptableObject
     {
         [Header("Info", order = 0)]
         [SerializeField] private string itemName;
@@ -16,6 +17,6 @@ namespace SpaceGame.Settings
         public Color Color => this.color;
         public int MaxStackSize => this.maxStackSize;
 
-        public virtual void Use() { }
+        public virtual void Use(Ship source) { }
     }
 }

@@ -5590,6 +5590,10 @@ PrefabInstance:
       propertyPath: ItemStack.amount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5025847936675032995, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
+      propertyPath: ItemStack.ItemInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 09d95cd4c821da14d81c90e0c087f24e, type: 2}
     - target: {fileID: 5025847936675032999, guid: ce88ecb3c56af374497cb793ce560496, type: 3}
       propertyPath: m_Name
       value: Slot Weapon
@@ -6388,11 +6392,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1205873065221026397, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.r
@@ -6400,15 +6404,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846706566606818846, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1846706566606818846, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1846706566606818846, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3331545610729043389, guid: 1caa2c6e041399f49bde41ef1d6ecb04, type: 3}
       propertyPath: m_RootOrder

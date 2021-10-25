@@ -9,7 +9,7 @@ namespace SpaceGame.SpaceObjects
 
     public sealed class ItemPickup : MonoBehaviour
     {
-        [SerializeField] private ItemObject parentItem;
+        [SerializeField] private SpaceObjectItem parentItem;
 
         private void OnTriggerEnter2D(Collider2D collider)
         {

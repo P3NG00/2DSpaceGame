@@ -146,7 +146,7 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract ItemWeapon GetWeapon();
+        public abstract ItemWeaponInfo GetWeapon();
 
         protected virtual void OnDeath() { }
 
@@ -156,7 +156,7 @@ namespace SpaceGame.Ships
             {
                 Vector3 posMissile = this.transform.position;
                 posMissile += this.transform.up * this.transform.localScale.y;
-                ItemWeapon weapon = this.GetWeapon();
+                ItemWeaponInfo weapon = this.GetWeapon();
                 float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
                 for (int i = 0; i < weapon.AmountOfShots; ++i)
