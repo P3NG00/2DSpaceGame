@@ -1,6 +1,4 @@
-using SpaceGame.Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SpaceGame.Items
 {
@@ -44,10 +42,11 @@ namespace SpaceGame.Items
                 difference = this.amount - maxStackSize;
                 this.amount = maxStackSize;
             }
-            else if (this.amount < 0)
+            else if (this.amount <= 0)
             {
                 this.amount = 0;
                 this.ItemInfo = null;
+                GameInfo.UpdateInventoryUI();
             }
 
             return difference;

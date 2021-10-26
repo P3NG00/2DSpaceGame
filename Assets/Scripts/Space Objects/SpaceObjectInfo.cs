@@ -1,9 +1,8 @@
 using SpaceGame.Items;
-using SpaceGame.SpaceObjects;
 using SpaceGame.Utilities;
 using UnityEngine;
 
-namespace SpaceGame.Settings
+namespace SpaceGame.SpaceObjects
 {
     [CreateAssetMenu(menuName = "2D Space Game/Space Object/Info", fileName = "Space Object Info")]
     public class SpaceObjectInfo : ScriptableObject

@@ -38,9 +38,6 @@ namespace SpaceGame
         [SerializeField] private GameModeInfo settings;
         [SerializeField] private int framerate;
 
-        [Header("Recipes", order = 3)]
-        [SerializeField] private Recipe[] recipes;
-
         [Header("Tags", order = 5)]
         [SerializeField] private string tagShip;
         [SerializeField] private string tagPlayer;
@@ -92,13 +89,13 @@ namespace SpaceGame
         public static SpaceObjectInfo SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
-
-        public static ItemProjectileInfo PlayerWeapon
+        public static UIInventorySlot PlayerWeaponSlot => GameInfo.instance.SlotWeapon;
+        public static ItemInfoProjectle PlayerWeaponInfo
         {
             get
             {
-                ItemInfo itemInfo = GameInfo.instance.SlotWeapon.ItemStack.ItemInfo;
-                return itemInfo == null ? null : (ItemProjectileInfo)itemInfo;
+                ItemInfo itemInfo = GameInfo.PlayerWeaponSlot.ItemStack.ItemInfo;
+                return itemInfo == null ? null : (ItemInfoProjectle)itemInfo;
             }
         }
 
@@ -309,7 +306,7 @@ namespace SpaceGame
                     if (slot == gi.SlotWeapon)
                     {
                         // If item being moved is a weapon...
-                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemProjectileInfo)
+                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemInfoProjectle)
                         {
                             SwapItems();
                         }
@@ -394,18 +391,20 @@ namespace SpaceGame
             return r;
         }
 
-        public static void SpawnProjectileObject(ProjectileInfo projectile, Ship source)
+        [System.Obsolete]
+        public static void SpawnProjectile(ProjectileInfo projectile, Ship source)
         {
-            Projectile projectileObject = Instantiate(projectile.ProjectileObject, source.transform.position, source.transform.rotation);
-            Vector2 velocity = source.transform.up * projectile.Magnitude;
-            projectileObject.Rigidbody.velocity = velocity;
-            projectileObject.ProjectileInfo = projectile;
-            projectileObject.SourceShip = source;
+            // Projectile projectileObject = Instantiate(projectile.ProjectileObject, source.transform.position, source.transform.rotation);
+            // Vector2 velocity = source.transform.up * projectile.Magnitude;
+            // projectileObject.SpriteRenderer.sprite = projectile.;
+            // projectileObject.Rigidbody.velocity = velocity;
+            // projectileObject.ProjectileInfo = projectile;
+            // projectileObject.SourceShip = source;
 
-            if (GameInfo.DEBUG_LOG)
-            {
-                print("$[{projectile.Name}] Spawned from {source.name}");
-            }
+            // if (GameInfo.DEBUG_LOG)
+            // {
+            //     print("$[{projectile.Name}] Spawned from {source.name}");
+            // }
         }
 
         public static void DestroySpaceObject(SpaceObject spaceObject)
@@ -538,7 +537,23 @@ namespace SpaceGame
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => this.selectedHotbar.ItemStack.ItemInfo?.Use(this.player));
+        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
+        {
+            ItemStack hotbarStack = this.selectedHotbar.ItemStack;
+            ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
+
+            if (hotbarItemInfo != null && !(hotbarItemInfo is ItemInfoProjectle))
+            {
+                hotbarItemInfo.Use(this.player);
+
+                if (!hotbarItemInfo.Infinite)
+                {
+                    // TODO make sure this works properly
+                    --hotbarStack.Amount;
+                    this.selectedHotbar.UpdateText();
+                }
+            }
+        });
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
         #endregion

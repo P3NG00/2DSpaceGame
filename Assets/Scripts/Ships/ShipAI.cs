@@ -8,15 +8,21 @@ namespace SpaceGame.Ships
     public sealed class ShipAI : Ship
     {
         [Header("Info [ShipAI]", order = 10)]
-        [SerializeField] private ItemProjectileInfo itemProjectile;
+        [SerializeField] private ItemInfoProjectle itemProjectile;
         [SerializeField] private Enums.ShipAIType shipAIType;
+        [SerializeField] private bool randomAIType;
 
-        private ShipAIInfo statsAI;
+        private ShipAIInfo shipInfoAI;
         private Ship target;
 
         private void Awake()
         {
-            this.statsAI = (ShipAIInfo)this.Stats;
+            this.shipInfoAI = (ShipAIInfo)this.ShipInfo;
+
+            if (this.randomAIType)
+            {
+                this.shipAIType = Util.RandomEnum<Enums.ShipAIType>();
+            }
         }
 
         protected override void FixedUpdate()
@@ -28,12 +34,12 @@ namespace SpaceGame.Ships
             {
                 Vector2 targetPos = this.target.Position;
                 float distanceFromTarget = Vector2.Distance(this.Position, targetPos);
-                bool withinDistance = distanceFromTarget < this.statsAI.DistanceStopFromTarget;
+                bool withinDistance = distanceFromTarget < this.shipInfoAI.DistanceStopFromTarget;
 
                 if (this.shipAIType == Enums.ShipAIType.Aggressive)
                 {
                     // Aggressive AI
-                    bool withinFireDistance = distanceFromTarget < this.statsAI.DistanceFireAtTarget;
+                    bool withinFireDistance = distanceFromTarget < this.shipInfoAI.DistanceFireAtTarget;
                     this.UpdateAI(withinFireDistance, withinDistance, !withinDistance, targetPos);
                 }
                 else
@@ -66,7 +72,7 @@ namespace SpaceGame.Ships
             this.ApplyDrag(drag);
         }
 
-        public override ItemProjectileInfo GetProjectile() => this.itemProjectile;
+        public override ItemInfoProjectle GetProjectile() => this.itemProjectile;
 
         protected override void OnDeath()
         {

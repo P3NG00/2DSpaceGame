@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpaceGame.Settings
+namespace SpaceGame.Items
 {
     [System.Serializable]
     public sealed class ItemDrop

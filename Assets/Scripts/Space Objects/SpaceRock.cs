@@ -1,4 +1,3 @@
-using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.Utilities;
 using UnityEngine;

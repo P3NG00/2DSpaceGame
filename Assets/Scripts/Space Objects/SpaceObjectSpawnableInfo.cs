@@ -1,7 +1,7 @@
 using SpaceGame.Utilities;
 using UnityEngine;
 
-namespace SpaceGame.Settings
+namespace SpaceGame.SpaceObjects
 {
     [CreateAssetMenu(menuName = "2D Space Game/Space Object/Spawnable", fileName = "Space Object Spawnable Info")]
     public sealed class SpaceObjectSpawnableInfo : SpaceObjectInfo

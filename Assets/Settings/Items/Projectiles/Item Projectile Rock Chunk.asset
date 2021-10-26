@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64c172d4ae0541a48b93805010037d56, type: 3}
-  m_Name: Platinum Lump
+  m_Script: {fileID: 11500000, guid: 7f997d49b3e63124a8bd14ce6c269212, type: 3}
+  m_Name: Item Projectile Rock Chunk
   m_EditorClassIdentifier: 
-  itemName: Platinum Lump
+  itemName: Rock Chunk
   sprite: {fileID: 21300000, guid: 34c1beda7462d084587837b2a5ad474e, type: 3}
-  color: {r: 0.765, g: 0.8325, b: 0.9, a: 1}
-  maxStackSize: 100
+  color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  maxStackSize: 999
+  infinite: 0
+  projectile: {fileID: 11400000, guid: 16f8e0a0e5c78804ab81e1fc6d7c6f3a, type: 2}
+  timeBetweenShots: 0.7

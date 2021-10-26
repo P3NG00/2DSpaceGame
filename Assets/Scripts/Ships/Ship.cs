@@ -1,8 +1,10 @@
 using System.Collections;
 using SpaceGame.Items;
-using SpaceGame.Settings;
+using SpaceGame.Projectiles;
+using SpaceGame.UI;
 using SpaceGame.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceGame.Ships
 {
@@ -11,7 +13,7 @@ namespace SpaceGame.Ships
         [Header("Info", order = 0)]
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
-        [SerializeField] private ShipInfo stats;
+        [FormerlySerializedAs("stats"), SerializeField] private ShipInfo shipInfo;
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -28,14 +30,13 @@ namespace SpaceGame.Ships
         private bool isFiring = false;
         private Coroutine routineFiring = null;
 
-        public ShipInfo Stats => this.stats;
+        public ShipInfo ShipInfo => this.shipInfo;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
         public float Health => this.health;
         public float MaxHealth => this.maxHealth;
 
         public Vector2 Position => this.transform.position;
-        public bool Dragging => this.rigidbody.drag == this.stats.Drag;
         public bool IsAlive => this.health > 0f;
         public bool IsFiring
         {
@@ -54,8 +55,8 @@ namespace SpaceGame.Ships
         private void OnValidate()
         {
             Util.ValidateMinMax(this.health, ref this.maxHealth);
-            this.srPrimary.color = this.stats.ColorPrimary;
-            this.srSecondary.color = this.stats.ColorSecondary;
+            this.srPrimary.color = this.shipInfo.ColorPrimary;
+            this.srSecondary.color = this.shipInfo.ColorSecondary;
 
             if (this.FORCE_VALIDATE)
             {
@@ -66,7 +67,7 @@ namespace SpaceGame.Ships
 
         protected virtual void FixedUpdate()
         {
-            this.animator.SetBool("Drag", Dragging);
+            this.animator.SetBool("Drag", this.rigidbody.drag == this.shipInfo.Drag);
         }
 
         public float GetRotationToLookAt(Vector2 pos)
@@ -92,7 +93,7 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                Vector2 v = this.transform.up * this.stats.MultiplierForce;
+                Vector2 v = this.transform.up * this.shipInfo.MultiplierForce;
                 this.rigidbody.AddForce(v);
             }
         }
@@ -101,7 +102,7 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                float r = -rotation * this.stats.MultiplierRotate * Time.deltaTime;
+                float r = -rotation * this.shipInfo.MultiplierRotate * Time.deltaTime;
                 this.rigidbody.AddTorque(r);
             }
         }
@@ -112,7 +113,7 @@ namespace SpaceGame.Ships
 
             if (this.IsAlive)
             {
-                this.rigidbody.drag = drag ? this.Stats.Drag : 0f;
+                this.rigidbody.drag = drag ? this.ShipInfo.Drag : 0f;
             }
         }
 
@@ -132,8 +133,8 @@ namespace SpaceGame.Ships
             {
                 switch (damageType)
                 {
-                    case Enums.DamageType.Collision: damage *= this.stats.ScaleCollisionDamage; break;
-                    case Enums.DamageType.Projectile: damage *= this.stats.ScaleMissileDamage; break;
+                    case Enums.DamageType.Collision: damage *= this.shipInfo.ScaleCollisionDamage; break;
+                    case Enums.DamageType.Projectile: damage *= this.shipInfo.ScaleMissileDamage; break;
                 }
 
                 this.health -= damage;
@@ -146,38 +147,46 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract ItemProjectileInfo GetProjectile();
+        public virtual UIInventorySlot ItemWeaponSlot() => null;
+
+        public abstract ItemInfoProjectle GetProjectile();
 
         protected virtual void OnDeath() { }
 
         private void Fire()
         {
-            // TODO use Projectile instead of Missile
-            // if (this.IsAlive)
-            // {
-            //     Vector3 posMissile = this.transform.position;
-            //     posMissile += this.transform.up * this.transform.localScale.y;
-            //     ItemWeaponInfo weapon = this.GetWeapon();
-            //     float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
+            if (this.IsAlive)
+            {
+                Projectile.Create(this.GetProjectile().ProjectileInfo, this);
+                UIInventorySlot itemWeaponSlot = this.ItemWeaponSlot();
 
-            //     for (int i = 0; i < weapon.AmountOfShots; ++i)
-            //     {
-            //         // Projectile rotation
-            //         Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
-            //         Quaternion rotation = this.transform.rotation * rotOffset;
+                if (itemWeaponSlot != null && !itemWeaponSlot.ItemStack.ItemInfo.Infinite)
+                {
+                    itemWeaponSlot.ItemStack.Amount--;
+                    itemWeaponSlot.UpdateText();
+                }
 
-            //         // Instantiate
-            //         Missile.Create(posMissile, rotation, weapon, this);
+                // TODO reimplement later - code used for multi-shot weapons
+                // float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
 
-            //         // Set for next missile
-            //         angle -= weapon.AngleBetweenShots;
-            //     }
-            // }
+                // for (int i = 0; i < weapon.AmountOfShots; ++i)
+                // {
+                //     // Projectile rotation
+                //     Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
+                //     Quaternion rotation = this.transform.rotation * rotOffset;
+
+                //     // Instantiate
+                //     Missile.Create(pos, rotation, weapon, this);
+
+                //     // Set for next missile
+                //     angle -= weapon.AngleBetweenShots;
+                // }
+            }
         }
 
         private IEnumerator RoutineFire()
         {
-            while (this.IsFiring)
+            while (this.IsFiring & this.GetProjectile() != null)
             {
                 this.Fire();
                 yield return new WaitForSeconds(this.GetProjectile().TimeBetweenShots);
@@ -186,7 +195,7 @@ namespace SpaceGame.Ships
             this.routineFiring = null;
         }
 
-        // TODO remvoe
+        // TODO remove
         // Missile class doesn't exist anymore, use Projectile instead
         // Projectile damage should be dealt with in the Projectile's OnTriggerEnter function
         // private void OnTriggerEnter2D(Collider2D collider)

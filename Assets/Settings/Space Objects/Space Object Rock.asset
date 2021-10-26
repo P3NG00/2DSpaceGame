@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f2baef68cc50746b0b1fe97ef21ed0, type: 3}
-  m_Name: Space Rock
+  m_Name: Space Object Rock
   m_EditorClassIdentifier: 
   tagName: Space Rock
   color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
-  - item: {fileID: 11400000, guid: 3e45daed6cdfc524daaa559ac74a1795, type: 2}
+  - item: {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
     weight: 2
     minAmount: 4
     maxVariance: 8

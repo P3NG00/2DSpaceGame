@@ -10,14 +10,33 @@ namespace SpaceGame.Projectiles
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         [Header("DEBUG", order = 100)]
-        public ProjectileInfo ProjectileInfo;
-        public Ship SourceShip;
+        [SerializeField] private ProjectileInfo projectileInfo;
+        [SerializeField] private Ship sourceShip;
 
-        public Rigidbody2D Rigidbody => this.rigidbody;
+        public static Projectile Create(ProjectileInfo projectileInfo, Ship source)
+        {
+            Projectile projectile = Instantiate(projectileInfo.ProjectileObject, source.transform.position, source.transform.rotation);
+            projectile.rigidbody.velocity = source.transform.up * projectileInfo.Magnitude;
+            projectile.spriteRenderer.sprite = projectileInfo.CorrespondingItem.Sprite;
+            projectile.spriteRenderer.color = projectileInfo.CorrespondingItem.Color;
+            projectile.projectileInfo = projectileInfo;
+            projectile.sourceShip = source;
+            Destroy(projectile.gameObject, projectileInfo.Lifetime);
+            return projectile;
+        }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            // TODO move all projectile collisions (from things like space objects or ships) into here
+            // TODO
+            // dont let projectile hit source ship
+            // projectile should damage ships for ship damage amount
+            // projectile should damage space objects for space object amount
+
+            // TODO add more cases
+            switch (collider.tag)
+            {
+                case "Player": /* TODO */ break;
+            }
         }
     }
 }

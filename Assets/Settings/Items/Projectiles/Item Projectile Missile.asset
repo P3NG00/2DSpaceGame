@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f997d49b3e63124a8bd14ce6c269212, type: 3}
-  m_Name: ItemProjectileMissile
+  m_Name: Item Projectile Missile
   m_EditorClassIdentifier: 
   itemName: Missile
   sprite: {fileID: 21300000, guid: 544aa337d893676468c2b31dd9a0a198, type: 3}
   color: {r: 0.14528298, g: 0.65583503, b: 1, a: 1}
   maxStackSize: 1
+  infinite: 1
   projectile: {fileID: 11400000, guid: acfee1002d16d9043b9bcd9cc0bc45c2, type: 2}
+  timeBetweenShots: 0.35

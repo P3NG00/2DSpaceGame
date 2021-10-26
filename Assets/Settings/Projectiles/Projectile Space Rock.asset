@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 838a0e96825685843966f59d20e814f0, type: 3}
-  m_Name: Projectile Missile
+  m_Name: Projectile Space Rock
   m_EditorClassIdentifier: 
-  projectileName: Missile Projectile
-  damageShip: 5
-  damageSpaceObject: 1
-  magnitude: 100
-  lifetime: 1.5
-  correspondingItem: {fileID: 11400000, guid: 3b64f83b1b1ba97428026d1d42f9f48a, type: 2}
-  projectileObject: {fileID: 5900169560255849357, guid: 1a0defda548efb741bc2eb79c9fd9288, type: 3}
+  projectileName: Rock Chunk Projectile
+  damageShip: 2
+  damageSpaceObject: 0.6
+  magnitude: 15
+  lifetime: 5
+  correspondingItem: {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
+  projectileObject: {fileID: -3121851429883694184, guid: 71b9d5c63d33f03489351cad802dc57f, type: 3}

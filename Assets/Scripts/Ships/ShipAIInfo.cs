@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpaceGame.Settings
+namespace SpaceGame.Ships
 {
     [CreateAssetMenu(menuName = "2D Space Game/Ship Stats/AI", fileName = "Ship AI Info")]
     public sealed class ShipAIInfo : ShipInfo

@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 9079760447092058087}
   spriteRenderer: {fileID: -6889906539230032377}
-  ProjectileInfo: {fileID: 0}
-  SourceShip: {fileID: 0}
+  projectileInfo: {fileID: 0}
+  sourceShip: {fileID: 0}
 --- !u!212 &-6889906539230032377
 SpriteRenderer:
   m_ObjectHideFlags: 0
