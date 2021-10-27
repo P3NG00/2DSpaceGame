@@ -7,51 +7,40 @@ namespace SpaceGame.Items
     {
         [Header("ItemStack Info", order = 0)]
         public ItemInfo ItemInfo;
-        [SerializeField, Min(0)] private int amount;
+        [Min(0)] public int Amount;
 
-        public ItemStack(ItemInfo item, int amount)
+        public ItemStack(ItemInfo itemInfo, int amount)
         {
-            this.ItemInfo = item;
-            this.amount = amount;
+            this.ItemInfo = itemInfo;
+            this.Amount = amount;
+            this.ModifyAmount(0);
         }
 
-        public int Amount
-        {
-            get => this.amount;
-            set
-            {
-                this.amount = value;
-                this.FixStackSize();
-            }
-        }
+        public ItemStack(ItemInfo itemInfo) : this(itemInfo, 1) { }
 
-        // Adds amount to stack, then returns
-        // remaining amount that couldn't be added
-        public int AddAmount(int amount)
+        public int ModifyAmount(int amount)
         {
-            this.amount += amount;
-            return this.FixStackSize();
-        }
+            this.Amount += amount;
+            int difference = 0;
+            int stackMax = this.ItemInfo.MaxStackSize;
 
-        private int FixStackSize()
-        {
-            int difference = 0, maxStackSize = this.ItemInfo.MaxStackSize;
-
-            if (this.amount > maxStackSize)
+            if (this.Amount < 0)
             {
-                difference = this.amount - maxStackSize;
-                this.amount = maxStackSize;
-            }
-            else if (this.amount <= 0)
-            {
-                this.amount = 0;
+                // If stack is empty
+                difference = this.Amount;
+                this.Amount = 0;
                 this.ItemInfo = null;
-                GameInfo.UpdateInventoryUI();
+            }
+            else if (this.Amount > stackMax)
+            {
+                // If stack exceeds limit
+                difference = this.Amount - stackMax;
+                this.Amount = stackMax;
             }
 
             return difference;
         }
 
-        public override string ToString() => this.ItemInfo == null ? "Empty" : $"{this.ItemInfo.ItemName} - {this.amount}";
+        public override string ToString() => this.ItemInfo == null ? "Empty" : $"{this.ItemInfo.ItemName} - {this.Amount}";
     }
 }

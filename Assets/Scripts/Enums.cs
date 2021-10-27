@@ -1,4 +1,4 @@
-namespace SpaceGame.Utilities
+namespace SpaceGame
 {
     public sealed class Enums
     {

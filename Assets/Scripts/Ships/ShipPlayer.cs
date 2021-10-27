@@ -11,8 +11,8 @@ namespace SpaceGame.Ships
 
         public Animator Animator => this.animatorPlayer;
 
-        public sealed override UIInventorySlot ItemWeaponSlot() => GameInfo.PlayerWeaponSlot;
-        public sealed override ItemInfoProjectle GetProjectile() => GameInfo.PlayerWeaponInfo;
+        public sealed override UIInventorySlot ItemWeaponSlot() => GameInfo.SlotWeapon;
+        public sealed override ItemInfoProjectile GetProjectile() => GameInfo.PlayerWeaponInfo;
 
         // protected override void OnDeath() { }
     }

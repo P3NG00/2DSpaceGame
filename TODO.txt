@@ -89,3 +89,9 @@ TODO add slots to UI for placing weapon/defense/quick use item?
 TODO add button for controller to switch between rotation and aim in direction
 left stick will be used for both
 clicking in left stick toggles control mode?
+
+
+
+
+
+TODO ADD SEPERATE BUTTON FOR BOOST. MAKE PLAYER SLOWER BY DEFAULT, MOVE FASTER WHEN HOLDING BOOST BUTTON

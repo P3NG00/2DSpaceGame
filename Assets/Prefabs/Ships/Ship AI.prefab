@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,15 +134,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   maxHealth: 20
-  stats: {fileID: 11400000, guid: c2e3da5393d33b847a1e796a556ee76e, type: 2}
+  shipInfo: {fileID: 11400000, guid: c2e3da5393d33b847a1e796a556ee76e, type: 2}
   rigidbody: {fileID: 4979323623273713214}
   srPrimary: {fileID: 1846706566606818846}
   srSecondary: {fileID: 1205873065221026397}
   animator: {fileID: 3470504029433804715}
   Invincible: 0
   FORCE_VALIDATE: 0
-  weapon: {fileID: 0}
+  itemProjectile: {fileID: 0}
   shipAIType: 0
+  randomAIType: 0
 --- !u!50 &4979323623273713214
 Rigidbody2D:
   serializedVersion: 4
@@ -284,7 +285,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 00910b9ea88bc3944a7b80544f9cc4dd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -366,7 +367,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b6f062154b2388344afd793fb5c9cdd0, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 0.4, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -448,7 +449,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 00910b9ea88bc3944a7b80544f9cc4dd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

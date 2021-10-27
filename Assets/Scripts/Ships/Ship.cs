@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using System.Collections;
 using SpaceGame.Items;
 using SpaceGame.Projectiles;
@@ -27,17 +29,21 @@ namespace SpaceGame.Ships
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
+        // Private caches
         private bool isFiring = false;
         private Coroutine routineFiring = null;
+        private Coroutine routineUsing = null;
 
+        // Public getters
+        public float Health => this.health;
+        public float MaxHealth => this.maxHealth;
         public ShipInfo ShipInfo => this.shipInfo;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
-        public float Health => this.health;
-        public float MaxHealth => this.maxHealth;
-
+        // Public properties
         public Vector2 Position => this.transform.position;
         public bool IsAlive => this.health > 0f;
+        public bool IsUsing => this.routineUsing != null;
         public bool IsFiring
         {
             get => this.isFiring;
@@ -147,9 +153,26 @@ namespace SpaceGame.Ships
             }
         }
 
+        public void StartItemRoutine(IEnumerator itemRoutine)
+        {
+            if (!this.IsUsing)
+            {
+                this.routineUsing = StartCoroutine(itemRoutine);
+            }
+        }
+
+        public void StopItemRoutine()
+        {
+            if (this.IsUsing)
+            {
+                this.StopCoroutine(this.routineUsing);
+                this.routineUsing = null;
+            }
+        }
+
         public virtual UIInventorySlot ItemWeaponSlot() => null;
 
-        public abstract ItemInfoProjectle GetProjectile();
+        public abstract ItemInfoProjectile GetProjectile();
 
         protected virtual void OnDeath() { }
 

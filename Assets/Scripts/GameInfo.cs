@@ -59,15 +59,12 @@ namespace SpaceGame
         [SerializeField] private SpaceObjectInfo settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] slotsInventory;
+        [SerializeField] private UIInventorySlot[] slotsHotbar;
+        [SerializeField] private UIInventorySlot slotWeapon;
 
         [Header("DEBUG", order = 100)]
-        [SerializeField] private bool updateUI;
         [SerializeField] private bool doDebugRays;
         [SerializeField] private bool doDebugLog;
-
-        [Header("DEBUG GIVE ITEM", order = 101)] // TODO implement into cheat menu
-        [SerializeField] private ItemStack debugItemStack;
-        [SerializeField] private bool debugGiveItemStack;
 
         // Cache
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
@@ -80,22 +77,22 @@ namespace SpaceGame
         private UIInventorySlot hoverSlot;
         private UIInventorySlot selectedHotbar;
         private Enums.RotationType rotationType = Enums.RotationType.RotateAxis;
-
-        // Private Getters
-        private UIInventorySlot SlotWeapon => this.slotsInventory[5];
+        private List<UIInventorySlot> invSlots = new List<UIInventorySlot>();
+        private List<UIInventorySlot> allSlots = new List<UIInventorySlot>();
 
         // Public Getters
         public static ShipPlayer Player => GameInfo.instance.player;
         public static SpaceObjectInfo SettingsItemObject => GameInfo.instance.settingsItemObject;
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
-        public static UIInventorySlot PlayerWeaponSlot => GameInfo.instance.SlotWeapon;
-        public static ItemInfoProjectle PlayerWeaponInfo
+        public static UIInventorySlot SlotWeapon => GameInfo.instance.slotWeapon;
+        public static GameObject ParentCheatMenu => GameInfo.instance.parentCheatMenu;
+        public static ItemInfoProjectile PlayerWeaponInfo
         {
             get
             {
-                ItemInfo itemInfo = GameInfo.PlayerWeaponSlot.ItemStack.ItemInfo;
-                return itemInfo == null ? null : (ItemInfoProjectle)itemInfo;
+                ItemInfo itemInfo = GameInfo.SlotWeapon.ItemStack.ItemInfo;
+                return itemInfo == null ? null : (ItemInfoProjectile)itemInfo;
             }
         }
 
@@ -107,6 +104,11 @@ namespace SpaceGame
         // Unity Start method
         private void Start()
         {
+            this.invSlots.AddRange(this.slotsHotbar);
+            this.invSlots.AddRange(this.slotsInventory);
+            this.allSlots.AddRange(this.slotsInventory);
+            this.allSlots.AddRange(this.slotsHotbar);
+            this.allSlots.Add(this.slotWeapon);
             Application.targetFrameRate = this.framerate;
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
             StartCoroutine(RoutineCleanDistantSpaceObjects());
@@ -114,7 +116,6 @@ namespace SpaceGame
             this.parentCheatMenu.SetActive(false);
             SelectHotbar(0);
             HoverSlot(SlotWeapon, true);
-            UpdateInventoryUI();
         }
 
         // Unity Update method
@@ -158,75 +159,59 @@ namespace SpaceGame
             // Health
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
 
-            // UI
-            if (this.updateUI)
+            // Update UI
+            foreach (UIInventorySlot slot in this.allSlots)
             {
-                this.updateUI = false;
+                ItemStack slotStack = slot.ItemStack;
+                bool hasItem = slotStack.ItemInfo != null;
 
-                // Update slot visual info
-                foreach (UIInventorySlot slot in this.slotsInventory)
+                if (hasItem)
                 {
-                    ItemStack slotStack = slot.ItemStack;
-                    bool hasItem = slotStack.ItemInfo != null;
-
-                    if (hasItem)
+                    if (slotStack.Amount <= 0)
                     {
-                        if (slotStack.Amount <= 0)
-                        {
-                            slotStack.ItemInfo = null;
-                            hasItem = false;
-                        }
-                        else
-                        {
-                            slot.Image.color = slotStack.ItemInfo.Color;
-                            slot.Image.sprite = slotStack.ItemInfo.Sprite;
-                        }
+                        slotStack.ItemInfo = null;
+                        hasItem = false;
                     }
-
-                    slot.Visible = hasItem;
-                    slot.UpdateText();
-                }
-
-                this.highlightHoverSlot.gameObject.SetActive(this.parentInvUI.activeSelf);
-
-                UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1);
-                UpdateSelectedSlot(this.hoverSlot, this.highlightHoverSlot, -2);
-                UpdateSelectedSlot(this.selectedHotbar, this.highlightSelectedHotbar, -3);
-
-                void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, int layer)
-                {
-                    bool b = selected != null;
-                    highlight.enabled = b;
-
-                    if (b)
+                    else
                     {
-                        highlight.rectTransform.SetParent(selected.transform);
-                        RectTransform rectHighlight = highlight.rectTransform;
-                        RectTransform rectSelected = selected.RectTransform;
-                        highlight.transform.localPosition = new Vector3(0f, 0f, layer);
+                        slot.Image.color = slotStack.ItemInfo.Color;
+                        slot.Image.sprite = slotStack.ItemInfo.Sprite;
                     }
                 }
+
+                slot.Visible = hasItem;
+                slot.UpdateText();
             }
 
-            // DEBUG
-            if (this.debugGiveItemStack)
+            this.highlightHoverSlot.gameObject.SetActive(this.parentInvUI.activeSelf);
+
+            UpdateSelectedSlot(this.selectedSlot, this.highlightSlotSelected, -1);
+            UpdateSelectedSlot(this.hoverSlot, this.highlightHoverSlot, -2);
+            UpdateSelectedSlot(this.selectedHotbar, this.highlightSelectedHotbar, -3);
+
+            void UpdateSelectedSlot(UIInventorySlot selected, Image highlight, int layer)
             {
-                GiveItem(this.debugItemStack);
-                this.debugItemStack = null;
-                this.debugGiveItemStack = false;
+                bool b = selected != null;
+                highlight.enabled = b;
+
+                if (b)
+                {
+                    highlight.rectTransform.SetParent(selected.transform);
+                    RectTransform rectHighlight = highlight.rectTransform;
+                    RectTransform rectSelected = selected.RectTransform;
+                    highlight.transform.localPosition = new Vector3(0f, 0f, layer);
+                }
             }
         }
-
-        public static void UpdateInventoryUI() => GameInfo.instance.updateUI = true;
 
         public static int GiveItem(ItemStack itemStack)
         {
             Queue<UIInventorySlot> emptySlots = new Queue<UIInventorySlot>();
-            UIInventorySlot[] inv = GameInfo.instance.slotsInventory;
+            List<UIInventorySlot> inv = GameInfo.instance.invSlots;
             UIInventorySlot slot;
             ItemInfo itemCurrent;
 
-            for (int i = 0; i < inv.Length & itemStack.Amount > 0; ++i)
+            for (int i = 0; i < inv.Count & itemStack.Amount > 0; ++i)
             {
                 slot = inv[i];
                 itemCurrent = slot.ItemStack.ItemInfo;
@@ -234,8 +219,7 @@ namespace SpaceGame
                 if (itemCurrent == itemStack.ItemInfo)
                 {
                     // Add amount and update remaining amount
-                    slot.ItemStack.Amount += itemStack.Amount;
-                    itemStack.Amount = slot.ItemStack.AddAmount(itemStack.Amount);
+                    itemStack.Amount = slot.ItemStack.ModifyAmount(itemStack.Amount);
                 }
                 else if (itemCurrent == null)
                 {
@@ -245,14 +229,13 @@ namespace SpaceGame
             }
 
             // Fill empty slots with extra
-            while (itemStack.Amount > 0 & emptySlots.Count > 0)
+            while (itemStack.Amount > 0 && emptySlots.Count > 0)
             {
                 slot = emptySlots.Dequeue();
                 slot.ItemStack.ItemInfo = itemStack.ItemInfo;
-                itemStack.Amount = slot.ItemStack.AddAmount(itemStack.Amount);
+                itemStack.Amount = slot.ItemStack.ModifyAmount(itemStack.Amount);
             }
 
-            UpdateInventoryUI();
             return itemStack.Amount;
         }
 
@@ -267,11 +250,10 @@ namespace SpaceGame
 
                 if (slotStack.ItemInfo == itemStack.ItemInfo)
                 {
-                    slotStack.Amount = Mathf.Abs(slotStack.AddAmount(-itemStack.Amount));
+                    // slotStack.Amount = Mathf.Abs(slotStack.ModifyAmount(-itemStack.Amount));
                 }
             }
 
-            UpdateInventoryUI();
             return itemStack.Amount == 0;
         }
 
@@ -286,7 +268,6 @@ namespace SpaceGame
                 {
                     // Deselect slot
                     gi.selectedSlot = null;
-                    UpdateInventoryUI();
                 }
                 // Else if no slot selected...
                 else if (gi.selectedSlot == null)
@@ -296,17 +277,16 @@ namespace SpaceGame
                     {
                         // Select slot
                         gi.selectedSlot = slot;
-                        UpdateInventoryUI();
                     }
                 }
                 // Else, selected slot exists and is selecting different slot...
                 else
                 {
                     // If selecting weapon slot...
-                    if (slot == gi.SlotWeapon)
+                    if (slot == gi.slotWeapon)
                     {
                         // If item being moved is a weapon...
-                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemInfoProjectle)
+                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemInfoProjectile)
                         {
                             SwapItems();
                         }
@@ -325,7 +305,6 @@ namespace SpaceGame
 
                         // Reset
                         gi.selectedSlot = null;
-                        UpdateInventoryUI();
                     }
                 }
             }
@@ -336,15 +315,13 @@ namespace SpaceGame
             if (slot != null & (ovrd | GameInfo.instance.parentInvUI.activeSelf))
             {
                 GameInfo.instance.hoverSlot = slot;
-                UpdateInventoryUI();
             }
         }
 
         public static void SelectHotbar(int index)
         {
             GameInfo gi = GameInfo.instance;
-            gi.selectedHotbar = gi.slotsInventory[index];
-            UpdateInventoryUI();
+            gi.selectedHotbar = gi.slotsHotbar[index];
         }
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectInfo sos, Vector2 pos)
@@ -521,11 +498,7 @@ namespace SpaceGame
         public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(2));
         public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(3));
         public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(4));
-        public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
-        {
-            Util.ToggleActive(this.parentInvUI);
-            UpdateInventoryUI();
-        });
+        public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
         public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotDown));
         public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotLeft));
         public void CallbackInput_MenuRight(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotRight));
@@ -542,15 +515,14 @@ namespace SpaceGame
             ItemStack hotbarStack = this.selectedHotbar.ItemStack;
             ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
 
-            if (hotbarItemInfo != null && !(hotbarItemInfo is ItemInfoProjectle))
+            if (hotbarItemInfo != null && !(hotbarItemInfo is ItemInfoProjectile))
             {
                 hotbarItemInfo.Use(this.player);
 
                 if (!hotbarItemInfo.Infinite)
                 {
                     // TODO make sure this works properly
-                    --hotbarStack.Amount;
-                    this.selectedHotbar.UpdateText();
+                    hotbarStack.ModifyAmount(-1);
                 }
             }
         });
