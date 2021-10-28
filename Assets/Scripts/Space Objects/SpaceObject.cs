@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
 {
-    public abstract class SpaceObject : MonoBehaviour
+    public class SpaceObject : MonoBehaviour
     {
         [Header("Info [SpaceObject]", order = 5)]
         public SpaceObjectInfo Settings;
@@ -14,10 +14,28 @@ namespace SpaceGame.SpaceObjects
         public SpriteRenderer SpriteRenderer => this.spriteRenderer;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
+        private bool alive = true;
+
         public float Scale
         {
             get => this.transform.localScale.x;
-            set => this.transform.localScale = Vector2.one * value;
+            set
+            {
+                if (this.alive)
+                {
+                    if (value < this.Settings.DestroyBelowScale)
+                    {
+                        this.alive = false;
+                        GameInfo.DestroySpaceObject(this);
+                        SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
+                        itemObject.SetItem(this.Settings.RandomItemDrop);
+                    }
+                    else
+                    {
+                        this.transform.localScale = Vector2.one * value;
+                    }
+                }
+            }
         }
 
         private void Start()
@@ -26,14 +44,5 @@ namespace SpaceGame.SpaceObjects
         }
 
         protected virtual Color GetColor() => this.Settings.Color;
-
-        // TODO move projectile Triggers to Projectile class
-        // protected virtual void OnTriggerEnter2D(Collider2D collider)
-        // {
-        //     if (this.Settings.DestroyMissile & collider.tag == GameInfo.TagMissile)
-        //     {
-        //         Destroy(collider.gameObject);
-        //     }
-        // }
     }
 }

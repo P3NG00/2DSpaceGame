@@ -1,0 +1,15 @@
+// reimplement later - code used for multi-shot weapons
+float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
+
+for (int i = 0; i < weapon.AmountOfShots; ++i)
+{
+    // Projectile rotation
+    Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
+    Quaternion rotation = this.transform.rotation * rotOffset;
+
+    // Instantiate
+    Missile.Create(pos, rotation, weapon, this);
+
+    // Set for next missile
+    angle -= weapon.AngleBetweenShots;
+}

@@ -24,9 +24,9 @@ MonoBehaviour:
   minAngularVelocity: 10
   maxAngularVelocity: 90
   prefabSpaceObjects:
-  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
-  - {fileID: 8602982224421927582, guid: 54e982048e29651428566b47da96f37d, type: 3}
-  - {fileID: 2414450234179785082, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
+  - {fileID: 1964630122336401675, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
+  - {fileID: 7411326359078354067, guid: 54e982048e29651428566b47da96f37d, type: 3}
+  - {fileID: 3474638696787253111, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
   - item: {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
     weight: 2

@@ -1,7 +1,6 @@
 using SpaceGame.Projectiles;
 using SpaceGame.Ships;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SpaceGame.Items
 {
@@ -9,8 +8,7 @@ namespace SpaceGame.Items
     public sealed class ItemInfoProjectile : ItemInfo
     {
         [Header("Info [ItemProjectile]", order = 5)]
-        // TODO remove FormerlySerializedAs tag
-        [SerializeField, FormerlySerializedAs("projectile")] private ProjectileInfo projectile;
+        [SerializeField] private ProjectileInfo projectile;
         [SerializeField] private float timeBetweenShots;
 
         public ProjectileInfo ProjectileInfo => this.projectile;

@@ -39,19 +39,7 @@ TODO implement a "base"
 TODO create tutorial dialogue on how to control your player
 "better to use short bursts of speed but you can try drifting at your discretion"
 
-
-TODO add crafting for items
-
-
-
 TODO big round boss creature that can only be attacked from certain sides. you need to fake him out to get enough time to attack his spots
-
-
-TODO implement keybind for cheat menu
-    possible features
-        able to change values of the game like:
-            - time scale
-        able to give any item or weapon
 
 TODO make weapon type that is a constant lazer
 lazer should take energy to use,
@@ -81,8 +69,6 @@ TODO keep stats about game
     planets ran into
     deaths
     total play time
-
-TODO regenerate player health when not taking damage
 
 TODO add slots to UI for placing weapon/defense/quick use item?
 

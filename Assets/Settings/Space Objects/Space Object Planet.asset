@@ -24,7 +24,7 @@ MonoBehaviour:
   minAngularVelocity: 5
   maxAngularVelocity: 20
   prefabSpaceObjects:
-  - {fileID: 791077045920939782, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
+  - {fileID: 1964630122336401675, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   itemDrops: []
   distanceSpawn: 250
   widthSpawn: 50

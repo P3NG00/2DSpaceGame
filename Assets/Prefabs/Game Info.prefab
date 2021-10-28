@@ -46,41 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 100e61a65745f1e4b8e9ec88f043c76f, type: 2}
   framerate: 150
-  recipes:
-  - ingredients:
-    - Item: {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
-      amount: 3
-    output:
-      Item: {fileID: 11400000, guid: 9d16f728f6454e740a5a760084cd9be2, type: 2}
-      amount: 1
-  - ingredients:
-    - Item: {fileID: 11400000, guid: 12d4719f9fa635c48b9c52d1bb59ff66, type: 2}
-      amount: 3
-    output:
-      Item: {fileID: 11400000, guid: 1623b427a9f3b864899f72d1a3f2739f, type: 2}
-      amount: 1
-  - ingredients:
-    - Item: {fileID: 11400000, guid: 1e47bc25f918b7c4c8ed34be3afffc94, type: 2}
-      amount: 3
-    output:
-      Item: {fileID: 11400000, guid: a508c20830bcb37439b701b387960ed6, type: 2}
-      amount: 1
-  - ingredients:
-    - Item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
-      amount: 3
-    output:
-      Item: {fileID: 11400000, guid: fbb83dfccd911714c9dc5930a5e5921e, type: 2}
-      amount: 1
-  - ingredients:
-    - Item: {fileID: 11400000, guid: 2cc1c85d90eed354fb2b93f0944a45e5, type: 2}
-      amount: 3
-    output:
-      Item: {fileID: 11400000, guid: 5606934a5271f7b42980022c661c62e4, type: 2}
-      amount: 1
   tagShip: Ship
   tagPlayer: Player
-  tagMissile: Missile
-  prefabMissile: {fileID: 8038494414457608711, guid: a43e52a7801009a4e95c94ebf1f9dd28, type: 3}
+  tagProjectile: Projectile
+  tagSpaceRock: Space Rock
   prefabTextCreditPopup: {fileID: 5284667503819923402, guid: 052644854a10f5b4e984287ef05b8f00, type: 3}
   player: {fileID: 0}
   parentSpaceObjects: {fileID: 0}
@@ -88,8 +57,8 @@ MonoBehaviour:
   parentInvUI: {fileID: 0}
   parentCheatMenu: {fileID: 0}
   highlightSlotSelected: {fileID: 0}
-  highlightSlotHover: {fileID: 0}
-  highlightHotbar: {fileID: 0}
+  highlightHoverSlot: {fileID: 0}
+  highlightSelectedHotbar: {fileID: 0}
   imageHealthBar: {fileID: 0}
   settingsItemObject: {fileID: 11400000, guid: 1eb3693a39484e04a92017a88a99170a, type: 2}
   sprites:
@@ -123,7 +92,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  updateUI: 0
+  slotsHotbar: []
+  slotWeapon: {fileID: 0}
   doDebugRays: 1
   doDebugLog: 0
 --- !u!114 &3068602627571150779

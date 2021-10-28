@@ -1,5 +1,3 @@
-using System;
-using System.Globalization;
 using System.Collections;
 using SpaceGame.Items;
 using SpaceGame.Projectiles;
@@ -115,8 +113,6 @@ namespace SpaceGame.Ships
 
         public void ApplyDrag(bool drag)
         {
-            // TODO if applying drag, make red rectangles on back of ship light up as "braking lights"
-
             if (this.IsAlive)
             {
                 this.rigidbody.drag = drag ? this.ShipInfo.Drag : 0f;
@@ -125,11 +121,18 @@ namespace SpaceGame.Ships
 
         public void Heal(float amount)
         {
-            this.health += amount;
-
-            if (this.health > this.maxHealth)
+            if (amount > 0)
             {
-                this.health = this.maxHealth;
+                this.health += amount;
+
+                if (this.health > this.maxHealth)
+                {
+                    this.health = this.maxHealth;
+                }
+            }
+            else if (GameInfo.DEBUG_LOG)
+            {
+                print($"Cannot heal for amount of '{amount}'");
             }
         }
 
@@ -144,6 +147,7 @@ namespace SpaceGame.Ships
                 }
 
                 this.health -= damage;
+                this.OnDamage();
 
                 if (this.health <= 0f)
                 {
@@ -170,11 +174,11 @@ namespace SpaceGame.Ships
             }
         }
 
+        public abstract ItemInfoProjectile GetProjectile();
         public virtual UIInventorySlot ItemWeaponSlot() => null;
 
-        public abstract ItemInfoProjectile GetProjectile();
-
         protected virtual void OnDeath() { }
+        protected virtual void OnDamage() { }
 
         private void Fire()
         {
@@ -188,22 +192,6 @@ namespace SpaceGame.Ships
                     itemWeaponSlot.ItemStack.Amount--;
                     itemWeaponSlot.UpdateText();
                 }
-
-                // TODO reimplement later - code used for multi-shot weapons
-                // float angle = (weapon.AngleBetweenShots / 2f) * (weapon.AmountOfShots - 1);
-
-                // for (int i = 0; i < weapon.AmountOfShots; ++i)
-                // {
-                //     // Projectile rotation
-                //     Quaternion rotOffset = Quaternion.Euler(0f, 0f, angle);
-                //     Quaternion rotation = this.transform.rotation * rotOffset;
-
-                //     // Instantiate
-                //     Missile.Create(pos, rotation, weapon, this);
-
-                //     // Set for next missile
-                //     angle -= weapon.AngleBetweenShots;
-                // }
             }
         }
 
@@ -218,21 +206,14 @@ namespace SpaceGame.Ships
             this.routineFiring = null;
         }
 
-        // TODO remove
-        // Missile class doesn't exist anymore, use Projectile instead
-        // Projectile damage should be dealt with in the Projectile's OnTriggerEnter function
-        // private void OnTriggerEnter2D(Collider2D collider)
-        // {
-        //     if (collider.tag == GameInfo.TagMissile)
-        //     {
-        //         Missile missile = collider.GetComponent<Missile>();
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            GameObject obj = collision.gameObject;
 
-        //         if (missile.SourceShip != this)
-        //         {
-        //             this.Damage(missile.Weapon.MultShip, Enums.DamageType.Projectile);
-        //             Destroy(collider.gameObject);
-        //         }
-        //     }
-        // }
+            if (obj.tag == GameInfo.TagSpaceRock)
+            {
+                this.Damage(rigidbody.velocity.magnitude, Enums.DamageType.Collision);
+            }
+        }
     }
 }

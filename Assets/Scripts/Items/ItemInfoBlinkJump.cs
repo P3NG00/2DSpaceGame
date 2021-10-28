@@ -18,14 +18,13 @@ namespace SpaceGame.Items
         {
             // TODO blink jump
             // start coroutine on ship to wait for re-appearance
+            // give time between each use
             source.StartItemRoutine(this.RoutineBlinkJump(source));
-            // TODO give time between each use
         }
 
         private IEnumerator RoutineBlinkJump(Ship ship)
         {
-            // TODO needs testing
-            // TODO REPLACE Util.ToggleActive(), CREATE FUNCTION IN SHIPS FOR INVISIBILITY/COLLISION
+            // TODO needs testing, REPLACE Util.ToggleActive(), CREATE FUNCTION IN SHIPS FOR INVISIBILITY/COLLISION
             Util.ToggleActive(ship.gameObject);
             yield return new WaitForSeconds(jumpTime);
             ship.Rigidbody.MovePosition(ship.transform.position + ship.transform.up * this.jumpDistance);

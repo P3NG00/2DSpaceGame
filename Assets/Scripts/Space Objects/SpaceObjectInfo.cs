@@ -24,19 +24,12 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
         [SerializeField] private ItemDrop[] itemDrops;
 
-        private int totalWeight = 0;
-
         protected virtual void OnValidate()
         {
             Util.ValidateMinMax(this.minSpawnScale, ref this.maxSpawnScale);
             Util.ValidateMinMax(this.destroyBelowScale, ref this.minSpawnScale);
             Util.ValidateMinMax(this.minVelocity, ref this.maxVelocity);
             Util.ValidateMinMax(this.minAngularVelocity, ref this.maxAngularVelocity);
-        }
-
-        private void Awake()
-        {
-            System.Array.ForEach(itemDrops, drop => totalWeight += drop.Weight);
         }
 
         public float RandomScale => Random.Range(this.minSpawnScale, this.maxSpawnScale);
@@ -48,7 +41,9 @@ namespace SpaceGame.SpaceObjects
         {
             get
             {
-                int weight = Random.Range(0, this.totalWeight);
+                int totalWeight = 0;
+                System.Array.ForEach(itemDrops, drop => totalWeight += drop.Weight);
+                int weight = Random.Range(0, totalWeight);
 
                 foreach (ItemDrop drop in this.itemDrops)
                 {

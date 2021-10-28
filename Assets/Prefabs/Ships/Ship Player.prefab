@@ -277,6 +277,8 @@ MonoBehaviour:
   animator: {fileID: 3470504029433804715}
   Invincible: 0
   FORCE_VALIDATE: 0
+  timeBeforeHealthRegen: 3
+  regenAmountPerTick: 0.1
   animatorPlayer: {fileID: 2700718572034551383}
 --- !u!50 &4979323623273713214
 Rigidbody2D:

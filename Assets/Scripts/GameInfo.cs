@@ -10,6 +10,7 @@ using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SpaceGame
@@ -41,7 +42,8 @@ namespace SpaceGame
         [Header("Tags", order = 5)]
         [SerializeField] private string tagShip;
         [SerializeField] private string tagPlayer;
-        [SerializeField] private string tagMissile;
+        [SerializeField] private string tagProjectile;
+        [SerializeField] private string tagSpaceRock;
 
         [Header("Prefabs", order = 50)]
         [SerializeField] private TMP_Text prefabTextCreditPopup;
@@ -99,7 +101,8 @@ namespace SpaceGame
         // Tags
         public static string TagShip => GameInfo.instance.tagShip;
         public static string TagPlayer => GameInfo.instance.tagPlayer;
-        public static string TagMissile => GameInfo.instance.tagMissile;
+        public static string TagProjectile => GameInfo.instance.tagProjectile;
+        public static string TagSpaceRock => GameInfo.instance.tagSpaceRock;
 
         // Unity Start method
         private void Start()
@@ -157,6 +160,7 @@ namespace SpaceGame
                 $"velocity: {this.player.Rigidbody.velocity.magnitude}";
 
             // Health
+            this.player.UpdateHealth();
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
 
             // Update UI
@@ -368,22 +372,6 @@ namespace SpaceGame
             return r;
         }
 
-        [System.Obsolete]
-        public static void SpawnProjectile(ProjectileInfo projectile, Ship source)
-        {
-            // Projectile projectileObject = Instantiate(projectile.ProjectileObject, source.transform.position, source.transform.rotation);
-            // Vector2 velocity = source.transform.up * projectile.Magnitude;
-            // projectileObject.SpriteRenderer.sprite = projectile.;
-            // projectileObject.Rigidbody.velocity = velocity;
-            // projectileObject.ProjectileInfo = projectile;
-            // projectileObject.SourceShip = source;
-
-            // if (GameInfo.DEBUG_LOG)
-            // {
-            //     print("$[{projectile.Name}] Spawned from {source.name}");
-            // }
-        }
-
         public static void DestroySpaceObject(SpaceObject spaceObject)
         {
             GameInfo.instance.spaceObjects.Remove(spaceObject);
@@ -521,7 +509,6 @@ namespace SpaceGame
 
                 if (!hotbarItemInfo.Infinite)
                 {
-                    // TODO make sure this works properly
                     hotbarStack.ModifyAmount(-1);
                 }
             }
