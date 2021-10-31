@@ -20,3 +20,4 @@ MonoBehaviour:
   scaleCollisionDamage: 0.2
   scaleMissileDamage: 0.5
   maxMagnitude: 100
+  boostMagnitude: 50

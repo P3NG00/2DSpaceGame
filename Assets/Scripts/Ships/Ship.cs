@@ -14,6 +14,7 @@ namespace SpaceGame.Ships
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private ShipInfo shipInfo;
+        public bool IsBoosting = false;
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -27,12 +28,10 @@ namespace SpaceGame.Ships
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
 
-        // Private caches
+        // Private cache
         private bool isFiring = false;
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
-
-        // Public cache
         private GameObject itemObjectToDestroy = null;
 
         // Public getters
@@ -121,9 +120,16 @@ namespace SpaceGame.Ships
                 this.rigidbody.AddForce(velocity, ForceMode2D.Impulse);
                 velocity = this.rigidbody.velocity;
 
-                if (velocity.magnitude > this.shipInfo.MaxMagnitude)
+                float maxMagnitude = this.shipInfo.MaxMagnitude;
+
+                if (this.IsBoosting)
                 {
-                    velocity = this.rigidbody.velocity.normalized * this.shipInfo.MaxMagnitude;
+                    maxMagnitude += this.shipInfo.BoostMagnitude;
+                }
+
+                if (velocity.magnitude > maxMagnitude)
+                {
+                    velocity = this.rigidbody.velocity.normalized * maxMagnitude;
                     this.rigidbody.velocity = velocity;
                 }
             }
