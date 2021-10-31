@@ -60,6 +60,7 @@ namespace SpaceGame
         [SerializeField] private Image highlightHoverSlot;
         [SerializeField] private Image highlightSelectedHotbar;
         [SerializeField] private Image imageHealthBar;
+        [SerializeField] private Image imageEnergyBar;
         [SerializeField] private SpaceObjectInfo settingsItemObject;
         [SerializeField] private Sprite[] sprites;
         [SerializeField] private UIInventorySlot[] slotsInventory;
@@ -146,7 +147,7 @@ namespace SpaceGame
             }
 
             // Update Player Animator
-            this.player.Animator.SetBool("Moving", this.inputApplyForce);
+            this.player.AnimatorPlayer.SetBool("Moving", this.inputApplyForce);
 
             // Update Info Panel Text
             this.textInfoPanel.text =
@@ -154,9 +155,10 @@ namespace SpaceGame
                 $"pos y: {this.player.Position.y}\n" +
                 $"velocity: {this.player.Rigidbody.velocity.magnitude}";
 
-            // Health
-            this.player.UpdateHealth();
+            // Health + Energy
+            this.player.UpdateStats();
             this.imageHealthBar.fillAmount = this.player.Health / this.player.MaxHealth;
+            this.imageEnergyBar.fillAmount = this.player.EnergyRatio;
 
             // Update UI
             foreach (UIInventorySlot slot in this.allSlots)
@@ -426,7 +428,7 @@ namespace SpaceGame
 
                 if (GameInfo.DEBUG_LOG && soss.DebugAnnounceSpawn)
                 {
-                    print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {(chancePassed ? "SUCCESS" : "FAILURE")}");
+                    print($"[{Time.time:00.0000}] Attempt to spawn [{soss.name}] - {(chancePassed ? "SUCCESS" : "FAIL")}");
                 }
             }
         }
@@ -475,6 +477,7 @@ namespace SpaceGame
             this.rotationType = Enums.RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
+        public void CallbackInput_Boost(InputAction.CallbackContext ctx) { } // TODO make player boost
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
         public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();
         public void CallbackInput_Fire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;

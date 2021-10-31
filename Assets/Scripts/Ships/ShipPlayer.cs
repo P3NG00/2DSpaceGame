@@ -9,6 +9,9 @@ namespace SpaceGame.Ships
         [Header("Info [ShipPlayer]", order = 5)]
         [SerializeField] private float timeBeforeHealthRegen = 3f;
         [SerializeField] private float regenAmountPerTick = 0.1f;
+        [SerializeField] private float energy = 0f;
+        [SerializeField] private float energyMax = 100f;
+        [SerializeField] private float energyAmountPerTick = 0.1f;
 
         [Header("References [ShipPlayer]", order = 99)]
         [SerializeField] private Animator animatorPlayer;
@@ -16,13 +19,25 @@ namespace SpaceGame.Ships
         private float timeCanRegenAfter = 0f;
 
         // Public Getters
-        public Animator Animator => this.animatorPlayer;
+        public float Energy => this.energy;
+        public float EnergyRatio => this.Energy / this.energyMax;
+        public Animator AnimatorPlayer => this.animatorPlayer;
 
-        public void UpdateHealth()
+        public void UpdateStats()
         {
             if (Time.time > this.timeCanRegenAfter)
             {
-                this.Heal(this.regenAmountPerTick);
+                this.Heal(this.regenAmountPerTick * Time.deltaTime);
+            }
+
+            if (this.energy < this.energyMax)
+            {
+                this.energy += this.energyAmountPerTick;
+            }
+
+            if (this.energy > this.energyMax)
+            {
+                this.energy = this.energyMax;
             }
         }
 

@@ -4,6 +4,7 @@ using SpaceGame.SpaceObjects;
 using SpaceGame.UI;
 using SpaceGame.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceGame.Ships
 {
@@ -16,8 +17,8 @@ namespace SpaceGame.Ships
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
-        [SerializeField] private SpriteRenderer srPrimary;
-        [SerializeField] private SpriteRenderer srSecondary;
+        [FormerlySerializedAs("srPrimary"), SerializeField] private SpriteRenderer srBody;
+        [FormerlySerializedAs("srSecondary"), SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
 
         [Header("Cheats", order = 95)]
@@ -78,8 +79,8 @@ namespace SpaceGame.Ships
         private void OnValidate()
         {
             Util.ValidateMinMax(this.health, ref this.maxHealth);
-            this.srPrimary.color = this.shipInfo.ColorPrimary;
-            this.srSecondary.color = this.shipInfo.ColorSecondary;
+            this.srBody.color = this.shipInfo.ColorPrimary;
+            this.srTip.color = this.shipInfo.ColorSecondary;
 
             if (this.FORCE_VALIDATE)
             {
@@ -220,20 +221,6 @@ namespace SpaceGame.Ships
 
         protected virtual void OnDeath() { }
         protected virtual void OnDamage() { }
-
-        // TODO remove?
-        // private IEnumerator RoutineFire()
-        // {
-        //     ItemInfo itemInfo = this.GetItemInfo();
-
-        //     while (this.IsFiring & itemInfo != null)
-        //     {
-        //         this.UseWeapon();
-        //         yield return new WaitForSeconds(itemInfo.TimeBetweenUses);
-        //     }
-
-        //     this.IsFiring = false;
-        // }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {

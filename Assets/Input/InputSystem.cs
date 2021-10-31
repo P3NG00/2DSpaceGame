@@ -43,6 +43,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""157242f5-52da-4256-95a3-c32dc0381667"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Cheat Menu"",
                     ""type"": ""Button"",
                     ""id"": ""15a5c2a1-4090-4872-8ce0-09a8117e52cb"",
@@ -201,17 +209,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""077fd388-4d2c-4f67-9003-8b45316911ed"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Add Force"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""503de463-2ced-4d34-b879-51adb98e4825"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -228,17 +225,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""24b0065e-4b6c-4eeb-95da-57362e4a5db9"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -311,17 +297,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""06d8e7bc-fc22-4de5-bcb3-dd6cd42a26b9"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Aim In Direction"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e0cff634-79a1-4a28-b430-55982808b3f6"",
                     ""path"": ""<Keyboard>/f8"",
                     ""interactions"": """",
@@ -355,17 +330,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""723f9c93-a974-4e8a-be70-6a2e5e07c1b4"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7221955b-19cd-4ba2-8414-5b972b9898e5"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -374,50 +338,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Slow Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7e9f732d-e458-4007-bcc2-97811912b201"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Slow Down"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Controller"",
-                    ""id"": ""aeb65b9c-7258-436a-b853-5cc87add7103"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""78a0230b-20a2-4ae7-82bb-6052027a972a"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""2a845a8d-845f-4673-b1d7-1c5b13577173"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""1D Axis"",
@@ -454,34 +374,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""86868716-b6c6-4048-86c4-8b317f25f2fc"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""47cde2cf-5425-4048-b546-42dfbce51e8f"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Menu Up"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c5d92fa6-2d28-41ce-a543-af2c43c4c5ed"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -498,17 +396,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c85b26fc-3806-4c2f-895c-ed7daa7df08c"",
-                    ""path"": ""<Gamepad>/dpad/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""cff24113-fcb8-466d-ad4a-e8a82e259553"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
@@ -520,34 +407,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15963fef-dec7-4acf-81b1-4c68d03b8a9a"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""876f0877-3aab-4493-b327-9f828f5d0a7e"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Menu Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""be137146-9171-492a-a16b-831c39279426"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Select Slot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -575,23 +440,23 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4159b4d7-e1f9-4abf-87df-29f2f8a84f0d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Controller"",
-                    ""action"": ""Use Item"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""aa24c98f-68c3-4411-a4ec-c3766113966e"",
                     ""path"": ""<Keyboard>/f12"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dcc6b6b-a4bf-46fa-bc7e-73dfd368bcb9"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -614,17 +479,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Controller"",
-            ""bindingGroup"": ""Controller"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
         }
     ]
 }");
@@ -633,6 +487,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_AddForce = m_Input.FindAction("Add Force", throwIfNotFound: true);
         m_Input_AimAtMouse = m_Input.FindAction("Aim At Mouse", throwIfNotFound: true);
         m_Input_AimInDirection = m_Input.FindAction("Aim In Direction", throwIfNotFound: true);
+        m_Input_Boost = m_Input.FindAction("Boost", throwIfNotFound: true);
         m_Input_CheatMenu = m_Input.FindAction("Cheat Menu", throwIfNotFound: true);
         m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
@@ -703,6 +558,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_AddForce;
     private readonly InputAction m_Input_AimAtMouse;
     private readonly InputAction m_Input_AimInDirection;
+    private readonly InputAction m_Input_Boost;
     private readonly InputAction m_Input_CheatMenu;
     private readonly InputAction m_Input_Exit;
     private readonly InputAction m_Input_Fire;
@@ -728,6 +584,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @AddForce => m_Wrapper.m_Input_AddForce;
         public InputAction @AimAtMouse => m_Wrapper.m_Input_AimAtMouse;
         public InputAction @AimInDirection => m_Wrapper.m_Input_AimInDirection;
+        public InputAction @Boost => m_Wrapper.m_Input_Boost;
         public InputAction @CheatMenu => m_Wrapper.m_Input_CheatMenu;
         public InputAction @Exit => m_Wrapper.m_Input_Exit;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
@@ -764,6 +621,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AimInDirection.started -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
                 @AimInDirection.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
                 @AimInDirection.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnAimInDirection;
+                @Boost.started -= m_Wrapper.m_InputActionsCallbackInterface.OnBoost;
+                @Boost.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnBoost;
+                @Boost.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnBoost;
                 @CheatMenu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
                 @CheatMenu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
                 @CheatMenu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
@@ -831,6 +691,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @AimInDirection.started += instance.OnAimInDirection;
                 @AimInDirection.performed += instance.OnAimInDirection;
                 @AimInDirection.canceled += instance.OnAimInDirection;
+                @Boost.started += instance.OnBoost;
+                @Boost.performed += instance.OnBoost;
+                @Boost.canceled += instance.OnBoost;
                 @CheatMenu.started += instance.OnCheatMenu;
                 @CheatMenu.performed += instance.OnCheatMenu;
                 @CheatMenu.canceled += instance.OnCheatMenu;
@@ -898,20 +761,12 @@ public class @InputSystem : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
     }
-    private int m_ControllerSchemeIndex = -1;
-    public InputControlScheme ControllerScheme
-    {
-        get
-        {
-            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
-            return asset.controlSchemes[m_ControllerSchemeIndex];
-        }
-    }
     public interface IInputActions
     {
         void OnAddForce(InputAction.CallbackContext context);
         void OnAimAtMouse(InputAction.CallbackContext context);
         void OnAimInDirection(InputAction.CallbackContext context);
+        void OnBoost(InputAction.CallbackContext context);
         void OnCheatMenu(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);

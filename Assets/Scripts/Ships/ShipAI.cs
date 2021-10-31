@@ -11,8 +11,10 @@ namespace SpaceGame.Ships
         [SerializeField] private Enums.ShipAIType shipAIType;
         [SerializeField] private bool randomAIType;
 
+        [Header("Debug [ShipAI]", order = 105)]
+        [SerializeField] private Ship target;
+
         private ShipAIInfo shipInfoAI;
-        private Ship target;
 
         private void Awake()
         {
