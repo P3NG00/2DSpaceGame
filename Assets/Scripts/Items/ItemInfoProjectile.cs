@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Collections;
 using SpaceGame.Projectiles;
 using SpaceGame.Ships;
 using UnityEngine;
@@ -5,15 +7,29 @@ using UnityEngine;
 namespace SpaceGame.Items
 {
     [CreateAssetMenu(menuName = "2D Space Game/Item/Projectile", fileName = "Item Projectile")]
-    public sealed class ItemInfoProjectile : ItemInfo
+    public sealed class ItemInfoProjectile : ItemInfo, ItemWeapon
     {
-        [Header("Info [ItemProjectile]", order = 5)]
+        [Header("Info [ItemInfoProjectile]", order = 5)]
         [SerializeField] private ProjectileInfo projectile;
-        [SerializeField] private float timeBetweenShots;
 
-        public ProjectileInfo ProjectileInfo => this.projectile;
-        public float TimeBetweenShots => this.timeBetweenShots; // TODO move up to ItemInfo and implement for all usable items
+        public GameObject UseWeapon(Ship source)
+        {
+            Projectile.Create(this.projectile, source);
+            return null;
+        }
 
-        public sealed override void Use(Ship source) => Projectile.Create(projectile, source);
+        public IEnumerator UseRoutine(Ship ship)
+        {
+            ItemInfo itemInfo = ship.GetItemInfo();
+
+            while (ship.IsFiring && itemInfo != null)
+            {
+                ship.UseWeapon();
+                yield return new WaitForSeconds(itemInfo.TimeBetweenUses);
+                itemInfo = ship.GetItemInfo();
+            }
+
+            ship.IsFiring = false;
+        }
     }
 }

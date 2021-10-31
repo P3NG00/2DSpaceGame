@@ -203,6 +203,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5606934a5271f7b42980022c661c62e4, type: 2}
   - {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
   - {fileID: 11400000, guid: 3b64f83b1b1ba97428026d1d42f9f48a, type: 2}
+  - {fileID: 11400000, guid: c0e523bbc93a83f4eababcef585dbc50, type: 2}
   - {fileID: 11400000, guid: ba2a8b18e22c6fa4c9ce6dcec128f463, type: 2}
   cheatSlotPrefab: {fileID: 4681363520008523959, guid: 0238204fdac4c3e49955f9ff29135ceb, type: 3}
 --- !u!222 &7295944854604095846

@@ -19,6 +19,8 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private float maxVelocity;
         [SerializeField, Min(0f)] private float minAngularVelocity;
         [SerializeField] private float maxAngularVelocity;
+        [SerializeField, Min(0f)] private float damageScaleCollision;
+        [SerializeField, Min(0f)] private float damageScaleWeapon;
 
         [Header("References [SpaceObjectSettings]", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
@@ -64,6 +66,8 @@ namespace SpaceGame.SpaceObjects
         public Color Color => this.color;
         public float DestroyBelowScale => this.destroyBelowScale;
         public float DistanceMax => this.distanceMax;
+        public float DamageScaleCollision => this.damageScaleCollision;
+        public float DamageScaleProjectile => this.damageScaleWeapon;
         public bool DestroyMissile => this.destroyMissile;
     }
 }

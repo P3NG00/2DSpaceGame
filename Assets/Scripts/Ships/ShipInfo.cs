@@ -13,6 +13,7 @@ namespace SpaceGame.Ships
         [SerializeField] private float drag;
         [SerializeField, Min(0f)] private float scaleCollisionDamage;
         [SerializeField, Min(0f)] private float scaleMissileDamage;
+        [SerializeField, Min(0f)] private float maxMagnitude;
 
         public Color ColorPrimary => this.colorPrimary;
         public Color ColorSecondary => this.colorSecondary;
@@ -21,5 +22,6 @@ namespace SpaceGame.Ships
         public float Drag => this.drag;
         public float ScaleCollisionDamage => this.scaleCollisionDamage;
         public float ScaleMissileDamage => this.scaleMissileDamage;
+        public float MaxMagnitude => this.maxMagnitude;
     }
 }

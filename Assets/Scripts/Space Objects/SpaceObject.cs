@@ -16,32 +16,33 @@ namespace SpaceGame.SpaceObjects
 
         private bool alive = true;
 
-        public float Scale
+        public void Damage(float amount, Enums.DamageType damageType)
         {
-            get => this.transform.localScale.x;
-            set
+            if (this.alive)
             {
-                if (this.alive)
+                float scale = this.transform.localScale.x;
+
+                switch (damageType)
                 {
-                    if (value < this.Settings.DestroyBelowScale)
-                    {
-                        this.alive = false;
-                        GameInfo.DestroySpaceObject(this);
-                        SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
-                        itemObject.SetItem(this.Settings.RandomItemDrop);
-                    }
-                    else
-                    {
-                        this.transform.localScale = Vector2.one * value;
-                    }
+                    case Enums.DamageType.Collision: scale -= amount * this.Settings.DamageScaleCollision; break;
+                    case Enums.DamageType.Weapon: scale -= amount * this.Settings.DamageScaleProjectile; break;
+                }
+
+                if (scale < this.Settings.DestroyBelowScale)
+                {
+                    this.alive = false;
+                    GameInfo.DestroySpaceObject(this);
+                    SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
+                    itemObject.SetItem(this.Settings.RandomItemDrop);
+                }
+                else
+                {
+                    this.transform.localScale = Vector2.one * scale;
                 }
             }
         }
 
-        private void Start()
-        {
-            this.SpriteRenderer.color = this.GetColor();
-        }
+        private void Start() => this.SpriteRenderer.color = this.GetColor();
 
         protected virtual Color GetColor() => this.Settings.Color;
     }

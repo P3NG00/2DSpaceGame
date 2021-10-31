@@ -1,10 +1,9 @@
 using System.Collections;
 using SpaceGame.Items;
-using SpaceGame.Projectiles;
+using SpaceGame.SpaceObjects;
 using SpaceGame.UI;
 using SpaceGame.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SpaceGame.Ships
 {
@@ -13,7 +12,7 @@ namespace SpaceGame.Ships
         [Header("Info", order = 0)]
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
-        [FormerlySerializedAs("stats"), SerializeField] private ShipInfo shipInfo;
+        [SerializeField] private ShipInfo shipInfo;
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -32,6 +31,9 @@ namespace SpaceGame.Ships
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
 
+        // Public cache
+        private GameObject itemObjectToDestroy = null;
+
         // Public getters
         public float Health => this.health;
         public float MaxHealth => this.maxHealth;
@@ -47,11 +49,28 @@ namespace SpaceGame.Ships
             get => this.isFiring;
             set
             {
-                this.isFiring = value;
+                ItemInfo itemInfo = this.GetItemInfo();
 
-                if (value & GetProjectile() != null & this.routineFiring == null)
+                if (value && this.IsAlive && !this.IsFiring && itemInfo != null && itemInfo is ItemWeapon itemWeapon)
                 {
-                    this.routineFiring = StartCoroutine(this.RoutineFire());
+                    this.isFiring = true;
+                    this.routineFiring = StartCoroutine(itemWeapon.UseRoutine(this));
+                }
+                else if (!value)
+                {
+                    if (this.routineFiring != null)
+                    {
+                        StopCoroutine(this.routineFiring);
+                    }
+
+                    this.routineFiring = null;
+                    this.isFiring = false;
+
+                    if (this.itemObjectToDestroy != null)
+                    {
+                        Destroy(this.itemObjectToDestroy);
+                        this.itemObjectToDestroy = null;
+                    }
                 }
             }
         }
@@ -97,8 +116,15 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                Vector2 v = this.transform.up * this.shipInfo.MultiplierForce;
-                this.rigidbody.AddForce(v);
+                Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
+                this.rigidbody.AddForce(velocity, ForceMode2D.Impulse);
+                velocity = this.rigidbody.velocity;
+
+                if (velocity.magnitude > this.shipInfo.MaxMagnitude)
+                {
+                    velocity = this.rigidbody.velocity.normalized * this.shipInfo.MaxMagnitude;
+                    this.rigidbody.velocity = velocity;
+                }
             }
         }
 
@@ -143,7 +169,7 @@ namespace SpaceGame.Ships
                 switch (damageType)
                 {
                     case Enums.DamageType.Collision: damage *= this.shipInfo.ScaleCollisionDamage; break;
-                    case Enums.DamageType.Projectile: damage *= this.shipInfo.ScaleMissileDamage; break;
+                    case Enums.DamageType.Weapon: damage *= this.shipInfo.ScaleMissileDamage; break;
                 }
 
                 this.health -= damage;
@@ -157,7 +183,22 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void StartItemRoutine(IEnumerator itemRoutine)
+        public void UseWeapon()
+        {
+            if (this.IsAlive)
+            {
+                this.itemObjectToDestroy = ((ItemWeapon)this.GetItemInfo()).UseWeapon(this);
+                UIInventorySlot itemWeaponSlot = this.ItemWeaponSlot();
+
+                if (itemWeaponSlot != null && !itemWeaponSlot.ItemStack.ItemInfo.Infinite)
+                {
+                    itemWeaponSlot.ItemStack.ModifyAmount(-1);
+                    itemWeaponSlot.UpdateText();
+                }
+            }
+        }
+
+        public void StartUsingRoutine(IEnumerator itemRoutine)
         {
             if (!this.IsUsing)
             {
@@ -165,7 +206,7 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void StopItemRoutine()
+        public void StopUsingRoutine()
         {
             if (this.IsUsing)
             {
@@ -174,45 +215,33 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract ItemInfoProjectile GetProjectile();
+        public abstract ItemInfo GetItemInfo();
         public virtual UIInventorySlot ItemWeaponSlot() => null;
 
         protected virtual void OnDeath() { }
         protected virtual void OnDamage() { }
 
-        private void Fire()
-        {
-            if (this.IsAlive)
-            {
-                Projectile.Create(this.GetProjectile().ProjectileInfo, this);
-                UIInventorySlot itemWeaponSlot = this.ItemWeaponSlot();
+        // TODO remove?
+        // private IEnumerator RoutineFire()
+        // {
+        //     ItemInfo itemInfo = this.GetItemInfo();
 
-                if (itemWeaponSlot != null && !itemWeaponSlot.ItemStack.ItemInfo.Infinite)
-                {
-                    itemWeaponSlot.ItemStack.Amount--;
-                    itemWeaponSlot.UpdateText();
-                }
-            }
-        }
+        //     while (this.IsFiring & itemInfo != null)
+        //     {
+        //         this.UseWeapon();
+        //         yield return new WaitForSeconds(itemInfo.TimeBetweenUses);
+        //     }
 
-        private IEnumerator RoutineFire()
-        {
-            while (this.IsFiring & this.GetProjectile() != null)
-            {
-                this.Fire();
-                yield return new WaitForSeconds(this.GetProjectile().TimeBetweenShots);
-            }
-
-            this.routineFiring = null;
-        }
+        //     this.IsFiring = false;
+        // }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            GameObject obj = collision.gameObject;
-
-            if (obj.tag == GameInfo.TagSpaceRock)
+            if (collision.gameObject.tag == GameInfo.TagSpaceRock)
             {
-                this.Damage(rigidbody.velocity.magnitude, Enums.DamageType.Collision);
+                float magnitude = collision.relativeVelocity.magnitude;
+                this.Damage(magnitude, Enums.DamageType.Collision);
+                collision.gameObject.GetComponent<SpaceObject>().Damage(magnitude / 100f, Enums.DamageType.Collision); // TODO change scale of space rock damage?
             }
         }
     }

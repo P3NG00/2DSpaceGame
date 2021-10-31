@@ -141,7 +141,7 @@ MonoBehaviour:
   animator: {fileID: 3470504029433804715}
   Invincible: 0
   FORCE_VALIDATE: 0
-  itemProjectile: {fileID: 0}
+  itemInfo: {fileID: 0}
   shipAIType: 0
   randomAIType: 0
 --- !u!50 &4979323623273713214

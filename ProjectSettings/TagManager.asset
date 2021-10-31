@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Ship
   - Projectile
+  - Lazer
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Item Object
   - Item Pickup
   - Ship
-  - Projectile
+  - Weapon
   - 
   - 
   - 

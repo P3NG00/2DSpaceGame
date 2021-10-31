@@ -10,9 +10,8 @@ namespace SpaceGame.Projectiles
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
-        [Header("DEBUG", order = 100)]
-        [SerializeField] private ProjectileInfo projectileInfo;
-        [SerializeField] private Ship sourceShip;
+        private ProjectileInfo projectileInfo;
+        private Ship sourceShip;
 
         private bool alive = true;
 
@@ -28,39 +27,39 @@ namespace SpaceGame.Projectiles
             return projectile;
         }
 
-        private void DestroyProjectile()
-        {
-            this.alive = false;
-            Destroy(this.gameObject);
-        }
-
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if (this.alive)
             {
                 // Unable to use switch statement for this because it uses non-constant values
-                if ((collider.tag == GameInfo.TagShip) || (collider.tag == GameInfo.TagPlayer))
+                if (collider.tag == GameInfo.TagShip || collider.tag == GameInfo.TagPlayer)
                 {
                     // Damage ship if not source
                     Ship ship = collider.GetComponent<Ship>();
 
                     if (this.sourceShip != ship)
                     {
-                        ship.Damage(this.projectileInfo.DamageShip, Enums.DamageType.Projectile);
+                        ship.Damage(this.projectileInfo.DamageShip, Enums.DamageType.Weapon);
                         DestroyProjectile();
                     }
                 }
                 else if (collider.tag == GameInfo.TagSpaceRock)
                 {
                     // Decrease size of Space Rock
-                    collider.GetComponent<SpaceObject>().Scale -= this.projectileInfo.DamageSpaceObject;
+                    collider.GetComponent<SpaceObject>().Damage(this.projectileInfo.DamageSpaceObject, Enums.DamageType.Weapon);
                     DestroyProjectile();
                 }
-                else if (collider.tag == GameInfo.TagProjectile)
+                else if (collider.tag == GameInfo.TagProjectile || collider.tag == GameInfo.TagLazer)
                 {
                     // supposed to make any colliding projectiles destroy each other on impact
-                    Destroy(collider.GetComponent<Projectile>().gameObject);
+                    Destroy(collider.gameObject);
                     DestroyProjectile();
+                }
+
+                void DestroyProjectile()
+                {
+                    this.alive = false;
+                    Destroy(this.gameObject);
                 }
             }
         }

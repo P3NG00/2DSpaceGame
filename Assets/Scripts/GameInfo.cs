@@ -1,7 +1,7 @@
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using SpaceGame.Items;
-using SpaceGame.Projectiles;
 using SpaceGame.Settings;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
@@ -10,13 +10,14 @@ using SpaceGame.Utilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SpaceGame
 {
     public sealed class GameInfo : MonoBehaviour
     {
+        public const string Title = "2D Space Game";
+
         #region Singleton Instance
         private static GameInfo instance = null;
 
@@ -44,6 +45,7 @@ namespace SpaceGame
         [SerializeField] private string tagPlayer;
         [SerializeField] private string tagProjectile;
         [SerializeField] private string tagSpaceRock;
+        [SerializeField] private string tagLazer;
 
         [Header("Prefabs", order = 50)]
         [SerializeField] private TMP_Text prefabTextCreditPopup;
@@ -89,20 +91,13 @@ namespace SpaceGame
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
         public static UIInventorySlot SlotWeapon => GameInfo.instance.slotWeapon;
         public static GameObject ParentCheatMenu => GameInfo.instance.parentCheatMenu;
-        public static ItemInfoProjectile PlayerWeaponInfo
-        {
-            get
-            {
-                ItemInfo itemInfo = GameInfo.SlotWeapon.ItemStack.ItemInfo;
-                return itemInfo == null ? null : (ItemInfoProjectile)itemInfo;
-            }
-        }
 
         // Tags
         public static string TagShip => GameInfo.instance.tagShip;
         public static string TagPlayer => GameInfo.instance.tagPlayer;
         public static string TagProjectile => GameInfo.instance.tagProjectile;
         public static string TagSpaceRock => GameInfo.instance.tagSpaceRock;
+        public static string TagLazer => GameInfo.instance.tagLazer;
 
         // Unity Start method
         private void Start()
@@ -290,7 +285,9 @@ namespace SpaceGame
                     if (slot == gi.slotWeapon)
                     {
                         // If item being moved is a weapon...
-                        if (gi.selectedSlot.ItemStack.ItemInfo is ItemInfoProjectile)
+                        ItemInfo slotItemInfo = gi.selectedSlot.ItemStack.ItemInfo;
+
+                        if (slotItemInfo is ItemInfoProjectile || slotItemInfo is ItemInfoLazer)
                         {
                             SwapItems();
                         }
@@ -356,7 +353,7 @@ namespace SpaceGame
                 Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
                 SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, pos, rot, gi.parentSpaceObjects);
                 spaceObject.Settings = sos;
-                spaceObject.Scale = sos.RandomScale;
+                spaceObject.transform.localScale = Vector2.one * sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
                 spaceObject.Rigidbody.velocity = Util.RandomUnitVector * sos.RandomVelocity;
                 spaceObject.Rigidbody.angularVelocity = Random.Range(-1f, 1f) * sos.RandomAngularVelocity;
@@ -498,23 +495,49 @@ namespace SpaceGame
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
+        public void CallbackInput_UseItem(InputAction.CallbackContext ctx)
         {
-            ItemStack hotbarStack = this.selectedHotbar.ItemStack;
-            ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
-
-            if (hotbarItemInfo != null && !(hotbarItemInfo is ItemInfoProjectile))
+            OnButtonPress(ctx, () =>
             {
-                hotbarItemInfo.Use(this.player);
+                ItemStack hotbarStack = this.selectedHotbar.ItemStack;
+                ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
 
-                if (!hotbarItemInfo.Infinite)
+                if (hotbarItemInfo != null && hotbarItemInfo is ItemUsable itemUsable)
                 {
-                    hotbarStack.ModifyAmount(-1);
-                }
-            }
-        });
+                    itemUsable.Use(this.player);
 
-        private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.performed) { action.Invoke(); } }
+                    if (!hotbarItemInfo.Infinite)
+                    {
+                        hotbarStack.ModifyAmount(-1);
+                    }
+                }
+            });
+        }
+
+        public void CallbackInput_Debug(InputAction.CallbackContext ctx)
+        {
+            if (GameInfo.DEBUG_LOG)
+            {
+                StringBuilder sb = new StringBuilder();
+                Append(ctx.action, "action");
+                Append(ctx.canceled, "canceled");
+                Append(ctx.control, "control");
+                Append(ctx.duration, "duration");
+                Append(ctx.interaction, "interaction");
+                Append(ctx.performed, "performed");
+                Append(ctx.phase, "phase");
+                Append(ctx.started, "started");
+                Append(ctx.startTime, "startTime");
+                Append(ctx.time, "time");
+                Append(ctx.valueSizeInBytes, "valueSizeInBytes");
+                Append(ctx.valueType, "valueType");
+                void Append(object value, string name) => sb.AppendLine($"{name} - {value}");
+                print(sb.ToString());
+            }
+        }
+
+        private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.started) { action.Invoke(); } }
+        private void OnButtonUp(InputAction.CallbackContext ctx, System.Action action) { if (ctx.canceled) { action.Invoke(); } }
         #endregion
     }
 }

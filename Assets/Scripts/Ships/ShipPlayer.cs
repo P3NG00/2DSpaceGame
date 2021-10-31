@@ -27,7 +27,7 @@ namespace SpaceGame.Ships
         }
 
         public sealed override UIInventorySlot ItemWeaponSlot() => GameInfo.SlotWeapon;
-        public sealed override ItemInfoProjectile GetProjectile() => GameInfo.PlayerWeaponInfo;
+        public sealed override ItemInfo GetItemInfo() => GameInfo.SlotWeapon.ItemStack.ItemInfo;
 
         // On damage, update time the player can regen next
         protected override void OnDamage() => this.timeCanRegenAfter = Time.time + this.timeBeforeHealthRegen;

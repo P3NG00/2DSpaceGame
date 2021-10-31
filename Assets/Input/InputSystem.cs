@@ -177,6 +177,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""18d05492-5365-44b1-ac0f-f689ab3d279f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -575,6 +583,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Use Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa24c98f-68c3-4411-a4ec-c3766113966e"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -631,6 +650,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_SelectSlot = m_Input.FindAction("Select Slot", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
         m_Input_UseItem = m_Input.FindAction("Use Item", throwIfNotFound: true);
+        m_Input_Debug = m_Input.FindAction("Debug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -700,6 +720,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_SelectSlot;
     private readonly InputAction m_Input_SlowDown;
     private readonly InputAction m_Input_UseItem;
+    private readonly InputAction m_Input_Debug;
     public struct InputActions
     {
         private @InputSystem m_Wrapper;
@@ -724,6 +745,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @SelectSlot => m_Wrapper.m_Input_SelectSlot;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputAction @UseItem => m_Wrapper.m_Input_UseItem;
+        public InputAction @Debug => m_Wrapper.m_Input_Debug;
         public InputActionMap Get() { return m_Wrapper.m_Input; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -793,6 +815,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @UseItem.started -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
                 @UseItem.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
                 @UseItem.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnUseItem;
+                @Debug.started -= m_Wrapper.m_InputActionsCallbackInterface.OnDebug;
+                @Debug.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnDebug;
+                @Debug.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnDebug;
             }
             m_Wrapper.m_InputActionsCallbackInterface = instance;
             if (instance != null)
@@ -857,6 +882,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @UseItem.started += instance.OnUseItem;
                 @UseItem.performed += instance.OnUseItem;
                 @UseItem.canceled += instance.OnUseItem;
+                @Debug.started += instance.OnDebug;
+                @Debug.performed += instance.OnDebug;
+                @Debug.canceled += instance.OnDebug;
             }
         }
     }
@@ -901,5 +929,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnSelectSlot(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnDebug(InputAction.CallbackContext context);
     }
 }

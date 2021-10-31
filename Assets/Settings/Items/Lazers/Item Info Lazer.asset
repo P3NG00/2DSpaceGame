@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f54feb9b13dc54cb044d0d097f5a75, type: 3}
+  m_Name: Item Info Lazer
+  m_EditorClassIdentifier: 
+  itemName: Lazer
+  sprite: {fileID: 21300000, guid: ac7d645b53638b646b2a79f280fffcdd, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  maxStackSize: 1
+  infinite: 1
+  loopUsage: 0
+  timeBetweenUses: 0
+  lazerInfo: {fileID: 11400000, guid: ed306dcceeea89d46b01b30af916d6ca, type: 2}

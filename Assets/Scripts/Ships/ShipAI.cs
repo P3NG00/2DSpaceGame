@@ -1,5 +1,4 @@
 using SpaceGame.Items;
-using SpaceGame.Settings;
 using SpaceGame.Utilities;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace SpaceGame.Ships
     public sealed class ShipAI : Ship
     {
         [Header("Info [ShipAI]", order = 10)]
-        [SerializeField] private ItemInfoProjectile itemProjectile;
+        [SerializeField] private ItemInfo itemInfo;
         [SerializeField] private Enums.ShipAIType shipAIType;
         [SerializeField] private bool randomAIType;
 
@@ -72,7 +71,7 @@ namespace SpaceGame.Ships
             this.ApplyDrag(drag);
         }
 
-        public override ItemInfoProjectile GetProjectile() => this.itemProjectile;
+        public override ItemInfo GetItemInfo() => this.itemInfo;
 
         protected override void OnDeath()
         {

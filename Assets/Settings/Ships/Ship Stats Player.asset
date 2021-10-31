@@ -15,7 +15,8 @@ MonoBehaviour:
   colorPrimary: {r: 1, g: 1, b: 1, a: 1}
   colorSecondary: {r: 0, g: 0.2, b: 1, a: 1}
   multiplierForce: 500
-  multiplierRotate: 4000
+  multiplierRotate: 3750
   drag: 2.25
   scaleCollisionDamage: 0.2
   scaleMissileDamage: 0.5
+  maxMagnitude: 100

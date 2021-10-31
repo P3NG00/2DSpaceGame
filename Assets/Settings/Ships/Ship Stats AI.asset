@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorPrimary: {r: 0.8, g: 0.8, b: 0.8, a: 1}
   colorSecondary: {r: 1, g: 0.4, b: 0, a: 1}
-  multiplierForce: 10
-  multiplierRotate: 250
+  multiplierForce: 50
+  multiplierRotate: 1000
   drag: 0.6
   scaleCollisionDamage: 1
   scaleMissileDamage: 1
+  maxMagnitude: 50
   distanceStopFromTarget: 20
   distanceFireAtTarget: 50

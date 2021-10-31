@@ -441,6 +441,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 93b38658-2dfc-435e-a86d-8a4a8cf3fa8a
     m_ActionName: Input/Use Item[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInput_Debug
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 18d05492-5365-44b1-ac0f-f689ab3d279f
+    m_ActionName: Input/Debug[/Keyboard/f12]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

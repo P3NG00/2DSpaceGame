@@ -17,5 +17,6 @@ MonoBehaviour:
   color: {r: 0.6, g: 0.6, b: 0.6, a: 1}
   maxStackSize: 999
   infinite: 0
+  loopUsage: 0
+  timeBetweenUses: 0.55
   projectile: {fileID: 11400000, guid: 16f8e0a0e5c78804ab81e1fc6d7c6f3a, type: 2}
-  timeBetweenShots: 0.7

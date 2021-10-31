@@ -23,6 +23,8 @@ MonoBehaviour:
   maxVelocity: 2
   minAngularVelocity: 5
   maxAngularVelocity: 20
+  damageScaleCollision: 0
+  damageScaleWeapon: 0
   prefabSpaceObjects:
   - {fileID: -160183931098287300, guid: 678271c7454158f4da07cfeff49cb710, type: 3}
   itemDrops: []

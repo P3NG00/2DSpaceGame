@@ -398,7 +398,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 1
 --- !u!114 &187601943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5718,7 +5718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3068602627571150779, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: m_DefaultActionMap
-      value: 33063dee-766e-4c81-9c8f-1ed363d508f0
+      value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 5258815394248899770, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: m_Name
