@@ -540,7 +540,6 @@ namespace SpaceGame
         }
 
         private void OnButtonPress(InputAction.CallbackContext ctx, System.Action action) { if (ctx.started) { action.Invoke(); } }
-        private void OnButtonUp(InputAction.CallbackContext ctx, System.Action action) { if (ctx.canceled) { action.Invoke(); } }
         #endregion
     }
 }
