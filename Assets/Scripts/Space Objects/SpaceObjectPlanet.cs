@@ -11,11 +11,6 @@ namespace SpaceGame.SpaceObjects
         {
             if (collider.gameObject != this.gameObject)
             {
-                // TODO
-                // get rigidbody (of anything)
-                // add velocity to drag towards planet
-                // stronger velocity closer to center
-
                 // Distance is divided by two because planet takes up half of raidus
                 Vector2 offset = this.transform.position - collider.transform.position;
                 float distance = offset.magnitude;
