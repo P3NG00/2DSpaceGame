@@ -50,7 +50,7 @@ MonoBehaviour:
   widthSpawn: 200
   scaleSpawnRate: 0.075
   timeBetweenChance: 0.55
-  chanceSpawn: 0.4
+  chanceSpawn: 0.35
   scaleMissileDamage: 0.15
   scaleMissileImpactForce: 1
   spawnRateType: 1
