@@ -1,4 +1,3 @@
-using System.IO;
 using System.Collections;
 using SpaceGame.Items;
 using SpaceGame.SpaceObjects;
@@ -233,9 +232,7 @@ namespace SpaceGame.Ships
         {
             if (collision.gameObject.tag == GameInfo.TagSpaceRock)
             {
-                float magnitudeShip = this.rigidbody.velocity.magnitude;
-                float magnitudeRock = collision.rigidbody.velocity.magnitude;
-                float magnitude = Mathf.Max(magnitudeShip, magnitudeRock);
+                float magnitude = collision.relativeVelocity.magnitude;
 
                 if (magnitude > 50f) // TODO 50f is limit for taking and dealing damage with velocity. move this reference somewhere else? ship stats?
                 {

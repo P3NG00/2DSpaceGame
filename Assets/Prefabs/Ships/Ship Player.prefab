@@ -226,10 +226,10 @@ MonoBehaviour:
   Invincible: 0
   FORCE_VALIDATE: 0
   timeBeforeHealthRegen: 3
-  regenAmountPerTick: 0.1
+  regenAmountPerTick: 5
   energy: 100
   energyMax: 100
-  energyAmountPerTick: 0.1
+  energyAmountPerTick: 3
   animatorPlayer: {fileID: 2234492995521085018}
 --- !u!95 &2234492995521085018
 Animator:
