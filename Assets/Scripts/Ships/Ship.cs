@@ -4,7 +4,6 @@ using SpaceGame.SpaceObjects;
 using SpaceGame.UI;
 using SpaceGame.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SpaceGame.Ships
 {
@@ -18,8 +17,8 @@ namespace SpaceGame.Ships
 
         [Header("References [Ship]", order = 90)]
         [SerializeField] private new Rigidbody2D rigidbody;
-        [FormerlySerializedAs("srPrimary"), SerializeField] private SpriteRenderer srBody;
-        [FormerlySerializedAs("srSecondary"), SerializeField] private SpriteRenderer srTip;
+        [SerializeField] private SpriteRenderer srBody;
+        [SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
 
         [Header("Cheats", order = 95)]

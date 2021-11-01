@@ -482,11 +482,11 @@ namespace SpaceGame
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
         public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();
         public void CallbackInput_Fire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
-        public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(0));
-        public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(1));
-        public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(2));
-        public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(3));
-        public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => SelectHotbar(4));
+        public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(0));
+        public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(1));
+        public void CallbackInput_Hotbar3(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(2));
+        public void CallbackInput_Hotbar4(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(3));
+        public void CallbackInput_Hotbar5(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(4));
         public void CallbackInput_Inventory(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentInvUI));
         public void CallbackInput_MenuDown(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotDown));
         public void CallbackInput_MenuLeft(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.HoverSlot(this.hoverSlot.SlotLeft));
@@ -499,24 +499,21 @@ namespace SpaceGame
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
-        public void CallbackInput_UseItem(InputAction.CallbackContext ctx)
+        public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
         {
-            OnButtonPress(ctx, () =>
+            ItemStack hotbarStack = this.selectedHotbar.ItemStack;
+            ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
+
+            if (hotbarItemInfo != null && hotbarItemInfo is ItemUsable itemUsable)
             {
-                ItemStack hotbarStack = this.selectedHotbar.ItemStack;
-                ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
+                itemUsable.Use(this.player);
 
-                if (hotbarItemInfo != null && hotbarItemInfo is ItemUsable itemUsable)
+                if (!hotbarItemInfo.Infinite)
                 {
-                    itemUsable.Use(this.player);
-
-                    if (!hotbarItemInfo.Infinite)
-                    {
-                        hotbarStack.ModifyAmount(-1);
-                    }
+                    hotbarStack.ModifyAmount(-1);
                 }
-            });
-        }
+            }
+        });
 
         public void CallbackInput_Debug(InputAction.CallbackContext ctx)
         {
