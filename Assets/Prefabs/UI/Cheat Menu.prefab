@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c453b6cd5186c64aa359bb76736844a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiArrayWidth: 5
   uiSlotSize: 90
+  uiArrayWidth: 5
   yStart: 90
   cheatMenuItems:
   - {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
@@ -205,7 +205,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b64f83b1b1ba97428026d1d42f9f48a, type: 2}
   - {fileID: 11400000, guid: c0e523bbc93a83f4eababcef585dbc50, type: 2}
   - {fileID: 11400000, guid: ba2a8b18e22c6fa4c9ce6dcec128f463, type: 2}
+  startPos: {x: 300, y: 135}
+  spawnables:
+  - {fileID: 11400000, guid: 0cc34474b1ab9924baf41c71118aa562, type: 2}
+  - {fileID: 11400000, guid: 90c12bd977c91154fb28eeff5b5cd35c, type: 2}
+  - {fileID: 11400000, guid: 4b163d7379f6609438eb2345c9d7f64f, type: 2}
   cheatSlotPrefab: {fileID: 4681363520008523959, guid: 0238204fdac4c3e49955f9ff29135ceb, type: 3}
+  spawnSlotPrefab: {fileID: 3646467449052974059, guid: fb867a2a79a1a264181232aa797de939, type: 3}
 --- !u!222 &7295944854604095846
 CanvasRenderer:
   m_ObjectHideFlags: 0

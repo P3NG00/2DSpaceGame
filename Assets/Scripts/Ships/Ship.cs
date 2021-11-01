@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using SpaceGame.Items;
 using SpaceGame.SpaceObjects;
@@ -232,9 +233,15 @@ namespace SpaceGame.Ships
         {
             if (collision.gameObject.tag == GameInfo.TagSpaceRock)
             {
-                float magnitude = collision.relativeVelocity.magnitude;
-                this.Damage(magnitude, Enums.DamageType.Collision);
-                collision.gameObject.GetComponent<SpaceObject>().Damage(magnitude / 100f, Enums.DamageType.Collision); // TODO change scale of space rock damage?
+                float magnitudeShip = this.rigidbody.velocity.magnitude;
+                float magnitudeRock = collision.rigidbody.velocity.magnitude;
+                float magnitude = Mathf.Max(magnitudeShip, magnitudeRock);
+
+                if (magnitude > 50f) // TODO 50f is limit for taking and dealing damage with velocity. move this reference somewhere else? ship stats?
+                {
+                    this.Damage(magnitude, Enums.DamageType.Collision);
+                    collision.gameObject.GetComponent<SpaceObject>().Damage(magnitude / 100f, Enums.DamageType.Collision); // TODO change scale of space rock damage?
+                }
             }
         }
     }

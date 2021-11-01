@@ -11,16 +11,21 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
 
+        // Private Cache
+        private bool alive = true;
+
+        // Public Getters
         public SpriteRenderer SpriteRenderer => this.spriteRenderer;
         public Rigidbody2D Rigidbody => this.rigidbody;
 
-        private bool alive = true;
+        // Public Properties
+        public float Scale => this.transform.localScale.x;
 
         public void Damage(float amount, Enums.DamageType damageType)
         {
             if (this.alive)
             {
-                float scale = this.transform.localScale.x;
+                float scale = this.Scale;
 
                 switch (damageType)
                 {
@@ -42,6 +47,7 @@ namespace SpaceGame.SpaceObjects
             }
         }
 
+        // Unity Start Method
         private void Start() => this.SpriteRenderer.color = this.GetColor();
 
         protected virtual Color GetColor() => this.Settings.Color;

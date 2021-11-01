@@ -477,6 +477,7 @@ namespace SpaceGame
             this.rotationType = Enums.RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
+        // TODO make sure boosting works
         public void CallbackInput_Boost(InputAction.CallbackContext ctx) => this.player.IsBoosting = ctx.performed;
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
         public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();

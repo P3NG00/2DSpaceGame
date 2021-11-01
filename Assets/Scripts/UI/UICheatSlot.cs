@@ -6,6 +6,8 @@ namespace SpaceGame.UI
 {
     public sealed class UICheatSlot : MonoBehaviour
     {
+        // TODO when holding down shift, give stack of item instead of one
+
         [Header("References", order = 99)]
         [SerializeField] private Image image;
         [SerializeField] private RectTransform rectTransform;
