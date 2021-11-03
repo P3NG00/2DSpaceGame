@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 namespace SpaceGame.Utilities
@@ -10,10 +11,12 @@ namespace SpaceGame.Utilities
 
         public static Vector2 RandomUnitVector => Random.insideUnitCircle.normalized;
 
+        public static T[] GetEnums<T>() => (T[])System.Enum.GetValues(typeof(T));
+
         public static T RandomEnum<T>()
         {
-            System.Array enums = System.Enum.GetValues(typeof(T));
-            return (T)enums.GetValue(Random.Range(0, enums.Length));
+            T[] enums = Util.GetEnums<T>();
+            return enums[Random.Range(0, enums.Length)];
         }
 
         // i have no idea if this actually works, it was concept in my head and i was gonna use it

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f997d49b3e63124a8bd14ce6c269212, type: 3}
+  m_Name: Item Projectile Ice Shards
+  m_EditorClassIdentifier: 
+  itemName: Ice Shards
+  sprite: {fileID: 21300000, guid: 1efee6f6f1891574d9de23baac2088f8, type: 3}
+  color: {r: 0, g: 0.8, b: 1, a: 1}
+  maxStackSize: 99
+  infinite: 0
+  loopUsage: 1
+  timeBetweenUses: 0.35
+  effectAttack:
+    effects:
+    - effect: 2
+      time: 3
+  projectile: {fileID: 11400000, guid: 8c0ee5e56e1146b4bab48a1a1a32e570, type: 2}

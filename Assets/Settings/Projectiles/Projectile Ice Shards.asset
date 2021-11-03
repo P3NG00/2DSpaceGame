@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 838a0e96825685843966f59d20e814f0, type: 3}
-  m_Name: Projectile Missile
+  m_Name: Projectile Ice Shards
   m_EditorClassIdentifier: 
-  projectileName: Missile Projectile
-  damageShip: 6
-  damageSpaceObject: 2
-  magnitude: 100
-  lifetime: 0.75
-  correspondingItem: {fileID: 11400000, guid: 3b64f83b1b1ba97428026d1d42f9f48a, type: 2}
-  projectileObject: {fileID: 5900169560255849357, guid: 1a0defda548efb741bc2eb79c9fd9288, type: 3}
+  projectileName: Ice Shards
+  damageShip: 5
+  damageSpaceObject: 1
+  magnitude: 60
+  lifetime: 1
+  correspondingItem: {fileID: 11400000, guid: 326b7f711c0dd954aa88bc535332c36e, type: 2}
+  projectileObject: {fileID: -3121851429883694184, guid: 71b9d5c63d33f03489351cad802dc57f, type: 3}

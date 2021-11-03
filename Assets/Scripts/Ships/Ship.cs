@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using SpaceGame.Effects;
 using SpaceGame.Items;
 using SpaceGame.SpaceObjects;
 using SpaceGame.UI;
@@ -32,12 +34,27 @@ namespace SpaceGame.Ships
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
         private GameObject itemObjectToDestroy = null;
+        private EffectList effectList = new EffectList();
 
         // Public getters
         public float Health => this.health;
         public float MaxHealth => this.maxHealth;
         public ShipInfo ShipInfo => this.shipInfo;
         public Rigidbody2D Rigidbody => this.rigidbody;
+        public float MaxMagnitude
+        {
+            get
+            {
+                float m = this.shipInfo.MaxMagnitude;
+
+                if (this.IsBoosting)
+                {
+                    m += this.shipInfo.BoostMagnitude;
+                }
+
+                return m;
+            }
+        }
 
         // Public properties
         public Vector2 Position => this.transform.position;
@@ -48,9 +65,9 @@ namespace SpaceGame.Ships
             get => this.isFiring;
             set
             {
-                ItemInfo itemInfo = this.GetItemInfo();
+                ItemInfo itemInfo = this.GetWeapon();
 
-                if (value && this.IsAlive && !this.IsFiring && itemInfo != null && itemInfo is ItemWeapon itemWeapon)
+                if (value && this.IsAlive && !this.IsFiring && itemInfo != null && itemInfo is ItemInfoWeapon itemWeapon)
                 {
                     this.isFiring = true;
                     this.routineFiring = StartCoroutine(itemWeapon.UseRoutine(this));
@@ -87,9 +104,17 @@ namespace SpaceGame.Ships
             }
         }
 
+        protected virtual void Awake() => this.effectList.InitializeList();
+
         protected virtual void FixedUpdate()
         {
             this.animator.SetBool("Drag", this.rigidbody.drag == this.shipInfo.Drag);
+
+            if (this.effectList.HasEffect(Enums.Effect.Fire))
+            {
+                // Time.fixedDeltaTime because this is in FixedUpdate?
+                this.Damage(Time.fixedDeltaTime, Enums.DamageType.Fire, null);
+            }
         }
 
         public float GetRotationToLookAt(Vector2 pos)
@@ -113,6 +138,10 @@ namespace SpaceGame.Ships
 
         public void ApplyForce()
         {
+            // TODO implement Elemental Effects
+            // ice makes maxMagnitude 
+            // MAKE SURE TO DECREASE TIME.FIXED UPDATE DELTA TIME OR WHATEEVER SO THE TIME DECREASES
+
             if (this.IsAlive)
             {
                 Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
@@ -126,10 +155,11 @@ namespace SpaceGame.Ships
                     maxMagnitude += this.shipInfo.BoostMagnitude;
                 }
 
-                if (velocity.magnitude > maxMagnitude)
+                if (this.effectList.HasEffect(Enums.Effect.Ice))
                 {
-                    velocity = this.rigidbody.velocity.normalized * maxMagnitude;
-                    this.rigidbody.velocity = velocity;
+                    // TODO enable icy color overlay or something
+                    maxMagnitude *= 0.5f; // TODO change ice scaling
+                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.fixedDeltaTime);
                 }
             }
         }
@@ -143,11 +173,11 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void ApplyDrag(bool drag)
+        public void ApplyDrag(bool drag, float scale = 1f)
         {
             if (this.IsAlive)
             {
-                this.rigidbody.drag = drag ? this.ShipInfo.Drag : 0f;
+                this.rigidbody.drag = drag ? this.ShipInfo.Drag * scale : 0f;
             }
         }
 
@@ -168,7 +198,7 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void Damage(float damage, Enums.DamageType damageType)
+        public void Damage(float damage, Enums.DamageType damageType, EffectList effects)
         {
             if (!Invincible)
             {
@@ -176,6 +206,12 @@ namespace SpaceGame.Ships
                 {
                     case Enums.DamageType.Collision: damage *= this.shipInfo.ScaleCollisionDamage; break;
                     case Enums.DamageType.Weapon: damage *= this.shipInfo.ScaleMissileDamage; break;
+                }
+
+                // TODO make sure adding effect time works
+                if (effects != null)
+                {
+                    this.effectList += effects;
                 }
 
                 this.health -= damage;
@@ -193,7 +229,7 @@ namespace SpaceGame.Ships
         {
             if (this.IsAlive)
             {
-                this.itemObjectToDestroy = ((ItemWeapon)this.GetItemInfo()).UseWeapon(this);
+                this.itemObjectToDestroy = ((ItemInfoWeapon)this.GetWeapon()).UseWeapon(this);
                 UIInventorySlot itemWeaponSlot = this.ItemWeaponSlot();
 
                 if (itemWeaponSlot != null && !itemWeaponSlot.ItemStack.ItemInfo.Infinite)
@@ -221,7 +257,8 @@ namespace SpaceGame.Ships
             }
         }
 
-        public abstract ItemInfo GetItemInfo();
+        public abstract ItemInfoWeapon GetWeapon();
+        public abstract ItemInfoDefense GetDefense();
         public virtual UIInventorySlot ItemWeaponSlot() => null;
 
         protected virtual void OnDeath() { }
@@ -233,10 +270,12 @@ namespace SpaceGame.Ships
             {
                 float magnitude = collision.relativeVelocity.magnitude;
 
-                if (magnitude > 50f) // TODO 50f is limit for taking and dealing damage with velocity. move this reference somewhere else? ship stats?
+                if (magnitude > 25f) // TODO 50f is limit for taking and dealing damage with velocity. move this reference somewhere else? ship stats?
                 {
-                    this.Damage(magnitude, Enums.DamageType.Collision);
-                    collision.gameObject.GetComponent<SpaceObject>().Damage(magnitude / 100f, Enums.DamageType.Collision); // TODO change scale of space rock damage?
+                    // TODO make playeer still take effects from touching space object, dont take damage unless moving quickly
+                    SpaceObject spaceRock = collision.gameObject.GetComponent<SpaceObject>();
+                    this.Damage(magnitude, Enums.DamageType.Collision, spaceRock.SpaceObjectInfo.Effects);
+                    spaceRock.Damage(magnitude / 100f, Enums.DamageType.Collision); // TODO change scale of space rock damage?
                 }
             }
         }

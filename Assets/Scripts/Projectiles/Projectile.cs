@@ -1,3 +1,4 @@
+using SpaceGame.Effects;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
@@ -19,8 +20,8 @@ namespace SpaceGame.Projectiles
         {
             Projectile projectile = Instantiate(projectileInfo.ProjectileObject, source.transform.position, source.transform.rotation);
             projectile.rigidbody.velocity = source.transform.up * projectileInfo.Magnitude;
-            projectile.spriteRenderer.sprite = projectileInfo.CorrespondingItem.Sprite;
-            projectile.spriteRenderer.color = projectileInfo.CorrespondingItem.Color;
+            projectile.spriteRenderer.sprite = projectileInfo.Item.Sprite;
+            projectile.spriteRenderer.color = projectileInfo.Item.Color;
             projectile.projectileInfo = projectileInfo;
             projectile.sourceShip = source;
             Destroy(projectile.gameObject, projectileInfo.Lifetime);
@@ -39,7 +40,7 @@ namespace SpaceGame.Projectiles
 
                     if (this.sourceShip != ship)
                     {
-                        ship.Damage(this.projectileInfo.DamageShip, Enums.DamageType.Weapon);
+                        ship.Damage(this.projectileInfo.DamageShip, Enums.DamageType.Weapon, this.projectileInfo.Item.Effects);
                         DestroyProjectile();
                     }
                 }

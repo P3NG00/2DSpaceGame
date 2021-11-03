@@ -5,7 +5,7 @@ namespace SpaceGame.SpaceObjects
     public class SpaceObject : MonoBehaviour
     {
         [Header("Info [SpaceObject]", order = 5)]
-        public SpaceObjectInfo Settings;
+        public SpaceObjectInfo SpaceObjectInfo;
 
         [Header("References [SpaceObject]", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -29,16 +29,16 @@ namespace SpaceGame.SpaceObjects
 
                 switch (damageType)
                 {
-                    case Enums.DamageType.Collision: scale -= amount * this.Settings.DamageScaleCollision; break;
-                    case Enums.DamageType.Weapon: scale -= amount * this.Settings.DamageScaleProjectile; break;
+                    case Enums.DamageType.Collision: scale -= amount * this.SpaceObjectInfo.DamageScaleCollision; break;
+                    case Enums.DamageType.Weapon: scale -= amount * this.SpaceObjectInfo.DamageScaleProjectile; break;
                 }
 
-                if (scale < this.Settings.DestroyBelowScale)
+                if (scale < this.SpaceObjectInfo.DestroyBelowScale)
                 {
                     this.alive = false;
                     GameInfo.DestroySpaceObject(this);
                     SpaceObjectItem itemObject = (SpaceObjectItem)GameInfo.SpawnSpaceObject(GameInfo.SettingsItemObject, this.transform.position);
-                    itemObject.SetItem(this.Settings.RandomItemDrop);
+                    itemObject.SetItem(this.SpaceObjectInfo.RandomItemDrop);
                 }
                 else
                 {
@@ -50,6 +50,6 @@ namespace SpaceGame.SpaceObjects
         // Unity Start Method
         private void Start() => this.SpriteRenderer.color = this.GetColor();
 
-        protected virtual Color GetColor() => this.Settings.Color;
+        protected virtual Color GetColor() => this.SpaceObjectInfo.Color;
     }
 }

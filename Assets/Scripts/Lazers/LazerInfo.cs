@@ -11,12 +11,12 @@ namespace SpaceGame.Lazers
         [SerializeField] private float length;
 
         [Header("References [LazerInfo]", order = 105)]
-        [SerializeField] private ItemInfo correspondingItem;
+        [SerializeField] private ItemInfoLazer correspondingItem;
         [SerializeField] private Lazer lazerObject;
 
         public float Damage => this.damage;
         public float Length => this.length;
-        public ItemInfo CorrespondingItem => this.correspondingItem;
+        public ItemInfoLazer Item => this.correspondingItem;
         public Lazer LazerObject => this.lazerObject;
     }
 }

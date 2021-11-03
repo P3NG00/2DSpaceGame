@@ -62,6 +62,8 @@ TODO keep stats about game
     shots fired
     shots landed
     hit/miss ratio
+        hits would be added when projectile hits space object or enemy
+        misses would be added upon projectile reaching end of lifetime before colliding with anything
     distance traveled (cache last location in fixed update and find difference between them and add it to stats?)
     space rocks destroyed
     items picked up
@@ -70,8 +72,30 @@ TODO keep stats about game
     deaths
     total play time
 
-TODO add slots to UI for placing defense
-
 TODO add button for controller to switch between rotation and aim in direction
 left stick will be used for both
 clicking in left stick toggles control mode?
+
+TODO add planet clusters
+prefab parent object with rigidbody on it with multiple preset PlanetObjects inside 
+
+TODO add a minimap
+theory:
+    make camera that can capture wide area
+    put labels on objects that should appear on minimap like planets
+    put labels on seperate layer and make camera capture only that layer
+    shrink camera displayport size and put in corner of screen
+
+TODO make defense items
+TODO add slots to UI for placing defense
+TODO add elements to defend against (fire, explosion, water, etc) (make them into Enums)
+TODO add items to deal damage of these types too
+TODO create icy space rocks, give ice upon touchings
+Ice makes player slower and shoot slower,
+Fire makes player lose health over time,
+Electricity increases the amount of energy it takes to use energy,
+TODO make effect list for ships for defense
+
+TODO make Spawnable an interface on Ships and SpaceObjects
+TODO replace GameMode Settings with Spawnables and add ships
+TODO make aggressive enemies spawn

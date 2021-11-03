@@ -14,7 +14,7 @@ namespace SpaceGame.Projectiles
         [SerializeField] private float lifetime;
 
         [Header("References", order = 100)]
-        [SerializeField] private ItemInfo correspondingItem;
+        [SerializeField] private ItemInfoProjectile correspondingItem;
         [SerializeField] private Projectile projectileObject;
 
         public string Name => this.projectileName;
@@ -22,7 +22,7 @@ namespace SpaceGame.Projectiles
         public float DamageSpaceObject => this.damageSpaceObject;
         public float Magnitude => this.magnitude;
         public float Lifetime => this.lifetime;
-        public ItemInfo CorrespondingItem => this.correspondingItem;
+        public ItemInfoProjectile Item => this.correspondingItem;
         public Projectile ProjectileObject => this.projectileObject;
     }
 }

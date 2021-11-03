@@ -66,6 +66,7 @@ namespace SpaceGame
         [SerializeField] private UIInventorySlot[] slotsInventory;
         [SerializeField] private UIInventorySlot[] slotsHotbar;
         [SerializeField] private UIInventorySlot slotWeapon;
+        [SerializeField] private UIInventorySlot slotDefense;
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool doDebugRays;
@@ -91,6 +92,7 @@ namespace SpaceGame
         public static bool DEBUG_RAYS => GameInfo.instance.doDebugRays;
         public static bool DEBUG_LOG => GameInfo.instance.doDebugLog;
         public static UIInventorySlot SlotWeapon => GameInfo.instance.slotWeapon;
+        public static UIInventorySlot SlotDefense => GameInfo.instance.slotDefense;
         public static GameObject ParentCheatMenu => GameInfo.instance.parentCheatMenu;
 
         // Tags
@@ -108,25 +110,41 @@ namespace SpaceGame
             this.allSlots.AddRange(this.slotsInventory);
             this.allSlots.AddRange(this.slotsHotbar);
             this.allSlots.Add(this.slotWeapon);
+            this.allSlots.Add(this.slotDefense);
             Application.targetFrameRate = this.framerate;
             System.Array.ForEach(this.settings.SpaceObjectsToSpawn, sos => StartCoroutine(RoutineSpawnSpaceObject(sos)));
-            StartCoroutine(RoutineCleanDistantSpaceObjects());
+            this.StartCoroutine(RoutineCleanDistantSpaceObjects());
             this.parentInvUI.SetActive(false);
             this.parentCheatMenu.SetActive(false);
-            SelectHotbar(0);
-            HoverSlot(SlotWeapon, true);
+            GameInfo.SelectHotbar(0);
+            GameInfo.HoverSlot(GameInfo.instance.slotsInventory[0], true);
         }
 
         // Unity Update method
         private void FixedUpdate()
         {
-            // Move Player
-            this.player.ApplyDrag(this.inputSlowDown);
-
-            if (!this.inputSlowDown & this.inputApplyForce)
+            if (this.player.Rigidbody.velocity.magnitude > this.player.MaxMagnitude)
             {
-                this.player.ApplyForce();
+                this.player.ApplyDrag(true, 0.3f);
             }
+            else
+            {
+                this.player.ApplyDrag(this.inputSlowDown);
+
+                if (!this.inputSlowDown & this.inputApplyForce)
+                {
+                    this.player.ApplyForce();
+                }
+            }
+
+            // TODO remove if above statements are adequate
+            // // Move Player
+            // this.player.ApplyDrag(this.inputSlowDown);
+
+            // if (!this.inputSlowDown & this.inputApplyForce)
+            // {
+            //     this.player.ApplyForce();
+            // }
 
             // Rotate Player
             switch (this.rotationType)
@@ -283,13 +301,21 @@ namespace SpaceGame
                 // Else, selected slot exists and is selecting different slot...
                 else
                 {
+                    ItemInfo slotItemInfo = gi.selectedSlot.ItemStack.ItemInfo;
+
                     // If selecting weapon slot...
                     if (slot == gi.slotWeapon)
                     {
                         // If item being moved is a weapon...
-                        ItemInfo slotItemInfo = gi.selectedSlot.ItemStack.ItemInfo;
-
                         if (slotItemInfo is ItemInfoProjectile || slotItemInfo is ItemInfoLazer)
+                        {
+                            SwapItems();
+                        }
+                    }
+                    else if (slot == gi.slotDefense)
+                    {
+                        // If item being moved is a defense...
+                        if (slotItemInfo is ItemInfoDefense)
                         {
                             SwapItems();
                         }
@@ -325,6 +351,7 @@ namespace SpaceGame
         {
             GameInfo gi = GameInfo.instance;
             gi.selectedHotbar = gi.slotsHotbar[index];
+            // This is then updated in GameInfo's FixedUpdate
         }
 
         public static SpaceObject SpawnSpaceObject(SpaceObjectInfo sos, Vector2 pos)
@@ -339,7 +366,7 @@ namespace SpaceGame
                 // Search through all space objects and see if it's already instantiated
                 foreach (SpaceObject so in gi.spaceObjects)
                 {
-                    if (so.Settings.Tag == sos.Tag)
+                    if (so.SpaceObjectInfo.Tag == sos.Tag)
                     {
                         // Cannot pass
                         pass = false;
@@ -354,7 +381,7 @@ namespace SpaceGame
                 // Instantiate space object
                 Quaternion rot = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
                 SpaceObject spaceObject = Instantiate(sos.RandomSpaceObject, pos, rot, gi.parentSpaceObjects);
-                spaceObject.Settings = sos;
+                spaceObject.SpaceObjectInfo = sos;
                 spaceObject.transform.localScale = Vector2.one * sos.RandomScale;
                 spaceObject.SpriteRenderer.color = sos.Color;
                 spaceObject.Rigidbody.velocity = Util.RandomUnitVector * sos.RandomVelocity;
@@ -447,7 +474,7 @@ namespace SpaceGame
                 foreach (SpaceObject so in this.spaceObjects)
                 {
                     // If Space Object too far away...
-                    if (Vector2.Distance(this.player.transform.position, so.transform.position) > so.Settings.DistanceMax)
+                    if (Vector2.Distance(this.player.transform.position, so.transform.position) > so.SpaceObjectInfo.DistanceMax)
                     {
                         // Add to disposal list
                         objectsToRemove.Add(so);
@@ -456,6 +483,12 @@ namespace SpaceGame
 
                 // Remove Space Objects
                 objectsToRemove.ForEach(so => DestroySpaceObject(so));
+
+                if (GameInfo.DEBUG_LOG)
+                {
+                    print($"Clean Routine - Cleaned {objectsToRemove.Count}");
+                }
+
                 objectsToRemove.Clear();
             }
         }
@@ -504,7 +537,7 @@ namespace SpaceGame
             ItemStack hotbarStack = this.selectedHotbar.ItemStack;
             ItemInfo hotbarItemInfo = hotbarStack.ItemInfo;
 
-            if (hotbarItemInfo != null && hotbarItemInfo is ItemUsable itemUsable)
+            if (hotbarItemInfo != null && hotbarItemInfo is ItemInfoUsable itemUsable)
             {
                 itemUsable.Use(this.player);
 

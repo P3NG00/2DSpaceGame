@@ -7,7 +7,8 @@ namespace SpaceGame.Ships
     public sealed class ShipAI : Ship
     {
         [Header("Info [ShipAI]", order = 10)]
-        [SerializeField] private ItemInfo itemInfo;
+        [SerializeField] private ItemInfoWeapon itemWeapon;
+        [SerializeField] private ItemInfoDefense itemDefense;
         [SerializeField] private Enums.ShipAIType shipAIType;
         [SerializeField] private bool randomAIType;
 
@@ -16,8 +17,9 @@ namespace SpaceGame.Ships
 
         private ShipAIInfo shipInfoAI;
 
-        private void Awake()
+        protected sealed override void Awake()
         {
+            base.Awake();
             this.shipInfoAI = (ShipAIInfo)this.ShipInfo;
 
             if (this.randomAIType)
@@ -40,10 +42,9 @@ namespace SpaceGame.Ships
                 if (this.shipAIType == Enums.ShipAIType.Aggressive)
                 {
                     // Aggressive AI
-                    bool withinFireDistance = distanceFromTarget < this.shipInfoAI.DistanceFireAtTarget;
-                    this.UpdateAI(withinFireDistance, withinDistance, !withinDistance, targetPos);
+                    this.UpdateAI(distanceFromTarget < this.shipInfoAI.DistanceFireAtTarget, withinDistance, !withinDistance, targetPos);
                 }
-                else
+                else // (this.shipType == Enums.ShipAIType.Stalk)
                 {
                     // Stalk AI
                     this.UpdateAI(false, withinDistance, !withinDistance, targetPos);
@@ -73,7 +74,8 @@ namespace SpaceGame.Ships
             this.ApplyDrag(drag);
         }
 
-        public override ItemInfo GetItemInfo() => this.itemInfo;
+        public sealed override ItemInfoWeapon GetWeapon() => this.itemWeapon;
+        public sealed override ItemInfoDefense GetDefense() => this.itemDefense;
 
         protected override void OnDeath()
         {

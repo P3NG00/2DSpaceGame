@@ -1,3 +1,4 @@
+using SpaceGame.Effects;
 using SpaceGame.Items;
 using SpaceGame.Utilities;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace SpaceGame.SpaceObjects
         [SerializeField] private float maxAngularVelocity;
         [SerializeField, Min(0f)] private float damageScaleCollision;
         [SerializeField, Min(0f)] private float damageScaleWeapon;
+        [SerializeField] private EffectList effects = new EffectList();
 
         [Header("References [SpaceObjectSettings]", order = 99)]
         [SerializeField] private SpaceObject[] prefabSpaceObjects;
@@ -69,5 +71,8 @@ namespace SpaceGame.SpaceObjects
         public float DamageScaleCollision => this.damageScaleCollision;
         public float DamageScaleProjectile => this.damageScaleWeapon;
         public bool DestroyMissile => this.destroyMissile;
+        public EffectList Effects => this.effects;
+
+        protected virtual void OnEnable() => this.effects.InitializeList();
     }
 }

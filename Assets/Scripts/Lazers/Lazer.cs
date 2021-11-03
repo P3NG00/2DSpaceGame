@@ -19,7 +19,7 @@ namespace SpaceGame.Lazers
             Vector2 offset = source.transform.up * (lazerInfo.Length / 2f);
             Lazer lazer = Instantiate(lazerInfo.LazerObject, source.Position + offset, source.transform.rotation, source.transform);
             lazer.transform.localScale = new Vector2(1f, lazerInfo.Length);
-            lazer.spriteRenderer.color = lazerInfo.CorrespondingItem.Color;
+            lazer.spriteRenderer.color = lazerInfo.Item.Color;
             lazer.sourceShip = source;
             return lazer;
         }
@@ -35,7 +35,7 @@ namespace SpaceGame.Lazers
 
                 if (this.sourceShip != ship)
                 {
-                    ship.Damage(this.lazerInfo.Damage * Time.deltaTime, Enums.DamageType.Weapon);
+                    ship.Damage(this.lazerInfo.Damage * Time.deltaTime, Enums.DamageType.Weapon, lazerInfo.Item.Effects);
                 }
             }
             else if (collider.tag == GameInfo.TagSpaceRock)

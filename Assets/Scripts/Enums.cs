@@ -6,6 +6,15 @@ namespace SpaceGame
         {
             Collision,
             Weapon,
+            Fire,
+        }
+
+        public enum Effect
+        {
+            General,
+            Fire,
+            Ice,
+            Electric,
         }
 
         public enum Direction

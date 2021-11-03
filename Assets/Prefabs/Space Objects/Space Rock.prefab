@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d23f579bf1b9054db5cb3513b45e33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Settings: {fileID: 0}
+  SpaceObjectInfo: {fileID: 0}
   rigidbody: {fileID: 2634249643401036137}
   spriteRenderer: {fileID: 2634249643401036139}
 --- !u!212 &2634249643401036139

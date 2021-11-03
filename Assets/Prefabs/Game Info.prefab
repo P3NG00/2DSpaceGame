@@ -96,6 +96,7 @@ MonoBehaviour:
   - {fileID: 0}
   slotsHotbar: []
   slotWeapon: {fileID: 0}
+  slotDefense: {fileID: 0}
   doDebugRays: 1
   doDebugLog: 0
 --- !u!114 &3068602627571150779
@@ -459,6 +460,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 18d05492-5365-44b1-ac0f-f689ab3d279f
     m_ActionName: Input/Debug[/Keyboard/f12]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5258815394248899773}
+        m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
+        m_MethodName: CallbackInput_Boost
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 157242f5-52da-4256-95a3-c32dc0381667
+    m_ActionName: Input/Boost[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Input

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7123659bb3925d943b3378837ab88358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Settings: {fileID: 11400000, guid: 4b163d7379f6609438eb2345c9d7f64f, type: 2}
+  SpaceObjectInfo: {fileID: 11400000, guid: 4b163d7379f6609438eb2345c9d7f64f, type: 2}
   rigidbody: {fileID: 3811068746203088919}
   spriteRenderer: {fileID: 3811068746203088917}
   gravityScale: 1500

@@ -25,13 +25,15 @@ MonoBehaviour:
   maxAngularVelocity: 20
   damageScaleCollision: 0
   damageScaleWeapon: 0
+  effects:
+    effects: []
   prefabSpaceObjects:
   - {fileID: 962869612192752619, guid: 7b0a7d983b324994e93012a3dcb02642, type: 3}
   itemDrops: []
   distanceSpawn: 400
   widthSpawn: 50
   scaleSpawnRate: 1
-  timeBetweenChance: 30
+  timeBetweenChance: 20
   chanceSpawn: 1
   scaleMissileDamage: 0
   scaleMissileImpactForce: 0
