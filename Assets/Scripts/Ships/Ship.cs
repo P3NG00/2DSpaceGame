@@ -28,6 +28,7 @@ namespace SpaceGame.Ships
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool FORCE_VALIDATE;
+        [SerializeField] private bool FROZEN;
 
         // Private cache
         private bool isFiring = false;
@@ -35,6 +36,9 @@ namespace SpaceGame.Ships
         private Coroutine routineUsing = null;
         private GameObject itemObjectToDestroy = null;
         private EffectList effectList = new EffectList();
+
+        // Protected properties
+        protected bool DEBUG_FROZEN => this.FROZEN;
 
         // Public getters
         public float Health => this.health;
@@ -109,11 +113,11 @@ namespace SpaceGame.Ships
         protected virtual void FixedUpdate()
         {
             this.animator.SetBool("Drag", this.rigidbody.drag == this.shipInfo.Drag);
+            this.effectList.RemoveTimeFromAll(Time.deltaTime);
 
             if (this.effectList.HasEffect(Enums.Effect.Fire))
             {
-                // Time.fixedDeltaTime because this is in FixedUpdate?
-                this.Damage(Time.fixedDeltaTime, Enums.DamageType.Fire, null);
+                this.Damage(Time.deltaTime, Enums.DamageType.Fire, null);
             }
         }
 
@@ -138,10 +142,6 @@ namespace SpaceGame.Ships
 
         public void ApplyForce()
         {
-            // TODO implement Elemental Effects
-            // ice makes maxMagnitude 
-            // MAKE SURE TO DECREASE TIME.FIXED UPDATE DELTA TIME OR WHATEEVER SO THE TIME DECREASES
-
             if (this.IsAlive)
             {
                 Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
@@ -159,7 +159,7 @@ namespace SpaceGame.Ships
                 {
                     // TODO enable icy color overlay or something
                     maxMagnitude *= 0.5f; // TODO change ice scaling
-                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.fixedDeltaTime);
+                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.deltaTime);
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace SpaceGame.Ships
             }
             else if (GameInfo.DEBUG_LOG)
             {
-                print($"Cannot heal for amount of '{amount}'");
+                print($"Cannot heal for amount of '{amount}' because it is less than or greater to 0");
             }
         }
 
@@ -211,7 +211,17 @@ namespace SpaceGame.Ships
                 // TODO make sure adding effect time works
                 if (effects != null)
                 {
-                    this.effectList += effects;
+                    EffectList newEffects = new EffectList();
+                    newEffects.InitializeList();
+                    newEffects += effects;
+                    EffectList defenseEffects = this.GetDefense()?.Effects;
+
+                    if (defenseEffects != null)
+                    {
+                        newEffects += defenseEffects;
+                    }
+
+                    this.effectList += newEffects;
                 }
 
                 this.health -= damage;

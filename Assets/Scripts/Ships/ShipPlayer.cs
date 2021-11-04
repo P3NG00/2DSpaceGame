@@ -15,6 +15,11 @@ namespace SpaceGame.Ships
 
         [Header("References [ShipPlayer]", order = 99)]
         [SerializeField] private Animator animatorPlayer;
+        [SerializeField] private CircleCollider2D interactionCollider; // TODO implement
+        // should be able to interact with interactables in space like
+        //  - ships
+        //  - crafting stations
+        //  - etc.
 
         private float timeCanRegenAfter = 0f;
 

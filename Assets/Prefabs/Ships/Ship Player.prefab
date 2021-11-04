@@ -203,6 +203,22 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 9081723669094372411, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
   m_PrefabInstance: {fileID: 1978245223488322083}
   m_PrefabAsset: {fileID: 0}
+--- !u!58 &5773003437938744955
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968034898291274686}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!114 &-8122564374128000448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,12 +241,14 @@ MonoBehaviour:
   animator: {fileID: 2746726828944081596}
   Invincible: 0
   FORCE_VALIDATE: 0
+  FROZEN: 0
   timeBeforeHealthRegen: 3
   regenAmountPerTick: 5
   energy: 100
   energyMax: 100
   energyAmountPerTick: 3
   animatorPlayer: {fileID: 2234492995521085018}
+  interactionCollider: {fileID: 5773003437938744955}
 --- !u!95 &2234492995521085018
 Animator:
   serializedVersion: 3

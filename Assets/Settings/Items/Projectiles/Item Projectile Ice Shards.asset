@@ -19,7 +19,7 @@ MonoBehaviour:
   infinite: 0
   loopUsage: 1
   timeBetweenUses: 0.35
-  effectAttack:
+  effects:
     effects:
     - effect: 2
       time: 3

@@ -117,13 +117,16 @@ MonoBehaviour:
   health: 50
   maxHealth: 50
   shipInfo: {fileID: 11400000, guid: c2e3da5393d33b847a1e796a556ee76e, type: 2}
+  IsBoosting: 0
   rigidbody: {fileID: 4570879652507290363}
   srBody: {fileID: 4858918682580644960}
   srTip: {fileID: 6594733993978846710}
   animator: {fileID: 1794551259763634514}
   Invincible: 0
   FORCE_VALIDATE: 0
-  itemInfo: {fileID: 0}
-  shipAIType: 0
+  FROZEN: 0
+  itemWeapon: {fileID: 0}
+  itemDefense: {fileID: 0}
+  shipAIType: 3
   randomAIType: 0
   target: {fileID: 0}

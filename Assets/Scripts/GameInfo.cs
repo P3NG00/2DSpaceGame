@@ -123,28 +123,24 @@ namespace SpaceGame
         // Unity Update method
         private void FixedUpdate()
         {
+            // Player Movement
             if (this.player.Rigidbody.velocity.magnitude > this.player.MaxMagnitude)
             {
+                // Slow player if moving too fast
                 this.player.ApplyDrag(true, 0.3f);
             }
             else
             {
+                // Set player drag
                 this.player.ApplyDrag(this.inputSlowDown);
 
+                // If not applying drag and is applying force...
                 if (!this.inputSlowDown & this.inputApplyForce)
                 {
+                    // Apply force
                     this.player.ApplyForce();
                 }
             }
-
-            // TODO remove if above statements are adequate
-            // // Move Player
-            // this.player.ApplyDrag(this.inputSlowDown);
-
-            // if (!this.inputSlowDown & this.inputApplyForce)
-            // {
-            //     this.player.ApplyForce();
-            // }
 
             // Rotate Player
             switch (this.rotationType)
@@ -510,7 +506,6 @@ namespace SpaceGame
             this.rotationType = Enums.RotationType.AimInDirection;
             this.inputDirection = ctx.ReadValue<Vector2>();
         }
-        // TODO make sure boosting works
         public void CallbackInput_Boost(InputAction.CallbackContext ctx) => this.player.IsBoosting = ctx.performed;
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
         public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();

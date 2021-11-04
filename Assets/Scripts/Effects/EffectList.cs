@@ -1,3 +1,4 @@
+using System;
 using SpaceGame.Utilities;
 using UnityEngine;
 
@@ -38,26 +39,20 @@ namespace SpaceGame.Effects
         // public void AddEffectTime(Enums.Effect effect, float time) => this.effectTime[(int)effect] += time;
         // public bool HasEffect(Enums.Effect effect) => this.GetEffectTime(effect) > 0f;
 
-        public float GetEffectTime(Enums.Effect effect)
-        {
-            int index = (int)effect;
-            float time = this.effectTime[index];
-            return time;
-        }
+        public float GetEffectTime(Enums.Effect effect) => this.effectTime[(int)effect];
+        public bool HasEffect(Enums.Effect effect) => this.GetEffectTime(effect) > 0f;
 
         public void AddEffectTime(Enums.Effect effect, float time)
         {
             int index = (int)effect;
-            float currentTime = this.effectTime[index];
-            float newTime = currentTime + time;
-            this.effectTime[index] = newTime;
-        }
+            float newTime = this.effectTime[index] + time;
 
-        public bool HasEffect(Enums.Effect effect)
-        {
-            float time = this.GetEffectTime(effect);
-            bool hasTime = time > 0f;
-            return hasTime;
+            if (newTime < 0f)
+            {
+                newTime = 0f;
+            }
+
+            this.effectTime[index] = newTime;
         }
 
         public void RemoveTimeFromAll(float time)
@@ -76,16 +71,26 @@ namespace SpaceGame.Effects
             }
         }
 
-        public static EffectList operator +(EffectList list0, EffectList list1)
+        public static EffectList operator +(EffectList list0, EffectList list1) => EffectList.Operate(list0, list1, (f0, f1) => f0 + f1);
+        public static EffectList operator -(EffectList list0, EffectList list1) => EffectList.Operate(list0, list1, (f0, f1) => f0 - f1);
+
+        private static EffectList Operate(EffectList list0, EffectList list1, Func<float, float, float> func)
         {
             EffectList effectList = new EffectList();
             effectList.InitializeList();
             Enums.Effect effect;
 
-            for (int i = 0; i < list0.effectTime.Length; i++)
+            try
             {
-                effect = (Enums.Effect)i;
-                effectList.AddEffectTime(effect, list0.GetEffectTime(effect) + list1.GetEffectTime(effect));
+                for (int i = 0; i < list0.effectTime.Length; i++)
+                {
+                    effect = (Enums.Effect)i;
+                    effectList.AddEffectTime(effect, func.Invoke(list0.GetEffectTime(effect), list1.GetEffectTime(effect)));
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e.Message);
             }
 
             return effectList;

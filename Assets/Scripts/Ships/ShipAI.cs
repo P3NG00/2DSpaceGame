@@ -50,11 +50,11 @@ namespace SpaceGame.Ships
                     this.UpdateAI(false, withinDistance, !withinDistance, targetPos);
                 }
             }
-            // If AI Type is 'Passive' (does not need tracking variables)
+            // If AI Type is 'Passive' or 'None' (does not need tracking variables)
             else
             {
                 // Passive AI
-                this.UpdateAI(false, false, true);
+                this.UpdateAI(false, false, this.shipAIType == Enums.ShipAIType.Passive);
             }
         }
 
@@ -62,10 +62,26 @@ namespace SpaceGame.Ships
         {
             if (target != null)
             {
-                this.RotateToLookAt((Vector2)target);
+                float rotation = this.GetRotationToLookAt((Vector2)target);
+
+                print(rotation);
+
+                // this was added to help direct the ship towards the target
+                // this will need to be replaced as the ship can still orbit the target
+                float angle = 0.15f; // TODO control with shipInfo
+
+                if (rotation < -angle || rotation > angle)
+                {
+                    drag = true;
+                }
+
+                if (!this.DEBUG_FROZEN)
+                {
+                    this.Rotate(rotation);
+                }
             }
 
-            if (!drag & applyForce)
+            if (!drag && applyForce && !this.DEBUG_FROZEN)
             {
                 this.ApplyForce();
             }

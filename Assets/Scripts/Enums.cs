@@ -37,6 +37,7 @@ namespace SpaceGame
             Passive,
             Aggressive,
             Stalk,
+            None,
         }
 
         public enum SpaceObjectSpawnAreaType

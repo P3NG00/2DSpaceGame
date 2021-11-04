@@ -76,6 +76,14 @@ TODO add button for controller to switch between rotation and aim in direction
 left stick will be used for both
 clicking in left stick toggles control mode?
 
+TODO add particles
+- when ship is applying force
+- when spaceobjects collide
+    space rocks collide with everything
+    itemobjects dont produce particles when colliding with player
+- when projectile lands
+    projectiles may have different partcile effects
+
 TODO add planet clusters
 prefab parent object with rigidbody on it with multiple preset PlanetObjects inside 
 
@@ -86,15 +94,10 @@ theory:
     put labels on seperate layer and make camera capture only that layer
     shrink camera displayport size and put in corner of screen
 
-TODO make defense items
-TODO add slots to UI for placing defense
-TODO add elements to defend against (fire, explosion, water, etc) (make them into Enums)
-TODO add items to deal damage of these types too
-TODO create icy space rocks, give ice upon touchings
+TODO make sure defense and elemental items are working
 Ice makes player slower and shoot slower,
 Fire makes player lose health over time,
 Electricity increases the amount of energy it takes to use energy,
-TODO make effect list for ships for defense
 
 TODO make Spawnable an interface on Ships and SpaceObjects
 TODO replace GameMode Settings with Spawnables and add ships

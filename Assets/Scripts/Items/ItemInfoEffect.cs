@@ -6,10 +6,10 @@ namespace SpaceGame.Items
     public abstract class ItemInfoEffect : ItemInfo
     {
         [Header("Info [ItemInfoEffect]", order = 2)]
-        [SerializeField] private EffectList effectAttack;
+        [SerializeField] private EffectList effects;
 
-        public EffectList Effects => this.effectAttack;
+        public EffectList Effects => this.effects;
 
-        protected virtual void Awake() => this.effectAttack.InitializeList();
+        protected virtual void OnEnable() => this.effects.InitializeList();
     }
 }
