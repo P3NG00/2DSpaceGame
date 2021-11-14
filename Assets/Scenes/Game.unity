@@ -6235,6 +6235,14 @@ PrefabInstance:
       propertyPath: m_DefaultActionMap
       value: Input
       objectReference: {fileID: 0}
+    - target: {fileID: 5079558678042916700, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: recipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079558678042916700, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: recipes.Array.data[0].ingredients.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5258815394248899770, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: m_Name
       value: Game Info

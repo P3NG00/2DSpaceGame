@@ -8,6 +8,8 @@ namespace SpaceGame.Items
     [CreateAssetMenu(menuName = "2D Space Game/Item/Lazer", fileName = "Item Info Lazer")]
     public sealed class ItemInfoLazer : ItemInfoWeapon
     {
+        // TODO use linerenderer points for lazer instead of so that it can look cooler
+
         [Header("Info [ItemInfoLazer]", order = 5)]
         [SerializeField] private LazerInfo lazerInfo;
 

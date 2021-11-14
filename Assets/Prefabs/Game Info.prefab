@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5258815394248899772}
   - component: {fileID: 5258815394248899773}
   - component: {fileID: 3068602627571150779}
+  - component: {fileID: 5079558678042916700}
   m_Layer: 0
   m_Name: Game Info
   m_TagString: Untagged
@@ -481,3 +482,16 @@ MonoBehaviour:
   m_DefaultActionMap: Input
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5079558678042916700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258815394248899770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1916fada528348c479df876843a9b75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes: []

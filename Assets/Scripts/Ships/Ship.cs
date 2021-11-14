@@ -22,6 +22,7 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srBody;
         [SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
+        // [SerializeField] private ParticleSystem particlesApplyForce; // TODO implement
 
         [Header("Cheats", order = 95)]
         public bool Invincible;

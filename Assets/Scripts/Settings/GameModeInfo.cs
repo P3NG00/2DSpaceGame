@@ -1,3 +1,4 @@
+using SpaceGame.Recipes;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
 
@@ -9,8 +10,10 @@ namespace SpaceGame.Settings
         [Header("Info", order = 0)]
         [SerializeField] private float timeBetweenCleanup;
         [SerializeField] private SpaceObjectSpawnableInfo[] spaceObjects;
+        [SerializeField] private Recipe[] recipes;
 
         public float TimeBetweenCleanup => timeBetweenCleanup;
         public SpaceObjectSpawnableInfo[] SpaceObjectsToSpawn => this.spaceObjects;
+        public Recipe[] Recipes => this.recipes;
     }
 }

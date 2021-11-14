@@ -485,6 +485,7 @@ namespace SpaceGame
                     print($"Clean Routine - Cleaned {objectsToRemove.Count}");
                 }
 
+                // Clear list for next check
                 objectsToRemove.Clear();
             }
         }
