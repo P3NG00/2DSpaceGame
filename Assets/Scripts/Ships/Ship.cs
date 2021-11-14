@@ -22,6 +22,7 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srBody;
         [SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
+        [SerializeField] private ParticleSystem particlesBooster;
         // [SerializeField] private ParticleSystem particlesApplyForce; // TODO implement
 
         [Header("Cheats", order = 95)]
@@ -33,6 +34,7 @@ namespace SpaceGame.Ships
 
         // Private cache
         private bool isFiring = false;
+        private bool applyForce = false;
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
         private GameObject itemObjectToDestroy = null;
@@ -65,6 +67,7 @@ namespace SpaceGame.Ships
         public Vector2 Position => this.transform.position;
         public bool IsAlive => this.health > 0f;
         public bool IsUsing => this.routineUsing != null;
+        public bool IsApplyingForce => this.applyForce;
         public bool IsFiring
         {
             get => this.isFiring;
@@ -113,9 +116,46 @@ namespace SpaceGame.Ships
 
         protected virtual void FixedUpdate()
         {
-            this.animator.SetBool("Drag", this.rigidbody.drag == this.shipInfo.Drag);
-            this.effectList.RemoveTimeFromAll(Time.deltaTime);
+            // Cap Ship Movement
+            if (this.Rigidbody.velocity.magnitude > this.MaxMagnitude)
+            {
+                // Slow player if moving too fast
+                this.ApplyDrag(true, 0.3f);
+            }
 
+            // Update drag
+            this.animator.SetBool("Drag", this.rigidbody.drag == this.shipInfo.Drag);
+
+            // Apply force
+            ParticleSystem.EmissionModule emission = this.particlesBooster.emission;
+
+            if (this.IsAlive && this.applyForce)
+            {
+                emission.enabled = true;
+                Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
+                this.rigidbody.AddForce(velocity, ForceMode2D.Impulse);
+                velocity = this.rigidbody.velocity;
+
+                float maxMagnitude = this.shipInfo.MaxMagnitude;
+
+                if (this.IsBoosting)
+                {
+                    maxMagnitude += this.shipInfo.BoostMagnitude;
+                }
+
+                if (this.effectList.HasEffect(Enums.Effect.Ice))
+                {
+                    // TODO enable icy color overlay or something
+                    maxMagnitude *= 0.5f; // TODO change ice scaling
+                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.deltaTime);
+                }
+            }
+            else
+            {
+                emission.enabled = false;
+            }
+
+            // Apply effects
             if (this.effectList.HasEffect(Enums.Effect.Fire))
             {
                 this.Damage(Time.deltaTime, Enums.DamageType.Fire, null);
@@ -141,29 +181,7 @@ namespace SpaceGame.Ships
 
         public void RotateToLookAt(Vector2 pos) => this.Rotate(this.GetRotationToLookAt(pos));
 
-        public void ApplyForce()
-        {
-            if (this.IsAlive)
-            {
-                Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
-                this.rigidbody.AddForce(velocity, ForceMode2D.Impulse);
-                velocity = this.rigidbody.velocity;
-
-                float maxMagnitude = this.shipInfo.MaxMagnitude;
-
-                if (this.IsBoosting)
-                {
-                    maxMagnitude += this.shipInfo.BoostMagnitude;
-                }
-
-                if (this.effectList.HasEffect(Enums.Effect.Ice))
-                {
-                    // TODO enable icy color overlay or something
-                    maxMagnitude *= 0.5f; // TODO change ice scaling
-                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.deltaTime);
-                }
-            }
-        }
+        public void ApplyForce(bool enable) => this.applyForce = enable;
 
         public void Rotate(float rotation)
         {

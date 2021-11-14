@@ -81,11 +81,7 @@ namespace SpaceGame.Ships
                 }
             }
 
-            if (!drag && applyForce && !this.DEBUG_FROZEN)
-            {
-                this.ApplyForce();
-            }
-
+            this.ApplyForce(!drag && applyForce && !this.DEBUG_FROZEN);
             this.IsFiring = firing;
             this.ApplyDrag(drag);
         }

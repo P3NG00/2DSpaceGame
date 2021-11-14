@@ -102,6 +102,11 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 9081723669094372411, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
   m_PrefabInstance: {fileID: 2706083039396350413}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &4891462071503646665 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7380281557273585156, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
+  m_PrefabInstance: {fileID: 2706083039396350413}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6297611490859889063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +127,7 @@ MonoBehaviour:
   srBody: {fileID: 4858918682580644960}
   srTip: {fileID: 6594733993978846710}
   animator: {fileID: 1794551259763634514}
+  particlesBooster: {fileID: 4891462071503646665}
   Invincible: 0
   FORCE_VALIDATE: 0
   FROZEN: 0

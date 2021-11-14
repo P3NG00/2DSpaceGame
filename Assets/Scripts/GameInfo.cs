@@ -1,3 +1,4 @@
+using Microsoft.Win32.SafeHandles;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,8 +17,6 @@ namespace SpaceGame
 {
     public sealed class GameInfo : MonoBehaviour
     {
-        public const string Title = "2D Space Game";
-
         #region Singleton Instance
         private static GameInfo instance = null;
 
@@ -74,8 +73,6 @@ namespace SpaceGame
 
         // Cache
         private List<SpaceObject> spaceObjects = new List<SpaceObject>();
-        private bool inputApplyForce = false;
-        private bool inputSlowDown = false;
         private float inputRotation = 0f;
         private Vector2 inputMousePosition = Vector2.zero;
         private Vector2 inputDirection = Vector2.zero;
@@ -123,25 +120,6 @@ namespace SpaceGame
         // Unity Update method
         private void FixedUpdate()
         {
-            // Player Movement
-            if (this.player.Rigidbody.velocity.magnitude > this.player.MaxMagnitude)
-            {
-                // Slow player if moving too fast
-                this.player.ApplyDrag(true, 0.3f);
-            }
-            else
-            {
-                // Set player drag
-                this.player.ApplyDrag(this.inputSlowDown);
-
-                // If not applying drag and is applying force...
-                if (!this.inputSlowDown & this.inputApplyForce)
-                {
-                    // Apply force
-                    this.player.ApplyForce();
-                }
-            }
-
             // Rotate Player
             switch (this.rotationType)
             {
@@ -161,7 +139,7 @@ namespace SpaceGame
             }
 
             // Update Player Animator
-            this.player.AnimatorPlayer.SetBool("Moving", this.inputApplyForce);
+            this.player.AnimatorPlayer.SetBool("Moving", this.player.IsApplyingForce);
 
             // Update Info Panel Text
             this.textInfoPanel.text =
@@ -496,7 +474,7 @@ namespace SpaceGame
         #endregion
 
         #region Input Callbacks
-        public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.inputApplyForce = ctx.performed;
+        public void CallbackInput_AddForce(InputAction.CallbackContext ctx) => this.player.ApplyForce(ctx.performed);
         public void CallbackInput_AimAtMouse(InputAction.CallbackContext ctx)
         {
             this.rotationType = Enums.RotationType.AimAtMouse;
@@ -527,7 +505,7 @@ namespace SpaceGame
             this.inputRotation = ctx.ReadValue<float>();
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
-        public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.inputSlowDown = ctx.performed;
+        public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.player.ApplyDrag(ctx.performed);
         public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
         {
             ItemStack hotbarStack = this.selectedHotbar.ItemStack;
