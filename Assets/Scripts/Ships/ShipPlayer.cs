@@ -20,6 +20,7 @@ namespace SpaceGame.Ships
         //  - ships
         //  - crafting stations
         //  - etc.
+        // and should probably be able to pickup items within this distance
 
         private float timeCanRegenAfter = 0f;
 

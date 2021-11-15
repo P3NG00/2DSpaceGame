@@ -64,7 +64,11 @@ namespace SpaceGame.Ships
             {
                 float rotation = this.GetRotationToLookAt((Vector2)target);
 
-                print(rotation);
+                // TODO sort out the below functions, i believe this was here for testing
+                if (GameInfo.DEBUG_LOG)
+                {
+                    print(rotation);
+                }
 
                 // this was added to help direct the ship towards the target
                 // this will need to be replaced as the ship can still orbit the target

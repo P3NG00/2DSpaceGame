@@ -99,7 +99,7 @@ MonoBehaviour:
   slotWeapon: {fileID: 0}
   slotDefense: {fileID: 0}
   doDebugRays: 1
-  doDebugLog: 0
+  doDebugLog: 1
 --- !u!114 &3068602627571150779
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,23 +25,21 @@ MonoBehaviour:
   maxAngularVelocity: 90
   damageScaleCollision: 0.5
   damageScaleWeapon: 0.75
+  effects:
+    effects: []
   prefabSpaceObjects:
   - {fileID: 1964630122336401675, guid: 9647459fe9f79b04aae7c6f0568c310f, type: 3}
   - {fileID: 7411326359078354067, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 3474638696787253111, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
-  - item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
-    weight: 5
-    minAmount: 6
-    maxVariance: 4
-  - item: {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
-    weight: 4
-    minAmount: 4
-    maxVariance: 6
   - item: {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
-    weight: 3
+    weight: 1
     minAmount: 6
-    maxVariance: 8
+    maxVariance: 5
+  - item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
+    weight: 8
+    minAmount: 7
+    maxVariance: 4
   distanceSpawn: 75
   widthSpawn: 200
   scaleSpawnRate: 0.05

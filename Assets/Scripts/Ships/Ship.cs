@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using SpaceGame.Effects;
 using SpaceGame.Items;
@@ -23,7 +22,6 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
         [SerializeField] private ParticleSystem particlesBooster;
-        // [SerializeField] private ParticleSystem particlesApplyForce; // TODO implement
 
         [Header("Cheats", order = 95)]
         public bool Invincible;
@@ -147,7 +145,6 @@ namespace SpaceGame.Ships
                 {
                     // TODO enable icy color overlay or something
                     maxMagnitude *= 0.5f; // TODO change ice scaling
-                    this.effectList.AddEffectTime(Enums.Effect.Ice, -Time.deltaTime);
                 }
             }
             else

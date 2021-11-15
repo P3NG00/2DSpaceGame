@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5f2baef68cc50746b0b1fe97ef21ed0, type: 3}
-  m_Name: Space Object Rock
+  m_Name: Space Object Wood
   m_EditorClassIdentifier: 
-  tagName: Space Rock
-  color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+  tagName: Space Wood
+  color: {r: 0.45490196, g: 0.30588236, b: 0.15686275, a: 1}
   distanceMax: 200
   destroyMissile: 1
   minSpawnScale: 3.5
-  maxSpawnScale: 6
-  destroyBelowScale: 3.5
-  minVelocity: 2
-  maxVelocity: 25
-  minAngularVelocity: 10
+  maxSpawnScale: 7
+  destroyBelowScale: 2
+  minVelocity: 5
+  maxVelocity: 30
+  minAngularVelocity: 30
   maxAngularVelocity: 180
-  damageScaleCollision: 0.75
-  damageScaleWeapon: 1
+  damageScaleCollision: 0.8
+  damageScaleWeapon: 1.2
   effects:
     effects: []
   prefabSpaceObjects:
@@ -32,21 +32,15 @@ MonoBehaviour:
   - {fileID: 7411326359078354067, guid: 54e982048e29651428566b47da96f37d, type: 3}
   - {fileID: 3474638696787253111, guid: d6400e5fedbbd6d4283ff9bc51b01291, type: 3}
   itemDrops:
-  - item: {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
-    weight: 5
-    minAmount: 5
-    maxVariance: 2
-  - item: {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
-    weight: 2
-    minAmount: 3
+  - item: {fileID: 11400000, guid: c3c6ccfb78a892d459a1a72bc2076041, type: 2}
+    weight: 1
+    minAmount: 8
     maxVariance: 5
-  distanceSpawn: 75
-  widthSpawn: 200
-  scaleSpawnRate: 0.075
-  timeBetweenChance: 0.55
-  chanceSpawn: 0.35
-  scaleMissileDamage: 0.15
-  scaleMissileImpactForce: 1
+  distanceSpawn: 80
+  widthSpawn: 150
+  scaleSpawnRate: 0.1
+  timeBetweenChance: 2
+  chanceSpawn: 0.6
   spawnRateType: 1
-  spawnAreaType: 2
-  debugAnnounceSpawn: 0
+  spawnAreaType: 1
+  debugAnnounceSpawn: 1
