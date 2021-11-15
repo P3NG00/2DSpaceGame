@@ -181,8 +181,6 @@ namespace SpaceGame.Ships
 
         public void RotateToLookAt(Vector2 pos) => this.Rotate(this.GetRotationToLookAt(pos));
 
-        public void ApplyForce(bool enable) => this.applyForce = enable;
-
         public void Rotate(float rotation)
         {
             if (this.IsAlive)
@@ -191,6 +189,8 @@ namespace SpaceGame.Ships
                 this.rigidbody.AddTorque(r);
             }
         }
+
+        public void ApplyForce(bool enable) => this.applyForce = enable;
 
         public void ApplyDrag(bool drag, float scale = 1f)
         {
