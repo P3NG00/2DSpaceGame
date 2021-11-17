@@ -33,6 +33,7 @@ namespace SpaceGame.Ships
         // Private cache
         private bool isFiring = false;
         private bool applyForce = false;
+        private bool applyDrag = false;
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
         private GameObject itemObjectToDestroy = null;
@@ -115,10 +116,18 @@ namespace SpaceGame.Ships
         protected virtual void FixedUpdate()
         {
             // Cap Ship Movement
-            if (this.Rigidbody.velocity.magnitude > this.MaxMagnitude)
+            if (this.applyDrag)
+            {
+                this.rigidbody.drag = this.shipInfo.Drag;
+            }
+            else if (this.Rigidbody.velocity.magnitude > this.MaxMagnitude)
             {
                 // Slow player if moving too fast
-                this.ApplyDrag(true, 0.3f);
+                this.rigidbody.drag = this.shipInfo.Drag * 0.25f; // TODO mess with player slow down drag scaling for smooth effect
+            }
+            else
+            {
+                this.rigidbody.drag = 0f;
             }
 
             // Update drag
@@ -187,15 +196,9 @@ namespace SpaceGame.Ships
             }
         }
 
-        public void ApplyForce(bool enable) => this.applyForce = enable;
+        public void ApplyForce(bool force) => this.applyForce = force;
 
-        public void ApplyDrag(bool drag, float scale = 1f)
-        {
-            if (this.IsAlive)
-            {
-                this.rigidbody.drag = drag ? this.ShipInfo.Drag * scale : 0f;
-            }
-        }
+        public void ApplyDrag(bool drag) => this.applyDrag = drag;
 
         public void Heal(float amount)
         {
