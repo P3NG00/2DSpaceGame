@@ -409,12 +409,12 @@ namespace SpaceGame
                 {
                     // Spawn Space Object
                     Transform transformPlayer = this.player.transform;
-                    Vector2 spawnOffset, spawnPos = transformPlayer.position;
+                    Vector2 spawnPos = transformPlayer.position;
 
                     switch (soss.SpawnAreaType)
                     {
                         case Enums.SpaceObjectSpawnAreaType.FrontOfPlayer:
-                            spawnOffset = transformPlayer.up * soss.RandomSpawnDistance;
+                            Vector2 spawnOffset = transformPlayer.up * soss.RandomSpawnDistance;
                             spawnOffset += (Vector2)transformPlayer.right * soss.RandomSpawnWidth;
                             spawnPos += spawnOffset;
                             break;
@@ -456,7 +456,7 @@ namespace SpaceGame
                 }
 
                 // Remove Space Objects
-                objectsToRemove.ForEach(so => DestroySpaceObject(so));
+                objectsToRemove.ForEach(DestroySpaceObject);
 
                 if (GameInfo.DEBUG_LOG)
                 {
