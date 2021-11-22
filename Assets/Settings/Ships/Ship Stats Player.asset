@@ -21,3 +21,4 @@ MonoBehaviour:
   scaleMissileDamage: 0.5
   maxMagnitude: 100
   boostMagnitude: 50
+  boostSoundTimeBetween: 0.25

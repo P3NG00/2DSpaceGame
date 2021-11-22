@@ -22,6 +22,7 @@ namespace SpaceGame.Ships
         [SerializeField] private SpriteRenderer srTip;
         [SerializeField] private Animator animator;
         [SerializeField] private ParticleSystem particlesBooster;
+        [SerializeField] private AudioSource audioSource;
 
         [Header("Cheats", order = 95)]
         public bool Invincible;
@@ -36,6 +37,7 @@ namespace SpaceGame.Ships
         private bool applyDrag = false;
         private Coroutine routineFiring = null;
         private Coroutine routineUsing = null;
+        private Coroutine routineBoostSound = null;
         private GameObject itemObjectToDestroy = null;
         private EffectList effectList = new EffectList();
 
@@ -138,6 +140,11 @@ namespace SpaceGame.Ships
 
             if (this.IsAlive && this.applyForce)
             {
+                if (this.routineBoostSound == null)
+                {
+                    this.routineBoostSound = StartCoroutine(this.RoutineBoostSound());
+                }
+
                 emission.enabled = true;
                 Vector2 velocity = this.transform.up * this.shipInfo.MultiplierForce * Time.deltaTime;
                 this.rigidbody.AddForce(velocity, ForceMode2D.Impulse);
@@ -158,6 +165,12 @@ namespace SpaceGame.Ships
             }
             else
             {
+                if (this.routineBoostSound != null)
+                {
+                    StopCoroutine(this.routineBoostSound);
+                    this.routineBoostSound = null;
+                }
+
                 emission.enabled = false;
             }
 
@@ -284,6 +297,17 @@ namespace SpaceGame.Ships
                 this.StopCoroutine(this.routineUsing);
                 this.routineUsing = null;
             }
+        }
+
+        private IEnumerator RoutineBoostSound()
+        {
+            while (this.IsAlive)
+            {
+                GameInfo.SoundManager.PlayBooster(this.audioSource);
+                yield return new WaitForSeconds(this.shipInfo.BoostSoundTimeBetween);
+            }
+
+            this.routineBoostSound = null;
         }
 
         public abstract ItemInfoWeapon GetWeapon();

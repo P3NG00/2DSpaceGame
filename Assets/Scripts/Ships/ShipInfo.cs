@@ -15,6 +15,7 @@ namespace SpaceGame.Ships
         [SerializeField, Min(0f)] private float scaleMissileDamage;
         [SerializeField, Min(0f)] private float maxMagnitude;
         [SerializeField] private float boostMagnitude;
+        [SerializeField] private float boostSoundTimeBetween;
 
         public Color ColorPrimary => this.colorPrimary;
         public Color ColorSecondary => this.colorSecondary;
@@ -25,5 +26,6 @@ namespace SpaceGame.Ships
         public float ScaleMissileDamage => this.scaleMissileDamage;
         public float MaxMagnitude => this.maxMagnitude;
         public float BoostMagnitude => this.boostMagnitude;
+        public float BoostSoundTimeBetween => this.boostSoundTimeBetween;
     }
 }

@@ -101,6 +101,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: -4797891666044438369, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
   m_PrefabInstance: {fileID: 1978245223488322083}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4102436113702459656 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2565614057337545515, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
+  m_PrefabInstance: {fileID: 1978245223488322083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6093633509007220222 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5756951523299469277, guid: 222527c694413a54b8e8b17ca2077bda, type: 3}
@@ -142,6 +147,7 @@ MonoBehaviour:
   srTip: {fileID: 7312966202391981592}
   animator: {fileID: 2746726828944081596}
   particlesBooster: {fileID: 9013995842432588839}
+  audioSource: {fileID: 4102436113702459656}
   Invincible: 0
   FORCE_VALIDATE: 0
   FROZEN: 0

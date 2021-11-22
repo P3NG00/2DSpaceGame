@@ -55,10 +55,9 @@ namespace SpaceGame.SpaceObjects
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            if (this.alive)
+            if (this.alive && collision.relativeVelocity.magnitude > 10f) // TODO this "10f" can be changed if sounds arent happening at low velocity
             {
                 Vector2 cameraPoint = Camera.main.WorldToViewportPoint(collision.contacts[0].point);
-                print(cameraPoint);
 
                 // If point within camera view...
                 if (cameraPoint.x > 0f && cameraPoint.x < 1f && cameraPoint.y > 0f && cameraPoint.y < 1f)

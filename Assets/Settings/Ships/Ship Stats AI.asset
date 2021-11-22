@@ -21,5 +21,6 @@ MonoBehaviour:
   scaleMissileDamage: 1
   maxMagnitude: 50
   boostMagnitude: 50
+  boostSoundTimeBetween: 0.02
   distanceStopFromTarget: 20
   distanceFireAtTarget: 50
