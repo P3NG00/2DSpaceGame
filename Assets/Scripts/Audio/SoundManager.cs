@@ -18,7 +18,9 @@ namespace SpaceGame.Audio
         [SerializeField] private AudioClip[] clipsCollision;
         [SerializeField] private AudioClip[] clipsMissile;
 
-        public void PlayCollision(AudioSource audioSource) => audioSource.PlayOneShot(this.clipsCollision[Random.Range(0, this.clipsCollision.Length)], this.volumeCollision);
-        public void PlayMissile(AudioSource audioSource) => audioSource.PlayOneShot(this.clipsMissile[Random.Range(0, this.clipsMissile.Length)], this.volumeMissile);
+        public void PlayCollision(AudioSource audioSource) => this.PlaySound(audioSource, this.clipsCollision, this.volumeCollision);
+        public void PlayMissile(AudioSource audioSource) => this.PlaySound(audioSource, this.clipsMissile, this.volumeMissile);
+
+        private void PlaySound(AudioSource audioSource, AudioClip[] clips, float volume) => audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)], volume);
     }
 }
