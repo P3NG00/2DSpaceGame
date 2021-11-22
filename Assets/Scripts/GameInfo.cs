@@ -489,7 +489,6 @@ namespace SpaceGame
         }
         public void CallbackInput_Boost(InputAction.CallbackContext ctx) => this.player.IsBoosting = ctx.performed;
         public void CallbackInput_CheatMenu(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => Util.ToggleActive(this.parentCheatMenu));
-        public void CallbackInput_Exit(InputAction.CallbackContext ctx) => Application.Quit();
         public void CallbackInput_Fire(InputAction.CallbackContext ctx) => this.player.IsFiring = ctx.performed;
         public void CallbackInput_Hotbar1(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(0));
         public void CallbackInput_Hotbar2(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectHotbar(1));
@@ -507,6 +506,14 @@ namespace SpaceGame
             this.inputRotation = ctx.ReadValue<float>();
         }
         public void CallbackInput_SelectSlot(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () => GameInfo.SelectSlot(this.hoverSlot));
+        public void CallbackInput_Settings(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
+        {
+            // TODO togggle settings menu
+            // settings menu should have audio sliders
+
+            // Toggle time scale (pause/unpause)
+            Time.timeScale = Time.timeScale == 1f ? 0f : 1f;
+        });
         public void CallbackInput_SlowDown(InputAction.CallbackContext ctx) => this.player.ApplyDrag(ctx.performed);
         public void CallbackInput_UseItem(InputAction.CallbackContext ctx) => OnButtonPress(ctx, () =>
         {

@@ -59,14 +59,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""962cd95c-12ca-4046-be24-364f014dec43"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""bf94d510-7c98-43c0-a0a4-21f7c345335e"",
@@ -166,6 +158,14 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""name"": ""Select Slot"",
                     ""type"": ""Button"",
                     ""id"": ""ff35ade7-1265-456f-b404-544e6e65b5da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Settings"",
+                    ""type"": ""Button"",
+                    ""id"": ""962cd95c-12ca-4046-be24-364f014dec43"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -303,17 +303,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""Cheat Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""302db301-833e-43ce-ac4b-14c393937e4b"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard + Mouse"",
-                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -459,6 +448,17 @@ public class @InputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""302db301-833e-43ce-ac4b-14c393937e4b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard + Mouse"",
+                    ""action"": ""Settings"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -489,7 +489,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_AimInDirection = m_Input.FindAction("Aim In Direction", throwIfNotFound: true);
         m_Input_Boost = m_Input.FindAction("Boost", throwIfNotFound: true);
         m_Input_CheatMenu = m_Input.FindAction("Cheat Menu", throwIfNotFound: true);
-        m_Input_Exit = m_Input.FindAction("Exit", throwIfNotFound: true);
         m_Input_Fire = m_Input.FindAction("Fire", throwIfNotFound: true);
         m_Input_Hotbar1 = m_Input.FindAction("Hotbar 1", throwIfNotFound: true);
         m_Input_Hotbar2 = m_Input.FindAction("Hotbar 2", throwIfNotFound: true);
@@ -503,6 +502,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         m_Input_MenuUp = m_Input.FindAction("Menu Up", throwIfNotFound: true);
         m_Input_Rotate = m_Input.FindAction("Rotate", throwIfNotFound: true);
         m_Input_SelectSlot = m_Input.FindAction("Select Slot", throwIfNotFound: true);
+        m_Input_Settings = m_Input.FindAction("Settings", throwIfNotFound: true);
         m_Input_SlowDown = m_Input.FindAction("Slow Down", throwIfNotFound: true);
         m_Input_UseItem = m_Input.FindAction("Use Item", throwIfNotFound: true);
         m_Input_Debug = m_Input.FindAction("Debug", throwIfNotFound: true);
@@ -560,7 +560,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_AimInDirection;
     private readonly InputAction m_Input_Boost;
     private readonly InputAction m_Input_CheatMenu;
-    private readonly InputAction m_Input_Exit;
     private readonly InputAction m_Input_Fire;
     private readonly InputAction m_Input_Hotbar1;
     private readonly InputAction m_Input_Hotbar2;
@@ -574,6 +573,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
     private readonly InputAction m_Input_MenuUp;
     private readonly InputAction m_Input_Rotate;
     private readonly InputAction m_Input_SelectSlot;
+    private readonly InputAction m_Input_Settings;
     private readonly InputAction m_Input_SlowDown;
     private readonly InputAction m_Input_UseItem;
     private readonly InputAction m_Input_Debug;
@@ -586,7 +586,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @AimInDirection => m_Wrapper.m_Input_AimInDirection;
         public InputAction @Boost => m_Wrapper.m_Input_Boost;
         public InputAction @CheatMenu => m_Wrapper.m_Input_CheatMenu;
-        public InputAction @Exit => m_Wrapper.m_Input_Exit;
         public InputAction @Fire => m_Wrapper.m_Input_Fire;
         public InputAction @Hotbar1 => m_Wrapper.m_Input_Hotbar1;
         public InputAction @Hotbar2 => m_Wrapper.m_Input_Hotbar2;
@@ -600,6 +599,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         public InputAction @MenuUp => m_Wrapper.m_Input_MenuUp;
         public InputAction @Rotate => m_Wrapper.m_Input_Rotate;
         public InputAction @SelectSlot => m_Wrapper.m_Input_SelectSlot;
+        public InputAction @Settings => m_Wrapper.m_Input_Settings;
         public InputAction @SlowDown => m_Wrapper.m_Input_SlowDown;
         public InputAction @UseItem => m_Wrapper.m_Input_UseItem;
         public InputAction @Debug => m_Wrapper.m_Input_Debug;
@@ -627,9 +627,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @CheatMenu.started -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
                 @CheatMenu.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
                 @CheatMenu.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnCheatMenu;
-                @Exit.started -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnExit;
                 @Fire.started -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnFire;
@@ -669,6 +666,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SelectSlot.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
                 @SelectSlot.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
                 @SelectSlot.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSelectSlot;
+                @Settings.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSettings;
+                @Settings.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSettings;
+                @Settings.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSettings;
                 @SlowDown.started -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_InputActionsCallbackInterface.OnSlowDown;
@@ -697,9 +697,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @CheatMenu.started += instance.OnCheatMenu;
                 @CheatMenu.performed += instance.OnCheatMenu;
                 @CheatMenu.canceled += instance.OnCheatMenu;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
@@ -739,6 +736,9 @@ public class @InputSystem : IInputActionCollection, IDisposable
                 @SelectSlot.started += instance.OnSelectSlot;
                 @SelectSlot.performed += instance.OnSelectSlot;
                 @SelectSlot.canceled += instance.OnSelectSlot;
+                @Settings.started += instance.OnSettings;
+                @Settings.performed += instance.OnSettings;
+                @Settings.canceled += instance.OnSettings;
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
@@ -768,7 +768,6 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnAimInDirection(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnCheatMenu(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnHotbar1(InputAction.CallbackContext context);
         void OnHotbar2(InputAction.CallbackContext context);
@@ -782,6 +781,7 @@ public class @InputSystem : IInputActionCollection, IDisposable
         void OnMenuUp(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnSelectSlot(InputAction.CallbackContext context);
+        void OnSettings(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnDebug(InputAction.CallbackContext context);

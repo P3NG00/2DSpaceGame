@@ -340,7 +340,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5258815394248899773}
         m_TargetAssemblyTypeName: SpaceGame.GameInfo, Assembly-CSharp
-        m_MethodName: CallbackInput_Exit
+        m_MethodName: CallbackInput_Settings
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

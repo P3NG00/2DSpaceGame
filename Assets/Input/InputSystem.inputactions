@@ -46,14 +46,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Exit",
-                    "type": "Button",
-                    "id": "962cd95c-12ca-4046-be24-364f014dec43",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "bf94d510-7c98-43c0-a0a4-21f7c345335e",
@@ -153,6 +145,14 @@
                     "name": "Select Slot",
                     "type": "Button",
                     "id": "ff35ade7-1265-456f-b404-544e6e65b5da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Settings",
+                    "type": "Button",
+                    "id": "962cd95c-12ca-4046-be24-364f014dec43",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -290,17 +290,6 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Cheat Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "302db301-833e-43ce-ac4b-14c393937e4b",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard + Mouse",
-                    "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -444,6 +433,17 @@
                     "processors": "",
                     "groups": "Keyboard + Mouse",
                     "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "302db301-833e-43ce-ac4b-14c393937e4b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Settings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
