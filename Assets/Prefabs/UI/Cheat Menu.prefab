@@ -191,25 +191,19 @@ MonoBehaviour:
   uiArrayWidth: 5
   yStart: 90
   cheatMenuItems:
-  - {fileID: 11400000, guid: 5a4ed80afa4872d4cbbc71149a8fe283, type: 2}
-  - {fileID: 11400000, guid: 12d4719f9fa635c48b9c52d1bb59ff66, type: 2}
-  - {fileID: 11400000, guid: 1e47bc25f918b7c4c8ed34be3afffc94, type: 2}
   - {fileID: 11400000, guid: 8da73882f2f4bd740b1f666c3dc00c45, type: 2}
-  - {fileID: 11400000, guid: 2cc1c85d90eed354fb2b93f0944a45e5, type: 2}
-  - {fileID: 11400000, guid: 9d16f728f6454e740a5a760084cd9be2, type: 2}
-  - {fileID: 11400000, guid: 1623b427a9f3b864899f72d1a3f2739f, type: 2}
-  - {fileID: 11400000, guid: a508c20830bcb37439b701b387960ed6, type: 2}
   - {fileID: 11400000, guid: fbb83dfccd911714c9dc5930a5e5921e, type: 2}
-  - {fileID: 11400000, guid: 5606934a5271f7b42980022c661c62e4, type: 2}
   - {fileID: 11400000, guid: 086c09633ee9e554e88a092484401939, type: 2}
   - {fileID: 11400000, guid: 3b64f83b1b1ba97428026d1d42f9f48a, type: 2}
   - {fileID: 11400000, guid: 326b7f711c0dd954aa88bc535332c36e, type: 2}
   - {fileID: 11400000, guid: c0e523bbc93a83f4eababcef585dbc50, type: 2}
   - {fileID: 11400000, guid: ba2a8b18e22c6fa4c9ce6dcec128f463, type: 2}
+  - {fileID: 11400000, guid: adfd3bd029b40464886c7a1d1f0f6548, type: 2}
   startPos: {x: 300, y: 135}
   spawnables:
   - {fileID: 11400000, guid: 0cc34474b1ab9924baf41c71118aa562, type: 2}
   - {fileID: 11400000, guid: 90c12bd977c91154fb28eeff5b5cd35c, type: 2}
+  - {fileID: 11400000, guid: a42031c11497b474890b72298bab64f2, type: 2}
   - {fileID: 11400000, guid: 4b163d7379f6609438eb2345c9d7f64f, type: 2}
   cheatSlotPrefab: {fileID: 4681363520008523959, guid: 0238204fdac4c3e49955f9ff29135ceb, type: 3}
   spawnSlotPrefab: {fileID: 3646467449052974059, guid: fb867a2a79a1a264181232aa797de939, type: 3}
