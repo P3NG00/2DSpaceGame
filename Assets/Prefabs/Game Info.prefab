@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5258815394248899772}
   - component: {fileID: 5258815394248899773}
-  - component: {fileID: 3068602627571150779}
   - component: {fileID: 5079558678042916700}
+  - component: {fileID: 3353708262466513690}
+  - component: {fileID: 3068602627571150779}
   m_Layer: 0
   m_Name: Game Info
   m_TagString: Untagged
@@ -98,8 +99,42 @@ MonoBehaviour:
   slotsHotbar: []
   slotWeapon: {fileID: 0}
   slotDefense: {fileID: 0}
+  soundManager: {fileID: 3353708262466513690}
   doDebugRays: 1
   doDebugLog: 1
+--- !u!114 &5079558678042916700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258815394248899770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1916fada528348c479df876843a9b75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes: []
+--- !u!114 &3353708262466513690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258815394248899770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7484b28f621f0640a25f1f60cd1bc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeCollision: 0.05
+  volumeMissile: 1
+  clipsCollision:
+  - {fileID: 8300000, guid: 91b75a86c8252fc47a895fdaa948859a, type: 3}
+  - {fileID: 8300000, guid: 047a748f1fa42cd488cfdd0e2eebd471, type: 3}
+  - {fileID: 8300000, guid: a75470b8d05ea7549a1051a3c8fd22c5, type: 3}
+  clipsMissile:
+  - {fileID: 8300000, guid: 3bdeafc770f2df64789a6eba12c609da, type: 3}
 --- !u!114 &3068602627571150779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,16 +517,3 @@ MonoBehaviour:
   m_DefaultActionMap: Input
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5079558678042916700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5258815394248899770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1916fada528348c479df876843a9b75e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipes: []

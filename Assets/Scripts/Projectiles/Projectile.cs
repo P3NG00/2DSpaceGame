@@ -1,4 +1,3 @@
-using SpaceGame.Effects;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
@@ -10,11 +9,14 @@ namespace SpaceGame.Projectiles
         [Header("References [Projectile]", order = 95)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private AudioSource audioSource;
 
         private ProjectileInfo projectileInfo;
         private Ship sourceShip;
 
         private bool alive = true;
+
+        private void Start() => GameInfo.SoundManager.PlayMissile(this.audioSource);
 
         public static Projectile Create(ProjectileInfo projectileInfo, Ship source)
         {

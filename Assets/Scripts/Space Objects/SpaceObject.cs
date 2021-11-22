@@ -10,6 +10,7 @@ namespace SpaceGame.SpaceObjects
         [Header("References [SpaceObject]", order = 99)]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private AudioSource audioSource;
 
         // Private Cache
         private bool alive = true;
@@ -51,5 +52,7 @@ namespace SpaceGame.SpaceObjects
         private void Start() => this.SpriteRenderer.color = this.GetColor();
 
         protected virtual Color GetColor() => this.SpaceObjectInfo.Color;
+
+        protected virtual void OnCollisionEnter2D(Collision2D collision) => GameInfo.SoundManager.PlayCollision(this.audioSource);
     }
 }

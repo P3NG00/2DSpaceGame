@@ -11,6 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using SpaceGame.Audio;
 
 namespace SpaceGame
 {
@@ -65,6 +66,7 @@ namespace SpaceGame
         [SerializeField] private UIInventorySlot[] slotsHotbar;
         [SerializeField] private UIInventorySlot slotWeapon;
         [SerializeField] private UIInventorySlot slotDefense;
+        [SerializeField] private SoundManager soundManager;
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool doDebugRays;
@@ -90,6 +92,7 @@ namespace SpaceGame
         public static UIInventorySlot SlotWeapon => GameInfo.instance.slotWeapon;
         public static UIInventorySlot SlotDefense => GameInfo.instance.slotDefense;
         public static GameObject ParentCheatMenu => GameInfo.instance.parentCheatMenu;
+        public static SoundManager SoundManager => GameInfo.instance.soundManager;
 
         // Tags
         public static string TagShip => GameInfo.instance.tagShip;
