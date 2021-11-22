@@ -6382,6 +6382,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1030487775}
     - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
+      propertyPath: doDebugLog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258815394248899773, guid: b943ff55725d0e5438cc4c81173b0eb3, type: 3}
       propertyPath: slotWeapon
       value: 
       objectReference: {fileID: 1791152925}

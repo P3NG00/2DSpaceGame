@@ -8,6 +8,10 @@ namespace SpaceGame.Audio
         // that includes background music
         // connect to in-game interface
 
+        // TODO switch everything that makes sound create a
+        // new object to play the sound so the object that might
+        // get destroyed doesn't stop playing the sound once destroyed
+
         [Header("Info [SoundManager]", order = 0)]
         [SerializeField, Range(0f, 1f)] private float volumeCollision = 1f;
         [SerializeField, Range(0f, 1f)] private float volumeMissile = 1f;

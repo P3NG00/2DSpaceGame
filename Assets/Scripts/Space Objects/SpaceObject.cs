@@ -53,6 +53,20 @@ namespace SpaceGame.SpaceObjects
 
         protected virtual Color GetColor() => this.SpaceObjectInfo.Color;
 
-        protected virtual void OnCollisionEnter2D(Collision2D collision) => GameInfo.SoundManager.PlayCollision(this.audioSource);
+        protected virtual void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (this.alive)
+            {
+                Vector2 cameraPoint = Camera.main.WorldToViewportPoint(collision.contacts[0].point);
+                print(cameraPoint);
+
+                // If point within camera view...
+                if (cameraPoint.x > 0f && cameraPoint.x < 1f && cameraPoint.y > 0f && cameraPoint.y < 1f)
+                {
+                    // Play collision sound
+                    GameInfo.SoundManager.PlayCollision(this.audioSource);
+                }
+            }
+        }
     }
 }
