@@ -100,6 +100,7 @@ MonoBehaviour:
   slotWeapon: {fileID: 0}
   slotDefense: {fileID: 0}
   soundManager: {fileID: 3353708262466513690}
+  audioInstancePrefab: {fileID: -1578268682682225260, guid: 6decf8fcc70a9ac4da99373c7e67871e, type: 3}
   doDebugRays: 1
   doDebugLog: 1
 --- !u!114 &5079558678042916700
@@ -127,20 +128,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7484b28f621f0640a25f1f60cd1bc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeCollision: 0.05
-  clipsCollision:
-  - {fileID: 8300000, guid: 91b75a86c8252fc47a895fdaa948859a, type: 3}
-  - {fileID: 8300000, guid: 047a748f1fa42cd488cfdd0e2eebd471, type: 3}
-  - {fileID: 8300000, guid: a75470b8d05ea7549a1051a3c8fd22c5, type: 3}
-  volumeMissile: 1
-  clipsMissile:
-  - {fileID: 8300000, guid: 3bdeafc770f2df64789a6eba12c609da, type: 3}
-  volumeBooster: 0.02
-  clipsBooster:
-  - {fileID: 8300000, guid: 5ce17f4b48a135b4ea8acc49dfec88c6, type: 3}
-  - {fileID: 8300000, guid: dc7e5c96429ffbb4a950cfcf28e8545f, type: 3}
-  - {fileID: 8300000, guid: fec597bd0ff32e8488e1136eb0208ea3, type: 3}
-  - {fileID: 8300000, guid: 83b73e806518d044b8f577e30491c851, type: 3}
+  soundCollision:
+    volume: 0.05
+    clips:
+    - {fileID: 8300000, guid: 91b75a86c8252fc47a895fdaa948859a, type: 3}
+    - {fileID: 8300000, guid: 047a748f1fa42cd488cfdd0e2eebd471, type: 3}
+    - {fileID: 8300000, guid: a75470b8d05ea7549a1051a3c8fd22c5, type: 3}
+  soundMissile:
+    volume: 0.1
+    clips:
+    - {fileID: 8300000, guid: 3bdeafc770f2df64789a6eba12c609da, type: 3}
+  soundBooster:
+    volume: 0.02
+    clips:
+    - {fileID: 8300000, guid: 5ce17f4b48a135b4ea8acc49dfec88c6, type: 3}
+    - {fileID: 8300000, guid: dc7e5c96429ffbb4a950cfcf28e8545f, type: 3}
+    - {fileID: 8300000, guid: fec597bd0ff32e8488e1136eb0208ea3, type: 3}
+    - {fileID: 8300000, guid: 83b73e806518d044b8f577e30491c851, type: 3}
 --- !u!114 &3068602627571150779
 MonoBehaviour:
   m_ObjectHideFlags: 0

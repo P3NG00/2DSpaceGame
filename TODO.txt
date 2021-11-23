@@ -102,3 +102,9 @@ Electricity increases the amount of energy it takes to use energy,
 TODO make Spawnable an interface on Ships and SpaceObjects
 TODO replace GameMode Settings with Spawnables and add ships
 TODO make aggressive enemies spawn
+
+AUDIO WAS REWORKED
+make sure that
+SHIP BOOSTER AUDIO WORKS
+SHIP PROJECTILE AUDIO WORKS
+OBJECT COLLISION AUDIO WORKS

@@ -1,4 +1,5 @@
 using System.Collections;
+using SpaceGame.Audio;
 using SpaceGame.Effects;
 using SpaceGame.Items;
 using SpaceGame.SpaceObjects;
@@ -301,9 +302,11 @@ namespace SpaceGame.Ships
 
         private IEnumerator RoutineBoostSound()
         {
+            SoundManager soundManager = GameInfo.SoundManager;
+
             while (this.IsAlive)
             {
-                GameInfo.SoundManager.PlayBooster(this.audioSource);
+                soundManager.PlaySound(soundManager.SoundBooster, this.audioSource);
                 yield return new WaitForSeconds(this.shipInfo.BoostSoundTimeBetween);
             }
 

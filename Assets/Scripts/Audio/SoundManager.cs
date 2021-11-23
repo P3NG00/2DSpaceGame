@@ -8,25 +8,23 @@ namespace SpaceGame.Audio
         // that includes background music
         // connect to in-game interface
 
-        // TODO switch everything that makes sound create a
-        // new object to play the sound so the object that might
-        // get destroyed doesn't stop playing the sound once destroyed
-
         [Header("Info [SoundManager]", order = 0)]
+        [SerializeField] private SoundInfo soundCollision;
+        [SerializeField] private SoundInfo soundMissile;
+        [SerializeField] private SoundInfo soundBooster;
 
-        [SerializeField, Range(0f, 1f)] private float volumeCollision = 1f;
-        [SerializeField] private AudioClip[] clipsCollision;
+        public SoundInfo SoundCollision => this.soundCollision;
+        public SoundInfo SoundMissile => this.soundMissile;
+        public SoundInfo SoundBooster => this.soundBooster;
 
-        [SerializeField, Range(0f, 1f)] private float volumeMissile = 1f;
-        [SerializeField] private AudioClip[] clipsMissile;
+        public void PlaySound(SoundInfo soundInfo, Vector2 position)
+        {
+            AudioSource audioSource = Instantiate(GameInfo.AudioInstancePrefab, position, Quaternion.identity).AudioSource;
+            AudioClip clip = soundInfo.RandomClip;
+            audioSource.PlayOneShot(clip, soundInfo.Volume);
+            Destroy(audioSource.gameObject, clip.length);
+        }
 
-        [SerializeField, Range(0f, 1f)] private float volumeBooster = 1f;
-        [SerializeField] private AudioClip[] clipsBooster;
-
-        public void PlayCollision(AudioSource audioSource) => this.PlaySound(audioSource, this.clipsCollision, this.volumeCollision);
-        public void PlayMissile(AudioSource audioSource) => this.PlaySound(audioSource, this.clipsMissile, this.volumeMissile);
-        public void PlayBooster(AudioSource audioSource) => this.PlaySound(audioSource, this.clipsBooster, this.volumeBooster);
-
-        private void PlaySound(AudioSource audioSource, AudioClip[] clips, float volume) => audioSource.PlayOneShot(clips[Random.Range(0, clips.Length)], volume);
+        public void PlaySound(SoundInfo soundInfo, AudioSource audioSource) => audioSource.PlayOneShot(soundInfo.RandomClip, soundInfo.Volume);
     }
 }

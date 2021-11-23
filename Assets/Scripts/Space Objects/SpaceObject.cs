@@ -1,3 +1,4 @@
+using SpaceGame.Audio;
 using UnityEngine;
 
 namespace SpaceGame.SpaceObjects
@@ -57,13 +58,15 @@ namespace SpaceGame.SpaceObjects
         {
             if (this.alive && collision.relativeVelocity.magnitude > 10f) // TODO this "10f" can be changed if sounds arent happening at low velocity
             {
-                Vector2 cameraPoint = Camera.main.WorldToViewportPoint(collision.contacts[0].point);
+                Vector2 contactPoint = collision.contacts[0].point;
+                Vector2 cameraPoint = Camera.main.WorldToViewportPoint(contactPoint);
 
                 // If point within camera view...
                 if (cameraPoint.x > 0f && cameraPoint.x < 1f && cameraPoint.y > 0f && cameraPoint.y < 1f)
                 {
                     // Play collision sound
-                    GameInfo.SoundManager.PlayCollision(this.audioSource);
+                    SoundManager soundManager = GameInfo.SoundManager;
+                    soundManager.PlaySound(soundManager.SoundCollision, contactPoint);
                 }
             }
         }

@@ -1,3 +1,4 @@
+using SpaceGame.Audio;
 using SpaceGame.Ships;
 using SpaceGame.SpaceObjects;
 using UnityEngine;
@@ -16,7 +17,11 @@ namespace SpaceGame.Projectiles
 
         private bool alive = true;
 
-        private void Start() => GameInfo.SoundManager.PlayMissile(this.audioSource);
+        private void Start()
+        {
+            SoundManager soundManager = GameInfo.SoundManager;
+            soundManager.PlaySound(soundManager.SoundMissile, this.audioSource);
+        }
 
         public static Projectile Create(ProjectileInfo projectileInfo, Ship source)
         {

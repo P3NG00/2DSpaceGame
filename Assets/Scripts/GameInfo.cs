@@ -67,6 +67,7 @@ namespace SpaceGame
         [SerializeField] private UIInventorySlot slotWeapon;
         [SerializeField] private UIInventorySlot slotDefense;
         [SerializeField] private SoundManager soundManager;
+        [SerializeField] private AudioInstance audioInstancePrefab;
 
         [Header("DEBUG", order = 100)]
         [SerializeField] private bool doDebugRays;
@@ -93,6 +94,7 @@ namespace SpaceGame
         public static UIInventorySlot SlotDefense => GameInfo.instance.slotDefense;
         public static GameObject ParentCheatMenu => GameInfo.instance.parentCheatMenu;
         public static SoundManager SoundManager => GameInfo.instance.soundManager;
+        public static AudioInstance AudioInstancePrefab => GameInfo.instance.audioInstancePrefab;
 
         // Tags
         public static string TagShip => GameInfo.instance.tagShip;
